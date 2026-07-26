@@ -33,6 +33,25 @@
   if (tablist) {
     var tabs = Array.prototype.slice.call(tablist.querySelectorAll('[role="tab"]'));
 
+    /* 狭い画面ではタブが横スクロールで隠れるため、選択中のタブを見える位置へ寄せる。
+       タブ列だけを動かすので、ページ自体はスクロールしない。 */
+    var scrollTabIntoView = function (tab) {
+      if (tablist.scrollWidth <= tablist.clientWidth + 1) return;
+      var pad = parseFloat(getComputedStyle(tablist).paddingInlineStart) || 0;
+      var listRect = tablist.getBoundingClientRect();
+      var tabRect = tab.getBoundingClientRect();
+      /* はみ出している分だけ動かす(中央寄せにするとスナップと引っ張り合うため) */
+      var delta = 0;
+      if (tabRect.left < listRect.left + pad) delta = tabRect.left - listRect.left - pad;
+      else if (tabRect.right > listRect.right - pad) delta = tabRect.right - listRect.right + pad;
+      if (Math.abs(delta) < 1) return;
+      if (tablist.scrollBy) {
+        tablist.scrollBy({ left: delta, behavior: prefersReduced ? "auto" : "smooth" });
+      } else {
+        tablist.scrollLeft += delta;
+      }
+    };
+
     var selectTab = function (tab, focus) {
       tabs.forEach(function (t) {
         var selected = t === tab;
@@ -42,6 +61,7 @@
         if (panel) panel.hidden = !selected;
       });
       if (focus) tab.focus();
+      scrollTabIntoView(tab);
 
       /* 絞り込み(collection-filter.js)へ、表示中のカテゴリが変わったことを伝える */
       document.dispatchEvent(new CustomEvent("ay:tabchange", {

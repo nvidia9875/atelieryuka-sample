@@ -307,6 +307,8 @@ section[id] { scroll-margin-top: 1.5rem; }
     /* 画面端まで流して、切れているのが分かるようにする */
     margin-inline: calc(var(--pad-x) * -1);
     padding-inline: var(--pad-x);
+    /* スナップ位置も本文と同じ左端に揃える(選択中の地色が画面端で切れて見えないように) */
+    scroll-padding-inline: var(--pad-x);
   }
   .tablist::-webkit-scrollbar { display: none; }
   .tablist [role="tab"] { flex: none; scroll-snap-align: start; }
@@ -315,21 +317,24 @@ section[id] { scroll-margin-top: 1.5rem; }
   appearance: none;
   background: none;
   border: 0;
-  border-bottom: 1px solid transparent;
+  border-bottom: 2px solid transparent;
   margin-bottom: -1px;
   padding: 0.8em 0.9em;
   font: 400 clamp(0.85rem, 0.8rem + 0.3vw, 0.95rem)/1.4 var(--font-body);
   color: var(--muted);
   cursor: pointer;
-  transition: color 0.15s ease-out, border-color 0.15s ease-out;
+  transition: color 0.15s ease-out, border-color 0.15s ease-out, background-color 0.15s ease-out;
 }
 @media (pointer: coarse) {
   .tablist [role="tab"] { min-height: 44px; padding-block: 0.95em; }
 }
 .tablist [role="tab"]:hover { color: var(--gold-ink); }
+/* 選択中は「地の色・文字の太さ・金の下線」の3つで示す。
+   線1本だけだと、特に横スクロールする狭い画面でどれが選択中か読み取れないため。 */
 .tablist [role="tab"][aria-selected="true"] {
   color: var(--ink);
-  font-weight: 400;
+  font-weight: 500;
+  background: var(--greige);
   border-bottom-color: var(--gold-ink);
 }
 
