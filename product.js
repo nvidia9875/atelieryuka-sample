@@ -82,8 +82,12 @@
         var fig = document.createElement("figure");
         var img = document.createElement("img");
         img.src = "assets/img/" + it.img;
+        /* サムネイルは最大でも約305px表示なので、440w があればそれで足りる */
+        var small = it.img.replace(/\.webp$/, "-440.webp");
+        img.srcset = "assets/img/" + small + " 440w, assets/img/" + it.img + " 900w";
+        img.sizes = "(max-width: 860px) 46vw, 320px";
         img.alt = col.label + " " + it.name;
-        img.width = 600; img.height = 800; img.loading = "lazy";
+        img.width = 600; img.height = 800; img.loading = "lazy"; img.decoding = "async";
         fig.appendChild(img);
         var name = document.createElement("p");
         name.className = "pd-related-name";

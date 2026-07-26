@@ -17,6 +17,37 @@ const ROOT = resolve(import.meta.dirname, "..");
 const require = createRequire(import.meta.url);
 const AY = require(resolve(ROOT, "assets/data.js"));
 
+/** 生成済み画像の実寸（tools/optimize-images.sh が書き出す）。srcset の幅記述子に使う */
+const IMG_WIDTHS = JSON.parse(readFileSync(resolve(ROOT, "assets/img-widths.json"), "utf8"));
+
+/**
+ * グリッドでの表示幅。スマホは2カラム(約46vw)、920px以上は最大幅1120pxの3カラム。
+ * これを sizes に渡すことで、スマホでは 440w だけを読ませる。
+ */
+const GRID_SIZES = "(max-width: 919px) 46vw, 350px";
+
+/** 商品画像の srcset。小サイズが無ければ通常サイズだけを返す */
+function srcset(file) {
+  const small = file.replace(/\.webp$/, "-440.webp");
+  const large = IMG_WIDTHS[file];
+  const smallWidth = IMG_WIDTHS[small];
+  if (!large) throw new Error(`assets/img-widths.json に ${file} がありません。tools/optimize-images.sh を実行してください`);
+  if (!smallWidth || smallWidth >= large) return null;
+  return `assets/img/${small} ${smallWidth}w, assets/img/${file} ${large}w`;
+}
+
+/** 商品カード用の <img>。拡大表示は data-full の原寸を使う */
+function productImg(file, { alt, className }) {
+  const set = srcset(file);
+  return [
+    `<img${className ? ` class="${className}"` : ""}`,
+    ` src="assets/img/${file}"`,
+    set ? ` srcset="${set}" sizes="${GRID_SIZES}"` : "",
+    ` data-full="assets/img/${file}"`,
+    ` alt="${alt}" width="600" height="800" loading="lazy" decoding="async">`,
+  ].join("");
+}
+
 /** 深さ n のインデント（index.html の <section> 直下が深さ1） */
 const ind = (n) => "  ".repeat(n);
 const yen = (n) => "¥" + n.toLocaleString("en-US");
@@ -133,14 +164,14 @@ function productCard(item, col) {
     `${ind(5)}<li class="product"`,
     `${ind(7)}${dataAttrs.join(" ")}>`,
     `${ind(6)}<figure class="product-media">`,
-    `${ind(7)}<img src="assets/img/${item.img}" alt="${esc(alt)}" width="600" height="800" loading="lazy" decoding="async">`,
+    `${ind(7)}${productImg(item.img, { alt: esc(alt) })}`,
     item.img2
-      ? `${ind(7)}<img class="alt-img" src="assets/img/${item.img2}" alt="" width="600" height="800" loading="lazy" decoding="async">`
+      ? `${ind(7)}${productImg(item.img2, { alt: "", className: "alt-img" })}`
       : "",
     `${ind(7)}<span class="float-code" aria-hidden="true" translate="no">${esc(item.code)}</span>`,
     `${ind(6)}</figure>`,
     `${ind(6)}<h3 class="product-name" translate="no"><a href="${href}">${esc(item.name)}</a></h3>`,
-    `${ind(6)}<p class="product-meta"><span translate="no">${esc(item.code)}</span> — ${esc(item.line)}</p>`,
+    `${ind(6)}<p class="product-meta"><span translate="no">${esc(item.code)}</span><span class="product-line"> — ${esc(item.line)}</span></p>`,
     `${ind(6)}<p class="product-price">${yen(item.price)}</p>`,
     `${ind(6)}<p class="product-cta"><a href="${href}">詳細・お申し込み</a></p>`,
     `${ind(5)}</li>`,

@@ -186,13 +186,18 @@
 /* ---------- 名前・型番の検索 ---------- */
 .filter-search input {
   width: 100%;
+  min-height: 44px;
   padding: 0.55em 0.2em;
   border: 0;
   border-bottom: 1px solid var(--line);
   background: transparent;
-  font: 300 0.9rem/1.6 var(--font-body);
+  /* iOS で入力時にズームされないよう 16px を下回らせない */
+  font: 300 1rem/1.6 var(--font-body);
   color: var(--ink);
   transition: border-color 0.2s ease-out;
+}
+@media (min-width: 720px) {
+  .filter-search input { font-size: 0.9rem; }
 }
 .filter-search input::placeholder { color: color-mix(in srgb, var(--muted) 60%, transparent); }
 .filter-search input:focus {
@@ -285,6 +290,20 @@
   text-align: center;
 }
 .more-wrap .btn { min-width: min(100%, 20rem); }
+
+/* ---------- タップ操作の端末では操作部を 44px 以上にする ---------- */
+@media (pointer: coarse) {
+  .filter-summary { padding-block: 1.15rem; }
+  .chip-label { padding: 0.75em 1.1em; }
+  .swatch-dot { width: 2.3rem; height: 2.3rem; }
+  .filter-clear,
+  .sort-field select {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+  .result-tools { align-items: center; }
+}
 
 /* ---------- 動きを抑える設定を尊重 ---------- */
 @media (prefers-reduced-motion: reduce) {

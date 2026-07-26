@@ -7,8 +7,12 @@ import { readFileSync, existsSync, readdirSync, statSync } from "node:fs";
 import { join, dirname, resolve, relative, extname } from "node:path";
 
 const ROOT = resolve(import.meta.dirname, "..");
-const SKIP_DIRS = new Set([".git", "node_modules", "assets/img-src", "data/originals-sq"]);
+const SKIP_DIRS = new Set([".git", "node_modules", "assets/img-src", "data/originals-sq", ".playwright-mcp"]);
 const SCAN_EXT = new Set([".html", ".css", ".js"]);
+
+/** GitHub Pages のプロジェクトサイトは /<repo>/ 配下に公開されるため、
+ *  絶対パス参照はこのプレフィックスを外してリポジトリルートに読み替える。 */
+const BASE_PATH = "/atelieryuka-sample";
 
 /** 走査対象ファイルを再帰収集 */
 function collect(dir, acc = []) {
@@ -29,28 +33,48 @@ function isExternal(url) {
 }
 
 const PATTERNS = [
-  /(?:href|src)\s*=\s*"([^"]+)"/g,
-  /(?:href|src)\s*=\s*'([^']+)'/g,
+  /(?:href|src|data-full)\s*=\s*"([^"]+)"/g,
+  /(?:href|src|data-full)\s*=\s*'([^']+)'/g,
   /url\(\s*["']?([^"')]+)["']?\s*\)/g,
 ];
+
+/** srcset は "URL 幅記述子, URL 幅記述子" 形式なので分解して検証する */
+const SRCSET_PATTERN = /srcset\s*=\s*"([^"]+)"/g;
 
 const problems = [];
 let checked = 0;
 
 for (const file of collect(ROOT)) {
   const body = readFileSync(file, "utf8");
+  const refs = [];
   for (const pattern of PATTERNS) {
-    for (const [, raw] of body.matchAll(pattern)) {
-      if (isExternal(raw)) continue;
-      const path = raw.split(/[?#]/)[0];
-      if (path === "") continue;
-      checked += 1;
-      const target = path.startsWith("/")
-        ? join(ROOT, path)
-        : resolve(dirname(file), path);
-      if (!existsSync(target)) {
-        problems.push(`${relative(ROOT, file)} → ${raw}`);
-      }
+    for (const [, raw] of body.matchAll(pattern)) refs.push(raw);
+  }
+  for (const [, set] of body.matchAll(SRCSET_PATTERN)) {
+    for (const candidate of set.split(",")) {
+      const url = candidate.trim().split(/\s+/)[0];
+      if (url) refs.push(url);
+    }
+  }
+
+  for (const raw of refs) {
+    if (isExternal(raw)) continue;
+    const path = raw.split(/[?#]/)[0];
+    if (path === "") continue;
+    checked += 1;
+    let target;
+    if (path.startsWith("/")) {
+      const withoutBase = path.startsWith(BASE_PATH + "/") || path === BASE_PATH
+        ? path.slice(BASE_PATH.length) || "/"
+        : path;
+      target = join(ROOT, withoutBase);
+    } else {
+      target = resolve(dirname(file), path);
+    }
+    /* ディレクトリ参照は index.html を見る */
+    if (target.endsWith("/")) target = join(target, "index.html");
+    if (!existsSync(target)) {
+      problems.push(`${relative(ROOT, file)} → ${raw}`);
     }
   }
 }

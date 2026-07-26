@@ -323,6 +323,9 @@ section[id] { scroll-margin-top: 1.5rem; }
   cursor: pointer;
   transition: color 0.15s ease-out, border-color 0.15s ease-out;
 }
+@media (pointer: coarse) {
+  .tablist [role="tab"] { min-height: 44px; padding-block: 0.95em; }
+}
 .tablist [role="tab"]:hover { color: var(--gold-ink); }
 .tablist [role="tab"][aria-selected="true"] {
   color: var(--ink);
@@ -407,17 +410,13 @@ section[id] { scroll-margin-top: 1.5rem; }
     height: calc(100% - 10px);
   }
   .product-name { margin-top: 0.75rem; font-size: 1.05rem; }
-  .product-meta { margin-top: 0.2rem; font-size: 0.68rem; }
+  .product-meta { margin-top: 0.2rem; font-size: 0.7rem; }
   .product-price { margin-top: 0.25rem; font-size: 0.82rem; }
   .product-cta { display: none; }
-  /* タップ端末では hover が効かないので、型番は薄く常時表示する */
-  .float-code {
-    bottom: 12px;
-    padding: 0.3em 0.7em;
-    font-size: 0.62rem;
-    opacity: 0.82;
-    transform: translate(-50%, 0);
-  }
+  /* 2カラムでは行が折り返して高さが揃わないため、ライン名は詳細ページに任せる */
+  .product-line { display: none; }
+  /* 型番はカード下に出ているので、画像に重ねるバッジは省く */
+  .float-code { display: none; }
 }
 
 /* ---------- III. ご利用の流れ ---------- */
@@ -482,7 +481,7 @@ section[id] { scroll-margin-top: 1.5rem; }
   transform: translate(-50%, -50%);
   padding: 0.2em 1em;
   background: var(--paper);
-  font-size: 0.68rem;
+  font-size: 0.72rem;
   letter-spacing: 0.26em;
   text-transform: uppercase;
   color: var(--gold-ink);

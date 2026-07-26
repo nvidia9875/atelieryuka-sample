@@ -234,7 +234,8 @@
         var title = opts.title ? textOf(item, opts.title) : (img.alt || "");
         var subParts = (opts.sub || []).map(function (sel) { return textOf(item, sel); }).filter(Boolean);
         groupSlides.push({
-          src: img.currentSrc || img.src,
+          /* srcset があるとスマホでは小サイズが選ばれるため、拡大時は data-full の原寸を使う */
+          src: img.dataset.full || img.currentSrc || img.src,
           alt: img.alt || title,
           title: title,
           sub: subParts.join(" ・ "),

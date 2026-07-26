@@ -12,3 +12,8 @@ data/originals-sq/
 
 # Node
 node_modules/
+
+# Playwright の検証成果物
+.playwright-mcp/
+package.json
+package-lock.json
