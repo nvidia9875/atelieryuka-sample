@@ -169,6 +169,8 @@ function productCard(item, col) {
       ? `${ind(7)}${productImg(item.img2, { alt: "", className: "alt-img" })}`
       : "",
     `${ind(7)}<span class="float-code" aria-hidden="true" translate="no">${esc(item.code)}</span>`,
+    /* 画像をタップしたら詳細ページへ。名称・CTAと同じ行き先なので支援技術からは隠す */
+    `${ind(7)}<a class="product-media-link" href="${href}" tabindex="-1" aria-hidden="true"></a>`,
     `${ind(6)}</figure>`,
     `${ind(6)}<h3 class="product-name" translate="no"><a href="${href}">${esc(item.name)}</a></h3>`,
     `${ind(6)}<p class="product-meta"><span translate="no">${esc(item.code)}</span><span class="product-line"> — ${esc(item.line)}</span></p>`,

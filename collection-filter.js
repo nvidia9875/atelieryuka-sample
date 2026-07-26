@@ -123,9 +123,6 @@
       }
       if (clearBtn) clearBtn.hidden = active === 0;
 
-      /* 拡大表示のスライドを、表示中のカードだけで組み直す */
-      if (window.AYLightbox && window.AYLightbox.refresh) window.AYLightbox.refresh();
-
       if (!options.silent) writeUrl();
     }
 

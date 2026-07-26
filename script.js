@@ -307,16 +307,9 @@
   });
 })();
 
-/* ---------- 画像ライトボックス(共通 assets/lightbox.js) ---------- */
-(function () {
-  "use strict";
-  if (!window.AYLightbox) return;
-  window.AYLightbox.attach(".product-grid", "li", {
-    frame: ".product-media",
-    title: ".product-name",
-    sub: [".product-meta", ".product-price"],
-  });
-})();
+/* ---------- 画像ライトボックス(共通 assets/lightbox.js) ----------
+   商品カードは拡大せず詳細ページへ遷移させるため、ここでは付けない。
+   拡大表示は product.html のギャラリー(product.js)だけが持つ。 */
 (function () {
   "use strict";
   if (!window.AYLightbox) return;
