@@ -139,10 +139,12 @@
 .ay-lb-open:focus-visible { outline: 2px solid currentColor; outline-offset: -3px; }
 
 @media (max-width: 600px) {
-  .ay-lb-stage { padding: 3.25rem 0.75rem 4.5rem; }
-  .ay-lb-img { max-width: 94vw; max-height: 66dvh; }
-  .ay-lb .ay-lb-prev { left: max(0.5rem, env(safe-area-inset-left)); top: auto; bottom: max(1rem, env(safe-area-inset-bottom)); transform: none; }
-  .ay-lb .ay-lb-next { right: max(0.5rem, env(safe-area-inset-right)); top: auto; bottom: max(1rem, env(safe-area-inset-bottom)); transform: none; }
+  .ay-lb-stage { padding: 3.25rem 0.75rem 3.5rem; }
+  /* 左右送りは画像の高さ中央に重ねるので、画像を少し細くして重なりを浅くする */
+  .ay-lb-img { max-width: 88vw; max-height: 68dvh; }
+  .ay-lb .ay-lb-prev, .ay-lb .ay-lb-next { width: 2.75rem; height: 2.75rem; }
+  .ay-lb-prev { left: max(0.4rem, env(safe-area-inset-left)); }
+  .ay-lb-next { right: max(0.4rem, env(safe-area-inset-right)); }
 }
 
 @media (prefers-reduced-motion: reduce) {
