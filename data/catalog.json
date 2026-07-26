@@ -1,0 +1,352 @@
+{
+ "wedding": [
+  {
+   "code": "HLD-00085-01",
+   "type": "wedding",
+   "price": 330000,
+   "tags": [
+    "Aライン",
+    "VICTRIA FRANCEZKA"
+   ],
+   "img": "wd-01.png",
+   "img2": "wd-01-b.png"
+  },
+  {
+   "code": "HLD-00084-01",
+   "type": "wedding",
+   "price": 330000,
+   "tags": [
+    "Aライン",
+    "VICTRIA FRANCEZKA"
+   ],
+   "img": "wd-02.jpg",
+   "img2": "wd-02-b.jpg"
+  },
+  {
+   "code": "HLD-00066",
+   "type": "wedding",
+   "price": 290000,
+   "tags": [
+    "Aライン",
+    "VICTRIA FRANCEZKA"
+   ],
+   "img": "wd-03.png",
+   "img2": "wd-03-b.png"
+  },
+  {
+   "code": "HLD-00059-01",
+   "type": "wedding",
+   "price": 290000,
+   "tags": [
+    "Aライン",
+    "VICTRIA FRANCEZKA"
+   ],
+   "img": "wd-04.jpg",
+   "img2": "wd-04-b.jpg"
+  },
+  {
+   "code": "HLD-00043-01",
+   "type": "wedding",
+   "price": 290000,
+   "tags": [
+    "Aライン",
+    "VICTRIA FRANCEZKA"
+   ],
+   "img": "wd-05.jpg",
+   "img2": "wd-05-b.jpg"
+  },
+  {
+   "code": "HLD-00051-01",
+   "type": "wedding",
+   "price": 290000,
+   "tags": [
+    "Aライン",
+    "VICTRIA FRANCEZKA"
+   ],
+   "img": "wd-06.jpg",
+   "img2": "wd-06-b.jpg"
+  },
+  {
+   "code": "HLD-00053-01",
+   "type": "wedding",
+   "price": 290000,
+   "tags": [
+    "Aライン",
+    "VICTRIA FRANCEZKA"
+   ],
+   "img": "wd-07.jpg",
+   "img2": "wd-07-b.jpg"
+  },
+  {
+   "code": "HLD-00069-01",
+   "type": "wedding",
+   "price": 290000,
+   "tags": [
+    "Aライン",
+    "VICTRIA FRANCEZKA"
+   ],
+   "img": "wd-08.jpg",
+   "img2": "wd-08-b.jpg"
+  },
+  {
+   "code": "HLD-00070-01",
+   "type": "wedding",
+   "price": 290000,
+   "tags": [
+    "Aライン",
+    "VICTRIA FRANCEZKA"
+   ],
+   "img": "wd-09.jpg",
+   "img2": "wd-09-b.jpg"
+  },
+  {
+   "code": "HLD-00071-01",
+   "type": "wedding",
+   "price": 290000,
+   "tags": [
+    "Aライン",
+    "VICTRIA FRANCEZKA"
+   ],
+   "img": "wd-10.jpg",
+   "img2": "wd-10-b.jpg"
+  }
+ ],
+ "color": [
+  {
+   "code": "AY6001",
+   "type": "color",
+   "price": 385000,
+   "tags": [
+    "Atelier Yuka"
+   ],
+   "img": "cd-01.jpg",
+   "img2": "cd-01-b.jpg"
+  },
+  {
+   "code": "AY5601",
+   "type": "color",
+   "price": 340000,
+   "tags": [
+    "Atelier Yuka"
+   ],
+   "img": "cd-02.jpg",
+   "img2": "cd-02-b.jpg"
+  },
+  {
+   "code": "MVD-00392-05",
+   "type": "color",
+   "price": 250000,
+   "tags": [
+    "Atelier Yuka",
+    "L'ATELIER MARIAGE"
+   ],
+   "img": "cd-03.jpg",
+   "img2": "cd-03-b.jpg"
+  },
+  {
+   "code": "MVD-00392-13",
+   "type": "color",
+   "price": 250000,
+   "tags": [
+    "Atelier Yuka",
+    "L'ATELIER MARIAGE"
+   ],
+   "img": "cd-04.jpg",
+   "img2": "cd-04-b.jpg"
+  },
+  {
+   "code": "MVD-00392-06",
+   "type": "color",
+   "price": 250000,
+   "tags": [
+    "Atelier Yuka",
+    "L'ATELIER MARIAGE"
+   ],
+   "img": "cd-05.jpg",
+   "img2": "cd-05-b.jpg"
+  },
+  {
+   "code": "BLD-00055-09",
+   "type": "color",
+   "price": 220000,
+   "tags": [
+    "Atelier Yuka",
+    "Ballerina for Brides"
+   ],
+   "img": "cd-06.jpg",
+   "img2": "cd-06-b.jpg"
+  },
+  {
+   "code": "BLD-00055-32",
+   "type": "color",
+   "price": 220000,
+   "tags": [
+    "Atelier Yuka",
+    "Ballerina for Brides"
+   ],
+   "img": "cd-07.jpg",
+   "img2": "cd-07-b.jpg"
+  },
+  {
+   "code": "BLD-00055-11",
+   "type": "color",
+   "price": 220000,
+   "tags": [
+    "Atelier Yuka",
+    "Ballerina for Brides"
+   ],
+   "img": "cd-08.jpg",
+   "img2": "cd-08-b.jpg"
+  },
+  {
+   "code": "BLD-00055-14",
+   "type": "color",
+   "price": 220000,
+   "tags": [
+    "Atelier Yuka",
+    "Ballerina for Brides"
+   ],
+   "img": "cd-09.jpg",
+   "img2": "cd-09-b.jpg"
+  },
+  {
+   "code": "BLD-00051-05",
+   "type": "color",
+   "price": 220000,
+   "tags": [
+    "Atelier Yuka",
+    "Ballerina for Brides"
+   ],
+   "img": "cd-10.jpg",
+   "img2": "cd-10-b.jpg"
+  }
+ ],
+ "tuxedo": [
+  {
+   "code": "20345S",
+   "type": "tuxedo",
+   "price": 121000,
+   "tags": [
+    "rental-tuxedo"
+   ],
+   "img": "tx-01.jpg",
+   "img2": "tx-01-b.jpg"
+  },
+  {
+   "code": "20362S",
+   "type": "tuxedo",
+   "price": 121000,
+   "tags": [
+    "rental-tuxedo"
+   ],
+   "img": "tx-02.jpg",
+   "img2": "tx-02-b.jpg"
+  },
+  {
+   "code": "20366S",
+   "type": "tuxedo",
+   "price": 121000,
+   "tags": [
+    "rental-tuxedo"
+   ],
+   "img": "tx-03.jpg",
+   "img2": "tx-03-b.jpg"
+  },
+  {
+   "code": "20313S",
+   "type": "tuxedo",
+   "price": 110000,
+   "tags": [
+    "rental-tuxedo"
+   ],
+   "img": "tx-04.jpg",
+   "img2": "tx-04-b.jpg"
+  },
+  {
+   "code": "20321S",
+   "type": "tuxedo",
+   "price": 110000,
+   "tags": [
+    "rental-tuxedo"
+   ],
+   "img": "tx-05.jpg",
+   "img2": "tx-05-b.jpg"
+  },
+  {
+   "code": "20333S",
+   "type": "tuxedo",
+   "price": 110000,
+   "tags": [
+    "rental-tuxedo"
+   ],
+   "img": "tx-06.jpg",
+   "img2": "tx-06-b.jpg"
+  },
+  {
+   "code": "20336S",
+   "type": "tuxedo",
+   "price": 110000,
+   "tags": [
+    "rental-tuxedo"
+   ],
+   "img": "tx-07.jpg",
+   "img2": "tx-07-b.jpg"
+  },
+  {
+   "code": "20354S",
+   "type": "tuxedo",
+   "price": 110000,
+   "tags": [
+    "rental-tuxedo"
+   ],
+   "img": "tx-08.jpg",
+   "img2": "tx-08-b.jpg"
+  }
+ ],
+ "morning": [
+  {
+   "code": "コート　715S",
+   "type": "morning",
+   "price": 110000,
+   "tags": [
+    "rental-tuxedo",
+    "モーニングコート"
+   ],
+   "img": "mo-01.jpg",
+   "img2": "mo-01-b.jpg"
+  },
+  {
+   "code": "コート　778S",
+   "type": "morning",
+   "price": 110000,
+   "tags": [
+    "rental-tuxedo",
+    "モーニングコート"
+   ],
+   "img": "mo-02.jpg",
+   "img2": "mo-02-b.jpg"
+  },
+  {
+   "code": "コート　779S",
+   "type": "morning",
+   "price": 110000,
+   "tags": [
+    "rental-tuxedo",
+    "モーニングコート"
+   ],
+   "img": "mo-03.jpg",
+   "img2": "mo-03-b.jpg"
+  },
+  {
+   "code": "コート　773S",
+   "type": "morning",
+   "price": 110000,
+   "tags": [
+    "rental-tuxedo",
+    "モーニングコート"
+   ],
+   "img": "mo-04.jpg",
+   "img2": "mo-04-b.jpg"
+  }
+ ]
+}

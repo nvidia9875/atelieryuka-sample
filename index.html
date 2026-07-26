@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>アトリエユカ リニューアル提案 — 4つのデザイン案</title>
+<meta name="description" content="アトリエユカ サイトフルリプレイスに向けた4つのデザイン方向性のご提案。各案は実際に操作できるサンプルです。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Noto+Sans+JP:wght@300;400;500&family=Shippori+Mincho:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #26231f;
+  --ink-soft: #5c564e;
+  --paper: #faf8f4;
+  --line: #dcd6cc;
+  --accent: #a08a4f;
+  --text-base: clamp(0.95rem, 0.9rem + 0.25vw, 1.05rem);
+  --space-section: clamp(4rem, 3rem + 4vw, 7rem);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: "Noto Sans JP", sans-serif;
+  font-weight: 300;
+  font-size: var(--text-base);
+  line-height: 1.9;
+  color: var(--ink);
+  background: var(--paper);
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; height: auto; display: block; }
+a { color: inherit; }
+.skip-link {
+  position: absolute; left: -9999px; top: 0;
+  background: var(--ink); color: #fff; padding: 0.6em 1.2em; z-index: 100;
+}
+.skip-link:focus { left: 0; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+.wrap { max-width: 1200px; margin: 0 auto; padding: 0 clamp(1.25rem, 4vw, 3rem); }
+
+/* ---- header ---- */
+.site-head {
+  padding: calc(var(--space-section) * 0.9) 0 var(--space-section);
+  text-align: center;
+}
+.site-head .en {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  font-size: 0.95rem;
+  letter-spacing: 0.18em;
+  color: var(--accent);
+  display: block;
+  margin-bottom: 1.4rem;
+}
+.site-head h1 {
+  font-family: "Shippori Mincho", serif;
+  font-weight: 500;
+  font-size: clamp(1.6rem, 1.2rem + 2.4vw, 2.9rem);
+  line-height: 1.5;
+  text-wrap: balance;
+}
+.site-head .lede {
+  max-width: 620px;
+  margin: 2rem auto 0;
+  color: var(--ink-soft);
+  text-align: left;
+}
+.site-head .lede strong { font-weight: 500; color: var(--ink); }
+
+/* ---- proposal cards ---- */
+.proposals { display: grid; gap: clamp(2.5rem, 2rem + 3vw, 5rem); padding-bottom: var(--space-section); }
+.proposal {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  border: 1px solid var(--line);
+  background: #fff;
+  text-decoration: none;
+  overflow: hidden;
+  transition: transform 180ms var(--ease-out), box-shadow 180ms var(--ease-out);
+}
+.proposal:hover, .proposal:focus-visible {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 40px -20px rgba(38, 35, 31, 0.28);
+}
+.proposal:nth-of-type(even) { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); }
+.proposal:nth-of-type(even) .proposal-visual { order: 2; }
+.proposal-visual { position: relative; min-height: 300px; }
+.proposal-visual img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+.proposal-visual .letter {
+  position: absolute; top: 1.1rem; left: 1.3rem;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 2.4rem; line-height: 1;
+  color: #fff;
+  text-shadow: 0 1px 14px rgba(0,0,0,0.45);
+}
+.proposal-body { padding: clamp(1.8rem, 1.4rem + 2vw, 3.2rem); display: flex; flex-direction: column; gap: 1.1rem; }
+.proposal-body .plan-no {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  letter-spacing: 0.14em;
+  font-size: 0.9rem;
+  color: var(--accent);
+}
+.proposal-body h2 {
+  font-family: "Shippori Mincho", serif;
+  font-weight: 500;
+  font-size: clamp(1.35rem, 1.2rem + 0.9vw, 1.9rem);
+  line-height: 1.45;
+  text-wrap: balance;
+}
+.proposal-body .concept { color: var(--ink-soft); }
+.palette { display: flex; gap: 0.5rem; align-items: center; }
+.palette span {
+  width: 1.35rem; height: 1.35rem; border-radius: 50%;
+  border: 1px solid rgba(0,0,0,0.12);
+}
+.keywords { display: flex; flex-wrap: wrap; gap: 0.5rem; list-style: none; }
+.keywords li {
+  font-size: 0.8rem;
+  border: 1px solid var(--line);
+  padding: 0.25em 0.9em;
+  border-radius: 999px;
+  color: var(--ink-soft);
+  white-space: nowrap;
+}
+.proposal-body .view {
+  margin-top: auto;
+  padding-top: 1.2rem;
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  font-size: 1.05rem;
+  letter-spacing: 0.12em;
+  color: var(--ink);
+  display: inline-flex; align-items: center; gap: 0.6em;
+}
+.proposal-body .view::after {
+  content: "";
+  width: 2.6em; height: 1px;
+  background: var(--accent);
+  transition: transform 180ms var(--ease-out);
+  transform-origin: left center;
+}
+.proposal:hover .view::after, .proposal:focus-visible .view::after { transform: scaleX(1.5); }
+
+/* ---- compare table ---- */
+.compare { padding-bottom: var(--space-section); }
+.compare h2 {
+  font-family: "Shippori Mincho", serif;
+  font-weight: 500;
+  font-size: clamp(1.3rem, 1.1rem + 1vw, 1.8rem);
+  text-align: center;
+  margin-bottom: 2.6rem;
+}
+.compare-scroll { overflow-x: auto; border: 1px solid var(--line); background: #fff; }
+table { border-collapse: collapse; width: 100%; min-width: 760px; font-size: 0.9rem; }
+caption { position: absolute; left: -9999px; }
+th, td { padding: 1rem 1.2rem; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); }
+thead th {
+  font-family: "Shippori Mincho", serif;
+  font-weight: 500;
+  white-space: nowrap;
+  border-bottom: 1px solid var(--ink);
+}
+tbody th { font-weight: 500; white-space: nowrap; }
+tbody tr:last-child th, tbody tr:last-child td { border-bottom: none; }
+td { color: var(--ink-soft); line-height: 1.7; }
+
+/* ---- footer ---- */
+.site-foot {
+  border-top: 1px solid var(--line);
+  padding: 2.4rem 0 3rem;
+  text-align: center;
+  color: var(--ink-soft);
+  font-size: 0.85rem;
+}
+.site-foot .en {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  letter-spacing: 0.15em;
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--accent);
+}
+
+@media (max-width: 760px) {
+  .proposal, .proposal:nth-of-type(even) { grid-template-columns: 1fr; }
+  .proposal:nth-of-type(even) .proposal-visual { order: 0; }
+  .proposal-visual { min-height: 0; aspect-ratio: 16 / 9; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .proposal, .proposal-body .view::after { transition: none; }
+}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">本文へスキップ</a>
+
+<header class="site-head wrap">
+  <span class="en">Atelier Yuka — Website Renewal Proposal</span>
+  <h1>アトリエユカ<br>4つのデザイン方向性のご提案</h1>
+  <p class="lede">
+    ウエディングを軸に、<strong>「ここでドレスを頼みたい」</strong>と感じていただくこと、
+    そして<strong>予約・お問い合わせの入力しやすさ</strong>を主題に、
+    まったく異なる4つの方向性をご用意しました。
+    各案はすべて実際にスクロール・操作できるサンプルです。
+    お好みの1案をお選びいただければ、その方向で深掘りしてまいります。
+  </p>
+</header>
+
+<main id="main">
+  <div class="proposals wrap">
+
+    <a class="proposal" href="a-classic/index.html">
+      <div class="proposal-visual">
+        <img src="assets/img/hero-01.jpg" alt="ソファに腰掛けるウエディングドレス姿の女性とタキシードの男性" width="900" height="857" fetchpriority="high">
+        <span class="letter" aria-hidden="true">A</span>
+      </div>
+      <div class="proposal-body">
+        <span class="plan-no">Plan A — Timeless Classic</span>
+        <h2>銀座の正統</h2>
+        <p class="concept">現ブランドの正統進化。生成りとシャンパンゴールド、シンメトリーの構図で、老舗メゾンの静けさと品格を。</p>
+        <div class="palette" role="img" aria-label="配色: 生成り、墨、シャンパンゴールド">
+          <span style="background:#FBF9F5"></span>
+          <span style="background:#2B2724"></span>
+          <span style="background:#B49B57"></span>
+        </div>
+        <ul class="keywords">
+          <li>クラシック</li><li>シンメトリー</li><li>額縁の余白</li><li>静謐</li>
+        </ul>
+        <span class="view">サンプルを見る</span>
+      </div>
+    </a>
+
+    <a class="proposal" href="b-couture/index.html">
+      <div class="proposal-visual">
+        <img src="assets/img/wd-01.png" alt="やわらかな光の中に立つオートクチュールのウエディングドレス" width="1080" height="1350" loading="lazy">
+        <span class="letter" aria-hidden="true">B</span>
+      </div>
+      <div class="proposal-body">
+        <span class="plan-no">Plan B — Couture</span>
+        <h2>光のアトリエ</h2>
+        <p class="concept">白い空間に浮かぶ一点もののドレス。金箔の罫線と額装のメタファーで、オートクチュールメゾンの特別感を。</p>
+        <div class="palette" role="img" aria-label="配色: 白、墨、金">
+          <span style="background:#FFFFFF"></span>
+          <span style="background:#1C1916"></span>
+          <span style="background:#C9A961"></span>
+        </div>
+        <ul class="keywords">
+          <li>ホワイトクチュール</li><li>額装</li><li>金箔</li><li>ドラマティック</li>
+        </ul>
+        <span class="view">サンプルを見る</span>
+      </div>
+    </a>
+
+    <a class="proposal" href="c-story/index.html">
+      <div class="proposal-visual">
+        <img src="assets/img/journey-paris.png" alt="パリ・エッフェル塔の前でのウエディングフォト" width="640" height="960" loading="lazy">
+        <span class="letter" aria-hidden="true">C</span>
+      </div>
+      <div class="proposal-body">
+        <span class="plan-no">Plan C — Storytelling</span>
+        <h2>試着の日から、世界のどこかへ</h2>
+        <p class="concept">章立てのスクロールで一組の物語を追体験。自宅試着から海外フォトジャーニーまで、感情で読ませる構成。</p>
+        <div class="palette" role="img" aria-label="配色: ブラッシュ、アイボリー、スカイブルー">
+          <span style="background:#F5E6E0"></span>
+          <span style="background:#FFFDF9"></span>
+          <span style="background:#A8C3D1"></span>
+        </div>
+        <ul class="keywords">
+          <li>スクロールテリング</li><li>章立て</li><li>旅</li><li>やわらかさ</li>
+        </ul>
+        <span class="view">サンプルを見る</span>
+      </div>
+    </a>
+
+    <a class="proposal" href="d-motion/index.html">
+      <div class="proposal-visual">
+        <img src="assets/img/cd-01.jpg" alt="淡いブルーのカラードレスをまとい座る女性" width="800" height="1199" loading="lazy">
+        <span class="letter" aria-hidden="true">D</span>
+      </div>
+      <div class="proposal-body">
+        <span class="plan-no">Plan D — Motion</span>
+        <h2>Something Blue — 風をまとうメゾン</h2>
+        <p class="concept">動きで魅せるモーションサイト。ベールが持ち上がる場面転換、スクロールで進むランウェイショー、布の物理に統一されたアニメーション。</p>
+        <div class="palette" role="img" aria-label="配色: 白磁、墨、サムシングブルー">
+          <span style="background:#FCFBF9"></span>
+          <span style="background:#17161A"></span>
+          <span style="background:#4E6076"></span>
+        </div>
+        <ul class="keywords">
+          <li>モーション</li><li>ランウェイ</li><li>慣性スクロール</li><li>Something Blue</li>
+        </ul>
+        <span class="view">サンプルを見る</span>
+      </div>
+    </a>
+
+  </div>
+
+  <section class="compare wrap" aria-labelledby="compare-heading">
+    <h2 id="compare-heading">4案の比較</h2>
+    <div class="compare-scroll">
+      <table>
+        <caption>4つのデザイン案の方向性・強み・向いているお客様像の比較</caption>
+        <thead>
+          <tr>
+            <th scope="col">案</th>
+            <th scope="col">方向性</th>
+            <th scope="col">いちばんの強み</th>
+            <th scope="col">こんな方針に向く</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">A 銀座の正統</th>
+            <td>現ブランドイメージの正統進化</td>
+            <td>既存のお客様を裏切らない安心感と格</td>
+            <td>ブランドの継続性を重視しつつ質を上げたい</td>
+          </tr>
+          <tr>
+            <th scope="row">B 光のアトリエ</th>
+            <td>ホワイトクチュール</td>
+            <td>他社と絶対に被らない特別感</td>
+            <td>高価格帯・オーダーの価値を打ち出したい</td>
+          </tr>
+          <tr>
+            <th scope="row">C 物語</th>
+            <td>スクロールテリング</td>
+            <td>感情移入による「自分ごと化」</td>
+            <td>海外フォトジャーニーを主役にしたい</td>
+          </tr>
+          <tr>
+            <th scope="row">D 風をまとうメゾン</th>
+            <td>モーションデザイン</td>
+            <td>体験の記憶に残る没入感</td>
+            <td>圧倒的な世界観・体験で差をつけたい</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <span class="en">Atelier Yuka Website Renewal</span>
+    <p>本ページは提案用サンプルです。写真・商品情報は現行サイト(atelieryuka.com)より引用しています。</p>
+  </div>
+</footer>
+</body>
+</html>

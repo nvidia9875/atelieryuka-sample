@@ -1,0 +1,194 @@
+/* ============================================================
+   A案 Timeless Classic — 衣裳詳細ページ
+   トークンは style.css の :root を継承
+   ============================================================ */
+
+.pd, .pd-missing {
+  max-width: var(--w-wide);
+  margin: 0 auto;
+  padding: clamp(2rem, 1.2rem + 3vw, 4rem) var(--pad-x) 0;
+}
+.pd-missing { text-align: center; padding-bottom: var(--space-chapter); }
+.pd-missing-title { font-family: var(--font-jp); font-weight: 500; font-size: 1.5rem; margin: 0.8em 0 0.6em; }
+.pd-missing-text { color: var(--muted); }
+.pd-back { color: var(--gold-ink); }
+
+/* ---- パンくず ---- */
+.pd-crumb {
+  display: flex; flex-wrap: wrap; gap: 0.6em;
+  font-size: 0.8rem; color: var(--muted);
+  margin-bottom: clamp(1.6rem, 3vw, 2.8rem);
+}
+.pd-crumb a { color: var(--muted); text-decoration: none; }
+.pd-crumb a:hover, .pd-crumb a:focus-visible { color: var(--gold-ink); text-decoration: underline; }
+.pd-crumb [aria-current] { color: var(--ink); }
+
+/* ---- 上段: ギャラリー+情報 ---- */
+.pd-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: clamp(2rem, 4vw, 4.5rem);
+  align-items: start;
+}
+.pd-gallery {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(1rem, 2vw, 1.6rem);
+}
+.pd-shot {
+  margin: 0;
+  border: 1px solid var(--line);
+  padding: clamp(0.6rem, 1.2vw, 1rem);
+  background: var(--paper);
+}
+.pd-shot img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 4; object-fit: cover; }
+
+.pd-info { position: sticky; top: 5.5rem; }
+.pd-line { font-size: 0.8rem; letter-spacing: 0.14em; color: var(--gold-ink); text-transform: uppercase; margin: 1.2rem 0 0.4rem; }
+.pd-name {
+  font-family: var(--font-en);
+  font-weight: 500;
+  font-size: clamp(2.2rem, 1.6rem + 2.4vw, 3.4rem);
+  line-height: 1.15;
+  margin: 0 0 0.35em;
+  text-wrap: balance;
+}
+.pd-code { font-size: 0.85rem; color: var(--muted); display: flex; gap: 1em; margin-bottom: 1.6rem; font-variant-numeric: tabular-nums; }
+
+.pd-price { border-top: 1px solid var(--line); margin: 0 0 1.4rem; }
+.pd-price > div {
+  display: flex; justify-content: space-between; align-items: baseline; gap: 1em;
+  padding: 0.85em 0; border-bottom: 1px solid var(--line);
+}
+.pd-price dt { font-size: 0.85rem; color: var(--muted); }
+.pd-price dd { margin: 0; font-family: var(--font-en); font-size: 1.35rem; font-variant-numeric: tabular-nums; }
+.pd-price-note { font-family: var(--font-body); font-size: 0.72rem; color: var(--muted); margin-left: 0.5em; }
+
+.pd-notes { list-style: none; margin: 0 0 2rem; padding: 0; }
+.pd-notes li {
+  position: relative; padding-left: 1.2em;
+  font-size: 0.85rem; color: var(--muted); line-height: 1.9;
+}
+.pd-notes li::before { content: "—"; position: absolute; left: 0; color: var(--gold); }
+
+.pd-cta-wrap { margin: 0; }
+.pd-cta {
+  display: inline-block;
+  background: var(--ink);
+  color: var(--ivory);
+  text-decoration: none;
+  font-size: 0.95rem;
+  letter-spacing: 0.1em;
+  padding: 1em 2.6em;
+  border: 1px solid var(--ink);
+  transition: background-color 180ms ease, color 180ms ease;
+}
+.pd-cta:hover, .pd-cta:focus-visible { background: transparent; color: var(--ink); }
+
+/* ---- 申し込みフォーム(招待状カード) ---- */
+.pd-apply { max-width: var(--w-narrow); margin: var(--space-chapter) auto 0; }
+.pd-form, .pd-done {
+  border: 1px solid var(--gold);
+  outline: 1px solid var(--line);
+  outline-offset: 6px;
+  background: var(--paper);
+  padding: clamp(1.6rem, 4vw, 3rem);
+  margin-top: 2.2rem;
+}
+.pd-field { border: none; margin: 0 0 1.5rem; padding: 0; }
+.pd-field legend, .pd-field > label {
+  display: block;
+  font-family: var(--font-jp);
+  font-size: 0.95rem;
+  margin-bottom: 0.6em;
+}
+.req {
+  font-size: 0.68rem; color: var(--error);
+  border: 1px solid currentColor; border-radius: 2px;
+  padding: 0.1em 0.5em; margin-left: 0.8em; vertical-align: middle;
+}
+.pd-choices { display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: 0.8rem; }
+.pd-choice {
+  display: flex; align-items: center; gap: 0.8em;
+  border: 1px solid var(--line);
+  padding: 0.9em 1.1em;
+  cursor: pointer;
+  background: #fff;
+  transition: border-color 160ms ease;
+}
+.pd-choice:hover { border-color: var(--gold); }
+.pd-choice:has(input:checked) { border-color: var(--gold-ink); }
+.pd-choice input { accent-color: var(--gold-ink); }
+.pd-choice span { line-height: 1.5; }
+.pd-choice small { display: block; color: var(--muted); font-variant-numeric: tabular-nums; }
+
+.pd-field input[type="date"],
+.pd-field input[type="text"],
+.pd-field input[type="email"],
+.pd-field input[type="tel"] {
+  width: 100%;
+  font: inherit;
+  padding: 0.85em 1em;
+  border: 1px solid var(--line);
+  background: #fff;
+  color: var(--ink);
+}
+.pd-field input:focus-visible { outline: 2px solid var(--gold-ink); outline-offset: 1px; }
+.pd-field input[aria-invalid="true"] { border-color: var(--error); }
+.pd-hint { font-size: 0.75rem; color: var(--muted); margin: 0.5em 0 0; }
+.pd-err { font-size: 0.8rem; color: var(--error); margin: 0.5em 0 0; }
+
+.pd-submit-wrap { text-align: center; margin: 2rem 0 0; }
+.pd-submit {
+  font: inherit;
+  letter-spacing: 0.1em;
+  background: var(--ink);
+  color: var(--ivory);
+  border: 1px solid var(--ink);
+  padding: 1em 3em;
+  cursor: pointer;
+  transition: background-color 180ms ease, color 180ms ease;
+}
+.pd-submit:hover, .pd-submit:focus-visible { background: transparent; color: var(--ink); }
+.pd-submit[disabled] { opacity: 0.6; cursor: progress; }
+.pd-status { text-align: center; font-size: 0.85rem; color: var(--muted); min-height: 1.4em; margin: 0.8em 0 0; }
+
+.pd-done { text-align: center; }
+.pd-done-en { font-family: var(--font-en); font-style: italic; letter-spacing: 0.2em; color: var(--gold-ink); margin: 0 0 0.6em; }
+.pd-done-title { font-family: var(--font-jp); font-weight: 500; font-size: 1.4rem; margin: 0 0 0.8em; }
+.pd-done-text { color: var(--muted); font-size: 0.9rem; line-height: 2; }
+.pd-done-summary { margin: 1.6rem auto 0; max-width: 24rem; text-align: left; border-top: 1px solid var(--line); }
+.pd-done-summary div { display: flex; justify-content: space-between; gap: 1em; padding: 0.7em 0; border-bottom: 1px solid var(--line); font-size: 0.85rem; }
+.pd-done-summary dt { color: var(--muted); }
+.pd-done-summary dd { margin: 0; font-variant-numeric: tabular-nums; }
+.pd-done-note { font-size: 0.72rem; color: var(--muted); margin-top: 1.4rem; }
+
+/* ---- 関連 ---- */
+.pd-related { margin-top: var(--space-chapter); padding-bottom: var(--space-chapter); }
+.pd-related-grid {
+  list-style: none;
+  margin: 2.2rem 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1.2rem, 2.5vw, 2.2rem);
+}
+.pd-related-grid a { text-decoration: none; color: inherit; display: block; }
+.pd-related-grid figure { margin: 0 0 0.8rem; border: 1px solid var(--line); padding: 0.5rem; background: var(--paper); }
+.pd-related-grid img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 4; object-fit: cover; }
+.pd-related-name { font-family: var(--font-en); font-size: 1.15rem; text-align: center; }
+.pd-related-price { text-align: center; font-size: 0.82rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.pd-related-grid a:hover .pd-related-name, .pd-related-grid a:focus-visible .pd-related-name { color: var(--gold-ink); }
+
+@media (max-width: 860px) {
+  .pd-grid { grid-template-columns: 1fr; }
+  .pd-info { position: static; }
+  .pd-gallery { grid-template-columns: repeat(2, 1fr); }
+  .pd-related-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 520px) {
+  .pd-gallery { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pd-cta, .pd-submit, .pd-choice { transition: none; }
+}

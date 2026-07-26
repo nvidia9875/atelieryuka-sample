@@ -1,0 +1,14 @@
+# macOS
+.DS_Store
+._*
+
+# エディタ / ツール設定
+.claude/
+.vscode/
+.idea/
+
+# 中間素材（画像の切り出し作業用・公開不要）
+data/originals-sq/
+
+# Node
+node_modules/

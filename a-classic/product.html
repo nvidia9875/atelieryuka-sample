@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>衣裳詳細 | Atelier Yuka — アトリエユカ(A案)</title>
+<meta name="description" content="アトリエユカの衣裳詳細とお申し込み。ご自宅試着¥5,500、本使用レンタル3泊4日。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Noto+Sans+JP:wght@300;400;500&family=Shippori+Mincho:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=3">
+<link rel="stylesheet" href="style-b.css?v=3">
+<link rel="stylesheet" href="../assets/lightbox.css?v=3">
+<link rel="stylesheet" href="product.css?v=1">
+<script src="../assets/data.js" defer></script>
+<script src="../assets/lightbox.js?v=3" defer></script>
+<script src="product.js?v=1" defer></script>
+</head>
+<body id="top">
+<a class="skip-link" href="#main">本文へスキップ</a>
+
+<header class="site-header">
+  <a class="brand" href="index.html">
+    <span class="brand-en" translate="no">Atelier Yuka</span>
+    <span class="brand-ja">アトリエユカ — 銀座・ハワイ ウエディングドレスメゾン</span>
+  </a>
+  <nav class="site-nav" aria-label="ページ内ナビゲーション">
+    <ul>
+      <li><a href="index.html#collection">コレクション</a></li>
+      <li><a href="index.html#flow">ご利用の流れ</a></li>
+      <li><a href="index.html#pricing">料金</a></li>
+      <li><a class="nav-reserve" href="#apply">お申し込み</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main id="main">
+  <!-- 見つからない場合のフォールバック -->
+  <section class="pd-missing" id="pd-missing" hidden>
+    <p class="chapter-label" translate="no">Collection</p>
+    <h1 class="pd-missing-title">お探しの衣裳が見つかりませんでした</h1>
+    <p class="pd-missing-text">恐れ入りますが、コレクション一覧からお選び直しください。</p>
+    <p><a class="pd-back" href="index.html#collection">コレクションへ戻る</a></p>
+  </section>
+
+  <article class="pd" id="pd" hidden>
+    <nav class="pd-crumb" aria-label="パンくず">
+      <a href="index.html#collection">コレクション</a>
+      <span aria-hidden="true">/</span>
+      <a href="index.html#collection" id="crumb-cat">—</a>
+      <span aria-hidden="true">/</span>
+      <span id="crumb-name" aria-current="page" translate="no">—</span>
+    </nav>
+
+    <div class="pd-grid">
+      <div class="pd-gallery" id="pd-gallery">
+        <figure class="pd-shot">
+          <img id="pd-img-1" src="" alt="" width="900" height="1200" fetchpriority="high">
+        </figure>
+        <figure class="pd-shot" id="pd-shot-2">
+          <img id="pd-img-2" src="" alt="" width="900" height="1200" loading="lazy">
+        </figure>
+      </div>
+
+      <div class="pd-info">
+        <p class="chapter-label" translate="no">Collection — Détail</p>
+        <p class="pd-line" id="pd-line" translate="no">—</p>
+        <h1 class="pd-name" id="pd-name" translate="no">—</h1>
+        <p class="pd-code"><span id="pd-code" translate="no">—</span><span id="pd-silhouette"></span></p>
+
+        <dl class="pd-price">
+          <div>
+            <dt>本使用レンタル(3泊4日)</dt>
+            <dd id="pd-price">—</dd>
+          </div>
+          <div>
+            <dt>ご自宅試着(1泊2日)</dt>
+            <dd>¥5,500 <span class="pd-price-note">シューズオプション +¥1,500</span></dd>
+          </div>
+        </dl>
+
+        <ul class="pd-notes">
+          <li>ご利用日の4ヶ月前〜10日前までご予約いただけます</li>
+          <li>ヤマト運輸がご指定の場所へお届け・ご返送はそのまま(クリーニング不要)</li>
+          <li>ご試着後の本使用予約もオンラインで完結します</li>
+        </ul>
+
+        <p class="pd-cta-wrap"><a class="pd-cta" href="#apply">この衣裳で申し込む</a></p>
+      </div>
+    </div>
+
+    <!-- お申し込み -->
+    <section class="pd-apply" id="apply" aria-labelledby="apply-title">
+      <header class="chapter-head">
+        <p class="chapter-no" aria-hidden="true" translate="no">R.S.V.P.</p>
+        <h2 class="chapter-title" id="apply-title">お申し込み</h2>
+        <p class="chapter-lede">招待状にご返信いただくように、必要事項をご記入ください。<br>お申し込みはデモです。送信は行われません。</p>
+      </header>
+
+      <form class="pd-form" id="pd-form" novalidate>
+        <fieldset class="pd-field">
+          <legend>ご利用の目的<span class="req">必須</span></legend>
+          <div class="pd-choices">
+            <label class="pd-choice">
+              <input type="radio" name="purpose" value="ご自宅試着(¥5,500)" checked>
+              <span>ご自宅試着<small>1泊2日 ・ ¥5,500</small></span>
+            </label>
+            <label class="pd-choice">
+              <input type="radio" name="purpose" value="本使用レンタル(3泊4日)">
+              <span>本使用レンタル<small>3泊4日 ・ 表示価格</small></span>
+            </label>
+          </div>
+        </fieldset>
+
+        <div class="pd-field">
+          <label for="f-date">ご利用希望日<span class="req">必須</span></label>
+          <input type="date" id="f-date" name="date" autocomplete="off" required aria-describedby="err-date">
+          <p class="pd-hint">10日後〜4ヶ月先までご指定いただけます</p>
+          <p class="pd-err" id="err-date" hidden>ご利用希望日をお選びください</p>
+        </div>
+
+        <div class="pd-field">
+          <label for="f-name">お名前<span class="req">必須</span></label>
+          <input type="text" id="f-name" name="name" autocomplete="name" placeholder="例: 山田 花子" required aria-describedby="err-name">
+          <p class="pd-err" id="err-name" hidden>お名前をご記入ください</p>
+        </div>
+
+        <div class="pd-field">
+          <label for="f-email">メールアドレス<span class="req">必須</span></label>
+          <input type="email" id="f-email" name="email" autocomplete="email" inputmode="email" spellcheck="false" placeholder="例: hanako@example.com" required aria-describedby="err-email">
+          <p class="pd-err" id="err-email" hidden>メールアドレスの形式をご確認ください</p>
+        </div>
+
+        <div class="pd-field">
+          <label for="f-tel">お電話番号<span class="req">必須</span></label>
+          <input type="tel" id="f-tel" name="tel" autocomplete="tel" inputmode="tel" placeholder="例: 09012345678" required aria-describedby="err-tel">
+          <p class="pd-err" id="err-tel" hidden>お電話番号をご記入ください</p>
+        </div>
+
+        <p class="pd-submit-wrap">
+          <button type="submit" class="pd-submit" id="pd-submit">この内容で申し込む</button>
+        </p>
+        <p class="pd-status" id="pd-status" role="status" aria-live="polite"></p>
+      </form>
+
+      <div class="pd-done" id="pd-done" hidden tabindex="-1">
+        <p class="pd-done-en" translate="no">R.S.V.P.</p>
+        <h3 class="pd-done-title">ご予約を承りました</h3>
+        <p class="pd-done-text" id="pd-done-text">このたびはアトリエユカにお申し込みいただき、誠にありがとうございます。一両日中に、担当スタイリストよりご確認のご連絡を差し上げます。</p>
+        <dl class="pd-done-summary" id="pd-done-summary"></dl>
+        <p class="pd-done-note">※ このお申し込みはデザインサンプルのデモです。実際の送信は行われていません。</p>
+      </div>
+    </section>
+
+    <!-- 同じコレクションより -->
+    <section class="pd-related" aria-labelledby="related-title">
+      <header class="chapter-head">
+        <p class="chapter-no" aria-hidden="true" translate="no">✦</p>
+        <h2 class="chapter-title" id="related-title">同じコレクションより</h2>
+      </header>
+      <ul class="pd-related-grid" id="pd-related-grid"></ul>
+    </section>
+  </article>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <p class="footer-mark" translate="no">Atelier Yuka</p>
+    <p class="footer-company">松尾株式会社/MATSUO — 代表取締役 松尾 祐佳</p>
+    <p class="footer-note">※ 本ページはサイトリプレイス提案「A案 Timeless Classic」のデザインデモです。</p>
+    <p class="footer-copy" translate="no">© 2026 MATSUO Co., Ltd.</p>
+  </div>
+</footer>
+
+<a class="compare-pill" href="index.html#collection">← コレクションへ</a>
+<noscript><p style="text-align:center; padding:2rem;">このページの表示にはJavaScriptが必要です。<a href="index.html">トップへ戻る</a></p></noscript>
+</body>
+</html>

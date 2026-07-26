@@ -1,0 +1,434 @@
+/* ============================================================
+   Atelier Yuka — A案 Timeless Classic(2/2)
+   予約フォーム / フォトジャーニー / サロン / ニュース / FAQ /
+   フッター / 比較ピル / Reduced Motion
+   ============================================================ */
+
+/* ---------- V. 予約フォーム(招待状カード) ---------- */
+.invitation {
+  max-width: var(--w-narrow);
+  margin: 0 auto;
+  background: var(--paper);
+  border: 1px solid var(--gold);
+  outline: 1px solid var(--line);
+  outline-offset: 6px;
+  padding: clamp(1.7rem, 5vw, 3.4rem);
+}
+
+.form-progress {
+  display: flex;
+  justify-content: center;
+  gap: clamp(1.2rem, 5vw, 2.8rem);
+  margin-bottom: clamp(1.8rem, 4vw, 2.6rem);
+  padding-bottom: 1.6rem;
+  border-bottom: 1px solid var(--line);
+}
+.form-progress li {
+  display: flex; flex-direction: column; align-items: center;
+  gap: 0.45rem;
+}
+.pg-num {
+  width: 44px; height: 44px;
+  display: grid; place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  font: italic 500 1.1rem/1 var(--font-en);
+  color: var(--muted);
+  transition: border-color 0.18s ease-out, color 0.18s ease-out, background-color 0.18s ease-out;
+}
+.pg-label { font-size: 0.72rem; color: var(--muted); }
+.form-progress li.is-current .pg-num {
+  border-color: var(--gold-ink);
+  color: var(--gold-ink);
+}
+.form-progress li.is-current .pg-label { color: var(--ink); font-weight: 400; }
+.form-progress li.is-done .pg-num {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--ivory);
+}
+
+.form-step { border: 0; min-width: 0; }
+.step-legend {
+  display: block;
+  width: 100%;
+  text-align: center;
+  font: 500 1.15rem/1.7 var(--font-jp);
+  margin-bottom: 1.6rem;
+}
+.step-legend:focus { outline: none; }
+
+.choice-group { border: 0; min-width: 0; margin-bottom: 1.6rem; }
+.field-label {
+  display: block;
+  width: 100%;
+  font-size: 0.88rem; font-weight: 400;
+  margin-bottom: 0.6rem;
+}
+.req {
+  display: inline-block;
+  margin-left: 0.5em;
+  font-size: 0.7rem;
+  color: var(--gold-ink);
+  border: 1px solid var(--gold);
+  padding: 0 0.5em;
+}
+
+.choice-grid {
+  display: grid;
+  gap: 0.7rem;
+}
+@media (min-width: 560px) { .choice-grid { grid-template-columns: 1fr 1fr; } }
+.choice {
+  display: flex; align-items: center; gap: 0.7em;
+  border: 1px solid var(--line);
+  background: #FFFFFF;
+  padding: 0.85em 1em;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: border-color 0.15s ease-out, background-color 0.15s ease-out;
+}
+.choice:hover { border-color: var(--gold); }
+.choice input {
+  accent-color: var(--gold-ink);
+  width: 17px; height: 17px;
+  flex: none;
+}
+.choice:has(input:checked) { border-color: var(--gold-ink); background: #F7F2E6; }
+.choice:has(input:focus-visible) { outline: 2px solid var(--gold-ink); outline-offset: 2px; }
+
+.field { margin-bottom: 1.6rem; }
+.field input,
+.field select {
+  width: 100%;
+  min-height: 50px;
+  padding: 0.7em 0.95em;
+  border: 1px solid var(--line);
+  background-color: #FFFFFF;
+  color: var(--ink);
+  font: 400 1rem/1.5 var(--font-body);
+  border-radius: 0;
+  color-scheme: light;
+  transition: border-color 0.15s ease-out;
+}
+.field input:hover, .field select:hover { border-color: var(--gold); }
+.field input::placeholder { color: #857E76; }
+.field-note {
+  margin-top: 0.5rem;
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+.field-error {
+  margin-top: 0.5rem;
+  font-size: 0.84rem; font-weight: 400;
+  color: var(--error);
+}
+.field-error::before { content: "※ "; }
+input[aria-invalid="true"], .choice-group.has-error .choice { border-color: var(--error); }
+
+.form-nav {
+  display: flex;
+  justify-content: center;
+  gap: 0.8rem;
+  margin-top: 2rem;
+  padding-top: 1.8rem;
+  border-top: 1px solid var(--line);
+}
+@media (max-width: 559px) {
+  .form-nav { flex-direction: column-reverse; }
+  .form-nav .btn { width: 100%; }
+}
+.form-demo-note {
+  margin-top: 1.4rem;
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+/* 完了画面(招待状の返信) */
+.form-complete { text-align: center; }
+.complete-en {
+  font: italic 400 1.3rem/1.4 var(--font-en);
+  letter-spacing: 0.18em;
+  color: var(--gold-ink);
+}
+.complete-title {
+  margin-top: 0.8rem;
+  font: 500 1.5rem/1.7 var(--font-jp);
+}
+.complete-title:focus { outline: none; }
+.complete-title::after {
+  content: "";
+  display: block;
+  width: 40px; height: 1px;
+  margin: 1.2rem auto 0;
+  background: var(--gold);
+}
+.complete-body {
+  margin-top: 1.4rem;
+  font-size: 0.92rem;
+  text-align: center;
+}
+.complete-summary {
+  max-width: 400px;
+  margin: 1.8rem auto;
+  text-align: left;
+}
+.complete-summary > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.7em 0.2em;
+  border-top: 1px solid var(--line);
+  font-size: 0.88rem;
+}
+.complete-summary > div:last-child { border-bottom: 1px solid var(--line); }
+.complete-summary dt { color: var(--muted); flex: none; }
+.complete-summary dd { font-variant-numeric: tabular-nums; text-align: right; }
+.complete-sign {
+  margin: 1.6rem 0 1.8rem;
+  font: italic 500 1.15rem/1.4 var(--font-en);
+  color: var(--gold-ink);
+}
+
+/* ---------- VI. フォトジャーニー ---------- */
+.journey-grid {
+  max-width: var(--w-wide);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(1.8rem, 4vw, 3rem) clamp(0.9rem, 2.5vw, 2rem);
+}
+@media (min-width: 960px) { .journey-grid { grid-template-columns: repeat(4, 1fr); } }
+
+.journey { text-align: center; }
+.journey-frame {
+  padding: 6px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+}
+.journey-frame img {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+}
+.journey-city {
+  margin-top: 0.9rem;
+  font: 500 1.25rem/1.3 var(--font-en);
+}
+.journey-meta {
+  margin-top: 0.25rem;
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+.journey-plan {
+  margin-top: 0.3rem;
+  font-size: 0.78rem; font-weight: 400;
+  font-variant-numeric: tabular-nums;
+  color: var(--gold-ink);
+}
+
+/* ---------- VII. サロン ---------- */
+.salon-grid {
+  max-width: var(--w-mid);
+  margin: 0 auto;
+  display: grid;
+}
+.salon {
+  text-align: center;
+  padding: 2rem 1.4rem;
+}
+.salon + .salon { border-top: 1px solid var(--line); }
+.salon-en {
+  font: italic 400 1rem/1.4 var(--font-en);
+  color: var(--gold-ink);
+}
+.salon-name {
+  margin-top: 0.5rem;
+  font: 500 1.25rem/1.6 var(--font-jp);
+}
+.salon-address {
+  margin-top: 0.8rem;
+  font-style: normal;
+  font-size: 0.88rem;
+}
+.salon-note {
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+.salon-map { margin: 1.1rem auto 0; max-width: 420px; border: 1px solid var(--line); }
+.salon-map iframe { display: block; width: 100%; height: 190px; border: 0; }
+.salon-map-link {
+  display: inline-block;
+  margin-top: 0.7rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  color: inherit;
+  text-underline-offset: 3px;
+}
+@media (min-width: 720px) {
+  .salon-grid { grid-template-columns: 1fr 1fr; }
+  .salon { padding: 1rem 2rem; }
+  .salon + .salon { border-top: 0; border-left: 1px solid var(--line); }
+}
+
+/* ---------- VIII. ニュース ---------- */
+.news-list {
+  max-width: var(--w-narrow);
+  margin: 0 auto;
+  border-top: 1px solid var(--line);
+}
+.news-item {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.1rem 1.6rem;
+  padding: 1.1em 0.3em;
+  border-bottom: 1px solid var(--line);
+}
+.news-item time {
+  font-size: 0.82rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--gold-ink);
+}
+.news-item p { font-size: 0.92rem; }
+@media (min-width: 560px) {
+  .news-item { grid-template-columns: 110px 1fr; align-items: baseline; }
+}
+
+/* ---------- IX. FAQ ---------- */
+.faq-list {
+  max-width: 760px;
+  margin: 0 auto;
+  border-top: 1px solid var(--line);
+}
+.faq { border-bottom: 1px solid var(--line); }
+.faq summary {
+  position: relative;
+  list-style: none;
+  cursor: pointer;
+  padding: 1.15em 2.6em 1.15em 0.2em;
+  font-weight: 400;
+  font-size: 0.95rem;
+  transition: color 0.15s ease-out;
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary:hover { color: var(--gold-ink); }
+.faq summary::after {
+  content: "+";
+  position: absolute;
+  right: 0.4em; top: 50%;
+  transform: translateY(-50%);
+  font: 400 1.5rem/1 var(--font-en);
+  color: var(--gold-ink);
+}
+.faq[open] summary::after { content: "−"; }
+.faq p {
+  padding: 0 2.6em 1.4em 0.2em;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+.faq-cta {
+  margin-top: clamp(2.4rem, 5vw, 3.6rem);
+  text-align: center;
+}
+
+/* ---------- フッター ---------- */
+.site-footer {
+  background: var(--ink);
+  color: #EFE9DD;
+  text-align: center;
+  padding: clamp(3.5rem, 6vw, 5.5rem) var(--pad-x) clamp(4.5rem, 7vw, 6rem);
+}
+.footer-inner { max-width: var(--w-mid); margin: 0 auto; }
+.footer-mark { font: 500 1.9rem/1.3 var(--font-en); }
+.footer-tagline {
+  margin-top: 0.8rem;
+  font: 400 0.85rem/2 var(--font-jp);
+}
+.footer-social {
+  display: flex; justify-content: center; gap: 2rem;
+  margin-top: 1.8rem;
+}
+.footer-social a {
+  color: var(--gold);
+  font: italic 400 1rem/1.4 var(--font-en);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color 0.15s ease-out, border-color 0.15s ease-out;
+  padding: 0.2em 0.1em;
+}
+.footer-social a:hover { color: #EFE9DD; border-bottom-color: #EFE9DD; }
+.site-footer :focus-visible { outline-color: var(--gold); }
+.footer-company {
+  margin-top: 2.2rem;
+  font-size: 0.84rem;
+}
+.footer-address {
+  margin-top: 0.5rem;
+  font-size: 0.78rem;
+  color: #B7B0A4;
+}
+.footer-sep { margin: 0 0.5em; }
+.footer-note {
+  margin-top: 1.6rem;
+  font-size: 0.74rem;
+  color: #B7B0A4;
+}
+.footer-copy {
+  margin-top: 0.4rem;
+  font-size: 0.78rem;
+  color: #B7B0A4;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- 比較ページへ戻るピル ---------- */
+.compare-pill {
+  position: fixed;
+  left: max(14px, env(safe-area-inset-left));
+  bottom: max(14px, env(safe-area-inset-bottom));
+  z-index: var(--z-pill);
+  padding: 0.5em 1.1em;
+  border-radius: 999px;
+  background: rgba(43, 39, 36, 0.92);
+  border: 1px solid rgba(180, 155, 87, 0.55);
+  color: #F5F1E8;
+  font-size: 0.78rem;
+  text-decoration: none;
+  transition: background-color 0.15s ease-out, border-color 0.15s ease-out;
+}
+.compare-pill:hover { background: var(--ink); border-color: var(--gold); }
+.compare-pill:focus-visible { outline-color: var(--gold-ink); }
+
+/* ---------- Reduced Motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  html.js .reveal { opacity: 1; transform: none; transition: none; }
+  *, *::before, *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+/* ---------- 詳細ページへの導線(コレクションカード) ---------- */
+.product-name a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 180ms ease;
+}
+.product-name a:hover, .product-name a:focus-visible { color: var(--gold-ink); }
+.product-cta { text-align: center; margin-top: 0.5rem; }
+.product-cta a {
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  color: var(--gold-ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--gold);
+  padding-bottom: 0.15em;
+  transition: border-color 180ms ease;
+}
+.product-cta a:hover, .product-cta a:focus-visible { border-color: var(--gold-ink); }
+@media (prefers-reduced-motion: reduce) {
+  .product-name a, .product-cta a { transition: none; }
+}

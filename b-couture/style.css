@@ -1,0 +1,646 @@
+/* ============================================================
+   Atelier Yuka — B案 Couture「光のアトリエ」(白背景改訂)
+   style.css: tokens / base / header / hero / maison / collection
+   ============================================================ */
+
+/* ---------- tokens ---------- */
+:root {
+  --bg: #FFFFFF;
+  --bg-warm: #F8F6F1;
+  --text: #1C1916;
+  --text-dim: rgba(28, 25, 22, 0.75);
+  --text-mute: rgba(28, 25, 22, 0.64);
+  --gold: #C9A961;            /* 罫線・額縁・装飾のみ(文字には使わない) */
+  --gold-text: #80692C;       /* 文字・アイコン用の濃い金(白地でAA) */
+  --gold-dim: rgba(201, 169, 97, 0.6);
+  --hairline-gold: rgba(201, 169, 97, 0.5);
+  --hairline-ink: rgba(28, 25, 22, 0.14);
+  --error: #A9402F;
+  --shadow-frame: 0 12px 32px rgba(28, 25, 22, 0.09), 0 2px 8px rgba(28, 25, 22, 0.05);
+
+  --font-en: "Cinzel", "Times New Roman", serif;
+  --font-head: "Shippori Mincho B1", "Hiragino Mincho ProN", serif;
+  --font-body: "Noto Serif JP", "Hiragino Mincho ProN", serif;
+
+  --text-sm: 0.8125rem;
+  --text-base: clamp(0.9375rem, 0.9rem + 0.2vw, 1.0625rem);
+  --text-title: clamp(1.75rem, 1.2rem + 2.4vw, 3rem);
+  --text-hero-en: clamp(2.75rem, 1.4rem + 8vw, 7.5rem);
+
+  --sp-section: clamp(6.5rem, 4rem + 9vw, 13rem);
+  --gutter: clamp(1.25rem, 4vw, 3rem);
+
+  --dur-fast: 160ms;
+  --dur-slow: 600ms;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --z-head: 100;
+  --z-pill: 110;
+  --z-grain: 120;
+}
+
+/* ---------- reset / base ---------- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  color-scheme: light;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: var(--text-base);
+  line-height: 2;
+  letter-spacing: 0;
+  overflow-x: clip;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* paper grain — 光のアトリエの紙の空気 */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-grain);
+  pointer-events: none;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 160px 160px;
+}
+
+img { display: block; max-width: 100%; height: auto; }
+
+a { color: inherit; text-decoration-color: var(--gold-dim); text-underline-offset: 0.3em; }
+a, button, input, summary, label { touch-action: manipulation; }
+
+button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+
+:focus-visible {
+  outline: 2px solid var(--gold-text);
+  outline-offset: 3px;
+  border-radius: 1px;
+}
+
+h1, h2, h3 { font-weight: 400; text-wrap: balance; word-break: auto-phrase; }
+p { text-wrap: pretty; }
+
+section[id] { scroll-margin-top: 5.5rem; }
+
+.visually-hidden {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: fixed;
+  top: 0.75rem; left: 0.75rem;
+  z-index: 200;
+  padding: 0.6em 1.2em;
+  background-color: var(--bg);
+  border: 1px solid var(--gold-text);
+  color: var(--text);
+  font-size: var(--text-sm);
+  text-decoration: none;
+  transform: translateY(-300%);
+}
+.skip-link:focus-visible { transform: translateY(0); }
+
+/* ---------- layout ---------- */
+.wrap { max-width: 68rem; margin-inline: auto; padding-inline: var(--gutter); }
+.wrap-wide { max-width: 84rem; }
+.wrap-narrow { max-width: 46rem; }
+
+.sec { padding-block: calc(var(--sp-section) / 2); }
+.sec + .sec { border-top: 1px solid var(--hairline-ink); }
+
+/* section header — 箔押しのラベルと和文見出し */
+.sec-head { margin-bottom: clamp(3rem, 2rem + 4vw, 5.5rem); }
+.sec-label {
+  font-family: var(--font-en);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--gold-text);
+  text-transform: uppercase;
+  letter-spacing: 0.42em; /* 英字ラベル用途のみ */
+  margin-bottom: 1.4rem;
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+.sec-label::before {
+  content: "";
+  width: 2.75rem; height: 1px;
+  background-color: var(--gold);
+  flex: none;
+}
+.sec-title {
+  font-family: var(--font-head);
+  font-size: var(--text-title);
+  line-height: 1.5;
+  letter-spacing: 0;
+}
+.sec-desc {
+  margin-top: 1.4rem;
+  max-width: 44rem;
+  color: var(--text-dim);
+}
+
+/* ---------- buttons / links ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.9em;
+  min-height: 3.25rem;
+  padding: 0.7em 2.2em;
+  font-family: var(--font-head);
+  font-size: 0.9375rem;
+  letter-spacing: 0;
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition: opacity var(--dur-fast) ease, border-color var(--dur-fast) ease, transform var(--dur-fast) ease;
+}
+.btn:hover { opacity: 0.86; }
+.btn:active { transform: translateY(1px); }
+@media (max-width: 400px) {
+  .btn { padding-inline: 1.3em; width: 100%; }
+}
+
+.btn-gold {
+  background-color: var(--gold);
+  color: var(--text);
+  border-color: var(--gold);
+}
+.btn-price {
+  font-family: var(--font-en);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  border-left: 1px solid rgba(28, 25, 22, 0.35);
+  padding-left: 0.9em;
+}
+
+.btn-ghost {
+  color: var(--text-dim);
+  border-color: var(--hairline-ink);
+}
+.btn-ghost:hover { border-color: var(--gold-text); color: var(--text); opacity: 1; }
+
+.link-quiet {
+  display: inline-block;
+  color: var(--text-dim);
+  font-size: 0.9375rem;
+  text-decoration: underline;
+  text-decoration-color: var(--gold-dim);
+  transition: color var(--dur-fast) ease, text-decoration-color var(--dur-fast) ease;
+}
+.link-quiet:hover { color: var(--gold-text); text-decoration-color: var(--gold-text); }
+
+/* ---------- header ---------- */
+.site-head {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: var(--z-head);
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  min-height: 4.25rem;
+  padding-block: 0.5rem;
+  padding-inline: calc(env(safe-area-inset-left) + var(--gutter)) calc(env(safe-area-inset-right) + var(--gutter));
+}
+.site-head::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-color: rgba(255, 255, 255, 0.94);
+  border-bottom: 1px solid var(--hairline-gold);
+  opacity: 0;
+  transition: opacity 240ms ease;
+}
+.site-head.is-scrolled::before { opacity: 1; }
+
+.brand {
+  font-family: var(--font-en);
+  font-weight: 500;
+  font-size: 1.0625rem;
+  letter-spacing: 0.22em; /* 英字ラベル用途 */
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--text);
+  transition: color var(--dur-fast) ease;
+}
+.brand:hover { color: var(--gold-text); }
+
+.site-nav { margin-inline: auto; }
+.site-nav ul { display: flex; gap: clamp(1.25rem, 2.5vw, 2.5rem); list-style: none; }
+.site-nav a {
+  font-size: 0.875rem;
+  color: var(--text-dim);
+  text-decoration: none;
+  padding-block: 0.5em;
+  transition: color var(--dur-fast) ease;
+}
+.site-nav a:hover { color: var(--gold-text); }
+
+.head-cta {
+  margin-left: auto;
+  font-size: 0.875rem;
+  color: var(--gold-text);
+  text-decoration: none;
+  white-space: nowrap;
+  border: 1px solid var(--gold-dim);
+  padding: 0.55em 1.5em;
+  border-radius: 999px;
+  transition: border-color var(--dur-fast) ease, color var(--dur-fast) ease;
+}
+.head-cta:hover { border-color: var(--gold-text); color: var(--text); }
+
+@media (max-width: 800px) {
+  .site-nav { display: none; }
+}
+
+/* ---------- hero ---------- */
+.hero {
+  position: relative;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow: hidden;
+  isolation: isolate;
+}
+.hero-media { position: absolute; inset: 0; z-index: -2; }
+.hero-media img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: 42% 32%;
+  animation: kenburns 20s var(--ease-out) forwards;
+  transform-origin: 42% 36%;
+}
+@keyframes kenburns {
+  from { transform: scale(1); }
+  to { transform: scale(1.06); }
+}
+/* 白のスクリム + 白へ溶けるフェード(radial-gradientは縁の落とし込み=ビネット用途のみ) */
+.hero::before {
+  content: "";
+  position: absolute; inset: 0; z-index: -1;
+  /* テキスト側(左)は濃く、ドレス側(右)は薄く — 被写体の存在感を残す方向性スクリム */
+  background-image: linear-gradient(97deg,
+    rgba(255, 255, 255, 0.80) 0%,
+    rgba(255, 255, 255, 0.62) 42%,
+    rgba(255, 255, 255, 0.26) 72%,
+    rgba(255, 255, 255, 0.10) 100%);
+}
+.hero::after {
+  content: "";
+  position: absolute; inset: 0; z-index: -1;
+  background-image:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.92) 0, rgba(255, 255, 255, 0) 9rem),
+    radial-gradient(72% 48% at 100% 0%, rgba(255, 255, 255, 0.95) 22%, rgba(255, 255, 255, 0) 68%),
+    radial-gradient(120% 90% at 46% 38%, rgba(255, 255, 255, 0) 44%, rgba(255, 255, 255, 0.88) 100%);
+}
+
+.hero-inner {
+  position: relative;
+  max-width: 68rem;
+  margin-inline: auto;
+  width: 100%;
+  padding-inline: var(--gutter);
+  padding-bottom: clamp(5rem, 12vh, 9rem);
+}
+.hero-kicker {
+  font-family: var(--font-en);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: #6B571F; /* 淡い写真上でもAAを満たす深い金 */
+  text-transform: uppercase;
+  letter-spacing: 0.42em; /* 英字ラベル用途 */
+  margin-bottom: 1.75rem;
+}
+.hero-title { display: block; }
+.hero-en {
+  display: block;
+  font-family: var(--font-en);
+  font-weight: 400;
+  font-size: var(--text-hero-en);
+  line-height: 1.04;
+  text-transform: uppercase;
+  color: var(--text);
+}
+.hero-ja {
+  display: block;
+  font-family: var(--font-head);
+  font-size: clamp(1.0625rem, 0.9rem + 1vw, 1.5rem);
+  line-height: 2;
+  margin-top: 1.75rem;
+  color: var(--text);
+}
+.hero-lead {
+  max-width: 38rem;
+  margin-top: 1.25rem;
+  color: var(--text-dim);
+  font-size: 0.9375rem;
+}
+.hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.5rem 2.25rem;
+  margin-top: 2.75rem;
+}
+.hero-scroll {
+  position: absolute;
+  right: calc(env(safe-area-inset-right) + var(--gutter));
+  bottom: clamp(5rem, 12vh, 9rem);
+  font-family: var(--font-en);
+  font-size: 0.6875rem;
+  letter-spacing: 0.42em; /* 英字ラベル用途 */
+  text-transform: uppercase;
+  color: var(--text-mute);
+  writing-mode: vertical-rl;
+}
+.hero-scroll::after {
+  content: "";
+  display: block;
+  width: 1px; height: 3.5rem;
+  margin-top: 1rem;
+  margin-inline: auto;
+  background-color: var(--gold);
+}
+@media (max-width: 800px) {
+  .hero-scroll { display: none; }
+}
+/* スマートフォン: 右上を白に溶かし、写真内の刷り込み文字を光に沈める */
+@media (max-width: 700px) {
+  .hero-media img { object-position: 0% 32%; }
+  /* SPは本文が全幅に回り込むため、右側の抜きを弱めて可読性を優先 */
+  .hero::before {
+    background-image: linear-gradient(97deg,
+      rgba(255, 255, 255, 0.78) 0%,
+      rgba(255, 255, 255, 0.62) 48%,
+      rgba(255, 255, 255, 0.44) 100%);
+  }
+  .hero::after {
+    background-image:
+      radial-gradient(95% 42% at 100% 0%, rgba(255, 255, 255, 0.99) 38%, rgba(255, 255, 255, 0) 80%),
+      radial-gradient(130% 90% at 44% 42%, rgba(255, 255, 255, 0) 26%, rgba(255, 255, 255, 0.96) 100%);
+  }
+  .hero-kicker { font-size: 0.6875rem; letter-spacing: 0.3em; }
+}
+
+/* hero entrance — 静かに光が差す */
+.hero-kicker, .hero-title, .hero-lead, .hero-cta {
+  animation: hero-in 1100ms var(--ease-out) both;
+}
+.hero-title { animation-delay: 140ms; }
+.hero-lead { animation-delay: 300ms; }
+.hero-cta { animation-delay: 460ms; }
+@keyframes hero-in {
+  from { opacity: 0; transform: translateY(22px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- maison ---------- */
+.maison-statement {
+  max-width: 46rem;
+  font-family: var(--font-head);
+  font-size: clamp(1rem, 0.92rem + 0.5vw, 1.1875rem);
+  line-height: 2.3;
+  margin-bottom: clamp(4rem, 3rem + 4vw, 6.5rem);
+}
+.line-grid { display: grid; gap: clamp(3.5rem, 3rem + 3vw, 6rem); }
+.line-card {
+  display: grid;
+  gap: 1.75rem 4.5rem;
+  align-items: center;
+}
+@media (min-width: 860px) {
+  .line-card { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); }
+  .line-card.is-rev .line-figure { order: 2; }
+  .line-card.is-rev .line-body { order: 1; text-align: right; }
+  .line-card.is-rev .line-body .line-name::after { margin-left: auto; }
+}
+/* 額装 — 金の細縁と紙の上の柔らかい影 */
+.line-figure {
+  position: relative;
+  border: 1px solid var(--hairline-ink);
+  padding: 0.75rem;
+  background-color: var(--bg);
+  box-shadow: var(--shadow-frame);
+}
+.line-figure::after {
+  content: "";
+  position: absolute; inset: 0.75rem;
+  border: 1px solid var(--hairline-gold);
+  pointer-events: none;
+}
+.line-figure img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; }
+.line-index {
+  font-family: var(--font-en);
+  font-size: var(--text-sm);
+  color: var(--gold-text);
+  letter-spacing: 0.42em; /* 英字ラベル用途 */
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+.line-name {
+  font-family: var(--font-en);
+  font-weight: 400;
+  font-size: clamp(1.5rem, 1.2rem + 1.4vw, 2.25rem);
+  text-transform: uppercase;
+  line-height: 1.3;
+}
+.line-name::after {
+  content: "";
+  display: block;
+  width: 3.5rem; height: 1px;
+  margin-block: 1.25rem;
+  background-color: var(--gold);
+}
+.line-desc { color: var(--text-dim); }
+
+/* ---------- collection ---------- */
+.cat { margin-top: clamp(3.5rem, 3rem + 3vw, 6rem); }
+.cat:first-of-type { margin-top: 0; }
+
+.cat-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.75rem 1.75rem;
+  padding-bottom: 1.1rem;
+  margin-bottom: 1.4rem;
+  border-bottom: 1px solid var(--hairline-gold);
+}
+.cat-title { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.4rem 1.1rem; }
+.cat-en {
+  font-family: var(--font-en);
+  font-weight: 400;
+  font-size: clamp(1.375rem, 1.15rem + 1.1vw, 1.9375rem);
+  text-transform: uppercase;
+}
+.cat-ja { font-family: var(--font-head); font-size: 0.9375rem; color: var(--text-dim); }
+.cat-count {
+  font-family: var(--font-en);
+  font-size: var(--text-sm);
+  font-variant-numeric: tabular-nums;
+  color: var(--gold-text);
+  letter-spacing: 0.3em; /* 英字ラベル用途 */
+  text-transform: uppercase;
+}
+.rail-nav { margin-left: auto; display: flex; gap: 0.6rem; }
+.rail-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.9rem; height: 2.9rem;
+  border: 1px solid var(--hairline-ink);
+  border-radius: 999px;
+  color: var(--text-dim);
+  transition: border-color var(--dur-fast) ease, color var(--dur-fast) ease, opacity var(--dur-fast) ease;
+}
+.rail-btn:hover { border-color: var(--gold-text); color: var(--gold-text); }
+.rail-btn:disabled { opacity: 0.35; cursor: default; border-color: var(--hairline-ink); color: var(--text-dim); }
+
+/* 横スクロール・ギャラリー(このレールのみ意図した横スクロール) */
+.rail {
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x proximity;
+  padding-bottom: 0.9rem;
+  scrollbar-width: thin;
+  scrollbar-color: var(--gold-dim) rgba(28, 25, 22, 0.08);
+}
+.rail::-webkit-scrollbar { height: 4px; }
+.rail::-webkit-scrollbar-track { background-color: rgba(28, 25, 22, 0.08); }
+.rail::-webkit-scrollbar-thumb { background-color: var(--gold-dim); }
+.rail:focus-visible { outline-offset: 6px; }
+
+.rail-track {
+  display: flex;
+  gap: clamp(1rem, 1.6vw, 1.75rem);
+  list-style: none;
+  width: max-content;
+  padding: 0.5rem 0.5rem 1.25rem;
+}
+.work {
+  width: clamp(15rem, 62vw, 20rem);
+  flex: none;
+  scroll-snap-align: start;
+}
+
+/* 額装カード — ホバーで金縁に光が差し、別カットへクロスフェード */
+.work-media {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  background-color: var(--bg-warm);
+  border: 1px solid var(--hairline-ink);
+  box-shadow: var(--shadow-frame);
+}
+.work-media img {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+.work-media .media-alt {
+  opacity: 0;
+  transition: opacity 450ms ease;
+}
+.work-media::after {
+  content: "";
+  position: absolute;
+  inset: 0.65rem;
+  border: 1px solid rgba(201, 169, 97, 0);
+  pointer-events: none;
+  transition: border-color var(--dur-fast) ease;
+}
+.work:hover .work-media::after,
+.work:focus-within .work-media::after,
+.work.is-alt .work-media::after { border-color: rgba(201, 169, 97, 0.95); }
+/* ホバーは常に「もう一方のカット」をプレビューする(ボタン押下が必ず視覚変化を生むように) */
+.work:hover .media-alt,
+.work.is-alt .media-alt { opacity: 1; }
+.work.is-alt:hover .media-alt { opacity: 0; }
+
+.alt-toggle {
+  position: absolute;
+  right: 0.9rem; bottom: 0.9rem;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem; height: 2.25rem;
+  border-radius: 999px;
+  background-color: rgba(255, 255, 255, 0.88);
+  border: 1px solid var(--hairline-gold);
+  color: var(--gold-text);
+  transition: border-color var(--dur-fast) ease, color var(--dur-fast) ease;
+}
+.alt-toggle:hover { border-color: var(--gold-text); color: var(--text); }
+.alt-toggle[aria-pressed="true"] { background-color: var(--gold); color: var(--text); border-color: var(--gold); }
+
+.work-meta { padding-top: 0.6rem; }
+.work-line {
+  font-family: var(--font-en);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: var(--gold-text);
+  text-transform: uppercase;
+  letter-spacing: 0.3em; /* 英字ラベル用途 */
+}
+.work-name {
+  font-family: var(--font-en);
+  font-size: 1.375rem;
+  line-height: 1.35;
+  margin-top: 0.35rem;
+}
+.work-spec {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 0.4rem;
+  border-top: 1px solid var(--hairline-ink);
+  padding-top: 0.55rem;
+}
+.work-code { font-size: 0.75rem; color: var(--text-mute); font-variant-numeric: tabular-nums; }
+.work-price {
+  font-family: var(--font-en);
+  font-weight: 500;
+  font-size: 1rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+}
+
+/* ---------- reveal(scroll fade) ---------- */
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(26px);
+}
+.js [data-reveal].is-in {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 900ms ease, transform 900ms var(--ease-out);
+}
+
+/* ---------- reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .hero-media img { animation: none; }
+  .hero-kicker, .hero-title, .hero-lead, .hero-cta { animation: none; }
+  .js [data-reveal] { opacity: 1; transform: none; transition: none; }
+  .work-media .media-alt { transition: none; }
+  *, *::before, *::after { transition-duration: 1ms !important; animation-duration: 1ms !important; }
+}

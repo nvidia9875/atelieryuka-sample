@@ -1,0 +1,472 @@
+/* ============================================================
+   Atelier Yuka — A案 Timeless Classic「銀座の正統」
+   生成り #FBF9F5 / 墨 #2B2724 / シャンパンゴールド #B49B57
+   ============================================================ */
+
+:root {
+  --ivory: #FBF9F5;
+  --ink: #2B2724;
+  --gold: #B49B57;        /* 罫線・装飾用(テキストには使わない) */
+  --gold-ink: #7A6027;    /* テキスト用ゴールド(AA確保) */
+  --greige: #F3EEE4;      /* 淡いグレージュ(章の地) */
+  --paper: #FFFDF9;       /* カード・入力欄の地 */
+  --line: #E4DCCB;        /* 極細罫線 */
+  --muted: #6B645C;       /* 補助テキスト */
+  --error: #96372A;
+
+  --font-en: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --font-jp: "Shippori Mincho", "Hiragino Mincho ProN", "Yu Mincho", serif;
+  --font-body: "Noto Sans JP", "Hiragino Kaku Gothic ProN", sans-serif;
+
+  --w-narrow: 680px;
+  --w-mid: 900px;
+  --w-wide: 1120px;
+  --space-chapter: clamp(4.5rem, 3rem + 5vw, 8.5rem);
+  --pad-x: clamp(16px, 4vw, 40px);
+
+  --z-pill: 50;
+  --z-skip: 100;
+}
+
+/* ---------- リセット・ベース ---------- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 1.5rem;
+}
+
+body {
+  background: var(--ivory);
+  color: var(--ink);
+  font: 300 1rem/1.95 var(--font-body);
+  overflow-wrap: break-word;
+  min-width: 320px;
+}
+
+a, button, summary, label, input, select { touch-action: manipulation; }
+a, button, summary, label { -webkit-tap-highlight-color: transparent; }
+
+img { max-width: 100%; height: auto; display: block; }
+
+ul, ol { list-style: none; }
+
+[hidden] { display: none !important; }
+
+::selection { background: var(--gold); color: var(--ink); }
+
+:focus-visible { outline: 2px solid var(--gold-ink); outline-offset: 3px; }
+
+h1, h2, h3 { text-wrap: balance; font-weight: 500; }
+p { text-wrap: pretty; }
+
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+/* ---------- スキップリンク ---------- */
+.skip-link {
+  position: fixed; top: 10px; left: 10px; z-index: var(--z-skip);
+  background: var(--ink); color: var(--ivory);
+  padding: 0.7em 1.3em; font-size: 0.85rem; text-decoration: none;
+  transform: translateY(-300%);
+  transition: transform 0.15s ease-out;
+}
+.skip-link:focus { transform: none; }
+
+/* ---------- フェードイン(静かに) ---------- */
+html.js .reveal {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+html.js .reveal.is-in { opacity: 1; transform: none; }
+
+/* ---------- 装飾(フルーロン) ---------- */
+.fleuron {
+  width: 7px; height: 7px;
+  margin: clamp(1.6rem, 3vw, 2.4rem) auto;
+  border: 1px solid var(--gold);
+  transform: rotate(45deg);
+}
+
+/* ---------- ヘッダー ---------- */
+.site-header {
+  text-align: center;
+  padding: clamp(1.6rem, 3vw, 2.6rem) var(--pad-x) 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.brand {
+  display: inline-block;
+  text-decoration: none;
+  color: var(--ink);
+}
+.brand-en {
+  display: block;
+  font: 500 clamp(1.7rem, 1.4rem + 1.2vw, 2.2rem)/1.2 var(--font-en);
+}
+.brand-ja {
+  display: block;
+  margin-top: 0.35em;
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+
+.site-nav { margin-top: 1.2rem; }
+.site-nav ul {
+  display: flex; flex-wrap: wrap; justify-content: center;
+  column-gap: clamp(0.9rem, 2vw, 1.7rem); row-gap: 0.35rem;
+  padding-bottom: 1.1rem;
+}
+.site-nav a {
+  display: inline-block;
+  font-size: 0.83rem; font-weight: 400;
+  color: var(--ink); text-decoration: none;
+  padding: 0.35em 0.1em;
+  border-bottom: 1px solid transparent;
+  transition: color 0.15s ease-out, border-color 0.15s ease-out;
+}
+.site-nav a:hover { color: var(--gold-ink); border-bottom-color: var(--gold-ink); }
+.site-nav a.nav-reserve {
+  color: var(--gold-ink);
+  border: 1px solid var(--gold-ink);
+  padding: 0.35em 1.1em;
+  transition: color 0.15s ease-out, background-color 0.15s ease-out;
+}
+.site-nav a.nav-reserve:hover { background: var(--gold-ink); color: var(--ivory); }
+
+/* ---------- ボタン ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  gap: 0.7em;
+  min-height: 52px;
+  padding: 0.85em 2.1em;
+  border: 1px solid var(--ink);
+  font: 400 0.95rem/1.4 var(--font-body);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.18s ease-out, color 0.18s ease-out, border-color 0.18s ease-out;
+}
+.btn .price { font-variant-numeric: tabular-nums; }
+.btn-primary { background: var(--ink); color: var(--ivory); }
+.btn-primary:hover { background: var(--gold-ink); border-color: var(--gold-ink); color: #FFFDF9; }
+.btn-ghost { background: transparent; color: var(--ink); }
+.btn-ghost:hover { border-color: var(--gold-ink); color: var(--gold-ink); }
+.btn:disabled { opacity: 0.55; cursor: default; }
+
+/* ---------- ヒーロー(額装) ---------- */
+.hero {
+  text-align: center;
+  padding: clamp(3rem, 6vw, 5.5rem) var(--pad-x) 0;
+}
+.hero-eyebrow {
+  font: 400 0.72rem/1.6 var(--font-body);
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--gold-ink);
+}
+.hero-title {
+  margin-top: 0.5em;
+  font: 400 clamp(2.9rem, 1.6rem + 6.5vw, 6.2rem)/1.08 var(--font-en);
+}
+.hero-tagline {
+  margin-top: 1.1em;
+  font: 500 clamp(1rem, 0.9rem + 0.7vw, 1.3rem)/2 var(--font-jp);
+  text-wrap: balance;
+}
+
+.hero-frame {
+  max-width: 1020px;
+  margin: 0 auto;
+  padding: clamp(10px, 2vw, 18px);
+  border: 1px solid var(--gold);
+  background: var(--paper);
+}
+.hero-frame img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+}
+
+.hero-cta {
+  padding: clamp(2rem, 4vw, 3rem) 0 0;
+  display: flex; flex-direction: column; align-items: center; gap: 0.9rem;
+}
+.hero-note {
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+@media (min-width: 720px) {
+  .hero-frame img { aspect-ratio: 3 / 2; }
+  .hero-cta { flex-direction: row; flex-wrap: wrap; justify-content: center; }
+  .hero-note { width: 100%; text-align: center; }
+}
+
+/* ---------- 章(チャプター) ---------- */
+.chapter {
+  padding: var(--space-chapter) var(--pad-x);
+}
+.chapter-tinted { background: var(--greige); }
+.chapter-last { padding-bottom: calc(var(--space-chapter) + 1rem); }
+section[id] { scroll-margin-top: 1.5rem; }
+
+.chapter-head {
+  max-width: var(--w-narrow);
+  margin: 0 auto clamp(2.6rem, 5vw, 4.2rem);
+  text-align: center;
+}
+.chapter-no {
+  font: italic 400 clamp(2.2rem, 1.8rem + 1.6vw, 3.2rem)/1 var(--font-en);
+  color: var(--gold-ink);
+}
+.chapter-label {
+  display: flex; align-items: center; justify-content: center;
+  gap: 18px;
+  margin-top: 0.9rem;
+  font: 400 0.72rem/1.6 var(--font-body);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold-ink);
+}
+.chapter-label::before,
+.chapter-label::after {
+  content: "";
+  width: clamp(32px, 6vw, 64px); height: 1px;
+  background: var(--gold);
+}
+.chapter-title {
+  margin-top: 1.1rem;
+  font: 500 clamp(1.5rem, 1.2rem + 1.4vw, 2.25rem)/1.6 var(--font-jp);
+}
+.chapter-lede {
+  margin-top: 1.2rem;
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+/* ---------- I. メゾン ---------- */
+.statement {
+  max-width: var(--w-narrow);
+  margin: 0 auto;
+  text-align: center;
+  font: 400 clamp(0.95rem, 0.9rem + 0.3vw, 1.08rem)/2.3 var(--font-jp);
+}
+
+.lines {
+  max-width: var(--w-mid);
+  margin: clamp(3rem, 6vw, 5rem) auto 0;
+  display: grid;
+  gap: clamp(2.5rem, 5vw, 3.5rem);
+}
+.line { text-align: center; }
+.line-frame {
+  max-width: 380px;
+  margin: 0 auto;
+  padding: 8px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+}
+.line-frame img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; }
+.line-name {
+  margin-top: 1.3rem;
+  font: 500 1.35rem/1.4 var(--font-en);
+}
+.line-desc {
+  max-width: 420px;
+  margin: 0.7rem auto 0;
+  font-size: 0.88rem;
+  color: var(--muted);
+}
+@media (min-width: 720px) {
+  .lines { grid-template-columns: 1fr 1fr; }
+}
+
+/* ---------- II. コレクション(タブ+3カラム) ---------- */
+.tabs { max-width: var(--w-wide); margin: 0 auto; }
+
+.tablist {
+  display: flex; flex-wrap: wrap; justify-content: center;
+  column-gap: clamp(0.4rem, 2vw, 1.6rem); row-gap: 0.3rem;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: clamp(2.2rem, 4vw, 3.4rem);
+}
+.tablist [role="tab"] {
+  appearance: none;
+  background: none;
+  border: 0;
+  border-bottom: 1px solid transparent;
+  margin-bottom: -1px;
+  padding: 0.8em 0.9em;
+  font: 400 clamp(0.85rem, 0.8rem + 0.3vw, 0.95rem)/1.4 var(--font-body);
+  color: var(--muted);
+  cursor: pointer;
+  transition: color 0.15s ease-out, border-color 0.15s ease-out;
+}
+.tablist [role="tab"]:hover { color: var(--gold-ink); }
+.tablist [role="tab"][aria-selected="true"] {
+  color: var(--ink);
+  font-weight: 400;
+  border-bottom-color: var(--gold-ink);
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(2.4rem, 4vw, 3.4rem) clamp(1.2rem, 2.5vw, 2.2rem);
+}
+@media (min-width: 560px) { .product-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 920px) {
+  .product-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+.product { text-align: center; }
+.product-media {
+  position: relative;
+  padding: 8px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+}
+.product-media img {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+}
+.product-media .alt-img {
+  position: absolute;
+  inset: 8px;
+  width: calc(100% - 16px);
+  height: calc(100% - 16px);
+  aspect-ratio: auto;
+  opacity: 0;
+  transition: opacity 0.5s ease-out;
+}
+.float-code {
+  position: absolute;
+  bottom: 20px; left: 50%;
+  transform: translate(-50%, 6px);
+  padding: 0.35em 0.9em;
+  background: rgba(251, 249, 245, 0.94);
+  border: 1px solid var(--line);
+  font-size: 0.72rem; font-weight: 400;
+  color: var(--ink);
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+}
+@media (hover: hover) {
+  .product-media:hover .alt-img { opacity: 1; }
+  .product-media:hover .float-code { opacity: 1; transform: translate(-50%, 0); }
+}
+
+.product-name {
+  margin-top: 1.1rem;
+  font: 500 1.3rem/1.3 var(--font-en);
+}
+.product-meta {
+  margin-top: 0.3rem;
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+.product-price {
+  margin-top: 0.35rem;
+  font-size: 0.95rem; font-weight: 400;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- III. ご利用の流れ ---------- */
+.flow-list {
+  max-width: var(--w-wide);
+  margin: 0 auto;
+  display: grid;
+  gap: 0;
+  counter-reset: none;
+}
+.flow-step {
+  text-align: center;
+  padding: 1.8rem 1.2rem;
+}
+.flow-step + .flow-step { border-top: 1px solid var(--line); }
+.flow-no {
+  font: italic 400 1.7rem/1 var(--font-en);
+  font-variant-numeric: tabular-nums;
+  color: var(--gold-ink);
+}
+.flow-no::after {
+  content: "";
+  display: block;
+  width: 28px; height: 1px;
+  margin: 0.8rem auto 0;
+  background: var(--gold);
+}
+.flow-title {
+  margin-top: 0.9rem;
+  font: 500 1.05rem/1.6 var(--font-jp);
+}
+.flow-desc {
+  max-width: 300px;
+  margin: 0.6rem auto 0;
+  font-size: 0.83rem;
+  color: var(--muted);
+}
+@media (min-width: 920px) {
+  .flow-list { grid-template-columns: repeat(5, 1fr); }
+  .flow-step { padding: 0.6rem 1.2rem; }
+  .flow-step + .flow-step { border-top: 0; border-left: 1px solid var(--line); }
+}
+
+/* ---------- IV. 料金 ---------- */
+.pricing-grid {
+  max-width: var(--w-wide);
+  margin: 0 auto;
+  display: grid;
+  gap: clamp(1.4rem, 3vw, 2rem);
+}
+.plan {
+  position: relative;
+  text-align: center;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  padding: clamp(2.2rem, 4vw, 3rem) 1.6rem;
+}
+.plan-main { border-color: var(--gold); }
+.plan-badge {
+  position: absolute;
+  top: 0; left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 0.2em 1em;
+  background: var(--paper);
+  font-size: 0.68rem;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--gold-ink);
+  white-space: nowrap;
+}
+.plan-name { font: 500 1.1rem/1.7 var(--font-jp); }
+.plan-en {
+  margin-top: 0.2rem;
+  font: italic 400 0.95rem/1.4 var(--font-en);
+  color: var(--gold-ink);
+}
+.plan-price {
+  margin-top: 1.2rem;
+  font: 500 2.3rem/1.2 var(--font-en);
+  font-variant-numeric: tabular-nums;
+}
+.plan-price-range { font-size: 1.55rem; padding-top: 0.35rem; }
+.plan-note {
+  margin-top: 1rem;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+.pricing-cta {
+  margin-top: clamp(2.2rem, 4vw, 3rem);
+  text-align: center;
+}
+@media (min-width: 860px) {
+  .pricing-grid { grid-template-columns: repeat(3, 1fr); align-items: stretch; }
+}
+
