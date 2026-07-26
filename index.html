@@ -1,358 +1,804 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8">
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>アトリエユカ リニューアル提案 — 4つのデザイン案</title>
-<meta name="description" content="アトリエユカ サイトフルリプレイスに向けた4つのデザイン方向性のご提案。各案は実際に操作できるサンプルです。">
+<title>Atelier Yuka — アトリエユカ | 銀座のウエディングドレスメゾン(A案 Timeless Classic)</title>
+<meta name="description" content="銀座とハワイのウエディングドレスメゾン、アトリエユカ。ご自宅試着¥5,500から。インポート素材×国内最高峰アトリエの一着をオンラインでレンタル。">
+<meta name="theme-color" content="#FBF9F5">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Noto+Sans+JP:wght@300;400;500&family=Shippori+Mincho:wght@400;500&display=swap" rel="stylesheet">
-<style>
-:root {
-  --ink: #26231f;
-  --ink-soft: #5c564e;
-  --paper: #faf8f4;
-  --line: #dcd6cc;
-  --accent: #a08a4f;
-  --text-base: clamp(0.95rem, 0.9rem + 0.25vw, 1.05rem);
-  --space-section: clamp(4rem, 3rem + 4vw, 7rem);
-  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-}
-* { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body {
-  font-family: "Noto Sans JP", sans-serif;
-  font-weight: 300;
-  font-size: var(--text-base);
-  line-height: 1.9;
-  color: var(--ink);
-  background: var(--paper);
-  -webkit-font-smoothing: antialiased;
-}
-img { max-width: 100%; height: auto; display: block; }
-a { color: inherit; }
-.skip-link {
-  position: absolute; left: -9999px; top: 0;
-  background: var(--ink); color: #fff; padding: 0.6em 1.2em; z-index: 100;
-}
-.skip-link:focus { left: 0; }
-:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
-
-.wrap { max-width: 1200px; margin: 0 auto; padding: 0 clamp(1.25rem, 4vw, 3rem); }
-
-/* ---- header ---- */
-.site-head {
-  padding: calc(var(--space-section) * 0.9) 0 var(--space-section);
-  text-align: center;
-}
-.site-head .en {
-  font-family: "Cormorant Garamond", serif;
-  font-style: italic;
-  font-size: 0.95rem;
-  letter-spacing: 0.18em;
-  color: var(--accent);
-  display: block;
-  margin-bottom: 1.4rem;
-}
-.site-head h1 {
-  font-family: "Shippori Mincho", serif;
-  font-weight: 500;
-  font-size: clamp(1.6rem, 1.2rem + 2.4vw, 2.9rem);
-  line-height: 1.5;
-  text-wrap: balance;
-}
-.site-head .lede {
-  max-width: 620px;
-  margin: 2rem auto 0;
-  color: var(--ink-soft);
-  text-align: left;
-}
-.site-head .lede strong { font-weight: 500; color: var(--ink); }
-
-/* ---- proposal cards ---- */
-.proposals { display: grid; gap: clamp(2.5rem, 2rem + 3vw, 5rem); padding-bottom: var(--space-section); }
-.proposal {
-  display: grid;
-  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-  border: 1px solid var(--line);
-  background: #fff;
-  text-decoration: none;
-  overflow: hidden;
-  transition: transform 180ms var(--ease-out), box-shadow 180ms var(--ease-out);
-}
-.proposal:hover, .proposal:focus-visible {
-  transform: translateY(-4px);
-  box-shadow: 0 18px 40px -20px rgba(38, 35, 31, 0.28);
-}
-.proposal:nth-of-type(even) { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); }
-.proposal:nth-of-type(even) .proposal-visual { order: 2; }
-.proposal-visual { position: relative; min-height: 300px; }
-.proposal-visual img {
-  position: absolute; inset: 0;
-  width: 100%; height: 100%;
-  object-fit: cover;
-}
-.proposal-visual .letter {
-  position: absolute; top: 1.1rem; left: 1.3rem;
-  font-family: "Cormorant Garamond", serif;
-  font-size: 2.4rem; line-height: 1;
-  color: #fff;
-  text-shadow: 0 1px 14px rgba(0,0,0,0.45);
-}
-.proposal-body { padding: clamp(1.8rem, 1.4rem + 2vw, 3.2rem); display: flex; flex-direction: column; gap: 1.1rem; }
-.proposal-body .plan-no {
-  font-family: "Cormorant Garamond", serif;
-  font-style: italic;
-  letter-spacing: 0.14em;
-  font-size: 0.9rem;
-  color: var(--accent);
-}
-.proposal-body h2 {
-  font-family: "Shippori Mincho", serif;
-  font-weight: 500;
-  font-size: clamp(1.35rem, 1.2rem + 0.9vw, 1.9rem);
-  line-height: 1.45;
-  text-wrap: balance;
-}
-.proposal-body .concept { color: var(--ink-soft); }
-.palette { display: flex; gap: 0.5rem; align-items: center; }
-.palette span {
-  width: 1.35rem; height: 1.35rem; border-radius: 50%;
-  border: 1px solid rgba(0,0,0,0.12);
-}
-.keywords { display: flex; flex-wrap: wrap; gap: 0.5rem; list-style: none; }
-.keywords li {
-  font-size: 0.8rem;
-  border: 1px solid var(--line);
-  padding: 0.25em 0.9em;
-  border-radius: 999px;
-  color: var(--ink-soft);
-  white-space: nowrap;
-}
-.proposal-body .view {
-  margin-top: auto;
-  padding-top: 1.2rem;
-  font-family: "Cormorant Garamond", serif;
-  font-style: italic;
-  font-size: 1.05rem;
-  letter-spacing: 0.12em;
-  color: var(--ink);
-  display: inline-flex; align-items: center; gap: 0.6em;
-}
-.proposal-body .view::after {
-  content: "";
-  width: 2.6em; height: 1px;
-  background: var(--accent);
-  transition: transform 180ms var(--ease-out);
-  transform-origin: left center;
-}
-.proposal:hover .view::after, .proposal:focus-visible .view::after { transform: scaleX(1.5); }
-
-/* ---- compare table ---- */
-.compare { padding-bottom: var(--space-section); }
-.compare h2 {
-  font-family: "Shippori Mincho", serif;
-  font-weight: 500;
-  font-size: clamp(1.3rem, 1.1rem + 1vw, 1.8rem);
-  text-align: center;
-  margin-bottom: 2.6rem;
-}
-.compare-scroll { overflow-x: auto; border: 1px solid var(--line); background: #fff; }
-table { border-collapse: collapse; width: 100%; min-width: 760px; font-size: 0.9rem; }
-caption { position: absolute; left: -9999px; }
-th, td { padding: 1rem 1.2rem; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); }
-thead th {
-  font-family: "Shippori Mincho", serif;
-  font-weight: 500;
-  white-space: nowrap;
-  border-bottom: 1px solid var(--ink);
-}
-tbody th { font-weight: 500; white-space: nowrap; }
-tbody tr:last-child th, tbody tr:last-child td { border-bottom: none; }
-td { color: var(--ink-soft); line-height: 1.7; }
-
-/* ---- footer ---- */
-.site-foot {
-  border-top: 1px solid var(--line);
-  padding: 2.4rem 0 3rem;
-  text-align: center;
-  color: var(--ink-soft);
-  font-size: 0.85rem;
-}
-.site-foot .en {
-  font-family: "Cormorant Garamond", serif;
-  font-style: italic;
-  letter-spacing: 0.15em;
-  display: block;
-  margin-bottom: 0.5rem;
-  color: var(--accent);
-}
-
-@media (max-width: 760px) {
-  .proposal, .proposal:nth-of-type(even) { grid-template-columns: 1fr; }
-  .proposal:nth-of-type(even) .proposal-visual { order: 0; }
-  .proposal-visual { min-height: 0; aspect-ratio: 16 / 9; }
-}
-@media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  .proposal, .proposal-body .view::after { transition: none; }
-}
-</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&amp;family=Noto+Sans+JP:wght@300;400&amp;family=Shippori+Mincho:wght@400;500&amp;display=swap">
+<link rel="stylesheet" href="style.css?v=3">
+<link rel="stylesheet" href="style-b.css?v=3">
+<link rel="stylesheet" href="assets/lightbox.css?v=3">
+<script>document.documentElement.className += " js";</script>
 </head>
-<body>
+<body id="top">
 <a class="skip-link" href="#main">本文へスキップ</a>
 
-<header class="site-head wrap">
-  <span class="en">Atelier Yuka — Website Renewal Proposal</span>
-  <h1>アトリエユカ<br>4つのデザイン方向性のご提案</h1>
-  <p class="lede">
-    ウエディングを軸に、<strong>「ここでドレスを頼みたい」</strong>と感じていただくこと、
-    そして<strong>予約・お問い合わせの入力しやすさ</strong>を主題に、
-    まったく異なる4つの方向性をご用意しました。
-    各案はすべて実際にスクロール・操作できるサンプルです。
-    お好みの1案をお選びいただければ、その方向で深掘りしてまいります。
-  </p>
+<header class="site-header">
+  <a class="brand" href="#top">
+    <span class="brand-en" translate="no">Atelier Yuka</span>
+    <span class="brand-ja">アトリエユカ — 銀座・ハワイ ウエディングドレスメゾン</span>
+  </a>
+  <nav class="site-nav" aria-label="メインナビゲーション">
+    <ul>
+      <li><a href="#maison">メゾン</a></li>
+      <li><a href="#collection">コレクション</a></li>
+      <li><a href="#flow">ご利用の流れ</a></li>
+      <li><a href="#pricing">料金</a></li>
+      <li><a href="#journey">フォトジャーニー</a></li>
+      <li><a href="#salon">サロン</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a class="nav-reserve" href="#reserve">ご予約</a></li>
+    </ul>
+  </nav>
 </header>
 
 <main id="main">
-  <div class="proposals wrap">
 
-    <a class="proposal" href="a-classic/index.html">
-      <div class="proposal-visual">
-        <img src="assets/img/hero-01.jpg" alt="ソファに腰掛けるウエディングドレス姿の女性とタキシードの男性" width="900" height="857" fetchpriority="high">
-        <span class="letter" aria-hidden="true">A</span>
-      </div>
-      <div class="proposal-body">
-        <span class="plan-no">Plan A — Timeless Classic</span>
-        <h2>銀座の正統</h2>
-        <p class="concept">現ブランドの正統進化。生成りとシャンパンゴールド、シンメトリーの構図で、老舗メゾンの静けさと品格を。</p>
-        <div class="palette" role="img" aria-label="配色: 生成り、墨、シャンパンゴールド">
-          <span style="background:#FBF9F5"></span>
-          <span style="background:#2B2724"></span>
-          <span style="background:#B49B57"></span>
-        </div>
-        <ul class="keywords">
-          <li>クラシック</li><li>シンメトリー</li><li>額縁の余白</li><li>静謐</li>
-        </ul>
-        <span class="view">サンプルを見る</span>
-      </div>
-    </a>
-
-    <a class="proposal" href="b-couture/index.html">
-      <div class="proposal-visual">
-        <img src="assets/img/wd-01.png" alt="やわらかな光の中に立つオートクチュールのウエディングドレス" width="1080" height="1350" loading="lazy">
-        <span class="letter" aria-hidden="true">B</span>
-      </div>
-      <div class="proposal-body">
-        <span class="plan-no">Plan B — Couture</span>
-        <h2>光のアトリエ</h2>
-        <p class="concept">白い空間に浮かぶ一点もののドレス。金箔の罫線と額装のメタファーで、オートクチュールメゾンの特別感を。</p>
-        <div class="palette" role="img" aria-label="配色: 白、墨、金">
-          <span style="background:#FFFFFF"></span>
-          <span style="background:#1C1916"></span>
-          <span style="background:#C9A961"></span>
-        </div>
-        <ul class="keywords">
-          <li>ホワイトクチュール</li><li>額装</li><li>金箔</li><li>ドラマティック</li>
-        </ul>
-        <span class="view">サンプルを見る</span>
-      </div>
-    </a>
-
-    <a class="proposal" href="c-story/index.html">
-      <div class="proposal-visual">
-        <img src="assets/img/journey-paris.png" alt="パリ・エッフェル塔の前でのウエディングフォト" width="640" height="960" loading="lazy">
-        <span class="letter" aria-hidden="true">C</span>
-      </div>
-      <div class="proposal-body">
-        <span class="plan-no">Plan C — Storytelling</span>
-        <h2>試着の日から、世界のどこかへ</h2>
-        <p class="concept">章立てのスクロールで一組の物語を追体験。自宅試着から海外フォトジャーニーまで、感情で読ませる構成。</p>
-        <div class="palette" role="img" aria-label="配色: ブラッシュ、アイボリー、スカイブルー">
-          <span style="background:#F5E6E0"></span>
-          <span style="background:#FFFDF9"></span>
-          <span style="background:#A8C3D1"></span>
-        </div>
-        <ul class="keywords">
-          <li>スクロールテリング</li><li>章立て</li><li>旅</li><li>やわらかさ</li>
-        </ul>
-        <span class="view">サンプルを見る</span>
-      </div>
-    </a>
-
-    <a class="proposal" href="d-motion/index.html">
-      <div class="proposal-visual">
-        <img src="assets/img/cd-01.jpg" alt="淡いブルーのカラードレスをまとい座る女性" width="800" height="1199" loading="lazy">
-        <span class="letter" aria-hidden="true">D</span>
-      </div>
-      <div class="proposal-body">
-        <span class="plan-no">Plan D — Motion</span>
-        <h2>Something Blue — 風をまとうメゾン</h2>
-        <p class="concept">動きで魅せるモーションサイト。ベールが持ち上がる場面転換、スクロールで進むランウェイショー、布の物理に統一されたアニメーション。</p>
-        <div class="palette" role="img" aria-label="配色: 白磁、墨、サムシングブルー">
-          <span style="background:#FCFBF9"></span>
-          <span style="background:#17161A"></span>
-          <span style="background:#4E6076"></span>
-        </div>
-        <ul class="keywords">
-          <li>モーション</li><li>ランウェイ</li><li>慣性スクロール</li><li>Something Blue</li>
-        </ul>
-        <span class="view">サンプルを見る</span>
-      </div>
-    </a>
-
-  </div>
-
-  <section class="compare wrap" aria-labelledby="compare-heading">
-    <h2 id="compare-heading">4案の比較</h2>
-    <div class="compare-scroll">
-      <table>
-        <caption>4つのデザイン案の方向性・強み・向いているお客様像の比較</caption>
-        <thead>
-          <tr>
-            <th scope="col">案</th>
-            <th scope="col">方向性</th>
-            <th scope="col">いちばんの強み</th>
-            <th scope="col">こんな方針に向く</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">A 銀座の正統</th>
-            <td>現ブランドイメージの正統進化</td>
-            <td>既存のお客様を裏切らない安心感と格</td>
-            <td>ブランドの継続性を重視しつつ質を上げたい</td>
-          </tr>
-          <tr>
-            <th scope="row">B 光のアトリエ</th>
-            <td>ホワイトクチュール</td>
-            <td>他社と絶対に被らない特別感</td>
-            <td>高価格帯・オーダーの価値を打ち出したい</td>
-          </tr>
-          <tr>
-            <th scope="row">C 物語</th>
-            <td>スクロールテリング</td>
-            <td>感情移入による「自分ごと化」</td>
-            <td>海外フォトジャーニーを主役にしたい</td>
-          </tr>
-          <tr>
-            <th scope="row">D 風をまとうメゾン</th>
-            <td>モーションデザイン</td>
-            <td>体験の記憶に残る没入感</td>
-            <td>圧倒的な世界観・体験で差をつけたい</td>
-          </tr>
-        </tbody>
-      </table>
+  <!-- ヒーロー -->
+  <section class="hero" aria-labelledby="hero-title">
+    <p class="hero-eyebrow reveal" translate="no">Ginza &amp; Hawaii — Wedding Dress Maison</p>
+    <h1 class="hero-title reveal" id="hero-title" translate="no">Atelier Yuka</h1>
+    <p class="hero-tagline reveal">人生でいちばん美しい日を、いちばん確かな一着で。</p>
+    <div class="fleuron" aria-hidden="true"></div>
+    <figure class="hero-frame reveal">
+      <img src="assets/img/hero-01.jpg" alt="クラシカルなソファに腰かける、ウエディングドレスの花嫁とタキシードの新郎" width="1800" height="1714" fetchpriority="high">
+    </figure>
+    <div class="hero-cta reveal">
+      <a class="btn btn-primary" href="#reserve">ご自宅試着を予約する <span class="price">¥5,500</span></a>
+      <a class="btn btn-ghost" href="#collection">コレクションを見る</a>
+      <p class="hero-note">1泊2日でご自宅へお届け。クリーニング不要、そのままご返送いただけます。</p>
     </div>
   </section>
+
+  <!-- I. メゾン -->
+  <section class="chapter" id="maison" aria-labelledby="maison-title">
+    <header class="chapter-head reveal">
+      <p class="chapter-no" aria-hidden="true" translate="no">I</p>
+      <p class="chapter-label" translate="no">Maison</p>
+      <h2 class="chapter-title" id="maison-title">洗練されたクラシックを、普遍美へ</h2>
+    </header>
+    <p class="statement reveal">アトリエユカは「洗練されたクラシック」をウェディングドレスの普遍美に進化させるドレスメゾン。インポートの素材を惜しみなく使い、国内最高峰のアトリエで一着ずつ仕立てるコレクションを、銀座とハワイのサロン、そしてオンラインからお届けします。</p>
+    <div class="lines">
+      <article class="line reveal">
+        <figure class="line-frame">
+          <img src="assets/img/brand-01.png" alt="Atelier Yuka ラインのドレスを纏う花嫁" width="540" height="540" loading="lazy">
+        </figure>
+        <h3 class="line-name" translate="no">Atelier Yuka</h3>
+        <p class="line-desc">「洗練されたクラシック」を普遍美に進化させたメゾンライン。インポート素材×国内最高峰アトリエの仕立て。</p>
+      </article>
+      <article class="line reveal">
+        <figure class="line-frame">
+          <img src="assets/img/brand-02.png" alt="VICTRIA FRANCEZKA ラインのドレスを纏う花嫁" width="540" height="540" loading="lazy">
+        </figure>
+        <h3 class="line-name" translate="no">VICTRIA FRANCEZKA</h3>
+        <p class="line-desc">ウェディングシーンに欠かせないクラシカルで上質な正統派スタイル。華やかな王道の美を意識した、誰からも愛される究極のコレクション。</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- II. コレクション -->
+  <section class="chapter" id="collection" aria-labelledby="collection-title">
+    <header class="chapter-head reveal">
+      <p class="chapter-no" aria-hidden="true" translate="no">II</p>
+      <p class="chapter-label" translate="no">Collection</p>
+      <h2 class="chapter-title" id="collection-title">コレクション</h2>
+      <p class="chapter-lede">一着ごとに愛称を持つ、メゾンのドレスと礼服。すべてご自宅試着(1着 ¥5,500)からお選びいただけます。</p>
+    </header>
+    <div class="tabs reveal">
+      <div class="tablist" role="tablist" aria-label="コレクションのカテゴリ">
+        <button type="button" role="tab" id="tab-wedding" aria-controls="panel-wedding" aria-selected="true">ウエディングドレス</button>
+        <button type="button" role="tab" id="tab-color" aria-controls="panel-color" aria-selected="false" tabindex="-1">カラードレス</button>
+        <button type="button" role="tab" id="tab-tuxedo" aria-controls="panel-tuxedo" aria-selected="false" tabindex="-1">タキシード</button>
+        <button type="button" role="tab" id="tab-morning" aria-controls="panel-morning" aria-selected="false" tabindex="-1">モーニング</button>
+      </div>
+
+      <div class="tabpanel" role="tabpanel" id="panel-wedding" aria-labelledby="tab-wedding" tabindex="0">
+        <ul class="product-grid">
+          <li class="product">
+            <figure class="product-media">
+              <img src="assets/img/wd-01.png" alt="ウエディングドレス Lumière" width="600" height="800" loading="lazy">
+              <img class="alt-img" src="assets/img/wd-01-b.png" alt="" width="600" height="800" loading="lazy">
+              <span class="float-code" aria-hidden="true" translate="no">HLD-00085-01</span>
+            </figure>
+            <h3 class="product-name" translate="no"><a href="product.html?code=HLD-00085-01">Lumière</a></h3>
+            <p class="product-meta"><span translate="no">HLD-00085-01</span> — VICTRIA FRANCEZKA</p>
+            <p class="product-price">¥330,000</p>
+            <p class="product-cta"><a href="product.html?code=HLD-00085-01">詳細・お申し込み</a></p>
+          </li>
+          <li class="product">
+            <figure class="product-media">
+              <img src="assets/img/wd-02.jpg" alt="ウエディングドレス Clair de Lune" width="600" height="800" loading="lazy">
+              <img class="alt-img" src="assets/img/wd-02-b.jpg" alt="" width="600" height="800" loading="lazy">
+              <span class="float-code" aria-hidden="true" translate="no">HLD-00084-01</span>
+            </figure>
+            <h3 class="product-name" translate="no"><a href="product.html?code=HLD-00084-01">Clair de Lune</a></h3>
+            <p class="product-meta"><span translate="no">HLD-00084-01</span> — VICTRIA FRANCEZKA</p>
+            <p class="product-price">¥330,000</p>
+            <p class="product-cta"><a href="product.html?code=HLD-00084-01">詳細・お申し込み</a></p>
+          </li>
+          <li class="product">
+            <figure class="product-media">
+              <img src="assets/img/wd-03.png" alt="ウエディングドレス Étoile" width="600" height="800" loading="lazy">
+              <img class="alt-img" src="assets/img/wd-03-b.png" alt="" width="600" height="800" loading="lazy">
+              <span class="float-code" aria-hidden="true" translate="no">HLD-00066</span>
+            </figure>
+            <h3 class="product-name" translate="no"><a href="product.html?code=HLD-00066">Étoile</a></h3>
+            <p class="product-meta"><span translate="no">HLD-00066</span> — VICTRIA FRANCEZKA</p>
+            <p class="product-price">¥290,000</p>
+            <p class="product-cta"><a href="product.html?code=HLD-00066">詳細・お申し込み</a></p>
+          </li>
+          <li class="product">
+            <figure class="product-media">
+              <img src="assets/img/wd-04.jpg" alt="ウエディングドレス Aurore" width="600" height="800" loading="lazy">
+              <img class="alt-img" src="assets/img/wd-04-b.jpg" alt="" width="600" height="800" loading="lazy">
+              <span class="float-code" aria-hidden="true" translate="no">HLD-00059-01</span>
+            </figure>
+            <h3 class="product-name" translate="no"><a href="product.html?code=HLD-00059-01">Aurore</a></h3>
+            <p class="product-meta"><span translate="no">HLD-00059-01</span> — VICTRIA FRANCEZKA</p>
+            <p class="product-price">¥290,000</p>
+            <p class="product-cta"><a href="product.html?code=HLD-00059-01">詳細・お申し込み</a></p>
+          </li>
+          <li class="product">
+            <figure class="product-media">
+              <img src="assets/img/wd-05.jpg" alt="ウエディングドレス Blanche" width="600" height="800" loading="lazy">
+              <img class="alt-img" src="assets/img/wd-05-b.jpg" alt="" width="600" height="800" loading="lazy">
+              <span class="float-code" aria-hidden="true" translate="no">HLD-00043-01</span>
+            </figure>
+            <h3 class="product-name" translate="no"><a href="product.html?code=HLD-00043-01">Blanche</a></h3>
+            <p class="product-meta"><span translate="no">HLD-00043-01</span> — VICTRIA FRANCEZKA</p>
+            <p class="product-price">¥290,000</p>
+            <p class="product-cta"><a href="product.html?code=HLD-00043-01">詳細・お申し込み</a></p>
+          </li>
+          <li class="product">
+            <figure class="product-media">
+              <img src="assets/img/wd-06.jpg" alt="ウエディングドレス Camélia" width="600" height="800" loading="lazy">
+              <img class="alt-img" src="assets/img/wd-06-b.jpg" alt="" width="600" height="800" loading="lazy">
+              <span class="float-code" aria-hidden="true" translate="no">HLD-00051-01</span>
+            </figure>
+            <h3 class="product-name" translate="no"><a href="product.html?code=HLD-00051-01">Camélia</a></h3>
+            <p class="product-meta"><span translate="no">HLD-00051-01</span> — VICTRIA FRANCEZKA</p>
+            <p class="product-price">¥290,000</p>
+            <p class="product-cta"><a href="product.html?code=HLD-00051-01">詳細・お申し込み</a></p>
+          </li>
+          <li class="product">
+            <figure class="product-media">
+              <img src="assets/img/wd-07.jpg" alt="ウエディングドレス Séraphine" width="600" height="800" loading="lazy">
+              <img class="alt-img" src="assets/img/wd-07-b.jpg" alt="" width="600" height="800" loading="lazy">
+              <span class="float-code" aria-hidden="true" translate="no">HLD-00053-01</span>
+            </figure>
+            <h3 class="product-name" translate="no"><a href="product.html?code=HLD-00053-01">Séraphine</a></h3>
+            <p class="product-meta"><span translate="no">HLD-00053-01</span> — VICTRIA FRANCEZKA</p>
+            <p class="product-price">¥290,000</p>
+            <p class="product-cta"><a href="product.html?code=HLD-00053-01">詳細・お申し込み</a></p>
+          </li>
+          <li class="product">
+            <figure class="product-media">
+              <img src="assets/img/wd-08.jpg" alt="ウエディングドレス Gardenia" width="600" height="800" loading="lazy">
+              <img class="alt-img" src="assets/img/wd-08-b.jpg" alt="" width="600" height="800" loading="lazy">
+              <span class="float-code" aria-hidden="true" translate="no">HLD-00069-01</span>
+            </figure>
+            <h3 class="product-name" translate="no"><a href="product.html?code=HLD-00069-01">Gardenia</a></h3>
+            <p class="product-meta"><span translate="no">HLD-00069-01</span> — VICTRIA FRANCEZKA</p>
+            <p class="product-price">¥290,000</p>
+            <p class="product-cta"><a href="product.html?code=HLD-00069-01">詳細・お申し込み</a></p>
+          </li>
+          <li class="product">
+            <figure class="product-media">
+              <img src="assets/img/wd-09.jpg" alt="ウエディングドレス Mirabelle" width="600" height="800" loading="lazy">
+              <img class="alt-img" src="assets/img/wd-09-b.jpg" alt="" width="600" height="800" loading="lazy">
+              <span class="float-code" aria-hidden="true" translate="no">HLD-00070-01</span>
+            </figure>
+            <h3 class="product-name" translate="no"><a href="product.html?code=HLD-00070-01">Mirabelle</a></h3>
+            <p class="product-meta"><span translate="no">HLD-00070-01</span> — VICTRIA FRANCEZKA</p>
+            <p class="product-price">¥290,000</p>
+            <p class="product-cta"><a href="product.html?code=HLD-00070-01">詳細・お申し込み</a></p>
+          </li>
+        </ul>
+      </div>
+
+      <div class="tabpanel" role="tabpanel" id="panel-color" aria-labelledby="tab-color" tabindex="0" hidden>
+        <ul class="product-grid">
+          <li class="product">
+            <figure class="product-media">
+              <img src="assets/img/cd-01.jpg" alt="カラードレス Azur" width="600" height="800" loading="lazy">
+              <img class="alt-img" src="assets/img/cd-01-b.jpg" alt="" width="600" height="800" loading="lazy">
+              <span class="float-code" aria-hidden="true" translate="no">AY6001</span>
+            </figure>
+            <h3 class="product-name" translate="no"><a href="product.html?code=AY6001">Azur</a></h3>
+            <p class="product-meta"><span translate="no">AY6001</span> — Atelier Yuka</p>
+            <p class="product-price">¥385,000</p>
+            <p class="product-cta"><a href="product.html?code=AY6001">詳細・お申し込み</a></p>
+          </li>
+          <li class="product">
+            <figure class="product-media">
+              <img src="assets/img/cd-02.jpg" alt="カラードレス Noisette" width="600" height="800" loading="lazy">
+              <img class="alt-img" src="assets/img/cd-02-b.jpg" alt="" width="600" height="800" loading="lazy">
+              <span class="float-code" aria-hidden="true" translate="no">AY5601</span>
+            </figure>
+            <h3 class="product-name" translate="no"><a href="product.html?code=AY5601">Noisette</a></h3>
+            <p class="product-meta"><span translate="no">AY5601</span> — Atelier Yuka</p>
+            <p class="product-price">¥340,000</p>
+            <p class="product-cta"><a href="product.html?code=AY5601">詳細・お申し込み</a></p>
+          </li>
+          <li class="product">
+            <figure class="product-media">
+              <img src="assets/img/cd-03.jpg" alt="カラードレス Mimosa" width="600" height="800" loading="lazy">
+              <img class="alt-img" src="assets/img/cd-03-b.jpg" alt="" width="600" height="800" loading="lazy">
+              <span class="float-code" aria-hidden="true" translate="no">MVD-00392-05</span>
+            </figure>
+            <h3 class="product-name" translate="no"><a href="product.html?code=MVD-00392-05">Mimosa</a></h3>
+            <p class="product-meta"><span translate="no">MVD-00392-05</span> — L'ATELIER MARIAGE</p>
+            <p class="product-price">¥250,000</p>
+            <p class="product-cta"><a href="product.html?code=MVD-00392-05">詳細・お申し込み</a></p>
+          </li>
+          <li class="product">
+            <figure class="product-media">
+              <img src="assets/img/cd-04.jpg" alt="カラードレス Paon" width="600" height="800" loading="lazy">
+              <img class="alt-img" src="assets/img/cd-04-b.jpg" alt="" width="600" height="800" loading="lazy">
+              <span class="float-code" aria-hidden="true" translate="no">MVD-00392-13</span>
+            </figure>
+            <h3 class="product-name" translate="no"><a href="product.html?code=MVD-00392-13">Paon</a></h3>
+            <p class="product-meta"><span translate="no">MVD-00392-13</span> — L'ATELIER MARIAGE</p>
+            <p class="product-price">¥250,000</p>
+            <p class="product-cta"><a href="product.html?code=MVD-00392-13">詳細・お申し込み</a></p>
+          </li>
+          <li class="product">
+            <figure class="product-media">
+              <img src="assets/img/cd-05.jpg" alt="カラードレス Framboise" width="600" height="800" loading="lazy">
+              <img class="alt-img" src="assets/img/cd-05-b.jpg" alt="" width="600" height="800" loading="lazy">
+              <span class="float-code" aria-hidden="true" translate="no">MVD-00392-06</span>
+            </figure>
+            <h3 class="product-name" translate="no"><a href="product.html?code=MVD-00392-06">Framboise</a></h3>
+            <p class="product-meta"><span translate="no">MVD-00392-06</span> — L'ATELIER MARIAGE</p>
+            <p class="product-price">¥250,000</p>
+            <p class="product-cta"><a href="product.html?code=MVD-00392-06">詳細・お申し込み</a></p>
+          </li>
+          <li class="product">
+            <figure class="product-media">
+              <img src="assets/img/cd-06.jpg" alt="カラードレス Ballerine" width="600" height="800" loading="lazy">
+              <img class="alt-img" src="assets/img/cd-06-b.jpg" alt="" width="600" height="800" loading="lazy">
+              <span class="float-code" aria-hidden="true" translate="no">BLD-00055-09</span>
+            </figure>
+            <h3 class="product-name" translate="no"><a href="product.html?code=BLD-00055-09">Ballerine</a></h3>
+            <p class="product-meta"><span translate="no">BLD-00055-09</span> — Ballerina for Brides</p>
+            <p class="product-price">¥220,000</p>
+            <p class="product-cta"><a href="product.html?code=BLD-00055-09">詳細・お申し込み</a></p>
+          </li>
+          <li class="product">
+            <figure class="product-media">
+              <img src="assets/img/cd-07.jpg" alt="カラードレス Cygne" width="600" height="800" loading="lazy">
+              <img class="alt-img" src="assets/img/cd-07-b.jpg" alt="" width="600" height="800" loading="lazy">
+              <span class="float-code" aria-hidden="true" translate="no">BLD-00055-32</span>
+            </figure>
+            <h3 class="product-name" translate="no"><a href="product.html?code=BLD-00055-32">Cygne</a></h3>
+            <p class="product-meta"><span translate="no">BLD-00055-32</span> — Ballerina for Brides</p>
+            <p class="product-price">¥220,000</p>
+            <p class="product-cta"><a href="product.html?code=BLD-00055-32">詳細・お申し込み</a></p>
+          </li>
+          <li class="product">
+            <figure class="product-media">
+              <img src="assets/img/cd-08.jpg" alt="カラードレス Pivoine" width="600" height="800" loading="lazy">
+              <img class="alt-img" src="assets/img/cd-08-b.jpg" alt="" width="600" height="800" loading="lazy">
+              <span class="float-code" aria-hidden="true" translate="no">BLD-00055-11</span>
+            </figure>
+            <h3 class="product-name" translate="no"><a href="product.html?code=BLD-00055-11">Pivoine</a></h3>
+            <p class="product-meta"><span translate="no">BLD-00055-11</span> — Ballerina for Brides</p>
+            <p class="product-price">¥220,000</p>
+            <p class="product-cta"><a href="product.html?code=BLD-00055-11">詳細・お申し込み</a></p>
+          </li>
+          <li class="product">
+            <figure class="product-media">
+              <img src="assets/img/cd-09.jpg" alt="カラードレス Colombe" width="600" height="800" loading="lazy">
+              <img class="alt-img" src="assets/img/cd-09-b.jpg" alt="" width="600" height="800" loading="lazy">
+              <span class="float-code" aria-hidden="true" translate="no">BLD-00055-14</span>
+            </figure>
+            <h3 class="product-name" translate="no"><a href="product.html?code=BLD-00055-14">Colombe</a></h3>
+            <p class="product-meta"><span translate="no">BLD-00055-14</span> — Ballerina for Brides</p>
+            <p class="product-price">¥220,000</p>
+            <p class="product-cta"><a href="product.html?code=BLD-00055-14">詳細・お申し込み</a></p>
+          </li>
+        </ul>
+      </div>
+
+      <div class="tabpanel" role="tabpanel" id="panel-tuxedo" aria-labelledby="tab-tuxedo" tabindex="0" hidden>
+        <ul class="product-grid grid-square">
+          <li class="product">
+            <figure class="product-media">
+              <img src="assets/img/tx-01.jpg" alt="タキシード Noir Classique" width="600" height="800" loading="lazy">
+              <img class="alt-img" src="assets/img/tx-01-b.jpg" alt="" width="600" height="800" loading="lazy">
+              <span class="float-code" aria-hidden="true" translate="no">20345S</span>
+            </figure>
+            <h3 class="product-name" translate="no"><a href="product.html?code=20345S">Noir Classique</a></h3>
+            <p class="product-meta"><span translate="no">20345S</span> — Atelier Yuka</p>
+            <p class="product-price">¥121,000</p>
+            <p class="product-cta"><a href="product.html?code=20345S">詳細・お申し込み</a></p>
+          </li>
+          <li class="product">
+            <figure class="product-media">
+              <img src="assets/img/tx-02.jpg" alt="タキシード Gris Perle" width="600" height="800" loading="lazy">
+              <img class="alt-img" src="assets/img/tx-02-b.jpg" alt="" width="600" height="800" loading="lazy">
+              <span class="float-code" aria-hidden="true" translate="no">20362S</span>
+            </figure>
+            <h3 class="product-name" translate="no"><a href="product.html?code=20362S">Gris Perle</a></h3>
+            <p class="product-meta"><span translate="no">20362S</span> — Atelier Yuka</p>
+            <p class="product-price">¥121,000</p>
+            <p class="product-cta"><a href="product.html?code=20362S">詳細・お申し込み</a></p>
+          </li>
+          <li class="product">
+            <figure class="product-media">
+              <img src="assets/img/tx-03.jpg" alt="タキシード Minuit" width="600" height="800" loading="lazy">
+              <img class="alt-img" src="assets/img/tx-03-b.jpg" alt="" width="600" height="800" loading="lazy">
+              <span class="float-code" aria-hidden="true" translate="no">20366S</span>
+            </figure>
+            <h3 class="product-name" translate="no"><a href="product.html?code=20366S">Minuit</a></h3>
+            <p class="product-meta"><span translate="no">20366S</span> — Atelier Yuka</p>
+            <p class="product-price">¥121,000</p>
+            <p class="product-cta"><a href="product.html?code=20366S">詳細・お申し込み</a></p>
+          </li>
+          <li class="product">
+            <figure class="product-media">
+              <img src="assets/img/tx-04.jpg" alt="タキシード Encre" width="600" height="800" loading="lazy">
+              <img class="alt-img" src="assets/img/tx-04-b.jpg" alt="" width="600" height="800" loading="lazy">
+              <span class="float-code" aria-hidden="true" translate="no">20313S</span>
+            </figure>
+            <h3 class="product-name" translate="no"><a href="product.html?code=20313S">Encre</a></h3>
+            <p class="product-meta"><span translate="no">20313S</span> — Atelier Yuka</p>
+            <p class="product-price">¥110,000</p>
+            <p class="product-cta"><a href="product.html?code=20313S">詳細・お申し込み</a></p>
+          </li>
+          <li class="product">
+            <figure class="product-media">
+              <img src="assets/img/tx-05.jpg" alt="タキシード Fumée" width="600" height="800" loading="lazy">
+              <img class="alt-img" src="assets/img/tx-05-b.jpg" alt="" width="600" height="800" loading="lazy">
+              <span class="float-code" aria-hidden="true" translate="no">20321S</span>
+            </figure>
+            <h3 class="product-name" translate="no"><a href="product.html?code=20321S">Fumée</a></h3>
+            <p class="product-meta"><span translate="no">20321S</span> — Atelier Yuka</p>
+            <p class="product-price">¥110,000</p>
+            <p class="product-cta"><a href="product.html?code=20321S">詳細・お申し込み</a></p>
+          </li>
+          <li class="product">
+            <figure class="product-media">
+              <img src="assets/img/tx-06.jpg" alt="タキシード Océan" width="600" height="800" loading="lazy">
+              <img class="alt-img" src="assets/img/tx-06-b.jpg" alt="" width="600" height="800" loading="lazy">
+              <span class="float-code" aria-hidden="true" translate="no">20333S</span>
+            </figure>
+            <h3 class="product-name" translate="no"><a href="product.html?code=20333S">Océan</a></h3>
+            <p class="product-meta"><span translate="no">20333S</span> — Atelier Yuka</p>
+            <p class="product-price">¥110,000</p>
+            <p class="product-cta"><a href="product.html?code=20333S">詳細・お申し込み</a></p>
+          </li>
+          <li class="product">
+            <figure class="product-media">
+              <img src="assets/img/tx-07.jpg" alt="タキシード Sable" width="600" height="800" loading="lazy">
+              <img class="alt-img" src="assets/img/tx-07-b.jpg" alt="" width="600" height="800" loading="lazy">
+              <span class="float-code" aria-hidden="true" translate="no">20336S</span>
+            </figure>
+            <h3 class="product-name" translate="no"><a href="product.html?code=20336S">Sable</a></h3>
+            <p class="product-meta"><span translate="no">20336S</span> — Atelier Yuka</p>
+            <p class="product-price">¥110,000</p>
+            <p class="product-cta"><a href="product.html?code=20336S">詳細・お申し込み</a></p>
+          </li>
+          <li class="product">
+            <figure class="product-media">
+              <img src="assets/img/tx-08.jpg" alt="タキシード Argent" width="600" height="800" loading="lazy">
+              <img class="alt-img" src="assets/img/tx-08-b.jpg" alt="" width="600" height="800" loading="lazy">
+              <span class="float-code" aria-hidden="true" translate="no">20354S</span>
+            </figure>
+            <h3 class="product-name" translate="no"><a href="product.html?code=20354S">Argent</a></h3>
+            <p class="product-meta"><span translate="no">20354S</span> — Atelier Yuka</p>
+            <p class="product-price">¥110,000</p>
+            <p class="product-cta"><a href="product.html?code=20354S">詳細・お申し込み</a></p>
+          </li>
+        </ul>
+      </div>
+
+      <div class="tabpanel" role="tabpanel" id="panel-morning" aria-labelledby="tab-morning" tabindex="0" hidden>
+        <ul class="product-grid grid-square">
+          <li class="product">
+            <figure class="product-media">
+              <img src="assets/img/mo-01.jpg" alt="モーニング Cérémonie I" width="600" height="800" loading="lazy">
+              <img class="alt-img" src="assets/img/mo-01-b.jpg" alt="" width="600" height="800" loading="lazy">
+              <span class="float-code" aria-hidden="true" translate="no">715S</span>
+            </figure>
+            <h3 class="product-name" translate="no"><a href="product.html?code=715S">Cérémonie I</a></h3>
+            <p class="product-meta"><span translate="no">715S</span> — Atelier Yuka</p>
+            <p class="product-price">¥110,000</p>
+            <p class="product-cta"><a href="product.html?code=715S">詳細・お申し込み</a></p>
+          </li>
+          <li class="product">
+            <figure class="product-media">
+              <img src="assets/img/mo-02.jpg" alt="モーニング Cérémonie II" width="600" height="800" loading="lazy">
+              <img class="alt-img" src="assets/img/mo-02-b.jpg" alt="" width="600" height="800" loading="lazy">
+              <span class="float-code" aria-hidden="true" translate="no">778S</span>
+            </figure>
+            <h3 class="product-name" translate="no"><a href="product.html?code=778S">Cérémonie II</a></h3>
+            <p class="product-meta"><span translate="no">778S</span> — Atelier Yuka</p>
+            <p class="product-price">¥110,000</p>
+            <p class="product-cta"><a href="product.html?code=778S">詳細・お申し込み</a></p>
+          </li>
+          <li class="product">
+            <figure class="product-media">
+              <img src="assets/img/mo-03.jpg" alt="モーニング Cérémonie III" width="600" height="800" loading="lazy">
+              <img class="alt-img" src="assets/img/mo-03-b.jpg" alt="" width="600" height="800" loading="lazy">
+              <span class="float-code" aria-hidden="true" translate="no">779S</span>
+            </figure>
+            <h3 class="product-name" translate="no"><a href="product.html?code=779S">Cérémonie III</a></h3>
+            <p class="product-meta"><span translate="no">779S</span> — Atelier Yuka</p>
+            <p class="product-price">¥110,000</p>
+            <p class="product-cta"><a href="product.html?code=779S">詳細・お申し込み</a></p>
+          </li>
+          <li class="product">
+            <figure class="product-media">
+              <img src="assets/img/mo-04.jpg" alt="モーニング Cérémonie IV" width="600" height="800" loading="lazy">
+              <img class="alt-img" src="assets/img/mo-04-b.jpg" alt="" width="600" height="800" loading="lazy">
+              <span class="float-code" aria-hidden="true" translate="no">773S</span>
+            </figure>
+            <h3 class="product-name" translate="no"><a href="product.html?code=773S">Cérémonie IV</a></h3>
+            <p class="product-meta"><span translate="no">773S</span> — Atelier Yuka</p>
+            <p class="product-price">¥110,000</p>
+            <p class="product-cta"><a href="product.html?code=773S">詳細・お申し込み</a></p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- III. ご利用の流れ -->
+  <section class="chapter chapter-tinted" id="flow" aria-labelledby="flow-title">
+    <header class="chapter-head reveal">
+      <p class="chapter-no" aria-hidden="true" translate="no">III</p>
+      <p class="chapter-label" translate="no">How to Rent</p>
+      <h2 class="chapter-title" id="flow-title">ご利用の流れ</h2>
+      <p class="chapter-lede">借りて、着て、返すだけ。店舗に足を運ばなくても、ご自宅で一着と出会えます。</p>
+    </header>
+    <ol class="flow-list">
+      <li class="flow-step reveal">
+        <p class="flow-no" aria-hidden="true">01</p>
+        <h3 class="flow-title">商品を選ぶ</h3>
+        <p class="flow-desc">ご利用日の4ヶ月前〜10日前までにオンラインでご予約。おすすめは2〜3ヶ月前です。</p>
+      </li>
+      <li class="flow-step reveal">
+        <p class="flow-no" aria-hidden="true">02</p>
+        <h3 class="flow-title">注文する</h3>
+        <p class="flow-desc">発送時にご登録のクレジットカードで決済。店舗に行かずに準備が完了します。</p>
+      </li>
+      <li class="flow-step reveal">
+        <p class="flow-no" aria-hidden="true">03</p>
+        <h3 class="flow-title">受け取る</h3>
+        <p class="flow-desc">指定日・指定時間帯に、ご自宅など指定の場所へヤマト運輸でお届けします。</p>
+      </li>
+      <li class="flow-step reveal">
+        <p class="flow-no" aria-hidden="true">04</p>
+        <h3 class="flow-title">試着/本使用</h3>
+        <p class="flow-desc">試着は1泊2日、本使用は3泊4日。サイズとイメージをご自宅でゆっくり確認できます。</p>
+      </li>
+      <li class="flow-step reveal">
+        <p class="flow-no" aria-hidden="true">05</p>
+        <h3 class="flow-title">返送する</h3>
+        <p class="flow-desc">翌日正午までに同梱の着払い伝票で返送。クリーニングは不要、そのままお戻しください。</p>
+      </li>
+    </ol>
+  </section>
+
+  <!-- IV. 料金 -->
+  <section class="chapter" id="pricing" aria-labelledby="pricing-title">
+    <header class="chapter-head reveal">
+      <p class="chapter-no" aria-hidden="true" translate="no">IV</p>
+      <p class="chapter-label" translate="no">Pricing</p>
+      <h2 class="chapter-title" id="pricing-title">料金のご案内</h2>
+      <p class="chapter-lede">価格はすべて明示しています。まずは¥5,500のご自宅試着からどうぞ。</p>
+    </header>
+    <div class="pricing-grid">
+      <article class="plan reveal">
+        <h3 class="plan-name">ご自宅試着</h3>
+        <p class="plan-en" aria-hidden="true" translate="no">Home Fitting</p>
+        <p class="plan-price">¥5,500</p>
+        <p class="plan-note">1泊2日/1着あたり。シューズオプション +¥1,500</p>
+      </article>
+      <article class="plan plan-main reveal">
+        <p class="plan-badge" translate="no">Main Plan</p>
+        <h3 class="plan-name">本使用レンタル(3泊4日)</h3>
+        <p class="plan-en" aria-hidden="true" translate="no">Rental</p>
+        <p class="plan-price plan-price-range">¥110,000〜¥394,500</p>
+        <p class="plan-note">ウエディングドレス ¥220,000〜/カラードレス ¥198,800〜/タキシード ¥110,000〜</p>
+      </article>
+      <article class="plan reveal">
+        <h3 class="plan-name">銀座サロンご試着予約</h3>
+        <p class="plan-en" aria-hidden="true" translate="no">Ginza Salon</p>
+        <p class="plan-price">¥5,500</p>
+        <p class="plan-note">銀座アトリエでスタイリストと一緒に試着</p>
+      </article>
+    </div>
+    <p class="pricing-cta reveal"><a class="btn btn-primary" href="#reserve">ご予約フォームへ進む</a></p>
+  </section>
+
+  <!-- V. ご予約 -->
+  <section class="chapter chapter-tinted" id="reserve" aria-labelledby="reserve-title">
+    <header class="chapter-head reveal">
+      <p class="chapter-no" aria-hidden="true" translate="no">V</p>
+      <p class="chapter-label" translate="no">Reservation</p>
+      <h2 class="chapter-title" id="reserve-title">ご予約</h2>
+      <p class="chapter-lede">招待状にご返信いただくように、3つのステップでご予約いただけます。</p>
+    </header>
+
+    <div class="invitation reveal">
+      <form id="reserve-form" novalidate>
+        <ol class="form-progress" aria-label="ご予約のステップ">
+          <li class="is-current" aria-current="step" data-progress="0"><span class="pg-num" aria-hidden="true" translate="no">I</span><span class="pg-label">日程</span></li>
+          <li data-progress="1"><span class="pg-num" aria-hidden="true" translate="no">II</span><span class="pg-label">衣裳</span></li>
+          <li data-progress="2"><span class="pg-num" aria-hidden="true" translate="no">III</span><span class="pg-label">お客さま情報</span></li>
+        </ol>
+
+        <fieldset class="form-step" data-step="0">
+          <legend class="step-legend" tabindex="-1">ご希望の内容と日程</legend>
+          <fieldset class="choice-group" aria-describedby="purpose-error">
+            <legend class="field-label">ご利用の目的 <span class="req">必須</span></legend>
+            <div class="choice-grid">
+              <label class="choice"><input type="radio" name="purpose" value="ご自宅試着(¥5,500)"><span>ご自宅試着(¥5,500)</span></label>
+              <label class="choice"><input type="radio" name="purpose" value="本使用レンタル(3泊4日)"><span>本使用レンタル(3泊4日)</span></label>
+              <label class="choice"><input type="radio" name="purpose" value="銀座サロン試着"><span>銀座サロン試着</span></label>
+              <label class="choice"><input type="radio" name="purpose" value="海外挙式・フォト相談"><span>海外挙式・フォト相談</span></label>
+            </div>
+            <p class="field-error" id="purpose-error" hidden></p>
+          </fieldset>
+          <div class="field">
+            <label class="field-label" for="f-date">ご希望日 <span class="req">必須</span></label>
+            <input type="date" id="f-date" name="date" required autocomplete="off" aria-describedby="f-date-note f-date-error">
+            <p class="field-note" id="f-date-note">ご利用日の4ヶ月前〜10日前までご予約いただけます。</p>
+            <p class="field-error" id="f-date-error" hidden></p>
+          </div>
+        </fieldset>
+
+        <fieldset class="form-step" data-step="1" hidden>
+          <legend class="step-legend" tabindex="-1">ご希望の衣裳</legend>
+          <fieldset class="choice-group" aria-describedby="category-error">
+            <legend class="field-label">衣裳カテゴリ <span class="req">必須</span></legend>
+            <div class="choice-grid">
+              <label class="choice"><input type="radio" name="category" value="ウエディングドレス"><span>ウエディングドレス</span></label>
+              <label class="choice"><input type="radio" name="category" value="カラードレス"><span>カラードレス</span></label>
+              <label class="choice"><input type="radio" name="category" value="タキシード"><span>タキシード</span></label>
+              <label class="choice"><input type="radio" name="category" value="モーニング"><span>モーニング</span></label>
+            </div>
+            <p class="field-error" id="category-error" hidden></p>
+          </fieldset>
+          <div class="field">
+            <label class="field-label" for="f-dress">気になるドレス(任意)</label>
+            <select id="f-dress" name="dress" autocomplete="off">
+              <option value="" selected>未定・相談して決めたい</option>
+              <optgroup label="ウエディングドレス">
+                <option value="Lumière(HLD-00085-01)">Lumière(HLD-00085-01)</option>
+                <option value="Clair de Lune(HLD-00084-01)">Clair de Lune(HLD-00084-01)</option>
+                <option value="Étoile(HLD-00066)">Étoile(HLD-00066)</option>
+                <option value="Aurore(HLD-00059-01)">Aurore(HLD-00059-01)</option>
+                <option value="Blanche(HLD-00043-01)">Blanche(HLD-00043-01)</option>
+              </optgroup>
+              <optgroup label="カラードレス">
+                <option value="Azur(AY6001)">Azur(AY6001)</option>
+                <option value="Noisette(AY5601)">Noisette(AY5601)</option>
+                <option value="Mimosa(MVD-00392-05)">Mimosa(MVD-00392-05)</option>
+                <option value="Ballerine(BLD-00055-09)">Ballerine(BLD-00055-09)</option>
+              </optgroup>
+            </select>
+          </div>
+        </fieldset>
+
+        <fieldset class="form-step" data-step="2" hidden>
+          <legend class="step-legend" tabindex="-1">お客さま情報</legend>
+          <div class="field">
+            <label class="field-label" for="f-name">お名前 <span class="req">必須</span></label>
+            <input type="text" id="f-name" name="name" required autocomplete="name" placeholder="例: 山田花子" aria-describedby="f-name-error">
+            <p class="field-error" id="f-name-error" hidden></p>
+          </div>
+          <div class="field">
+            <label class="field-label" for="f-email">メールアドレス <span class="req">必須</span></label>
+            <input type="email" id="f-email" name="email" required autocomplete="email" inputmode="email" spellcheck="false" placeholder="例: hanako@example.com" aria-describedby="f-email-error">
+            <p class="field-error" id="f-email-error" hidden></p>
+          </div>
+          <div class="field">
+            <label class="field-label" for="f-tel">お電話番号 <span class="req">必須</span></label>
+            <input type="tel" id="f-tel" name="tel" required autocomplete="tel" inputmode="tel" placeholder="例: 09012345678" aria-describedby="f-tel-error">
+            <p class="field-error" id="f-tel-error" hidden></p>
+          </div>
+        </fieldset>
+
+        <div class="form-nav">
+          <button type="button" class="btn btn-ghost" id="btn-prev" hidden>戻る</button>
+          <button type="button" class="btn btn-primary" id="btn-next">次へ進む</button>
+          <button type="submit" class="btn btn-primary" id="btn-submit" hidden>この内容で申し込む</button>
+        </div>
+        <p class="visually-hidden" role="status" id="form-live"></p>
+        <p class="form-demo-note">※ 本フォームはデザイン提案用のデモです。送信されても実際のご予約は行われません。</p>
+      </form>
+
+      <div class="form-complete" id="form-complete" hidden>
+        <p class="complete-en" aria-hidden="true" translate="no">R.S.V.P.</p>
+        <h3 class="complete-title" id="complete-title" tabindex="-1">ご予約を承りました</h3>
+        <p class="complete-body"><span id="complete-name"></span> さま<br>このたびはアトリエユカにお申し込みいただき、誠にありがとうございます。一両日中に、担当スタイリストよりご確認のご連絡を差し上げます。</p>
+        <dl class="complete-summary">
+          <div><dt>ご希望日</dt><dd id="complete-date"></dd></div>
+          <div><dt>ご利用の目的</dt><dd id="complete-purpose"></dd></div>
+          <div><dt>ご希望の衣裳</dt><dd id="complete-category"></dd></div>
+        </dl>
+        <p class="complete-body">お目にかかれる日を、スタッフ一同心より楽しみにしております。</p>
+        <p class="complete-sign" translate="no">Atelier Yuka — Ginza Atelier</p>
+        <button type="button" class="btn btn-ghost" id="btn-reset">最初から入力し直す</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- VI. フォトジャーニー -->
+  <section class="chapter" id="journey" aria-labelledby="journey-title">
+    <header class="chapter-head reveal">
+      <p class="chapter-no" aria-hidden="true" translate="no">VI</p>
+      <p class="chapter-label" translate="no">Photo Journey</p>
+      <h2 class="chapter-title" id="journey-title">世界8都市のフォトジャーニー</h2>
+      <p class="chapter-lede">ドレスとともに、世界のどこへでも。海外フォトウエディングのプロデュース実績です。</p>
+    </header>
+    <ul class="journey-grid">
+      <li class="journey reveal">
+        <figure class="journey-frame"><img src="assets/img/journey-paris.png" alt="パリ、エッフェル塔を望むフォトウエディング" width="640" height="960" loading="lazy"></figure>
+        <h3 class="journey-city" translate="no">Paris</h3>
+        <p class="journey-meta">パリ — エッフェル塔・凱旋門</p>
+        <p class="journey-plan">パリ・ゴールドプラン ¥598,000〜</p>
+      </li>
+      <li class="journey reveal">
+        <figure class="journey-frame"><img src="assets/img/journey-hawaii.png" alt="ハワイ、ワイキキでのフォトウエディング" width="640" height="960" loading="lazy"></figure>
+        <h3 class="journey-city" translate="no">Hawaii</h3>
+        <p class="journey-meta">ハワイ — ロイヤルハワイアン・ワイキキ</p>
+        <p class="journey-plan">ハワイサロンで現地サポート</p>
+      </li>
+      <li class="journey reveal">
+        <figure class="journey-frame"><img src="assets/img/journey-newyork.png" alt="ニューヨークでのフォトウエディング" width="640" height="960" loading="lazy"></figure>
+        <h3 class="journey-city" translate="no">New York</h3>
+        <p class="journey-meta">ニューヨーク — セントラルパーク・ブルックリン</p>
+      </li>
+      <li class="journey reveal">
+        <figure class="journey-frame"><img src="assets/img/journey-london.png" alt="ロンドンでのフォトウエディング" width="640" height="960" loading="lazy"></figure>
+        <h3 class="journey-city" translate="no">London</h3>
+        <p class="journey-meta">ロンドン — ビッグ・ベン・タワーブリッジ</p>
+      </li>
+      <li class="journey reveal">
+        <figure class="journey-frame"><img src="assets/img/journey-sydney.webp" alt="シドニーでのフォトウエディング" width="640" height="960" loading="lazy"></figure>
+        <h3 class="journey-city" translate="no">Sydney</h3>
+        <p class="journey-meta">シドニー — オペラハウス</p>
+      </li>
+      <li class="journey reveal">
+        <figure class="journey-frame"><img src="assets/img/journey-melbourne.png" alt="メルボルンでのフォトウエディング" width="640" height="960" loading="lazy"></figure>
+        <h3 class="journey-city" translate="no">Melbourne</h3>
+        <p class="journey-meta">メルボルン — オーストラリア</p>
+      </li>
+      <li class="journey reveal">
+        <figure class="journey-frame"><img src="assets/img/journey-perth.png" alt="パースでのフォトウエディング" width="640" height="960" loading="lazy"></figure>
+        <h3 class="journey-city" translate="no">Perth</h3>
+        <p class="journey-meta">パース — オーストラリア</p>
+      </li>
+      <li class="journey reveal">
+        <figure class="journey-frame"><img src="assets/img/journey-lasvegas.png" alt="ラスベガスでのフォトウエディング" width="640" height="960" loading="lazy"></figure>
+        <h3 class="journey-city" translate="no">Las Vegas</h3>
+        <p class="journey-meta">ラスベガス — ネバダ</p>
+      </li>
+    </ul>
+  </section>
+
+  <!-- VII. サロン -->
+  <section class="chapter chapter-tinted" id="salon" aria-labelledby="salon-title">
+    <header class="chapter-head reveal">
+      <p class="chapter-no" aria-hidden="true" translate="no">VII</p>
+      <p class="chapter-label" translate="no">Salons</p>
+      <h2 class="chapter-title" id="salon-title">サロンのご案内</h2>
+    </header>
+    <div class="salon-grid">
+      <article class="salon reveal">
+        <p class="salon-en" aria-hidden="true" translate="no">Ginza Atelier</p>
+        <h3 class="salon-name">銀座アトリエ</h3>
+        <address class="salon-address">〒104-0061 東京都中央区銀座1丁目20番地11号 6階</address>
+        <p class="salon-note">ご試着予約 ¥5,500(スタイリスト同伴)</p>
+        <div class="salon-map">
+          <iframe src="https://www.google.com/maps?q=%E6%9D%B1%E4%BA%AC%E9%83%BD%E4%B8%AD%E5%A4%AE%E5%8C%BA%E9%8A%80%E5%BA%A71%E4%B8%81%E7%9B%AE20-11&amp;z=16&amp;hl=ja&amp;output=embed" title="銀座アトリエ周辺の地図" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+        <a class="salon-map-link" href="https://www.google.com/maps/search/?api=1&amp;query=%E6%9D%B1%E4%BA%AC%E9%83%BD%E4%B8%AD%E5%A4%AE%E5%8C%BA%E9%8A%80%E5%BA%A71%E4%B8%81%E7%9B%AE20-11" target="_blank" rel="noopener">Google マップで開く</a>
+      </article>
+      <article class="salon reveal">
+        <p class="salon-en" aria-hidden="true" translate="no">Hawaii Salon</p>
+        <h3 class="salon-name">ハワイサロン</h3>
+        <address class="salon-address" translate="no">2270 Kalākaua Ave Suite 1220, Honolulu, HI 96815</address>
+        <p class="salon-note">ハワイ挙式・フォトウエディングを現地サポート</p>
+        <div class="salon-map">
+          <iframe src="https://www.google.com/maps?q=2270%20Kalakaua%20Ave%2C%20Honolulu%2C%20HI%2096815&amp;z=17&amp;hl=ja&amp;output=embed" title="ハワイサロン周辺の地図" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+        <a class="salon-map-link" href="https://www.google.com/maps/search/?api=1&amp;query=2270%20Kalakaua%20Ave%2C%20Honolulu%2C%20HI%2096815" target="_blank" rel="noopener">Google マップで開く</a>
+      </article>
+    </div>
+  </section>
+
+  <!-- VIII. ニュース -->
+  <section class="chapter" id="news" aria-labelledby="news-title">
+    <header class="chapter-head reveal">
+      <p class="chapter-no" aria-hidden="true" translate="no">VIII</p>
+      <p class="chapter-label" translate="no">News</p>
+      <h2 class="chapter-title" id="news-title">ニュース</h2>
+    </header>
+    <ul class="news-list reveal">
+      <li class="news-item">
+        <time datetime="2024-06-21">2024.06.21</time>
+        <p>Atelier Yuka 2024-2025新作ドレスを発表</p>
+      </li>
+      <li class="news-item">
+        <time datetime="2024-03-31">2024.03.31</time>
+        <p>山田幸愛さまの披露宴ドレスをオーダーでお仕立てしました</p>
+      </li>
+      <li class="news-item">
+        <time datetime="2024-01-31">2024.01.31</time>
+        <p>山田親太朗さま・幸愛さまのハワイフォトウエディングをお手伝いしました</p>
+      </li>
+      <li class="news-item">
+        <time datetime="2023-12-10">2023.12.10</time>
+        <p>2023 Jリーグアウォーズにタキシード衣裳を提供</p>
+      </li>
+    </ul>
+  </section>
+
+  <!-- IX. FAQ -->
+  <section class="chapter chapter-tinted chapter-last" id="faq" aria-labelledby="faq-title">
+    <header class="chapter-head reveal">
+      <p class="chapter-no" aria-hidden="true" translate="no">IX</p>
+      <p class="chapter-label" translate="no">FAQ</p>
+      <h2 class="chapter-title" id="faq-title">よくあるご質問</h2>
+    </header>
+    <div class="faq-list reveal">
+      <details class="faq">
+        <summary>試着だけでも利用できますか?</summary>
+        <p>はい。ご自宅試着は1泊2日・1着¥5,500でご利用いただけます。使用日が決まっていなくてもお申し込みいただけます。</p>
+      </details>
+      <details class="faq">
+        <summary>サイズが合わなかった場合は?</summary>
+        <p>試着でサイズやイメージをご確認いただいてから本使用をご予約いただけるので安心です。気になる点はチャット・お問合せでスタイリストにご相談ください。</p>
+      </details>
+      <details class="faq">
+        <summary>クリーニングは必要ですか?</summary>
+        <p>不要です。ご利用後はそのまま同梱の着払い伝票でご返送ください。クリーニングはアトリエユカで行います。</p>
+      </details>
+      <details class="faq">
+        <summary>いつまでに予約すればいいですか?</summary>
+        <p>ご利用日の4ヶ月前〜10日前までご予約可能です。人気のドレスは埋まりやすいため、2〜3ヶ月前のご予約がおすすめです。</p>
+      </details>
+      <details class="faq">
+        <summary>店舗での試着はできますか?</summary>
+        <p>銀座アトリエにてスタイリスト同伴のご試着(¥5,500)を承っています。ハワイサロンでは現地挙式のサポートも行っています。</p>
+      </details>
+      <details class="faq">
+        <summary>海外挙式にも対応していますか?</summary>
+        <p>パリ・ハワイをはじめ海外レンタルプランをご用意しています。フォトウエディングのプロデュース実績も多数ございます。</p>
+      </details>
+    </div>
+    <p class="faq-cta reveal"><a class="btn btn-primary" href="#reserve">ご自宅試着を予約する <span class="price">¥5,500</span></a></p>
+  </section>
+
 </main>
 
-<footer class="site-foot">
-  <div class="wrap">
-    <span class="en">Atelier Yuka Website Renewal</span>
-    <p>本ページは提案用サンプルです。写真・商品情報は現行サイト(atelieryuka.com)より引用しています。</p>
+<footer class="site-footer">
+  <div class="footer-inner">
+    <p class="footer-mark" translate="no">Atelier Yuka</p>
+    <p class="footer-tagline">人生でいちばん美しい日を、いちばん確かな一着で。</p>
+    <ul class="footer-social">
+      <li><a href="#" translate="no">Instagram</a></li>
+      <li><a href="#" translate="no">Pinterest</a></li>
+    </ul>
+    <p class="footer-company">松尾株式会社/MATSUO — 代表取締役 松尾 祐佳</p>
+    <p class="footer-address">銀座アトリエ: 東京都中央区銀座1丁目20番地11号 6階 <span class="footer-sep" aria-hidden="true">|</span> <span translate="no">Hawaii Salon: 2270 Kalākaua Ave Suite 1220, Honolulu, HI 96815</span></p>
+    <p class="footer-note">※ 本ページはサイトリプレイス提案「A案 Timeless Classic」のデザインデモです。</p>
+    <p class="footer-copy" translate="no">© 2026 MATSUO Co., Ltd.</p>
   </div>
 </footer>
+
+<a class="compare-pill" href="archive/index.html">← 比較ページへ</a>
+
+<script src="assets/lightbox.js?v=2" defer></script>
+<script src="script.js?v=3" defer></script>
 </body>
 </html>

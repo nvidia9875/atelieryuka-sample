@@ -1,4 +1,4 @@
-/* A案 Timeless Classic — 衣裳詳細ページ(データは ../assets/data.js の AY を参照) */
+/* A案 Timeless Classic — 衣裳詳細ページ(データは assets/data.js の AY を参照) */
 (function () {
   "use strict";
 
@@ -46,12 +46,12 @@
     el("pd-price").textContent = yen(item.price);
 
     var img1 = el("pd-img-1");
-    img1.src = "../assets/img/" + item.img;
+    img1.src = "assets/img/" + item.img;
     img1.alt = col.label + " " + item.name;
     var shot2 = el("pd-shot-2");
     if (item.img2) {
       var img2 = el("pd-img-2");
-      img2.src = "../assets/img/" + item.img2;
+      img2.src = "assets/img/" + item.img2;
       img2.alt = item.name + " の別カット";
     } else {
       shot2.remove();
@@ -81,7 +81,7 @@
         a.href = "product.html?code=" + encodeURIComponent(it.code);
         var fig = document.createElement("figure");
         var img = document.createElement("img");
-        img.src = "../assets/img/" + it.img;
+        img.src = "assets/img/" + it.img;
         img.alt = col.label + " " + it.name;
         img.width = 600; img.height = 800; img.loading = "lazy";
         fig.appendChild(img);
