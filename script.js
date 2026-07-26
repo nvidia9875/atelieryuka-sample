@@ -42,6 +42,19 @@
         if (panel) panel.hidden = !selected;
       });
       if (focus) tab.focus();
+
+      /* 絞り込み(collection-filter.js)へ、表示中のカテゴリが変わったことを伝える */
+      document.dispatchEvent(new CustomEvent("ay:tabchange", {
+        detail: { key: tab.id.replace(/^tab-/, "") },
+      }));
+    };
+
+    /* URL の ?cat= からカテゴリを復元するために外部へ公開する */
+    window.AYCollectionTabs = {
+      select: function (tabId) {
+        var tab = document.getElementById(tabId);
+        if (tab) selectTab(tab, false);
+      },
     };
 
     tabs.forEach(function (tab, index) {

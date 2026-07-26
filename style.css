@@ -24,6 +24,8 @@
   --space-chapter: clamp(4.5rem, 3rem + 5vw, 8.5rem);
   --pad-x: clamp(16px, 4vw, 40px);
 
+  --duration-fast: 150ms;
+
   --z-pill: 50;
   --z-skip: 100;
 }
@@ -292,7 +294,22 @@ section[id] { scroll-margin-top: 1.5rem; }
   display: flex; flex-wrap: wrap; justify-content: center;
   column-gap: clamp(0.4rem, 2vw, 1.6rem); row-gap: 0.3rem;
   border-bottom: 1px solid var(--line);
-  margin-bottom: clamp(2.2rem, 4vw, 3.4rem);
+  margin-bottom: clamp(1.6rem, 4vw, 3.4rem);
+}
+/* モバイルは折り返さず横スクロール1段にして、縦の消費を抑える */
+@media (max-width: 559px) {
+  .tablist {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    overflow-x: auto;
+    scrollbar-width: none;
+    scroll-snap-type: x proximity;
+    /* 画面端まで流して、切れているのが分かるようにする */
+    margin-inline: calc(var(--pad-x) * -1);
+    padding-inline: var(--pad-x);
+  }
+  .tablist::-webkit-scrollbar { display: none; }
+  .tablist [role="tab"] { flex: none; scroll-snap-align: start; }
 }
 .tablist [role="tab"] {
   appearance: none;
@@ -313,12 +330,15 @@ section[id] { scroll-margin-top: 1.5rem; }
   border-bottom-color: var(--gold-ink);
 }
 
+/* モバイルから2カラム。1カラムだと1画面に1着しか入らず、縦スクロールが極端に長くなるため。 */
 .product-grid {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: clamp(2.4rem, 4vw, 3.4rem) clamp(1.2rem, 2.5vw, 2.2rem);
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.7rem 0.7rem;
 }
-@media (min-width: 560px) { .product-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 560px) {
+  .product-grid { gap: clamp(2.4rem, 4vw, 3.4rem) clamp(1.2rem, 2.5vw, 2.2rem); }
+}
 @media (min-width: 920px) {
   .product-grid { grid-template-columns: repeat(3, 1fr); }
 }
@@ -375,6 +395,29 @@ section[id] { scroll-margin-top: 1.5rem; }
   margin-top: 0.35rem;
   font-size: 0.95rem; font-weight: 400;
   font-variant-numeric: tabular-nums;
+}
+
+/* 2カラムに収まるよう文字と余白を詰める。
+   カード全体が拡大ボタン+名称リンクになっているので、CTAは省いても導線は失われない。 */
+@media (max-width: 559px) {
+  .product-media { padding: 5px; }
+  .product-media .alt-img {
+    inset: 5px;
+    width: calc(100% - 10px);
+    height: calc(100% - 10px);
+  }
+  .product-name { margin-top: 0.75rem; font-size: 1.05rem; }
+  .product-meta { margin-top: 0.2rem; font-size: 0.68rem; }
+  .product-price { margin-top: 0.25rem; font-size: 0.82rem; }
+  .product-cta { display: none; }
+  /* タップ端末では hover が効かないので、型番は薄く常時表示する */
+  .float-code {
+    bottom: 12px;
+    padding: 0.3em 0.7em;
+    font-size: 0.62rem;
+    opacity: 0.82;
+    transform: translate(-50%, 0);
+  }
 }
 
 /* ---------- III. ご利用の流れ ---------- */

@@ -373,8 +373,16 @@ input[aria-invalid="true"], .choice-group.has-error .choice { border-color: var(
 .footer-note {
   margin-top: 1.6rem;
   font-size: 0.74rem;
+  line-height: 1.9;
   color: #B7B0A4;
 }
+.footer-note a {
+  color: #B7B0A4;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(183, 176, 164, 0.45);
+  transition: color 0.15s ease-out, border-color 0.15s ease-out;
+}
+.footer-note a:hover { color: var(--gold); border-bottom-color: var(--gold); }
 .footer-copy {
   margin-top: 0.4rem;
   font-size: 0.78rem;

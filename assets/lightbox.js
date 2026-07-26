@@ -216,17 +216,19 @@
     return el ? el.textContent.replace(/\s+/g, " ").trim() : "";
   }
 
-  /**
-   * @param {string} groupSel グループのコンテナ(この単位で前後移動)
-   * @param {string} itemSel  コンテナ内のアイテム
-   * @param {{frame?: string, title?: string, sub?: string[]}} opts
-   */
-  function attach(groupSel, itemSel, opts) {
-    opts = opts || {};
+  /* 絞り込み・並び替えで表示対象が変わったとき再構築するため、attach の引数を保持する */
+  var attachments = [];
+
+  function bind(groupSel, itemSel, opts) {
     document.querySelectorAll(groupSel).forEach(function (group) {
-      var items = Array.prototype.slice.call(group.querySelectorAll(itemSel));
+      /* 再構築時に拡大ボタンが重複しないよう、既存のものを取り除く */
+      group.querySelectorAll(".ay-lb-open").forEach(function (btn) { btn.remove(); });
+
+      /* 非表示のアイテムはスライドに含めない(隠れた商品へ送られてしまうため) */
+      var items = Array.prototype.slice.call(group.querySelectorAll(itemSel))
+        .filter(function (item) { return !item.hidden; });
       var groupSlides = [];
-      items.forEach(function (item, i) {
+      items.forEach(function (item) {
         var img = item.querySelector("img");
         if (!img) return;
         var title = opts.title ? textOf(item, opts.title) : (img.alt || "");
@@ -251,5 +253,21 @@
     });
   }
 
-  window.AYLightbox = { attach: attach };
+  /**
+   * @param {string} groupSel グループのコンテナ(この単位で前後移動)
+   * @param {string} itemSel  コンテナ内のアイテム
+   * @param {{frame?: string, title?: string, sub?: string[]}} opts
+   */
+  function attach(groupSel, itemSel, opts) {
+    opts = opts || {};
+    attachments.push({ groupSel: groupSel, itemSel: itemSel, opts: opts });
+    bind(groupSel, itemSel, opts);
+  }
+
+  /** 表示中のアイテムだけでスライドを組み直す(絞り込み・並び替えの後に呼ぶ) */
+  function refresh() {
+    attachments.forEach(function (a) { bind(a.groupSel, a.itemSel, a.opts); });
+  }
+
+  window.AYLightbox = { attach: attach, refresh: refresh };
 })();

@@ -1,0 +1,301 @@
+/* ============================================================
+   Atelier Yuka — コレクションの絞り込み
+   トーンは style.css に準拠(明朝・極細罫線・シャンパンゴールド)。
+   角丸とドロップシャドウは使わず、罫線と余白で階層をつくる。
+   ============================================================ */
+
+/* ---------- 開閉パネル ---------- */
+.filter {
+  max-width: var(--w-wide);
+  margin: 0 auto clamp(1.2rem, 2vw, 1.8rem);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.filter-summary {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 1.05rem 0.2rem;
+  font: 500 0.95rem/1.4 var(--font-jp);
+  letter-spacing: 0.14em;
+  cursor: pointer;
+  list-style: none;
+  transition: color var(--duration-fast, 150ms) ease-out;
+}
+.filter-summary::-webkit-details-marker { display: none; }
+.filter-summary:hover { color: var(--gold-ink); }
+
+/* 開閉インジケータ: 細い十字 / 横棒 */
+.filter-summary::after {
+  content: "";
+  flex: none;
+  margin-left: auto;
+  width: 11px;
+  height: 11px;
+  background:
+    linear-gradient(currentColor, currentColor) center / 100% 1px no-repeat,
+    linear-gradient(currentColor, currentColor) center / 1px 100% no-repeat;
+  opacity: 0.65;
+  transition: transform 0.25s ease-out, opacity 0.25s ease-out;
+}
+.filter[open] .filter-summary::after {
+  /* 縦棒を潰して「−」にする */
+  background: linear-gradient(currentColor, currentColor) center / 100% 1px no-repeat;
+  transform: rotate(180deg);
+  opacity: 1;
+}
+
+/* 選択中の条件数 */
+.filter-summary-badge {
+  padding: 0.2em 0.7em;
+  border: 1px solid var(--gold);
+  font: 400 0.7rem/1.6 var(--font-body);
+  letter-spacing: 0.06em;
+  color: var(--gold-ink);
+  white-space: nowrap;
+}
+
+/* ---------- 中身 ---------- */
+.filter-body {
+  display: grid;
+  gap: clamp(1.4rem, 2.4vw, 2rem);
+  padding: 0.4rem 0.2rem 1.7rem;
+}
+/* 軸を横に並べきって、開いたときにグリッドが押し下げられる量を抑える */
+@media (min-width: 720px) {
+  .filter-body {
+    grid-template-columns: repeat(auto-fit, minmax(11.5rem, 1fr));
+    column-gap: clamp(1.6rem, 2.6vw, 2.6rem);
+    align-items: start;
+  }
+}
+
+.filter-group { border: 0; }
+
+.filter-legend {
+  display: block;
+  margin-bottom: 0.85rem;
+  padding: 0;
+  font: 400 0.72rem/1.5 var(--font-body);
+  letter-spacing: 0.2em;
+  color: var(--muted);
+}
+
+/* ---------- 色スウォッチ ---------- */
+.swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem 0.55rem;
+}
+
+/* 幅は「アイボリー」が1行に収まる最小限に。狭くすると1列あたりの行数が減り、パネルが低くなる */
+.swatch {
+  display: grid;
+  justify-items: center;
+  gap: 0.4rem;
+  width: 3.35rem;
+  cursor: pointer;
+}
+.swatch input {
+  position: absolute;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.swatch-dot {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background: var(--swatch);
+  box-shadow: 0 0 0 1px var(--line);
+  transition: box-shadow 0.2s ease-out, transform 0.2s ease-out;
+}
+.swatch-label {
+  font: 400 0.7rem/1.4 var(--font-body);
+  color: var(--muted);
+  text-align: center;
+  transition: color 0.2s ease-out;
+}
+
+@media (hover: hover) {
+  .swatch:hover .swatch-dot { transform: scale(1.06); }
+  .swatch:hover .swatch-label { color: var(--ink); }
+}
+
+/* 選択中: 二重リング(色そのものに依存せず選択が伝わるようにする) */
+.swatch input:checked ~ .swatch-dot {
+  box-shadow: 0 0 0 1px var(--paper), 0 0 0 2px var(--gold-ink);
+}
+.swatch input:checked ~ .swatch-label {
+  color: var(--ink);
+  font-weight: 500;
+}
+.swatch input:focus-visible ~ .swatch-dot {
+  outline: 2px solid var(--gold-ink);
+  outline-offset: 3px;
+}
+
+/* ---------- 価格・シルエット・ラインのチップ ---------- */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.chip {
+  cursor: pointer;
+}
+.chip input {
+  position: absolute;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.chip-label {
+  display: block;
+  padding: 0.5em 1em;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  font: 400 0.78rem/1.5 var(--font-body);
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+  transition: border-color 0.2s ease-out, color 0.2s ease-out, background-color 0.2s ease-out;
+}
+@media (hover: hover) {
+  .chip:hover .chip-label { border-color: var(--gold); color: var(--ink); }
+}
+.chip input:checked ~ .chip-label {
+  border-color: var(--gold-ink);
+  background: var(--greige);
+  color: var(--ink);
+}
+.chip input:focus-visible ~ .chip-label {
+  outline: 2px solid var(--gold-ink);
+  outline-offset: 2px;
+}
+
+/* ---------- 名前・型番の検索 ---------- */
+.filter-search input {
+  width: 100%;
+  padding: 0.55em 0.2em;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  background: transparent;
+  font: 300 0.9rem/1.6 var(--font-body);
+  color: var(--ink);
+  transition: border-color 0.2s ease-out;
+}
+.filter-search input::placeholder { color: color-mix(in srgb, var(--muted) 60%, transparent); }
+.filter-search input:focus {
+  outline: none;
+  border-bottom-color: var(--gold-ink);
+}
+.filter-search input:focus-visible { outline: 2px solid var(--gold-ink); outline-offset: 3px; }
+
+/* ---------- 件数と並び替え ---------- */
+.result-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.7rem 1.2rem;
+  max-width: var(--w-wide);
+  margin: 0 auto clamp(1.8rem, 3vw, 2.6rem);
+}
+
+.result-count {
+  font: 400 0.95rem/1.5 var(--font-jp);
+  letter-spacing: 0.06em;
+  font-variant-numeric: tabular-nums;
+}
+
+.result-tools {
+  display: flex;
+  align-items: baseline;
+  gap: 1.2rem;
+  font-size: 0.78rem;
+}
+
+.filter-clear {
+  appearance: none;
+  border: 0;
+  background: none;
+  padding: 0;
+  font: 400 0.78rem/1.5 var(--font-body);
+  color: var(--muted);
+  border-bottom: 1px solid var(--line);
+  cursor: pointer;
+  transition: color 0.2s ease-out, border-color 0.2s ease-out;
+}
+.filter-clear:hover { color: var(--gold-ink); border-bottom-color: var(--gold-ink); }
+
+.sort-field {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  color: var(--muted);
+  font: 400 0.78rem/1.5 var(--font-body);
+}
+.sort-field select {
+  appearance: none;
+  padding: 0.3em 1.4em 0.3em 0.2em;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  background: transparent;
+  font: 400 0.82rem/1.5 var(--font-body);
+  color: var(--ink);
+  cursor: pointer;
+  /* 細い山形の下向き矢印 */
+  background-image:
+    linear-gradient(45deg, transparent 50%, currentColor 50%, currentColor calc(50% + 1px), transparent calc(50% + 1px)),
+    linear-gradient(-45deg, transparent 50%, currentColor 50%, currentColor calc(50% + 1px), transparent calc(50% + 1px));
+  background-position: right 0.5em top 55%, right 0.15em top 55%;
+  background-size: 6px 6px;
+  background-repeat: no-repeat;
+}
+.sort-field select:hover { border-bottom-color: var(--gold-ink); }
+
+/* ---------- 該当なし / さらに表示 ---------- */
+.no-result {
+  max-width: var(--w-narrow);
+  margin: clamp(2.5rem, 5vw, 4rem) auto;
+  text-align: center;
+  font: 400 1rem/2 var(--font-jp);
+  color: var(--muted);
+}
+.no-result::before {
+  content: "❦";
+  display: block;
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+  color: var(--gold);
+}
+
+.more-wrap {
+  margin-top: clamp(2rem, 4vw, 2.8rem);
+  text-align: center;
+}
+.more-wrap .btn { min-width: min(100%, 20rem); }
+
+/* ---------- 動きを抑える設定を尊重 ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .filter-summary,
+  .filter-summary::after,
+  .swatch-dot,
+  .swatch-label,
+  .chip-label,
+  .filter-search input,
+  .filter-clear {
+    transition: none;
+  }
+  .swatch:hover .swatch-dot { transform: none; }
+}

@@ -9,8 +9,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&amp;family=Noto+Sans+JP:wght@300;400&amp;family=Shippori+Mincho:wght@400;500&amp;display=swap">
-<link rel="stylesheet" href="style.css?v=3">
-<link rel="stylesheet" href="style-b.css?v=3">
+<link rel="stylesheet" href="style.css?v=4">
+<link rel="stylesheet" href="style-b.css?v=4">
+<link rel="stylesheet" href="collection-filter.css?v=3">
 <link rel="stylesheet" href="assets/lightbox.css?v=3">
 <script>document.documentElement.className += " js";</script>
 </head>
@@ -88,6 +89,7 @@
       <h2 class="chapter-title" id="collection-title">コレクション</h2>
       <p class="chapter-lede">一着ごとに愛称を持つ、メゾンのドレスと礼服。すべてご自宅試着(1着 ¥5,500)からお選びいただけます。</p>
     </header>
+    <!-- COLLECTION:START — tools/build-collection.mjs が assets/data.js から生成。直接編集しないこと -->
     <div class="tabs reveal">
       <div class="tablist" role="tablist" aria-label="コレクションのカテゴリ">
         <button type="button" role="tab" id="tab-wedding" aria-controls="panel-wedding" aria-selected="true">ウエディングドレス</button>
@@ -97,11 +99,61 @@
       </div>
 
       <div class="tabpanel" role="tabpanel" id="panel-wedding" aria-labelledby="tab-wedding" tabindex="0">
-        <ul class="product-grid">
-          <li class="product">
+        <details class="filter" data-filter>
+          <summary class="filter-summary">
+            <span class="filter-summary-label">絞り込む</span>
+            <span class="filter-summary-badge" data-active-count hidden></span>
+          </summary>
+          <div class="filter-body">
+            <fieldset class="filter-group">
+              <legend class="filter-legend">色</legend>
+              <div class="swatches">
+                <label class="swatch" style="--swatch: #EFE6D5"><input type="checkbox" data-axis="color" value="ivory"><span class="swatch-dot" aria-hidden="true"></span><span class="swatch-label">アイボリー</span></label>
+                <label class="swatch" style="--swatch: #F7F5F1"><input type="checkbox" data-axis="color" value="white"><span class="swatch-dot" aria-hidden="true"></span><span class="swatch-label">ホワイト</span></label>
+              </div>
+            </fieldset>
+            <fieldset class="filter-group">
+              <legend class="filter-legend">価格</legend>
+              <div class="chips">
+                <label class="chip"><input type="checkbox" data-axis="price" value="290000"><span class="chip-label">¥290,000</span></label>
+                <label class="chip"><input type="checkbox" data-axis="price" value="330000"><span class="chip-label">¥330,000</span></label>
+              </div>
+            </fieldset>
+            <fieldset class="filter-group">
+              <legend class="filter-legend">シルエット</legend>
+              <div class="chips">
+                <label class="chip"><input type="checkbox" data-axis="silhouette" value="プリンセス"><span class="chip-label">プリンセス</span></label>
+                <label class="chip"><input type="checkbox" data-axis="silhouette" value="Aライン"><span class="chip-label">Aライン</span></label>
+              </div>
+            </fieldset>
+            <div class="filter-group filter-search">
+              <label class="filter-legend" for="q-wedding">愛称・型番で探す</label>
+              <input type="search" id="q-wedding" data-axis="q" autocomplete="off" placeholder="例: Lumière / HLD-00085-01">
+            </div>
+          </div>
+        </details>
+
+        <div class="result-bar">
+          <p class="result-count" role="status" aria-live="polite" data-count>10件を表示</p>
+          <p class="result-tools">
+            <button type="button" class="filter-clear" data-clear hidden>条件をクリア</button>
+            <span class="sort-field">
+              <label for="sort-wedding">並び替え</label>
+              <select id="sort-wedding" data-sort>
+                <option value="recommended">おすすめ順</option>
+                <option value="price-asc">価格が安い順</option>
+                <option value="price-desc">価格が高い順</option>
+              </select>
+            </span>
+          </p>
+        </div>
+
+        <ul class="product-grid" data-grid>
+          <li class="product"
+              data-name="Lumière" data-code="HLD-00085-01" data-price="330000" data-color="ivory" data-silhouette="プリンセス" data-line="VICTRIA FRANCEZKA">
             <figure class="product-media">
-              <img src="assets/img/wd-01.webp" alt="ウエディングドレス Lumière" width="600" height="800" loading="lazy">
-              <img class="alt-img" src="assets/img/wd-01-b.webp" alt="" width="600" height="800" loading="lazy">
+              <img src="assets/img/wd-01.webp" alt="ウエディングドレス Lumière" width="600" height="800" loading="lazy" decoding="async">
+              <img class="alt-img" src="assets/img/wd-01-b.webp" alt="" width="600" height="800" loading="lazy" decoding="async">
               <span class="float-code" aria-hidden="true" translate="no">HLD-00085-01</span>
             </figure>
             <h3 class="product-name" translate="no"><a href="product.html?code=HLD-00085-01">Lumière</a></h3>
@@ -109,10 +161,11 @@
             <p class="product-price">¥330,000</p>
             <p class="product-cta"><a href="product.html?code=HLD-00085-01">詳細・お申し込み</a></p>
           </li>
-          <li class="product">
+          <li class="product"
+              data-name="Clair de Lune" data-code="HLD-00084-01" data-price="330000" data-color="ivory" data-silhouette="プリンセス" data-line="VICTRIA FRANCEZKA">
             <figure class="product-media">
-              <img src="assets/img/wd-02.webp" alt="ウエディングドレス Clair de Lune" width="600" height="800" loading="lazy">
-              <img class="alt-img" src="assets/img/wd-02-b.webp" alt="" width="600" height="800" loading="lazy">
+              <img src="assets/img/wd-02.webp" alt="ウエディングドレス Clair de Lune" width="600" height="800" loading="lazy" decoding="async">
+              <img class="alt-img" src="assets/img/wd-02-b.webp" alt="" width="600" height="800" loading="lazy" decoding="async">
               <span class="float-code" aria-hidden="true" translate="no">HLD-00084-01</span>
             </figure>
             <h3 class="product-name" translate="no"><a href="product.html?code=HLD-00084-01">Clair de Lune</a></h3>
@@ -120,10 +173,11 @@
             <p class="product-price">¥330,000</p>
             <p class="product-cta"><a href="product.html?code=HLD-00084-01">詳細・お申し込み</a></p>
           </li>
-          <li class="product">
+          <li class="product"
+              data-name="Étoile" data-code="HLD-00066" data-price="290000" data-color="ivory" data-silhouette="プリンセス" data-line="VICTRIA FRANCEZKA">
             <figure class="product-media">
-              <img src="assets/img/wd-03.webp" alt="ウエディングドレス Étoile" width="600" height="800" loading="lazy">
-              <img class="alt-img" src="assets/img/wd-03-b.webp" alt="" width="600" height="800" loading="lazy">
+              <img src="assets/img/wd-03.webp" alt="ウエディングドレス Étoile" width="600" height="800" loading="lazy" decoding="async">
+              <img class="alt-img" src="assets/img/wd-03-b.webp" alt="" width="600" height="800" loading="lazy" decoding="async">
               <span class="float-code" aria-hidden="true" translate="no">HLD-00066</span>
             </figure>
             <h3 class="product-name" translate="no"><a href="product.html?code=HLD-00066">Étoile</a></h3>
@@ -131,10 +185,11 @@
             <p class="product-price">¥290,000</p>
             <p class="product-cta"><a href="product.html?code=HLD-00066">詳細・お申し込み</a></p>
           </li>
-          <li class="product">
+          <li class="product"
+              data-name="Aurore" data-code="HLD-00059-01" data-price="290000" data-color="white" data-silhouette="プリンセス" data-line="VICTRIA FRANCEZKA">
             <figure class="product-media">
-              <img src="assets/img/wd-04.webp" alt="ウエディングドレス Aurore" width="600" height="800" loading="lazy">
-              <img class="alt-img" src="assets/img/wd-04-b.webp" alt="" width="600" height="800" loading="lazy">
+              <img src="assets/img/wd-04.webp" alt="ウエディングドレス Aurore" width="600" height="800" loading="lazy" decoding="async">
+              <img class="alt-img" src="assets/img/wd-04-b.webp" alt="" width="600" height="800" loading="lazy" decoding="async">
               <span class="float-code" aria-hidden="true" translate="no">HLD-00059-01</span>
             </figure>
             <h3 class="product-name" translate="no"><a href="product.html?code=HLD-00059-01">Aurore</a></h3>
@@ -142,10 +197,11 @@
             <p class="product-price">¥290,000</p>
             <p class="product-cta"><a href="product.html?code=HLD-00059-01">詳細・お申し込み</a></p>
           </li>
-          <li class="product">
+          <li class="product"
+              data-name="Blanche" data-code="HLD-00043-01" data-price="290000" data-color="ivory" data-silhouette="Aライン" data-line="VICTRIA FRANCEZKA">
             <figure class="product-media">
-              <img src="assets/img/wd-05.webp" alt="ウエディングドレス Blanche" width="600" height="800" loading="lazy">
-              <img class="alt-img" src="assets/img/wd-05-b.webp" alt="" width="600" height="800" loading="lazy">
+              <img src="assets/img/wd-05.webp" alt="ウエディングドレス Blanche" width="600" height="800" loading="lazy" decoding="async">
+              <img class="alt-img" src="assets/img/wd-05-b.webp" alt="" width="600" height="800" loading="lazy" decoding="async">
               <span class="float-code" aria-hidden="true" translate="no">HLD-00043-01</span>
             </figure>
             <h3 class="product-name" translate="no"><a href="product.html?code=HLD-00043-01">Blanche</a></h3>
@@ -153,10 +209,11 @@
             <p class="product-price">¥290,000</p>
             <p class="product-cta"><a href="product.html?code=HLD-00043-01">詳細・お申し込み</a></p>
           </li>
-          <li class="product">
+          <li class="product"
+              data-name="Camélia" data-code="HLD-00051-01" data-price="290000" data-color="white" data-silhouette="Aライン" data-line="VICTRIA FRANCEZKA">
             <figure class="product-media">
-              <img src="assets/img/wd-06.webp" alt="ウエディングドレス Camélia" width="600" height="800" loading="lazy">
-              <img class="alt-img" src="assets/img/wd-06-b.webp" alt="" width="600" height="800" loading="lazy">
+              <img src="assets/img/wd-06.webp" alt="ウエディングドレス Camélia" width="600" height="800" loading="lazy" decoding="async">
+              <img class="alt-img" src="assets/img/wd-06-b.webp" alt="" width="600" height="800" loading="lazy" decoding="async">
               <span class="float-code" aria-hidden="true" translate="no">HLD-00051-01</span>
             </figure>
             <h3 class="product-name" translate="no"><a href="product.html?code=HLD-00051-01">Camélia</a></h3>
@@ -164,10 +221,11 @@
             <p class="product-price">¥290,000</p>
             <p class="product-cta"><a href="product.html?code=HLD-00051-01">詳細・お申し込み</a></p>
           </li>
-          <li class="product">
+          <li class="product"
+              data-name="Séraphine" data-code="HLD-00053-01" data-price="290000" data-color="ivory" data-silhouette="プリンセス" data-line="VICTRIA FRANCEZKA">
             <figure class="product-media">
-              <img src="assets/img/wd-07.webp" alt="ウエディングドレス Séraphine" width="600" height="800" loading="lazy">
-              <img class="alt-img" src="assets/img/wd-07-b.webp" alt="" width="600" height="800" loading="lazy">
+              <img src="assets/img/wd-07.webp" alt="ウエディングドレス Séraphine" width="600" height="800" loading="lazy" decoding="async">
+              <img class="alt-img" src="assets/img/wd-07-b.webp" alt="" width="600" height="800" loading="lazy" decoding="async">
               <span class="float-code" aria-hidden="true" translate="no">HLD-00053-01</span>
             </figure>
             <h3 class="product-name" translate="no"><a href="product.html?code=HLD-00053-01">Séraphine</a></h3>
@@ -175,10 +233,11 @@
             <p class="product-price">¥290,000</p>
             <p class="product-cta"><a href="product.html?code=HLD-00053-01">詳細・お申し込み</a></p>
           </li>
-          <li class="product">
+          <li class="product"
+              data-name="Gardenia" data-code="HLD-00069-01" data-price="290000" data-color="white" data-silhouette="プリンセス" data-line="VICTRIA FRANCEZKA">
             <figure class="product-media">
-              <img src="assets/img/wd-08.webp" alt="ウエディングドレス Gardenia" width="600" height="800" loading="lazy">
-              <img class="alt-img" src="assets/img/wd-08-b.webp" alt="" width="600" height="800" loading="lazy">
+              <img src="assets/img/wd-08.webp" alt="ウエディングドレス Gardenia" width="600" height="800" loading="lazy" decoding="async">
+              <img class="alt-img" src="assets/img/wd-08-b.webp" alt="" width="600" height="800" loading="lazy" decoding="async">
               <span class="float-code" aria-hidden="true" translate="no">HLD-00069-01</span>
             </figure>
             <h3 class="product-name" translate="no"><a href="product.html?code=HLD-00069-01">Gardenia</a></h3>
@@ -186,10 +245,11 @@
             <p class="product-price">¥290,000</p>
             <p class="product-cta"><a href="product.html?code=HLD-00069-01">詳細・お申し込み</a></p>
           </li>
-          <li class="product">
+          <li class="product"
+              data-name="Mirabelle" data-code="HLD-00070-01" data-price="290000" data-color="white" data-silhouette="プリンセス" data-line="VICTRIA FRANCEZKA">
             <figure class="product-media">
-              <img src="assets/img/wd-09.webp" alt="ウエディングドレス Mirabelle" width="600" height="800" loading="lazy">
-              <img class="alt-img" src="assets/img/wd-09-b.webp" alt="" width="600" height="800" loading="lazy">
+              <img src="assets/img/wd-09.webp" alt="ウエディングドレス Mirabelle" width="600" height="800" loading="lazy" decoding="async">
+              <img class="alt-img" src="assets/img/wd-09-b.webp" alt="" width="600" height="800" loading="lazy" decoding="async">
               <span class="float-code" aria-hidden="true" translate="no">HLD-00070-01</span>
             </figure>
             <h3 class="product-name" translate="no"><a href="product.html?code=HLD-00070-01">Mirabelle</a></h3>
@@ -197,15 +257,95 @@
             <p class="product-price">¥290,000</p>
             <p class="product-cta"><a href="product.html?code=HLD-00070-01">詳細・お申し込み</a></p>
           </li>
+          <li class="product"
+              data-name="Perle" data-code="HLD-00071-01" data-price="290000" data-color="ivory" data-silhouette="Aライン" data-line="VICTRIA FRANCEZKA">
+            <figure class="product-media">
+              <img src="assets/img/wd-10.webp" alt="ウエディングドレス Perle" width="600" height="800" loading="lazy" decoding="async">
+              <img class="alt-img" src="assets/img/wd-10-b.webp" alt="" width="600" height="800" loading="lazy" decoding="async">
+              <span class="float-code" aria-hidden="true" translate="no">HLD-00071-01</span>
+            </figure>
+            <h3 class="product-name" translate="no"><a href="product.html?code=HLD-00071-01">Perle</a></h3>
+            <p class="product-meta"><span translate="no">HLD-00071-01</span> — VICTRIA FRANCEZKA</p>
+            <p class="product-price">¥290,000</p>
+            <p class="product-cta"><a href="product.html?code=HLD-00071-01">詳細・お申し込み</a></p>
+          </li>
         </ul>
+
+        <p class="no-result" data-empty hidden>条件に合う衣裳が見つかりませんでした。条件を減らしてお試しください。</p>
+        <p class="more-wrap" data-more-wrap hidden><button type="button" class="btn btn-ghost" data-more>さらに表示</button></p>
       </div>
 
       <div class="tabpanel" role="tabpanel" id="panel-color" aria-labelledby="tab-color" tabindex="0" hidden>
-        <ul class="product-grid">
-          <li class="product">
+        <details class="filter" data-filter>
+          <summary class="filter-summary">
+            <span class="filter-summary-label">絞り込む</span>
+            <span class="filter-summary-badge" data-active-count hidden></span>
+          </summary>
+          <div class="filter-body">
+            <fieldset class="filter-group">
+              <legend class="filter-legend">色</legend>
+              <div class="swatches">
+                <label class="swatch" style="--swatch: #6C9BD2"><input type="checkbox" data-axis="color" value="blue"><span class="swatch-dot" aria-hidden="true"></span><span class="swatch-label">ブルー</span></label>
+                <label class="swatch" style="--swatch: #8A7059"><input type="checkbox" data-axis="color" value="brown"><span class="swatch-dot" aria-hidden="true"></span><span class="swatch-label">ブラウン</span></label>
+                <label class="swatch" style="--swatch: #DFA61F"><input type="checkbox" data-axis="color" value="yellow"><span class="swatch-dot" aria-hidden="true"></span><span class="swatch-label">イエロー</span></label>
+                <label class="swatch" style="--swatch: #4F7A6D"><input type="checkbox" data-axis="color" value="green"><span class="swatch-dot" aria-hidden="true"></span><span class="swatch-label">グリーン</span></label>
+                <label class="swatch" style="--swatch: #DE5C72"><input type="checkbox" data-axis="color" value="pink"><span class="swatch-dot" aria-hidden="true"></span><span class="swatch-label">ピンク</span></label>
+                <label class="swatch" style="--swatch: #8E2A3C"><input type="checkbox" data-axis="color" value="red"><span class="swatch-dot" aria-hidden="true"></span><span class="swatch-label">レッド</span></label>
+                <label class="swatch" style="--swatch: #253453"><input type="checkbox" data-axis="color" value="navy"><span class="swatch-dot" aria-hidden="true"></span><span class="swatch-label">ネイビー</span></label>
+              </div>
+            </fieldset>
+            <fieldset class="filter-group">
+              <legend class="filter-legend">価格</legend>
+              <div class="chips">
+                <label class="chip"><input type="checkbox" data-axis="price" value="220000"><span class="chip-label">¥220,000</span></label>
+                <label class="chip"><input type="checkbox" data-axis="price" value="250000"><span class="chip-label">¥250,000</span></label>
+                <label class="chip"><input type="checkbox" data-axis="price" value="340000"><span class="chip-label">¥340,000</span></label>
+                <label class="chip"><input type="checkbox" data-axis="price" value="385000"><span class="chip-label">¥385,000</span></label>
+              </div>
+            </fieldset>
+            <fieldset class="filter-group">
+              <legend class="filter-legend">シルエット</legend>
+              <div class="chips">
+                <label class="chip"><input type="checkbox" data-axis="silhouette" value="プリンセス"><span class="chip-label">プリンセス</span></label>
+                <label class="chip"><input type="checkbox" data-axis="silhouette" value="Aライン"><span class="chip-label">Aライン</span></label>
+              </div>
+            </fieldset>
+            <fieldset class="filter-group">
+              <legend class="filter-legend">ライン</legend>
+              <div class="chips">
+                <label class="chip"><input type="checkbox" data-axis="line" value="Atelier Yuka"><span class="chip-label">Atelier Yuka</span></label>
+                <label class="chip"><input type="checkbox" data-axis="line" value="L'ATELIER MARIAGE"><span class="chip-label">L'ATELIER MARIAGE</span></label>
+                <label class="chip"><input type="checkbox" data-axis="line" value="Ballerina for Brides"><span class="chip-label">Ballerina for Brides</span></label>
+              </div>
+            </fieldset>
+            <div class="filter-group filter-search">
+              <label class="filter-legend" for="q-color">愛称・型番で探す</label>
+              <input type="search" id="q-color" data-axis="q" autocomplete="off" placeholder="例: Azur / AY6001">
+            </div>
+          </div>
+        </details>
+
+        <div class="result-bar">
+          <p class="result-count" role="status" aria-live="polite" data-count>10件を表示</p>
+          <p class="result-tools">
+            <button type="button" class="filter-clear" data-clear hidden>条件をクリア</button>
+            <span class="sort-field">
+              <label for="sort-color">並び替え</label>
+              <select id="sort-color" data-sort>
+                <option value="recommended">おすすめ順</option>
+                <option value="price-asc">価格が安い順</option>
+                <option value="price-desc">価格が高い順</option>
+              </select>
+            </span>
+          </p>
+        </div>
+
+        <ul class="product-grid" data-grid>
+          <li class="product"
+              data-name="Azur" data-code="AY6001" data-price="385000" data-color="blue" data-silhouette="プリンセス" data-line="Atelier Yuka">
             <figure class="product-media">
-              <img src="assets/img/cd-01.webp" alt="カラードレス Azur" width="600" height="800" loading="lazy">
-              <img class="alt-img" src="assets/img/cd-01-b.webp" alt="" width="600" height="800" loading="lazy">
+              <img src="assets/img/cd-01.webp" alt="カラードレス Azur" width="600" height="800" loading="lazy" decoding="async">
+              <img class="alt-img" src="assets/img/cd-01-b.webp" alt="" width="600" height="800" loading="lazy" decoding="async">
               <span class="float-code" aria-hidden="true" translate="no">AY6001</span>
             </figure>
             <h3 class="product-name" translate="no"><a href="product.html?code=AY6001">Azur</a></h3>
@@ -213,10 +353,11 @@
             <p class="product-price">¥385,000</p>
             <p class="product-cta"><a href="product.html?code=AY6001">詳細・お申し込み</a></p>
           </li>
-          <li class="product">
+          <li class="product"
+              data-name="Noisette" data-code="AY5601" data-price="340000" data-color="brown" data-silhouette="プリンセス" data-line="Atelier Yuka">
             <figure class="product-media">
-              <img src="assets/img/cd-02.webp" alt="カラードレス Noisette" width="600" height="800" loading="lazy">
-              <img class="alt-img" src="assets/img/cd-02-b.webp" alt="" width="600" height="800" loading="lazy">
+              <img src="assets/img/cd-02.webp" alt="カラードレス Noisette" width="600" height="800" loading="lazy" decoding="async">
+              <img class="alt-img" src="assets/img/cd-02-b.webp" alt="" width="600" height="800" loading="lazy" decoding="async">
               <span class="float-code" aria-hidden="true" translate="no">AY5601</span>
             </figure>
             <h3 class="product-name" translate="no"><a href="product.html?code=AY5601">Noisette</a></h3>
@@ -224,10 +365,11 @@
             <p class="product-price">¥340,000</p>
             <p class="product-cta"><a href="product.html?code=AY5601">詳細・お申し込み</a></p>
           </li>
-          <li class="product">
+          <li class="product"
+              data-name="Mimosa" data-code="MVD-00392-05" data-price="250000" data-color="yellow" data-silhouette="プリンセス" data-line="L'ATELIER MARIAGE">
             <figure class="product-media">
-              <img src="assets/img/cd-03.webp" alt="カラードレス Mimosa" width="600" height="800" loading="lazy">
-              <img class="alt-img" src="assets/img/cd-03-b.webp" alt="" width="600" height="800" loading="lazy">
+              <img src="assets/img/cd-03.webp" alt="カラードレス Mimosa" width="600" height="800" loading="lazy" decoding="async">
+              <img class="alt-img" src="assets/img/cd-03-b.webp" alt="" width="600" height="800" loading="lazy" decoding="async">
               <span class="float-code" aria-hidden="true" translate="no">MVD-00392-05</span>
             </figure>
             <h3 class="product-name" translate="no"><a href="product.html?code=MVD-00392-05">Mimosa</a></h3>
@@ -235,10 +377,11 @@
             <p class="product-price">¥250,000</p>
             <p class="product-cta"><a href="product.html?code=MVD-00392-05">詳細・お申し込み</a></p>
           </li>
-          <li class="product">
+          <li class="product"
+              data-name="Paon" data-code="MVD-00392-13" data-price="250000" data-color="green" data-silhouette="プリンセス" data-line="L'ATELIER MARIAGE">
             <figure class="product-media">
-              <img src="assets/img/cd-04.webp" alt="カラードレス Paon" width="600" height="800" loading="lazy">
-              <img class="alt-img" src="assets/img/cd-04-b.webp" alt="" width="600" height="800" loading="lazy">
+              <img src="assets/img/cd-04.webp" alt="カラードレス Paon" width="600" height="800" loading="lazy" decoding="async">
+              <img class="alt-img" src="assets/img/cd-04-b.webp" alt="" width="600" height="800" loading="lazy" decoding="async">
               <span class="float-code" aria-hidden="true" translate="no">MVD-00392-13</span>
             </figure>
             <h3 class="product-name" translate="no"><a href="product.html?code=MVD-00392-13">Paon</a></h3>
@@ -246,10 +389,11 @@
             <p class="product-price">¥250,000</p>
             <p class="product-cta"><a href="product.html?code=MVD-00392-13">詳細・お申し込み</a></p>
           </li>
-          <li class="product">
+          <li class="product"
+              data-name="Framboise" data-code="MVD-00392-06" data-price="250000" data-color="pink" data-silhouette="プリンセス" data-line="L'ATELIER MARIAGE">
             <figure class="product-media">
-              <img src="assets/img/cd-05.webp" alt="カラードレス Framboise" width="600" height="800" loading="lazy">
-              <img class="alt-img" src="assets/img/cd-05-b.webp" alt="" width="600" height="800" loading="lazy">
+              <img src="assets/img/cd-05.webp" alt="カラードレス Framboise" width="600" height="800" loading="lazy" decoding="async">
+              <img class="alt-img" src="assets/img/cd-05-b.webp" alt="" width="600" height="800" loading="lazy" decoding="async">
               <span class="float-code" aria-hidden="true" translate="no">MVD-00392-06</span>
             </figure>
             <h3 class="product-name" translate="no"><a href="product.html?code=MVD-00392-06">Framboise</a></h3>
@@ -257,10 +401,11 @@
             <p class="product-price">¥250,000</p>
             <p class="product-cta"><a href="product.html?code=MVD-00392-06">詳細・お申し込み</a></p>
           </li>
-          <li class="product">
+          <li class="product"
+              data-name="Ballerine" data-code="BLD-00055-09" data-price="220000" data-color="red" data-silhouette="Aライン" data-line="Ballerina for Brides">
             <figure class="product-media">
-              <img src="assets/img/cd-06.webp" alt="カラードレス Ballerine" width="600" height="800" loading="lazy">
-              <img class="alt-img" src="assets/img/cd-06-b.webp" alt="" width="600" height="800" loading="lazy">
+              <img src="assets/img/cd-06.webp" alt="カラードレス Ballerine" width="600" height="800" loading="lazy" decoding="async">
+              <img class="alt-img" src="assets/img/cd-06-b.webp" alt="" width="600" height="800" loading="lazy" decoding="async">
               <span class="float-code" aria-hidden="true" translate="no">BLD-00055-09</span>
             </figure>
             <h3 class="product-name" translate="no"><a href="product.html?code=BLD-00055-09">Ballerine</a></h3>
@@ -268,10 +413,11 @@
             <p class="product-price">¥220,000</p>
             <p class="product-cta"><a href="product.html?code=BLD-00055-09">詳細・お申し込み</a></p>
           </li>
-          <li class="product">
+          <li class="product"
+              data-name="Cygne" data-code="BLD-00055-32" data-price="220000" data-color="blue" data-silhouette="Aライン" data-line="Ballerina for Brides">
             <figure class="product-media">
-              <img src="assets/img/cd-07.webp" alt="カラードレス Cygne" width="600" height="800" loading="lazy">
-              <img class="alt-img" src="assets/img/cd-07-b.webp" alt="" width="600" height="800" loading="lazy">
+              <img src="assets/img/cd-07.webp" alt="カラードレス Cygne" width="600" height="800" loading="lazy" decoding="async">
+              <img class="alt-img" src="assets/img/cd-07-b.webp" alt="" width="600" height="800" loading="lazy" decoding="async">
               <span class="float-code" aria-hidden="true" translate="no">BLD-00055-32</span>
             </figure>
             <h3 class="product-name" translate="no"><a href="product.html?code=BLD-00055-32">Cygne</a></h3>
@@ -279,10 +425,11 @@
             <p class="product-price">¥220,000</p>
             <p class="product-cta"><a href="product.html?code=BLD-00055-32">詳細・お申し込み</a></p>
           </li>
-          <li class="product">
+          <li class="product"
+              data-name="Pivoine" data-code="BLD-00055-11" data-price="220000" data-color="navy" data-silhouette="Aライン" data-line="Ballerina for Brides">
             <figure class="product-media">
-              <img src="assets/img/cd-08.webp" alt="カラードレス Pivoine" width="600" height="800" loading="lazy">
-              <img class="alt-img" src="assets/img/cd-08-b.webp" alt="" width="600" height="800" loading="lazy">
+              <img src="assets/img/cd-08.webp" alt="カラードレス Pivoine" width="600" height="800" loading="lazy" decoding="async">
+              <img class="alt-img" src="assets/img/cd-08-b.webp" alt="" width="600" height="800" loading="lazy" decoding="async">
               <span class="float-code" aria-hidden="true" translate="no">BLD-00055-11</span>
             </figure>
             <h3 class="product-name" translate="no"><a href="product.html?code=BLD-00055-11">Pivoine</a></h3>
@@ -290,10 +437,11 @@
             <p class="product-price">¥220,000</p>
             <p class="product-cta"><a href="product.html?code=BLD-00055-11">詳細・お申し込み</a></p>
           </li>
-          <li class="product">
+          <li class="product"
+              data-name="Colombe" data-code="BLD-00055-14" data-price="220000" data-color="green" data-silhouette="Aライン" data-line="Ballerina for Brides">
             <figure class="product-media">
-              <img src="assets/img/cd-09.webp" alt="カラードレス Colombe" width="600" height="800" loading="lazy">
-              <img class="alt-img" src="assets/img/cd-09-b.webp" alt="" width="600" height="800" loading="lazy">
+              <img src="assets/img/cd-09.webp" alt="カラードレス Colombe" width="600" height="800" loading="lazy" decoding="async">
+              <img class="alt-img" src="assets/img/cd-09-b.webp" alt="" width="600" height="800" loading="lazy" decoding="async">
               <span class="float-code" aria-hidden="true" translate="no">BLD-00055-14</span>
             </figure>
             <h3 class="product-name" translate="no"><a href="product.html?code=BLD-00055-14">Colombe</a></h3>
@@ -301,15 +449,77 @@
             <p class="product-price">¥220,000</p>
             <p class="product-cta"><a href="product.html?code=BLD-00055-14">詳細・お申し込み</a></p>
           </li>
+          <li class="product"
+              data-name="Jardin" data-code="BLD-00051-05" data-price="220000" data-color="yellow" data-silhouette="プリンセス" data-line="Ballerina for Brides">
+            <figure class="product-media">
+              <img src="assets/img/cd-10.webp" alt="カラードレス Jardin" width="600" height="800" loading="lazy" decoding="async">
+              <img class="alt-img" src="assets/img/cd-10-b.webp" alt="" width="600" height="800" loading="lazy" decoding="async">
+              <span class="float-code" aria-hidden="true" translate="no">BLD-00051-05</span>
+            </figure>
+            <h3 class="product-name" translate="no"><a href="product.html?code=BLD-00051-05">Jardin</a></h3>
+            <p class="product-meta"><span translate="no">BLD-00051-05</span> — Ballerina for Brides</p>
+            <p class="product-price">¥220,000</p>
+            <p class="product-cta"><a href="product.html?code=BLD-00051-05">詳細・お申し込み</a></p>
+          </li>
         </ul>
+
+        <p class="no-result" data-empty hidden>条件に合う衣裳が見つかりませんでした。条件を減らしてお試しください。</p>
+        <p class="more-wrap" data-more-wrap hidden><button type="button" class="btn btn-ghost" data-more>さらに表示</button></p>
       </div>
 
       <div class="tabpanel" role="tabpanel" id="panel-tuxedo" aria-labelledby="tab-tuxedo" tabindex="0" hidden>
-        <ul class="product-grid grid-square">
-          <li class="product">
+        <details class="filter" data-filter>
+          <summary class="filter-summary">
+            <span class="filter-summary-label">絞り込む</span>
+            <span class="filter-summary-badge" data-active-count hidden></span>
+          </summary>
+          <div class="filter-body">
+            <fieldset class="filter-group">
+              <legend class="filter-legend">色</legend>
+              <div class="swatches">
+                <label class="swatch" style="--swatch: #DE5C72"><input type="checkbox" data-axis="color" value="pink"><span class="swatch-dot" aria-hidden="true"></span><span class="swatch-label">ピンク</span></label>
+                <label class="swatch" style="--swatch: #F7F5F1"><input type="checkbox" data-axis="color" value="white"><span class="swatch-dot" aria-hidden="true"></span><span class="swatch-label">ホワイト</span></label>
+                <label class="swatch" style="--swatch: #A9A6A4"><input type="checkbox" data-axis="color" value="gray"><span class="swatch-dot" aria-hidden="true"></span><span class="swatch-label">グレー</span></label>
+                <label class="swatch" style="--swatch: #EFE6D5"><input type="checkbox" data-axis="color" value="ivory"><span class="swatch-dot" aria-hidden="true"></span><span class="swatch-label">アイボリー</span></label>
+                <label class="swatch" style="--swatch: #8E2A3C"><input type="checkbox" data-axis="color" value="red"><span class="swatch-dot" aria-hidden="true"></span><span class="swatch-label">レッド</span></label>
+                <label class="swatch" style="--swatch: #2B2724"><input type="checkbox" data-axis="color" value="black"><span class="swatch-dot" aria-hidden="true"></span><span class="swatch-label">ブラック</span></label>
+              </div>
+            </fieldset>
+            <fieldset class="filter-group">
+              <legend class="filter-legend">価格</legend>
+              <div class="chips">
+                <label class="chip"><input type="checkbox" data-axis="price" value="110000"><span class="chip-label">¥110,000</span></label>
+                <label class="chip"><input type="checkbox" data-axis="price" value="121000"><span class="chip-label">¥121,000</span></label>
+              </div>
+            </fieldset>
+            <div class="filter-group filter-search">
+              <label class="filter-legend" for="q-tuxedo">愛称・型番で探す</label>
+              <input type="search" id="q-tuxedo" data-axis="q" autocomplete="off" placeholder="例: Noir Classique / 20345S">
+            </div>
+          </div>
+        </details>
+
+        <div class="result-bar">
+          <p class="result-count" role="status" aria-live="polite" data-count>8件を表示</p>
+          <p class="result-tools">
+            <button type="button" class="filter-clear" data-clear hidden>条件をクリア</button>
+            <span class="sort-field">
+              <label for="sort-tuxedo">並び替え</label>
+              <select id="sort-tuxedo" data-sort>
+                <option value="recommended">おすすめ順</option>
+                <option value="price-asc">価格が安い順</option>
+                <option value="price-desc">価格が高い順</option>
+              </select>
+            </span>
+          </p>
+        </div>
+
+        <ul class="product-grid grid-square" data-grid>
+          <li class="product"
+              data-name="Noir Classique" data-code="20345S" data-price="121000" data-color="pink" data-line="Atelier Yuka">
             <figure class="product-media">
-              <img src="assets/img/tx-01.webp" alt="タキシード Noir Classique" width="600" height="800" loading="lazy">
-              <img class="alt-img" src="assets/img/tx-01-b.webp" alt="" width="600" height="800" loading="lazy">
+              <img src="assets/img/tx-01.webp" alt="タキシード Noir Classique" width="600" height="800" loading="lazy" decoding="async">
+              <img class="alt-img" src="assets/img/tx-01-b.webp" alt="" width="600" height="800" loading="lazy" decoding="async">
               <span class="float-code" aria-hidden="true" translate="no">20345S</span>
             </figure>
             <h3 class="product-name" translate="no"><a href="product.html?code=20345S">Noir Classique</a></h3>
@@ -317,10 +527,11 @@
             <p class="product-price">¥121,000</p>
             <p class="product-cta"><a href="product.html?code=20345S">詳細・お申し込み</a></p>
           </li>
-          <li class="product">
+          <li class="product"
+              data-name="Gris Perle" data-code="20362S" data-price="121000" data-color="white" data-line="Atelier Yuka">
             <figure class="product-media">
-              <img src="assets/img/tx-02.webp" alt="タキシード Gris Perle" width="600" height="800" loading="lazy">
-              <img class="alt-img" src="assets/img/tx-02-b.webp" alt="" width="600" height="800" loading="lazy">
+              <img src="assets/img/tx-02.webp" alt="タキシード Gris Perle" width="600" height="800" loading="lazy" decoding="async">
+              <img class="alt-img" src="assets/img/tx-02-b.webp" alt="" width="600" height="800" loading="lazy" decoding="async">
               <span class="float-code" aria-hidden="true" translate="no">20362S</span>
             </figure>
             <h3 class="product-name" translate="no"><a href="product.html?code=20362S">Gris Perle</a></h3>
@@ -328,10 +539,11 @@
             <p class="product-price">¥121,000</p>
             <p class="product-cta"><a href="product.html?code=20362S">詳細・お申し込み</a></p>
           </li>
-          <li class="product">
+          <li class="product"
+              data-name="Minuit" data-code="20366S" data-price="121000" data-color="gray" data-line="Atelier Yuka">
             <figure class="product-media">
-              <img src="assets/img/tx-03.webp" alt="タキシード Minuit" width="600" height="800" loading="lazy">
-              <img class="alt-img" src="assets/img/tx-03-b.webp" alt="" width="600" height="800" loading="lazy">
+              <img src="assets/img/tx-03.webp" alt="タキシード Minuit" width="600" height="800" loading="lazy" decoding="async">
+              <img class="alt-img" src="assets/img/tx-03-b.webp" alt="" width="600" height="800" loading="lazy" decoding="async">
               <span class="float-code" aria-hidden="true" translate="no">20366S</span>
             </figure>
             <h3 class="product-name" translate="no"><a href="product.html?code=20366S">Minuit</a></h3>
@@ -339,10 +551,11 @@
             <p class="product-price">¥121,000</p>
             <p class="product-cta"><a href="product.html?code=20366S">詳細・お申し込み</a></p>
           </li>
-          <li class="product">
+          <li class="product"
+              data-name="Encre" data-code="20313S" data-price="110000" data-color="ivory" data-line="Atelier Yuka">
             <figure class="product-media">
-              <img src="assets/img/tx-04.webp" alt="タキシード Encre" width="600" height="800" loading="lazy">
-              <img class="alt-img" src="assets/img/tx-04-b.webp" alt="" width="600" height="800" loading="lazy">
+              <img src="assets/img/tx-04.webp" alt="タキシード Encre" width="600" height="800" loading="lazy" decoding="async">
+              <img class="alt-img" src="assets/img/tx-04-b.webp" alt="" width="600" height="800" loading="lazy" decoding="async">
               <span class="float-code" aria-hidden="true" translate="no">20313S</span>
             </figure>
             <h3 class="product-name" translate="no"><a href="product.html?code=20313S">Encre</a></h3>
@@ -350,10 +563,11 @@
             <p class="product-price">¥110,000</p>
             <p class="product-cta"><a href="product.html?code=20313S">詳細・お申し込み</a></p>
           </li>
-          <li class="product">
+          <li class="product"
+              data-name="Fumée" data-code="20321S" data-price="110000" data-color="red" data-line="Atelier Yuka">
             <figure class="product-media">
-              <img src="assets/img/tx-05.webp" alt="タキシード Fumée" width="600" height="800" loading="lazy">
-              <img class="alt-img" src="assets/img/tx-05-b.webp" alt="" width="600" height="800" loading="lazy">
+              <img src="assets/img/tx-05.webp" alt="タキシード Fumée" width="600" height="800" loading="lazy" decoding="async">
+              <img class="alt-img" src="assets/img/tx-05-b.webp" alt="" width="600" height="800" loading="lazy" decoding="async">
               <span class="float-code" aria-hidden="true" translate="no">20321S</span>
             </figure>
             <h3 class="product-name" translate="no"><a href="product.html?code=20321S">Fumée</a></h3>
@@ -361,10 +575,11 @@
             <p class="product-price">¥110,000</p>
             <p class="product-cta"><a href="product.html?code=20321S">詳細・お申し込み</a></p>
           </li>
-          <li class="product">
+          <li class="product"
+              data-name="Océan" data-code="20333S" data-price="110000" data-color="black" data-line="Atelier Yuka">
             <figure class="product-media">
-              <img src="assets/img/tx-06.webp" alt="タキシード Océan" width="600" height="800" loading="lazy">
-              <img class="alt-img" src="assets/img/tx-06-b.webp" alt="" width="600" height="800" loading="lazy">
+              <img src="assets/img/tx-06.webp" alt="タキシード Océan" width="600" height="800" loading="lazy" decoding="async">
+              <img class="alt-img" src="assets/img/tx-06-b.webp" alt="" width="600" height="800" loading="lazy" decoding="async">
               <span class="float-code" aria-hidden="true" translate="no">20333S</span>
             </figure>
             <h3 class="product-name" translate="no"><a href="product.html?code=20333S">Océan</a></h3>
@@ -372,10 +587,11 @@
             <p class="product-price">¥110,000</p>
             <p class="product-cta"><a href="product.html?code=20333S">詳細・お申し込み</a></p>
           </li>
-          <li class="product">
+          <li class="product"
+              data-name="Sable" data-code="20336S" data-price="110000" data-color="ivory" data-line="Atelier Yuka">
             <figure class="product-media">
-              <img src="assets/img/tx-07.webp" alt="タキシード Sable" width="600" height="800" loading="lazy">
-              <img class="alt-img" src="assets/img/tx-07-b.webp" alt="" width="600" height="800" loading="lazy">
+              <img src="assets/img/tx-07.webp" alt="タキシード Sable" width="600" height="800" loading="lazy" decoding="async">
+              <img class="alt-img" src="assets/img/tx-07-b.webp" alt="" width="600" height="800" loading="lazy" decoding="async">
               <span class="float-code" aria-hidden="true" translate="no">20336S</span>
             </figure>
             <h3 class="product-name" translate="no"><a href="product.html?code=20336S">Sable</a></h3>
@@ -383,10 +599,11 @@
             <p class="product-price">¥110,000</p>
             <p class="product-cta"><a href="product.html?code=20336S">詳細・お申し込み</a></p>
           </li>
-          <li class="product">
+          <li class="product"
+              data-name="Argent" data-code="20354S" data-price="110000" data-color="gray" data-line="Atelier Yuka">
             <figure class="product-media">
-              <img src="assets/img/tx-08.webp" alt="タキシード Argent" width="600" height="800" loading="lazy">
-              <img class="alt-img" src="assets/img/tx-08-b.webp" alt="" width="600" height="800" loading="lazy">
+              <img src="assets/img/tx-08.webp" alt="タキシード Argent" width="600" height="800" loading="lazy" decoding="async">
+              <img class="alt-img" src="assets/img/tx-08-b.webp" alt="" width="600" height="800" loading="lazy" decoding="async">
               <span class="float-code" aria-hidden="true" translate="no">20354S</span>
             </figure>
             <h3 class="product-name" translate="no"><a href="product.html?code=20354S">Argent</a></h3>
@@ -395,14 +612,55 @@
             <p class="product-cta"><a href="product.html?code=20354S">詳細・お申し込み</a></p>
           </li>
         </ul>
+
+        <p class="no-result" data-empty hidden>条件に合う衣裳が見つかりませんでした。条件を減らしてお試しください。</p>
+        <p class="more-wrap" data-more-wrap hidden><button type="button" class="btn btn-ghost" data-more>さらに表示</button></p>
       </div>
 
       <div class="tabpanel" role="tabpanel" id="panel-morning" aria-labelledby="tab-morning" tabindex="0" hidden>
-        <ul class="product-grid grid-square">
-          <li class="product">
+        <details class="filter" data-filter>
+          <summary class="filter-summary">
+            <span class="filter-summary-label">絞り込む</span>
+            <span class="filter-summary-badge" data-active-count hidden></span>
+          </summary>
+          <div class="filter-body">
+            <fieldset class="filter-group">
+              <legend class="filter-legend">色</legend>
+              <div class="swatches">
+                <label class="swatch" style="--swatch: #EFE6D5"><input type="checkbox" data-axis="color" value="ivory"><span class="swatch-dot" aria-hidden="true"></span><span class="swatch-label">アイボリー</span></label>
+                <label class="swatch" style="--swatch: #8A7059"><input type="checkbox" data-axis="color" value="brown"><span class="swatch-dot" aria-hidden="true"></span><span class="swatch-label">ブラウン</span></label>
+                <label class="swatch" style="--swatch: #253453"><input type="checkbox" data-axis="color" value="navy"><span class="swatch-dot" aria-hidden="true"></span><span class="swatch-label">ネイビー</span></label>
+                <label class="swatch" style="--swatch: #6C9BD2"><input type="checkbox" data-axis="color" value="blue"><span class="swatch-dot" aria-hidden="true"></span><span class="swatch-label">ブルー</span></label>
+              </div>
+            </fieldset>
+            <div class="filter-group filter-search">
+              <label class="filter-legend" for="q-morning">愛称・型番で探す</label>
+              <input type="search" id="q-morning" data-axis="q" autocomplete="off" placeholder="例: Cérémonie I / 715S">
+            </div>
+          </div>
+        </details>
+
+        <div class="result-bar">
+          <p class="result-count" role="status" aria-live="polite" data-count>4件を表示</p>
+          <p class="result-tools">
+            <button type="button" class="filter-clear" data-clear hidden>条件をクリア</button>
+            <span class="sort-field">
+              <label for="sort-morning">並び替え</label>
+              <select id="sort-morning" data-sort>
+                <option value="recommended">おすすめ順</option>
+                <option value="price-asc">価格が安い順</option>
+                <option value="price-desc">価格が高い順</option>
+              </select>
+            </span>
+          </p>
+        </div>
+
+        <ul class="product-grid grid-square" data-grid>
+          <li class="product"
+              data-name="Cérémonie I" data-code="715S" data-price="110000" data-color="ivory" data-line="Atelier Yuka">
             <figure class="product-media">
-              <img src="assets/img/mo-01.webp" alt="モーニング Cérémonie I" width="600" height="800" loading="lazy">
-              <img class="alt-img" src="assets/img/mo-01-b.webp" alt="" width="600" height="800" loading="lazy">
+              <img src="assets/img/mo-01.webp" alt="モーニング Cérémonie I" width="600" height="800" loading="lazy" decoding="async">
+              <img class="alt-img" src="assets/img/mo-01-b.webp" alt="" width="600" height="800" loading="lazy" decoding="async">
               <span class="float-code" aria-hidden="true" translate="no">715S</span>
             </figure>
             <h3 class="product-name" translate="no"><a href="product.html?code=715S">Cérémonie I</a></h3>
@@ -410,10 +668,11 @@
             <p class="product-price">¥110,000</p>
             <p class="product-cta"><a href="product.html?code=715S">詳細・お申し込み</a></p>
           </li>
-          <li class="product">
+          <li class="product"
+              data-name="Cérémonie II" data-code="778S" data-price="110000" data-color="brown" data-line="Atelier Yuka">
             <figure class="product-media">
-              <img src="assets/img/mo-02.webp" alt="モーニング Cérémonie II" width="600" height="800" loading="lazy">
-              <img class="alt-img" src="assets/img/mo-02-b.webp" alt="" width="600" height="800" loading="lazy">
+              <img src="assets/img/mo-02.webp" alt="モーニング Cérémonie II" width="600" height="800" loading="lazy" decoding="async">
+              <img class="alt-img" src="assets/img/mo-02-b.webp" alt="" width="600" height="800" loading="lazy" decoding="async">
               <span class="float-code" aria-hidden="true" translate="no">778S</span>
             </figure>
             <h3 class="product-name" translate="no"><a href="product.html?code=778S">Cérémonie II</a></h3>
@@ -421,10 +680,11 @@
             <p class="product-price">¥110,000</p>
             <p class="product-cta"><a href="product.html?code=778S">詳細・お申し込み</a></p>
           </li>
-          <li class="product">
+          <li class="product"
+              data-name="Cérémonie III" data-code="779S" data-price="110000" data-color="navy" data-line="Atelier Yuka">
             <figure class="product-media">
-              <img src="assets/img/mo-03.webp" alt="モーニング Cérémonie III" width="600" height="800" loading="lazy">
-              <img class="alt-img" src="assets/img/mo-03-b.webp" alt="" width="600" height="800" loading="lazy">
+              <img src="assets/img/mo-03.webp" alt="モーニング Cérémonie III" width="600" height="800" loading="lazy" decoding="async">
+              <img class="alt-img" src="assets/img/mo-03-b.webp" alt="" width="600" height="800" loading="lazy" decoding="async">
               <span class="float-code" aria-hidden="true" translate="no">779S</span>
             </figure>
             <h3 class="product-name" translate="no"><a href="product.html?code=779S">Cérémonie III</a></h3>
@@ -432,10 +692,11 @@
             <p class="product-price">¥110,000</p>
             <p class="product-cta"><a href="product.html?code=779S">詳細・お申し込み</a></p>
           </li>
-          <li class="product">
+          <li class="product"
+              data-name="Cérémonie IV" data-code="773S" data-price="110000" data-color="blue" data-line="Atelier Yuka">
             <figure class="product-media">
-              <img src="assets/img/mo-04.webp" alt="モーニング Cérémonie IV" width="600" height="800" loading="lazy">
-              <img class="alt-img" src="assets/img/mo-04-b.webp" alt="" width="600" height="800" loading="lazy">
+              <img src="assets/img/mo-04.webp" alt="モーニング Cérémonie IV" width="600" height="800" loading="lazy" decoding="async">
+              <img class="alt-img" src="assets/img/mo-04-b.webp" alt="" width="600" height="800" loading="lazy" decoding="async">
               <span class="float-code" aria-hidden="true" translate="no">773S</span>
             </figure>
             <h3 class="product-name" translate="no"><a href="product.html?code=773S">Cérémonie IV</a></h3>
@@ -444,8 +705,12 @@
             <p class="product-cta"><a href="product.html?code=773S">詳細・お申し込み</a></p>
           </li>
         </ul>
+
+        <p class="no-result" data-empty hidden>条件に合う衣裳が見つかりませんでした。条件を減らしてお試しください。</p>
+        <p class="more-wrap" data-more-wrap hidden><button type="button" class="btn btn-ghost" data-more>さらに表示</button></p>
       </div>
     </div>
+    <!-- COLLECTION:END -->
   </section>
 
   <!-- III. ご利用の流れ -->
@@ -791,14 +1056,14 @@
     </ul>
     <p class="footer-company">松尾株式会社/MATSUO — 代表取締役 松尾 祐佳</p>
     <p class="footer-address">銀座アトリエ: 東京都中央区銀座1丁目20番地11号 6階 <span class="footer-sep" aria-hidden="true">|</span> <span translate="no">Hawaii Salon: 2270 Kalākaua Ave Suite 1220, Honolulu, HI 96815</span></p>
-    <p class="footer-note">※ 本ページはサイトリプレイス提案「A案 Timeless Classic」のデザインデモです。</p>
+    <p class="footer-note">※ 本ページはサイトリプレイス提案「A案 Timeless Classic」のデザインデモです。ご予約フォームは動作サンプルで、送信されても実際のご予約は行われません。<br><a href="archive/index.html">4案の比較ページ（検討時のアーカイブ）</a></p>
     <p class="footer-copy" translate="no">© 2026 MATSUO Co., Ltd.</p>
   </div>
 </footer>
 
-<a class="compare-pill" href="archive/index.html">← 比較ページへ</a>
 
 <script src="assets/lightbox.js?v=2" defer></script>
-<script src="script.js?v=3" defer></script>
+<script src="script.js?v=4" defer></script>
+<script src="collection-filter.js?v=2" defer></script>
 </body>
 </html>
