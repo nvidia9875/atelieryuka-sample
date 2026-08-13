@@ -134,7 +134,21 @@ function assign(detail, key, value) {
   }
 }
 
-/* ---- 5. 突き合わせ ---- */
+/* ---- 5. サイズ(購入バリエーション側) ---- */
+
+/**
+ * サイズは商品説明ではなく購入バリエーションの選択肢に入っている。
+ * 説明文にも SIZE の記載がある商品はあるが、他商品からの転記が残っていて
+ * バリエーションと食い違うもの(例: MVD-00392-06 は本文「7号／9号」・実際は 7FTTT)が
+ * あるため、バリエーション側を正とする。
+ */
+function variantSizes(product) {
+  const option = (product.options || []).find((o) => /サイズ|size/i.test(o.name));
+  if (!option) return "";
+  return option.values.map((v) => v.trim()).filter(Boolean).join("・");
+}
+
+/* ---- 6. 突き合わせ ---- */
 
 function findProduct(products, code) {
   /* タイトル内の型番は前後が区切り文字(全角空白など)なので単純な包含で足りるが、
@@ -150,7 +164,8 @@ console.log(`取得: 実サイト商品 ${products.length}件 / 対象型番 ${c
 
 const details = {};
 const missing = [];
-const noBody = [];
+const empty = [];
+const noDesc = [];
 
 for (const code of codes) {
   const product = findProduct(products, code);
@@ -158,20 +173,29 @@ for (const code of codes) {
     missing.push(code);
     continue;
   }
+
   const detail = parseBody(product.body_html);
-  if (!detail.desc && !detail.material.length) {
-    noBody.push(code);
+  const sizes = variantSizes(product);
+  if (sizes) detail.size = sizes;
+
+  const hasAny =
+    detail.desc || detail.material.length || detail.design.length || detail.genres.length || detail.size;
+  if (!hasAny) {
+    empty.push(code);
     continue;
   }
+  if (!detail.desc) noDesc.push(code);
+
   details[code] = { ...detail, source: `${SHOP}/products/${product.handle}` };
 }
 
 const today = new Date().toISOString().slice(0, 10);
 const banner = [
   "/**",
-  " * 衣裳の説明文・素材。tools/fetch-product-details.mjs が生成(手で編集しない)。",
+  " * 衣裳の説明文・素材・サイズ。tools/fetch-product-details.mjs が生成(手で編集しない)。",
   ` * 出典: ${SHOP} (Shopify /products.json) ${today}取得`,
-  " * 文言は実サイトの原文のまま。読み込むのは product.html だけ。",
+  " * 説明文・素材は商品説明の原文のまま。サイズは購入バリエーションの選択肢。",
+  " * 読み込むのは product.html だけ。",
   " */",
 ].join("\n");
 
@@ -182,5 +206,6 @@ await writeFile(
 );
 
 console.log(`書き出し: ${OUT} (${Object.keys(details).length}件)`);
-if (noBody.length) console.log(`本文なし(実サイト側が空): ${noBody.join(", ")}`);
+if (noDesc.length) console.log(`説明文なし(素材・サイズのみ): ${noDesc.join(", ")}`);
+if (empty.length) console.log(`情報なし(実サイト側が空): ${empty.join(", ")}`);
 if (missing.length) console.log(`実サイトに見つからず: ${missing.join(", ")}`);

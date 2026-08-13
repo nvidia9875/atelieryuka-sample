@@ -1,9 +1,18 @@
 /**
- * 衣裳の説明文・素材。tools/fetch-product-details.mjs が生成(手で編集しない)。
+ * 衣裳の説明文・素材・サイズ。tools/fetch-product-details.mjs が生成(手で編集しない)。
  * 出典: https://atelieryuka.com (Shopify /products.json) 2026-08-13取得
- * 文言は実サイトの原文のまま。読み込むのは product.html だけ。
+ * 説明文・素材は商品説明の原文のまま。サイズは購入バリエーションの選択肢。
+ * 読み込むのは product.html だけ。
  */
 const AY_DETAILS = {
+  "HLD-00085-01": {
+    "desc": "",
+    "material": [],
+    "genres": [],
+    "design": [],
+    "size": "7FTTT",
+    "source": "https://atelieryuka.com/products/hld-00085-01"
+  },
   "HLD-00084-01": {
     "desc": "グリッターとビーズレースをふんだんに使用した韓国風ラグジュアリーstyle。パワーショルダーとふんわりチュールオフショルダーの2way仕様が嬉しいポイント。身頃からビーズレースが流れ、下からのグリッターで立ち上がる360℃豪華なプリンセスラインです。",
     "material": [
@@ -21,8 +30,16 @@ const AY_DETAILS = {
       "背中あき",
       "2way 3way"
     ],
-    "size": "",
+    "size": "7FTTT",
     "source": "https://atelieryuka.com/products/hld-00084-01"
+  },
+  "HLD-00066": {
+    "desc": "",
+    "material": [],
+    "genres": [],
+    "design": [],
+    "size": "7FTTT",
+    "source": "https://atelieryuka.com/products/hld-00066"
   },
   "HLD-00059-01": {
     "desc": "スターダストのようにキラキラと輝くスパンコールレースや、スカートから立ち上がるシフォンを加工した雪のようなレース。2つのレースを重ね合わせ、雪の結晶をイメージして作成したウェディングドレスです。",
@@ -40,7 +57,7 @@ const AY_DETAILS = {
       "フレンチ",
       "ロングトレーン"
     ],
-    "size": "",
+    "size": "7FTTT",
     "source": "https://atelieryuka.com/products/hld-00059-01"
   },
   "HLD-00043-01": {
@@ -60,7 +77,7 @@ const AY_DETAILS = {
       "ロングトレーン",
       "2way 3way"
     ],
-    "size": "",
+    "size": "7FTTT",
     "source": "https://atelieryuka.com/products/hld-00043-01"
   },
   "HLD-00051-01": {
@@ -80,7 +97,7 @@ const AY_DETAILS = {
       "ロングトレーン",
       "2way 3way"
     ],
-    "size": "",
+    "size": "7FTTT",
     "source": "https://atelieryuka.com/products/hld-00051-01"
   },
   "HLD-00053-01": {
@@ -98,7 +115,7 @@ const AY_DETAILS = {
       "ロングトレーン",
       "2way 3way"
     ],
-    "size": "",
+    "size": "7FTTT",
     "source": "https://atelieryuka.com/products/hld-00066-01"
   },
   "HLD-00069-01": {
@@ -121,7 +138,7 @@ const AY_DETAILS = {
       "ロングトレーン",
       "2way"
     ],
-    "size": "",
+    "size": "7FTTT",
     "source": "https://atelieryuka.com/products/hld-00069-01"
   },
   "HLD-00070-01": {
@@ -143,7 +160,7 @@ const AY_DETAILS = {
       "ロングトレーン",
       "2way 3way"
     ],
-    "size": "",
+    "size": "7FTTT",
     "source": "https://atelieryuka.com/products/hld-00070-01"
   },
   "HLD-00071-01": {
@@ -165,7 +182,7 @@ const AY_DETAILS = {
       "ロングトレーン",
       "2way 3way"
     ],
-    "size": "",
+    "size": "7FTTT",
     "source": "https://atelieryuka.com/products/hld-00071-01"
   },
   "AY6001": {
@@ -178,7 +195,7 @@ const AY_DETAILS = {
     ],
     "genres": [],
     "design": [],
-    "size": "2サイズフリー/3FT・7FT・7FTTT・11FT・15FT・19FT",
+    "size": "3FT・7FT・7FTTT・11FT・15FT・19FT",
     "source": "https://atelieryuka.com/products/ay6001"
   },
   "AY5601": {
@@ -188,7 +205,7 @@ const AY_DETAILS = {
     ],
     "genres": [],
     "design": [],
-    "size": "2サイズフリー/5FT・7FTTT・9FT・13FT・17FT",
+    "size": "5FT・7FTTT・9FT・13FT・17FT",
     "source": "https://atelieryuka.com/products/ay5601"
   },
   "MVD-00392-05": {
@@ -206,7 +223,7 @@ const AY_DETAILS = {
       "背中あき",
       "2way 3way"
     ],
-    "size": "",
+    "size": "7FTTT",
     "source": "https://atelieryuka.com/products/mvd-00392-05"
   },
   "MVD-00392-13": {
@@ -224,7 +241,7 @@ const AY_DETAILS = {
       "背中あき",
       "2way 3way"
     ],
-    "size": "",
+    "size": "7FTTT",
     "source": "https://atelieryuka.com/products/mvd-00392-13"
   },
   "MVD-00392-06": {
@@ -243,7 +260,7 @@ const AY_DETAILS = {
       "背中あき",
       "2way 3way"
     ],
-    "size": "7号／9号",
+    "size": "7FTTT",
     "source": "https://atelieryuka.com/products/mvd-00392-06"
   },
   "BLD-00055-09": {
@@ -259,7 +276,7 @@ const AY_DETAILS = {
       "背中あき",
       "2way 3way"
     ],
-    "size": "",
+    "size": "7FTTT",
     "source": "https://atelieryuka.com/products/bld-00055-09"
   },
   "BLD-00055-32": {
@@ -275,7 +292,7 @@ const AY_DETAILS = {
       "背中あき",
       "2way 3way"
     ],
-    "size": "",
+    "size": "7FTTT",
     "source": "https://atelieryuka.com/products/bld-00055-32"
   },
   "BLD-00055-11": {
@@ -290,7 +307,7 @@ const AY_DETAILS = {
       "ビスチェ",
       "2way 3way"
     ],
-    "size": "",
+    "size": "7FTTT",
     "source": "https://atelieryuka.com/products/bld-00055-10"
   },
   "BLD-00055-14": {
@@ -306,7 +323,7 @@ const AY_DETAILS = {
       "背中あき",
       "2way 3way"
     ],
-    "size": "",
+    "size": "7FTTT",
     "source": "https://atelieryuka.com/products/bld-00055-15"
   },
   "BLD-00051-05": {
@@ -322,7 +339,7 @@ const AY_DETAILS = {
       "ビスチェ",
       "背中あき"
     ],
-    "size": "",
+    "size": "7FTTT",
     "source": "https://atelieryuka.com/products/bld-00051-05"
   },
   "20345S": {
