@@ -22,7 +22,8 @@ const WIDTHS = [320, 375, 390, 414, 768, 1024, 1440];
 const PAGES = [
   { path: "/", label: "トップ" },
   { path: "/?cat=color&color=blue,green", label: "トップ(絞り込み中)" },
-  { path: "/product.html?code=HLD-00085-01", label: "衣裳詳細" },
+  { path: "/product.html?code=HLD-00085-01", label: "衣裳詳細(説明なし)" },
+  { path: "/product.html?code=HLD-00069-01", label: "衣裳詳細(説明・素材あり)" },
   { path: "/404.html", label: "404" },
 ];
 

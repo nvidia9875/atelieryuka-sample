@@ -25,6 +25,7 @@
 │
 ├── assets/
 │   ├── data.js           ★全コンテンツの正（商品・色・価格・FAQ 等）
+│   ├── details.js        衣裳の説明文・素材（自動生成。衣裳詳細ページのみ読み込む）
 │   ├── img/              公開用 WebP（自動生成）
 │   ├── img-src/          画像の原本（再生成用。公開ページからは参照しない）
 │   ├── img-widths.json   srcset の幅記述子用（自動生成）
@@ -60,6 +61,41 @@
 背景や肌色を拾ってしまうため）。定義は `assets/data.js` の `colors` にあります。
 
 ---
+
+## 書体
+
+**欧文・数字 = Cormorant Garamond ／ 和文 = Zen Kaku Gothic New** の2書体構成です。
+
+トークンは `style.css` の `:root` にあります。和文用スタック（`--font-jp` / `--font-body`）は
+先頭に欧文書体を置いているため、日本語の文中でも英数字だけが Cormorant Garamond で組まれます
+（ブラウザがグリフ単位でフォールバックする性質を利用）。
+
+| トークン | 用途 |
+|---|---|
+| `--font-en` | 欧文だけの見出し・価格（`Atelier Yuka` / `¥330,000`） |
+| `--font-jp` | 和文見出し |
+| `--font-body` | 本文 |
+| `--font-ui` | 入力欄・検索欄（小さな英数字は可読性優先でゴシック） |
+
+- Cormorant Garamond の既定はオールドスタイル数字（高さが不揃い）のため、
+  `body` に `font-variant-numeric: lining-nums` を指定して型番・価格の数字の高さを揃えています。
+- 和文がゴシックになった分、大見出しは 500 → 400 に落として字間をわずかに開けています。
+- 3書体（Cormorant + Noto Sans JP + Shippori Mincho）から2書体に減らしたことで、
+  トップページのWebフォント転送量は **約1,290KB → 約730KB** になりました。
+  さらに削るなら本文の 300（Light）をやめて 400 に寄せると約565KBまで下がります。
+
+## 衣裳の説明文・素材
+
+現行サイト（atelieryuka.com / Shopify）の商品説明から、説明文・MATERIAL・DESIGN・GENRES・SIZE を
+取得して `assets/details.js` に落とし、衣裳詳細ページに表示しています。文言は原文のままです。
+
+```bash
+node tools/fetch-product-details.mjs
+```
+
+- 型番は handle ではなく**商品タイトル**で突き合わせます（実サイト側で handle と型番がズレている商品があるため。例: `BLD-00055-11` → handle は `bld-00055-10`）
+- 現行サイトに説明がない衣裳（`HLD-00085-01` / `HLD-00066`）は、説明・素材の枠ごと非表示になります
+- 生成物はコミットするので、公開時にこのスクリプトを動かす必要はありません
 
 ## メンテナンス
 
@@ -117,5 +153,5 @@ npm install playwright && npx playwright install chromium
 
 ## 出典
 
-写真・商品情報・価格は現行サイト（atelieryuka.com）より引用しています。
+写真・商品情報・価格・衣裳の説明文・素材は現行サイト（atelieryuka.com）より引用しています。
 商品の愛称（Lumière 等）はリプレイス提案として付与したもので、実際の商品名ではありません。

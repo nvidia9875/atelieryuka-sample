@@ -8,14 +8,15 @@
 <meta name="description" content="アトリエユカの衣裳詳細とお申し込み。ご自宅試着¥5,500、本使用レンタル3泊4日。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Noto+Sans+JP:wght@300;400;500&family=Shippori+Mincho:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=5">
-<link rel="stylesheet" href="style-b.css?v=5">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Zen+Kaku+Gothic+New:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=9">
+<link rel="stylesheet" href="style-b.css?v=7">
 <link rel="stylesheet" href="assets/lightbox.css?v=5">
-<link rel="stylesheet" href="product.css?v=5">
+<link rel="stylesheet" href="product.css?v=6">
 <script src="assets/data.js" defer></script>
+<script src="assets/details.js" defer></script>
 <script src="assets/lightbox.js?v=4" defer></script>
-<script src="product.js?v=5" defer></script>
+<script src="product.js?v=6" defer></script>
 </head>
 <body id="top">
 <a class="skip-link" href="#main">本文へスキップ</a>
@@ -69,6 +70,9 @@
         <h1 class="pd-name" id="pd-name" translate="no">—</h1>
         <p class="pd-code"><span id="pd-code" translate="no">—</span><span id="pd-silhouette"></span></p>
 
+        <!-- 衣裳の説明。実サイトに記載のない衣裳では hidden のまま -->
+        <div class="pd-desc" id="pd-desc" hidden></div>
+
         <dl class="pd-price">
           <div>
             <dt>本使用レンタル(3泊4日)</dt>
@@ -87,6 +91,9 @@
         </ul>
 
         <p class="pd-cta-wrap"><a class="pd-cta" href="#apply">この衣裳で申し込む</a></p>
+
+        <!-- 素材・デザイン・雰囲気・サイズ。項目ごとに有無が違うので JS で組み立てる -->
+        <dl class="pd-spec" id="pd-spec" hidden></dl>
       </div>
     </div>
 

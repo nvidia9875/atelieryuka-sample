@@ -21,6 +21,52 @@
 
   function el(id) { return document.getElementById(id); }
 
+  /**
+   * 説明文・素材(assets/details.js)を描画する。
+   * 実サイトに記載のない衣裳もあるため、値のある項目だけを出し、
+   * 何も無ければブロックごと隠したままにする。
+   */
+  function renderDetail(code) {
+    var detail = typeof AY_DETAILS !== "undefined" ? AY_DETAILS[code] : null;
+    if (!detail) return;
+
+    if (detail.desc) {
+      var descBox = el("pd-desc");
+      detail.desc.split("\n").forEach(function (line) {
+        var p = document.createElement("p");
+        p.textContent = line;
+        descBox.appendChild(p);
+      });
+      descBox.hidden = false;
+    }
+
+    /* 実サイトの見出し語(MATERIAL / DESIGN / GENRES / SIZE)をそのまま欧文ラベルに使う */
+    var rows = [
+      { en: "Material", ja: "素材", value: detail.material.join("・") },
+      { en: "Design", ja: "デザイン", value: detail.design.join("・") },
+      { en: "Genre", ja: "雰囲気", value: detail.genres.join("・") },
+      { en: "Size", ja: "サイズ", value: detail.size },
+    ].filter(function (row) { return row.value; });
+    if (!rows.length) return;
+
+    var spec = el("pd-spec");
+    rows.forEach(function (row) {
+      var div = document.createElement("div");
+      var dt = document.createElement("dt");
+      var en = document.createElement("span");
+      en.className = "pd-spec-en";
+      en.setAttribute("translate", "no");
+      en.textContent = row.en;
+      dt.appendChild(en);
+      dt.appendChild(document.createTextNode(row.ja));
+      var dd = document.createElement("dd");
+      dd.textContent = row.value;
+      div.appendChild(dt); div.appendChild(dd);
+      spec.appendChild(div);
+    });
+    spec.hidden = false;
+  }
+
   function showMissing() {
     el("pd-missing").hidden = false;
     document.title = "衣裳が見つかりません | Atelier Yuka(A案)";
@@ -44,6 +90,7 @@
     el("pd-code").textContent = item.code;
     el("pd-silhouette").textContent = item.silhouette ? "シルエット: " + item.silhouette : "";
     el("pd-price").textContent = yen(item.price);
+    renderDetail(item.code);
 
     var img1 = el("pd-img-1");
     img1.src = "assets/img/" + item.img;
