@@ -58,7 +58,7 @@
   display: block;
   font-size: 0.8rem;
   color: var(--aylb-soft);
-  font-variant-numeric: tabular-nums;
+  font-variant-numeric: lining-nums tabular-nums;
 }
 
 /* --- controls --- */
@@ -108,7 +108,7 @@
   margin: 0;
   font-size: 0.85rem;
   color: var(--aylb-soft);
-  font-variant-numeric: tabular-nums;
+  font-variant-numeric: lining-nums tabular-nums;
   letter-spacing: 0.08em;
   z-index: 2;
 }

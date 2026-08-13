@@ -167,7 +167,7 @@
   background: var(--paper);
   font: 400 0.78rem/1.5 var(--font-body);
   color: var(--muted);
-  font-variant-numeric: tabular-nums;
+  font-variant-numeric: lining-nums tabular-nums;
   transition: border-color 0.2s ease-out, color 0.2s ease-out, background-color 0.2s ease-out;
 }
 @media (hover: hover) {
@@ -192,7 +192,8 @@
   border-bottom: 1px solid var(--line);
   background: transparent;
   /* iOS で入力時にズームされないよう 16px を下回らせない */
-  font: 300 1rem/1.6 var(--font-body);
+  /* 型番(HLD-00085-01)を打ち込む欄なのでゴシックで組む */
+  font: 300 1rem/1.6 var(--font-ui);
   color: var(--ink);
   transition: border-color 0.2s ease-out;
 }
@@ -220,7 +221,7 @@
 .result-count {
   font: 400 0.95rem/1.5 var(--font-jp);
   letter-spacing: 0.06em;
-  font-variant-numeric: tabular-nums;
+  font-variant-numeric: lining-nums tabular-nums;
 }
 
 .result-tools {

@@ -9,7 +9,7 @@
 <link rel="icon" href="/atelieryuka-sample/favicon.ico" sizes="any">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500&amp;family=Shippori+Mincho:wght@400;500&amp;family=Noto+Sans+JP:wght@300;400&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500&amp;family=Zen+Kaku+Gothic+New:wght@300;400;500&amp;display=swap">
 <style>
   :root {
     --ivory: #FBF9F5;
@@ -17,9 +17,13 @@
     --gold: #B49B57;
     --gold-ink: #7A6027;
     --muted: #6B645C;
-    --font-en: "Cormorant Garamond", Georgia, serif;
-    --font-jp: "Shippori Mincho", "Hiragino Mincho ProN", serif;
-    --font-body: "Noto Sans JP", "Hiragino Kaku Gothic ProN", sans-serif;
+    /* style.css と同じ2書体構成(欧文=Cormorant Garamond / 和文=Zen Kaku Gothic New)。
+       このページは単体で完結させるため :root を再宣言している */
+    --font-latin: "Cormorant Garamond", Georgia, "Times New Roman";
+    --font-gothic: "Zen Kaku Gothic New", "Hiragino Kaku Gothic ProN", "Yu Gothic Medium", "Yu Gothic", Meiryo, sans-serif;
+    --font-en: var(--font-latin), serif;
+    --font-jp: var(--font-latin), var(--font-gothic);
+    --font-body: var(--font-latin), var(--font-gothic);
   }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   body {
@@ -31,6 +35,7 @@
     background: var(--ivory);
     color: var(--ink);
     font: 300 1rem/1.95 var(--font-body);
+    font-variant-numeric: lining-nums;
     text-align: center;
   }
   .mark { font: italic 400 clamp(3rem, 2rem + 5vw, 5rem)/1 var(--font-en); color: var(--gold-ink); }
@@ -40,7 +45,7 @@
     border: 1px solid var(--gold);
     transform: rotate(45deg);
   }
-  h1 { font: 500 clamp(1.2rem, 1rem + 1vw, 1.6rem)/1.8 var(--font-jp); text-wrap: balance; }
+  h1 { font: 400 clamp(1.2rem, 1rem + 1vw, 1.6rem)/1.8 var(--font-jp); letter-spacing: 0.04em; text-wrap: balance; }
   p { color: var(--muted); font-size: 0.9rem; text-wrap: pretty; }
   a.btn {
     display: inline-flex; align-items: center; justify-content: center;

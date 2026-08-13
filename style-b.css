@@ -106,7 +106,8 @@
   border: 1px solid var(--line);
   background-color: #FFFFFF;
   color: var(--ink);
-  font: 400 1rem/1.5 var(--font-body);
+  /* 入力値はメールアドレスや電話番号など小さな英数字が中心なのでゴシックで組む */
+  font: 400 1rem/1.5 var(--font-ui);
   border-radius: 0;
   color-scheme: light;
   transition: border-color 0.15s ease-out;
@@ -154,7 +155,7 @@ input[aria-invalid="true"], .choice-group.has-error .choice { border-color: var(
 }
 .complete-title {
   margin-top: 0.8rem;
-  font: 500 1.5rem/1.7 var(--font-jp);
+  font: 400 1.5rem/1.7 var(--font-jp);
 }
 .complete-title:focus { outline: none; }
 .complete-title::after {
@@ -184,7 +185,7 @@ input[aria-invalid="true"], .choice-group.has-error .choice { border-color: var(
 }
 .complete-summary > div:last-child { border-bottom: 1px solid var(--line); }
 .complete-summary dt { color: var(--muted); flex: none; }
-.complete-summary dd { font-variant-numeric: tabular-nums; text-align: right; }
+.complete-summary dd { font-variant-numeric: lining-nums tabular-nums; text-align: right; }
 .complete-sign {
   margin: 1.6rem 0 1.8rem;
   font: italic 500 1.15rem/1.4 var(--font-en);
@@ -224,7 +225,7 @@ input[aria-invalid="true"], .choice-group.has-error .choice { border-color: var(
 .journey-plan {
   margin-top: 0.3rem;
   font-size: 0.78rem; font-weight: 400;
-  font-variant-numeric: tabular-nums;
+  font-variant-numeric: lining-nums tabular-nums;
   color: var(--gold-ink);
 }
 
@@ -288,7 +289,7 @@ input[aria-invalid="true"], .choice-group.has-error .choice { border-color: var(
 }
 .news-item time {
   font-size: 0.82rem;
-  font-variant-numeric: tabular-nums;
+  font-variant-numeric: lining-nums tabular-nums;
   color: var(--gold-ink);
 }
 .news-item p { font-size: 0.92rem; }
@@ -387,7 +388,7 @@ input[aria-invalid="true"], .choice-group.has-error .choice { border-color: var(
   margin-top: 0.4rem;
   font-size: 0.78rem;
   color: #B7B0A4;
-  font-variant-numeric: tabular-nums;
+  font-variant-numeric: lining-nums tabular-nums;
 }
 
 /* ---------- 比較ページへ戻るピル ---------- */

@@ -14,9 +14,18 @@
   --muted: #6B645C;       /* 補助テキスト */
   --error: #96372A;
 
-  --font-en: "Cormorant Garamond", Georgia, "Times New Roman", serif;
-  --font-jp: "Shippori Mincho", "Hiragino Mincho ProN", "Yu Mincho", serif;
-  --font-body: "Noto Sans JP", "Hiragino Kaku Gothic ProN", sans-serif;
+  /* 欧文・数字 = Cormorant Garamond ／ 和文 = Zen Kaku Gothic New の2書体構成。
+     和文スタックの先頭に欧文書体を置くと、日本語の文中でも英数字だけが
+     Cormorant Garamond で組まれる(ブラウザはグリフ単位でフォールバックする)。
+     --font-latin に総称ファミリ(serif)を含めないのは、途中で serif に落ちると
+     和文が明朝で拾われてしまうため。 */
+  --font-latin: "Cormorant Garamond", Georgia, "Times New Roman";
+  --font-gothic: "Zen Kaku Gothic New", "Hiragino Kaku Gothic ProN", "Yu Gothic Medium", "Yu Gothic", Meiryo, sans-serif;
+
+  --font-en: var(--font-latin), serif;                 /* 欧文だけの見出し・価格 */
+  --font-jp: var(--font-latin), var(--font-gothic);    /* 和文見出し */
+  --font-body: var(--font-latin), var(--font-gothic);  /* 本文 */
+  --font-ui: var(--font-gothic);                       /* 入力欄・選択欄(小さな英数字は可読性を優先) */
 
   --w-narrow: 680px;
   --w-mid: 900px;
@@ -42,6 +51,9 @@ body {
   background: var(--ivory);
   color: var(--ink);
   font: 300 1rem/1.95 var(--font-body);
+  /* Cormorant Garamond の既定はオールドスタイル数字(高さが不揃い)。
+     型番・価格・日付が主役の内容なので、サイト全体でライニング数字に揃える */
+  font-variant-numeric: lining-nums;
   overflow-wrap: break-word;
   min-width: 320px;
 }
@@ -152,7 +164,7 @@ html.js .reveal.is-in { opacity: 1; transform: none; }
   cursor: pointer;
   transition: background-color 0.18s ease-out, color 0.18s ease-out, border-color 0.18s ease-out;
 }
-.btn .price { font-variant-numeric: tabular-nums; }
+.btn .price { font-variant-numeric: lining-nums tabular-nums; }
 .btn-primary { background: var(--ink); color: var(--ivory); }
 .btn-primary:hover { background: var(--gold-ink); border-color: var(--gold-ink); color: #FFFDF9; }
 .btn-ghost { background: transparent; color: var(--ink); }
@@ -176,7 +188,8 @@ html.js .reveal.is-in { opacity: 1; transform: none; }
 }
 .hero-tagline {
   margin-top: 1.1em;
-  font: 500 clamp(1rem, 0.9rem + 0.7vw, 1.3rem)/2 var(--font-jp);
+  font: 400 clamp(1rem, 0.9rem + 0.7vw, 1.3rem)/2 var(--font-jp);
+  letter-spacing: 0.05em;
   text-wrap: balance;
 }
 
@@ -242,7 +255,10 @@ section[id] { scroll-margin-top: 1.5rem; }
 }
 .chapter-title {
   margin-top: 1.1rem;
-  font: 500 clamp(1.5rem, 1.2rem + 1.4vw, 2.25rem)/1.6 var(--font-jp);
+  /* 和文がゴシックになった分、大見出しは1段軽く(400)+わずかに字間を開けて
+     細い罫線・欧文セリフと釣り合わせる */
+  font: 400 clamp(1.5rem, 1.2rem + 1.4vw, 2.25rem)/1.6 var(--font-jp);
+  letter-spacing: 0.04em;
 }
 .chapter-lede {
   margin-top: 1.2rem;
@@ -411,7 +427,7 @@ section[id] { scroll-margin-top: 1.5rem; }
 .product-price {
   margin-top: 0.35rem;
   font-size: 0.95rem; font-weight: 400;
-  font-variant-numeric: tabular-nums;
+  font-variant-numeric: lining-nums tabular-nums;
 }
 
 /* 2カラムに収まるよう文字と余白を詰める。
@@ -448,7 +464,7 @@ section[id] { scroll-margin-top: 1.5rem; }
 .flow-step + .flow-step { border-top: 1px solid var(--line); }
 .flow-no {
   font: italic 400 1.7rem/1 var(--font-en);
-  font-variant-numeric: tabular-nums;
+  font-variant-numeric: lining-nums tabular-nums;
   color: var(--gold-ink);
 }
 .flow-no::after {
@@ -510,7 +526,7 @@ section[id] { scroll-margin-top: 1.5rem; }
 .plan-price {
   margin-top: 1.2rem;
   font: 500 2.3rem/1.2 var(--font-en);
-  font-variant-numeric: tabular-nums;
+  font-variant-numeric: lining-nums tabular-nums;
 }
 .plan-price-range { font-size: 1.55rem; padding-top: 0.35rem; }
 .plan-note {
