@@ -542,3 +542,68 @@ section[id] { scroll-margin-top: 1.5rem; }
   .pricing-grid { grid-template-columns: repeat(3, 1fr); align-items: stretch; }
 }
 
+/* ---------- クリーニング費・メンテナンス費 ----------
+   任意加入のオプションではなく必ず頂戴する費用なので、
+   プランカードと同じ「料金」の章に、同じ紙の質感で置く。 */
+.care {
+  max-width: var(--w-mid);
+  margin: clamp(2.6rem, 5vw, 4rem) auto 0;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  padding: clamp(1.8rem, 4vw, 3rem);
+  scroll-margin-top: 2rem;
+}
+.care-title {
+  font: 500 1.05rem/1.7 var(--font-jp);
+  letter-spacing: 0.08em;
+  padding-bottom: 0.9rem;
+  border-bottom: 1px solid var(--line);
+}
+.care-lede { margin-top: 1.4rem; font-size: 0.9rem; }
+.care-fee { display: grid; gap: 0.7rem; margin: 1.4rem 0 1.2rem; }
+.care-fee > div {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75em 1.1em;
+  background: var(--greige);
+}
+.care-fee dt { font-size: 0.9rem; }
+.care-fee dd {
+  font: 500 1.3rem/1.2 var(--font-en);
+  font-variant-numeric: lining-nums tabular-nums;
+  color: var(--gold-ink);
+}
+.care-yen { font-size: 0.78rem; margin-left: 0.15em; }
+.care-note { font-size: 0.85rem; color: var(--muted); }
+.care-cols { display: grid; gap: clamp(1.8rem, 3vw, 2.6rem); margin-top: 2rem; }
+.care-col h4 {
+  font: 500 0.92rem/1.7 var(--font-jp);
+  letter-spacing: 0.06em;
+  padding-left: 0.75em;
+  border-left: 2px solid var(--gold);
+}
+.care-col-lede { margin-top: 1rem; font-size: 0.85rem; }
+/* ul は全体でマーカーを外しているので、罫線で自前の中黒を引く */
+.care-col ul { margin-top: 1rem; display: grid; gap: 0.4rem; }
+.care-col li {
+  position: relative;
+  padding-left: 1.1em;
+  font-size: 0.85rem; line-height: 1.9;
+  color: var(--muted);
+}
+.care-col li::before {
+  content: ""; position: absolute; left: 0; top: 0.86em;
+  width: 6px; height: 1px; background: var(--gold);
+}
+.care-col-note { margin-top: 1rem; font-size: 0.8rem; color: var(--muted); }
+.care-caution {
+  margin-top: 2rem; padding-top: 1.3rem;
+  border-top: 1px solid var(--line);
+  font-size: 0.8rem; line-height: 1.9;
+  color: var(--muted);
+}
+@media (min-width: 860px) {
+  .care-fee { grid-template-columns: repeat(2, 1fr); }
+  .care-cols { grid-template-columns: repeat(2, 1fr); }
+}
+
