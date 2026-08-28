@@ -11,6 +11,10 @@ cd "$(dirname "$0")/.."
 SRC="assets/img-src"
 OUT="assets/img"
 
+# トップで使っているヒーロー画像(拡張子を除いたファイル名)。
+# 他のヒーロー候補より大きめに書き出し、スマホ用の800wもこれだけ作る。
+MAIN_HERO="hero-05"
+
 if [ ! -d "$SRC" ]; then
   echo "原本ディレクトリ $SRC が見つかりません" >&2
   exit 1
@@ -22,8 +26,8 @@ mkdir -p "$OUT"
 #   商品画像はライトボックス拡大(最大約670px表示)を2xで賄える1000pxを上限にする
 width_for() {
   case "$1" in
-    hero-01.*)              echo 1600 ;;   # ヒーロー(全幅)
-    hero-*)                 echo 1400 ;;   # 他案のヒーロー
+    "$MAIN_HERO".*)         echo 1600 ;;   # トップのヒーロー
+    hero-*)                 echo 1400 ;;   # 使っていないヒーロー候補
     brand-*)                echo  800 ;;   # メゾンライン紹介(540px表示)
     journey-*)              echo  560 ;;   # フォトジャーニー(最大242px表示・拡大時も約444px幅)
     *)                      echo 1000 ;;   # 商品画像 wd/cd/tx/mo
@@ -87,9 +91,10 @@ for src in "$SRC"/{wd,cd,tx,mo}-*; do
   cwebp -quiet -q 78 -metadata none -resize 440 0 "$src" -o "$OUT/$stem-440.webp"
   small_total=$((small_total + $(stat -f%z "$OUT/$stem-440.webp")))
 done
-cwebp -quiet -q 80 -metadata none -resize 800 0 "$SRC/hero-01.jpg" -o "$OUT/hero-01-800.webp"
-printf '  商品画像の440w: %.1fMB / hero-01-800.webp: %dKB\n' \
-  "$(echo "$small_total / 1048576" | bc -l)" "$(( $(stat -f%z "$OUT/hero-01-800.webp") / 1024 ))"
+main_hero_src="$(ls "$SRC/$MAIN_HERO".* | head -1)"
+cwebp -quiet -q 80 -metadata none -resize 800 0 "$main_hero_src" -o "$OUT/$MAIN_HERO-800.webp"
+printf '  商品画像の440w: %.1fMB / %s-800.webp: %dKB\n' \
+  "$(echo "$small_total / 1048576" | bc -l)" "$MAIN_HERO" "$(( $(stat -f%z "$OUT/$MAIN_HERO-800.webp") / 1024 ))"
 
 # ------------------------------------------------------------
 # srcset の幅記述子に使うため、生成した画像の実寸を書き出す
