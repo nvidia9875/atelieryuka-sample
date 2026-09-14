@@ -14,18 +14,23 @@
 ```
 /
 ├── index.html            A案トップ（決定案）
-├── product.html          衣裳詳細（?code=型番）
+├── product.html          衣裳詳細（?code=型番）。サイズの目安診断 → トップの予約フォームへ引き継ぐ
+├── terms.html            レンタル規約（国内・国外）。tools/build-terms.mjs が assets/terms.js から生成
 ├── style.css             基本スタイル（デザイントークン・レイアウト）
 ├── style-b.css           セクション別スタイル
 ├── collection-filter.css コレクション絞り込みのスタイル
-├── script.js             フェードイン / カテゴリタブ / 予約ステップフォーム
+├── catalog.css / .js     デジタルカタログ（冊子ビューア。with a WISH から移植）
+├── script.js             フェードイン / カテゴリタブ
+├── reserve-form.js       予約フォーム（5ステップ・申込書の項目・規約同意）
 ├── collection-filter.js  コレクションの絞り込み・並び替え
-├── product.js            衣裳詳細（assets/data.js から描画）
+├── product.js            衣裳詳細（assets/data.js から描画）＋サイズ診断
 ├── 404.html / robots.txt / .nojekyll
 │
 ├── assets/
-│   ├── data.js           ★全コンテンツの正（商品・色・価格・FAQ 等）
+│   ├── data.js           ★全コンテンツの正（商品・色・価格・FAQ・ドレスのサイズ表【仮】等）
 │   ├── details.js        衣裳の説明文・素材（自動生成。衣裳詳細ページのみ読み込む）
+│   ├── terms.js          レンタル規約の本文（国内・国外）。terms.html と予約フォームの同意ステップの元
+│   ├── catalog/          Atelier Yuka 2026 カタログ（PDF・ページ画像 58枚・サムネイル）
 │   ├── img/              公開用 WebP（自動生成）
 │   ├── img-src/          画像の原本（再生成用。公開ページからは参照しない）
 │   ├── img-widths.json   srcset の幅記述子用（自動生成）
@@ -35,9 +40,59 @@
 │   ├── index.html        4案の比較ページ
 │   └── b-couture/ c-story/ d-motion/
 │
+├── withawish/            with a WISH（業者さま向け・新郎タキシード）のサイト。黒背景のまま下層に統合
 ├── data/                 出典データ（Shopify から取得した実データ）
 └── tools/                メンテナンス用スクリプト
 ```
+
+## with a WISH との統合（2026-09-09〜）
+
+先方の要望で、with a WISH のサイトをアトリエユカの下層（`withawish/`）に置いています。
+それぞれ専用の CSS を読むので、見た目は独立したまま（アトリエユカ＝淡色、with a WISH＝黒）。
+
+- アトリエユカ側の導線: ヘッダーの「業者さまはこちら」とフッター（先方確認 2026-09-14 で「業者さま」に決定）
+- 現行ドメイン withawish.jp は残して `atelieryuka.com/withawish/` へ転送する方針（先方確認 2026-09-14）
+- with a WISH 側の戻り導線: 上部バーの「Atelier Yuka のサイトへ」とヘッダーの「ATELIER YUKA」
+- 単独リポジトリ時代の `archive/`（3案比較）は持ち込んでいない。元は `/Users/shun/Desktop/website/withawish`
+- with a WISH のカタログは自社版が未受領のため、`../assets/catalog/`（Atelier Yuka 2026）を参照している
+
+## デジタルカタログ
+
+コレクション章の末尾（`#catalogue`）とヘッダーの「カタログ」から開く冊子ビューア。
+SP はスワイプ、PC は見開き。拡大（ボタン・ダブルタップ・ピンチ・Ctrl＋ホイール）とドラッグ移動に対応。
+
+PDF を入れ替えるときは、ページ画像も作り直す。
+
+```bash
+pdftoppm -jpeg -jpegopt quality=92 -r 144 新しいカタログ.pdf raw/pg
+for f in raw/pg-*.jpg; do
+  n=$(basename "$f" .jpg); n=${n#pg-}
+  cwebp -q 76 -m 6 -resize 1200 0 "$f" -o assets/catalog/pages/$n.webp
+  cwebp -q 70 -m 6 -resize 220 0 "$f" -o assets/catalog/thumbs/$n.webp
+done
+```
+
+ページ数が変わる場合は `catalog.js` の `PAGES` と、`index.html` の `#cat-range` の `max`・「全58ページ」表記を合わせる。
+
+## 予約フォームと規約
+
+トップの予約フォームは「試着予約申込書」（先方の紙の申込書）と同じ項目を 5 ステップで受け取る。
+日程 → 衣裳（型番 4 点まで）→ サイズ（新婦・新郎の採寸）→ お客さま情報・お届け先（空港止め・オプション含む）→ 確認と規約同意。
+
+- 条件表示は `data-when="ラジオ名:値,値"`、条件つき必須は `data-required-when`。隠れた欄は disabled になり、検証・要約から外れる
+- 規約はご利用の目的で切り替える（海外挙式・フォト相談 → 国外、それ以外 → 国内）。同意しないと送信できず、同意した規約名と日時を送信内容に含める
+- 規約本文は `assets/terms.js` だけを編集し、`node tools/build-terms.mjs` で `terms.html` を再生成する
+- 送信はデモ（完了画面に送信内容をそのまま表示）。本番の送信先は未定
+
+## サイズの目安（衣裳詳細ページ）
+
+ドレスの詳細ページで、バスト・ウエスト・ヒップ（・身長）から目安サイズを出す。
+結果と採寸値は「この結果を添えて試着を申し込む」でトップの予約フォームに引き継がれる
+（`index.html?code=…&size=…&bust=…#reserve`）。タキシード・モーニングには出さない。
+
+**対応表 `AY.dressSizeChart` は仮データ**（先方から届いた構想図の写真から起こした値。3FT〜19FT、1段ごとに +4cm）。
+正式な表を受領したら `assets/data.js` のこの配列だけ差し替え、`AY.dressSizeChartStatus` を `"仮"` 以外にすると画面の注記が消える。
+各ドレスのサイズ展開（`assets/details.js` の `size`）は現行サイトどおり 1 サイズのままで、展開の表示は先方の回答待ち。
 
 ## コレクションの絞り込み
 
@@ -51,7 +106,7 @@
 
 ### サイズでの絞り込みについて
 
-**サイズ軸は未実装**です。サイズ情報自体は現行サイトにあり（購入バリエーションの選択肢。
+**サイズ軸は未実装**です（サイズの目安診断は衣裳詳細ページにあります。下記「サイズの目安」参照）。サイズ情報自体は現行サイトにあり（購入バリエーションの選択肢。
 `assets/details.js` に取り込み済みで衣裳詳細ページに表示しています）、ただし
 **ドレス20点のうち18点が同じ `7FTTT` の1サイズ**のため、絞り込みの軸としては機能しません
 （選択肢が実質1つ）。複数サイズがあるのは `AY6001` と `AY5601` のみ、

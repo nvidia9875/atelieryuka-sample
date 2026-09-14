@@ -123,8 +123,9 @@
 }
 
 /* ---- 申し込みフォーム(招待状カード) ---- */
-.pd-apply { max-width: var(--w-narrow); margin: var(--space-chapter) auto 0; }
-.pd-form, .pd-done {
+/* ---- サイズの目安 ---- */
+.pd-size { max-width: var(--w-narrow); margin: var(--space-chapter) auto 0; }
+.pd-size-form {
   border: 1px solid var(--gold);
   outline: 1px solid var(--line);
   outline-offset: 6px;
@@ -132,52 +133,14 @@
   padding: clamp(1.6rem, 4vw, 3rem);
   margin-top: 2.2rem;
 }
-.pd-field { border: none; margin: 0 0 1.5rem; padding: 0; }
-.pd-field legend, .pd-field > label {
-  display: block;
-  font-family: var(--font-jp);
-  font-size: 0.95rem;
-  margin-bottom: 0.6em;
-}
+.pd-size-form .measure-grid { margin-bottom: 0.6rem; }
 .req {
-  font-size: 0.68rem; color: var(--error);
-  border: 1px solid currentColor; border-radius: 2px;
-  padding: 0.1em 0.5em; margin-left: 0.8em; vertical-align: middle;
+  font-size: 0.68rem; color: var(--gold-ink);
+  border: 1px solid var(--gold); border-radius: 0;
+  padding: 0.05em 0.5em; margin-left: 0.6em; vertical-align: middle;
 }
-.pd-choices { display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: 0.8rem; }
-.pd-choice {
-  display: flex; align-items: center; gap: 0.8em;
-  border: 1px solid var(--line);
-  padding: 0.9em 1.1em;
-  cursor: pointer;
-  background: #fff;
-  transition: border-color 160ms ease;
-}
-.pd-choice:hover { border-color: var(--gold); }
-.pd-choice:has(input:checked) { border-color: var(--gold-ink); }
-.pd-choice input { accent-color: var(--gold-ink); }
-.pd-choice span { line-height: 1.5; }
-.pd-choice small { display: block; color: var(--muted); font-variant-numeric: lining-nums tabular-nums; }
-
-.pd-field input[type="date"],
-.pd-field input[type="text"],
-.pd-field input[type="email"],
-.pd-field input[type="tel"] {
-  width: 100%;
-  font: inherit;
-  /* 入力値はメールアドレスや電話番号など小さな英数字が中心なのでゴシックで組む */
-  font-family: var(--font-ui);
-  padding: 0.85em 1em;
-  border: 1px solid var(--line);
-  background: #fff;
-  color: var(--ink);
-}
-.pd-field input:focus-visible { outline: 2px solid var(--gold-ink); outline-offset: 1px; }
-.pd-field input[aria-invalid="true"] { border-color: var(--error); }
 .pd-hint { font-size: 0.75rem; color: var(--muted); margin: 0.5em 0 0; }
-.pd-err { font-size: 0.8rem; color: var(--error); margin: 0.5em 0 0; }
-
-.pd-submit-wrap { text-align: center; margin: 2rem 0 0; }
+.pd-size-act { text-align: center; margin: 1.8rem 0 0; }
 .pd-submit {
   font: inherit;
   letter-spacing: 0.1em;
@@ -189,18 +152,29 @@
   transition: background-color 180ms ease, color 180ms ease;
 }
 .pd-submit:hover, .pd-submit:focus-visible { background: transparent; color: var(--ink); }
-.pd-submit[disabled] { opacity: 0.6; cursor: progress; }
-.pd-status { text-align: center; font-size: 0.85rem; color: var(--muted); min-height: 1.4em; margin: 0.8em 0 0; }
+.pd-size-error { text-align: center; font-size: 0.85rem; color: var(--error); margin: 1rem 0 0; }
+.pd-size-error::before { content: "※ "; }
 
-.pd-done { text-align: center; }
-.pd-done-en { font-family: var(--font-en); font-style: italic; letter-spacing: 0.2em; color: var(--gold-ink); margin: 0 0 0.6em; }
-.pd-done-title { font-family: var(--font-jp); font-weight: 400; font-size: 1.4rem; margin: 0 0 0.8em; }
-.pd-done-text { color: var(--muted); font-size: 0.9rem; line-height: 2; }
-.pd-done-summary { margin: 1.6rem auto 0; max-width: 24rem; text-align: left; border-top: 1px solid var(--line); }
-.pd-done-summary div { display: flex; justify-content: space-between; gap: 1em; padding: 0.7em 0; border-bottom: 1px solid var(--line); font-size: 0.85rem; }
-.pd-done-summary dt { color: var(--muted); }
-.pd-done-summary dd { margin: 0; font-variant-numeric: lining-nums tabular-nums; }
-.pd-done-note { font-size: 0.72rem; color: var(--muted); margin-top: 1.4rem; }
+.pd-size-result {
+  text-align: center;
+  margin-top: 2rem;
+  padding: clamp(1.6rem, 4vw, 2.6rem);
+  border: 1px solid var(--line);
+  background: var(--greige);
+}
+.pd-size-en { font-family: var(--font-en); font-style: italic; letter-spacing: 0.2em; color: var(--gold-ink); margin: 0; }
+.pd-size-value { font: 500 clamp(2.4rem, 2rem + 2vw, 3.2rem)/1.2 var(--font-en); margin: 0.2em 0 0; letter-spacing: 0.06em; }
+.pd-size-go { font-size: 0.9rem; color: var(--muted); margin: 0.4em 0 0; }
+.pd-size-spec {
+  display: flex; justify-content: center; flex-wrap: wrap; gap: 0.6em 2.2em;
+  margin: 1.4rem 0 0;
+}
+.pd-size-spec div { display: flex; gap: 0.6em; font-size: 0.86rem; }
+.pd-size-spec dt { color: var(--muted); }
+.pd-size-spec dd { margin: 0; font-variant-numeric: lining-nums tabular-nums; }
+.pd-size-caution { font-size: 0.84rem; color: var(--error); margin: 1.2rem 0 0; }
+.pd-size-note { font-size: 0.78rem; color: var(--muted); line-height: 1.9; margin: 1.2rem 0 0; }
+.pd-size-cta-wrap { margin: 1.6rem 0 0; }
 
 /* ---- 関連 ---- */
 .pd-related { margin-top: var(--space-chapter); padding-bottom: var(--space-chapter); }

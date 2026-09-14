@@ -441,3 +441,160 @@ input[aria-invalid="true"], .choice-group.has-error .choice { border-color: var(
 @media (prefers-reduced-motion: reduce) {
   .product-name a, .product-cta a { transition: none; }
 }
+.footer-partner {
+  margin-top: 1.8rem;
+  font-size: 0.8rem;
+  color: #B7B0A4;
+}
+.footer-partner a {
+  color: var(--gold);
+  font: italic 400 0.95rem/1.4 var(--font-en);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color 0.15s ease-out, border-color 0.15s ease-out;
+}
+.footer-partner a:hover { color: #EFE9DD; border-bottom-color: #EFE9DD; }
+
+/* ---------- V. 予約フォーム: 申込書の項目に拡張した分 ---------- */
+.field-group {
+  border: 0; min-width: 0;
+  margin: 0 0 1.8rem;
+  padding: 1.3rem 1.2rem 0.2rem;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.55);
+}
+.field-group > legend {
+  padding: 0 0.5em;
+  font: 400 0.9rem/1.6 var(--font-jp);
+  letter-spacing: 0.08em;
+}
+.field-group-note { margin: -0.3rem 0 1.1rem; font-size: 0.78rem; color: var(--muted); }
+.opt { font-size: 0.7rem; color: var(--muted); margin-left: 0.5em; }
+
+.field-row { display: grid; gap: 0 1rem; }
+@media (min-width: 560px) { .field-row { grid-template-columns: 1fr 1fr; } }
+
+.measure-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.9rem 0.8rem;
+  margin-bottom: 1.4rem;
+}
+@media (min-width: 560px) { .measure-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.measure {
+  display: grid; gap: 0.35rem;
+  font-size: 0.8rem;
+}
+.measure-unit {
+  display: flex; align-items: center;
+  border: 1px solid var(--line);
+  background: #FFFFFF;
+  transition: border-color 0.15s ease-out;
+}
+.measure-unit:hover { border-color: var(--gold); }
+.measure-unit input {
+  width: 100%; min-width: 0; min-height: 46px;
+  border: 0; background: none;
+  padding: 0.5em 0.2em 0.5em 0.8em;
+  font: 400 1rem/1.5 var(--font-ui);
+  color: var(--ink);
+  font-variant-numeric: lining-nums tabular-nums;
+}
+.measure-unit input:focus-visible { outline: 2px solid var(--gold-ink); outline-offset: 1px; }
+.measure-unit span { padding: 0 0.7em 0 0.2em; font-size: 0.78rem; color: var(--muted); }
+.measure.has-error .measure-unit, .measure-unit:has(input[aria-invalid="true"]) { border-color: var(--error); }
+.measure .field-error { grid-column: 1 / -1; margin-top: 0; }
+
+.choice-grid.is-compact { grid-template-columns: repeat(2, 1fr); }
+@media (min-width: 560px) { .choice-grid.is-compact { grid-template-columns: repeat(4, 1fr); } }
+.choice-grid.is-compact .choice { padding: 0.7em 0.8em; font-size: 0.84rem; }
+
+.field textarea {
+  width: 100%; min-height: 96px;
+  padding: 0.7em 0.95em;
+  border: 1px solid var(--line);
+  background-color: #FFFFFF;
+  color: var(--ink);
+  font: 400 1rem/1.6 var(--font-ui);
+  border-radius: 0;
+  resize: vertical;
+}
+.field textarea:hover { border-color: var(--gold); }
+
+/* 確認ステップ */
+.review-summary { margin: 0 0 1.8rem; }
+.review-group {
+  margin-top: 1.4rem;
+  padding-bottom: 0.4rem;
+  font: 400 0.78rem/1.6 var(--font-en);
+  letter-spacing: 0.16em;
+  color: var(--gold-ink);
+}
+.review-summary > div:not(.review-group), .complete-summary > div:not(.review-group) {
+  display: grid;
+  grid-template-columns: minmax(7em, 32%) 1fr;
+  gap: 0.6rem 1rem;
+  padding: 0.6em 0.2em;
+  border-top: 1px solid var(--line);
+  font-size: 0.86rem;
+}
+.review-summary dt, .complete-summary dt { color: var(--muted); }
+.review-summary dd, .complete-summary dd { font-variant-numeric: lining-nums tabular-nums; overflow-wrap: anywhere; }
+.complete-summary { max-width: 520px; text-align: left; }
+.complete-summary > div:not(.review-group) { display: grid; text-align: left; }
+.complete-summary .review-group { text-align: left; }
+.complete-terms { margin-top: 1rem; font-size: 0.8rem; color: var(--muted); text-align: center; }
+
+.terms-box {
+  max-height: 260px; overflow-y: auto;
+  padding: 1rem 1.2rem;
+  border: 1px solid var(--line);
+  background: #FFFFFF;
+  font-size: 0.82rem; line-height: 1.85;
+  scrollbar-width: thin;
+}
+.terms-box:focus-visible { outline: 2px solid var(--gold-ink); outline-offset: 2px; }
+.terms-box-title { font: 400 1rem/1.6 var(--font-jp); letter-spacing: 0.1em; margin-bottom: 0.6em; }
+.terms-box-sec { margin-top: 1em; font-weight: 400; color: var(--gold-ink); }
+.terms-box-sec::before { content: "＜"; } .terms-box-sec::after { content: "＞"; }
+.terms-box-lead { margin-top: 0.3em; }
+.terms-box ul { padding-left: 1.2em; margin-top: 0.3em; }
+.terms-box li + li { margin-top: 0.3em; }
+.terms-box-note { margin-top: 0.4em; color: var(--muted); }
+.terms-links { margin: 0.6rem 0 1.2rem; font-size: 0.78rem; color: var(--muted); }
+.terms-links a { color: var(--gold-ink); }
+
+.consent { margin-bottom: 0.4rem; }
+.consent .choice { align-items: flex-start; }
+.consent .choice input { margin-top: 0.3em; }
+.consent.has-error .choice { border-color: var(--error); }
+
+/* ---------- 規約ページ ---------- */
+.terms-page { max-width: var(--w-narrow); margin: 0 auto; padding: var(--space-chapter) var(--pad-x); }
+.terms-doc { margin-top: clamp(2.5rem, 5vw, 4rem); scroll-margin-top: 2rem; }
+.terms-title {
+  font: 400 1.4rem/1.6 var(--font-jp); letter-spacing: 0.12em;
+  padding-bottom: 0.6em; border-bottom: 1px solid var(--gold);
+}
+.terms-sec { margin-top: 1.8rem; }
+.terms-sec-title { font: 400 0.95rem/1.7 var(--font-jp); color: var(--gold-ink); }
+.terms-sec-title::before { content: "＜"; } .terms-sec-title::after { content: "＞"; }
+.terms-lead { margin-top: 0.5em; font-size: 0.9rem; }
+.terms-list { padding-left: 1.3em; margin-top: 0.5em; font-size: 0.9rem; }
+.terms-list li + li { margin-top: 0.4em; }
+.terms-note { margin-top: 0.6em; font-size: 0.84rem; color: var(--muted); }
+.terms-back { margin-top: 3rem; text-align: center; }
+.footer-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 0.4em 1.6em; margin-top: 1.4rem; font-size: 0.8rem; }
+.footer-links a { color: #EFE9DD; text-decoration: none; border-bottom: 1px solid rgba(239, 233, 221, 0.35); }
+.footer-links a:hover { border-bottom-color: #EFE9DD; }
+.measure > input {
+  width: 100%; min-height: 46px;
+  padding: 0.5em 0.8em;
+  border: 1px solid var(--line);
+  background: #FFFFFF;
+  color: var(--ink);
+  font: 400 1rem/1.5 var(--font-ui);
+  border-radius: 0;
+}
+.measure > input:hover { border-color: var(--gold); }
+.complete-summary dd { text-align: left; }

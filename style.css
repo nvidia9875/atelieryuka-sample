@@ -609,3 +609,7 @@ section[id] { scroll-margin-top: 1.5rem; }
   .care-cols { grid-template-columns: repeat(2, 1fr); }
 }
 
+
+/* 衣裳店様向け（with a WISH）への導線。主導線ではないので控えめに */
+.site-nav a.nav-partner { color: var(--muted); font-size: 0.78rem; }
+.site-nav a.nav-partner:hover { color: var(--gold-ink); }

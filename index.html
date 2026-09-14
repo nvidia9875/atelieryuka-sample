@@ -28,9 +28,10 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&amp;family=Zen+Kaku+Gothic+New:wght@300;400;500&amp;display=swap">
 <link rel="stylesheet" href="style.css?v=10">
-<link rel="stylesheet" href="style-b.css?v=7">
+<link rel="stylesheet" href="style-b.css?v=8">
 <link rel="stylesheet" href="collection-filter.css?v=5">
 <link rel="stylesheet" href="assets/lightbox.css?v=5">
+<link rel="stylesheet" href="catalog.css?v=1">
 <script>document.documentElement.className += " js";</script>
 </head>
 <body id="top">
@@ -45,11 +46,13 @@
     <ul>
       <li><a href="#maison">メゾン</a></li>
       <li><a href="#collection">コレクション</a></li>
+      <li><a href="#catalogue">カタログ</a></li>
       <li><a href="#flow">ご利用の流れ</a></li>
       <li><a href="#pricing">料金</a></li>
       <li><a href="#journey">フォトジャーニー</a></li>
       <li><a href="#salon">サロン</a></li>
       <li><a href="#faq">FAQ</a></li>
+      <li><a class="nav-partner" href="withawish/">業者さまはこちら</a></li>
       <li><a class="nav-reserve" href="#reserve">ご予約</a></li>
     </ul>
   </nav>
@@ -764,6 +767,28 @@
       </div>
     </div>
     <!-- COLLECTION:END -->
+
+    <!-- デジタルカタログへの導線: 冊子であることが伝わるよう表紙を出し、
+         「ブラウザでめくる」と「PDFを開く」の2つの行き先を並べる -->
+    <div class="cat-lead reveal" id="catalogue">
+      <button type="button" class="cat-lead-cover" data-catalog aria-label="デジタルカタログをめくって見る">
+        <img src="assets/catalog/pages/01.webp" alt="Atelier Yuka 2026 カタログの表紙" width="1200" height="1683" loading="lazy" decoding="async">
+      </button>
+      <div class="cat-lead-body">
+        <p class="cat-lead-label" translate="no">Digital Catalogue</p>
+        <h3 class="cat-lead-title">2026 カタログを見る</h3>
+        <p class="cat-lead-desc">冊子のカタログを、そのままブラウザでご覧いただけます。スマートフォンはスワイプ、PCは見開き。拡大すればレースやビーズのディテールまでご確認いただけます。</p>
+        <ul class="cat-lead-spec">
+          <li>全58ページ</li>
+          <li>ダウンロード不要</li>
+          <li>PDF 25MB</li>
+        </ul>
+        <div class="cat-lead-acts">
+          <button type="button" class="btn btn-primary" data-catalog>ブラウザでめくる</button>
+          <a class="btn btn-ghost" href="assets/catalog/atelieryuka-catalog-2026.pdf" target="_blank" rel="noopener">PDFを開く<span class="cat-lead-ext" aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </div>
   </section>
 
   <!-- III. ご利用の流れ -->
@@ -877,7 +902,7 @@
       <p class="chapter-no" aria-hidden="true" translate="no">V</p>
       <p class="chapter-label" translate="no">Reservation</p>
       <h2 class="chapter-title" id="reserve-title">ご予約</h2>
-      <p class="chapter-lede">招待状にご返信いただくように、3つのステップでご予約いただけます。</p>
+      <p class="chapter-lede">招待状にご返信いただくように、5つのステップでご予約いただけます。ご採寸やお届け先まで一度にお伺いするので、折り返しの確認メールなしでお手続きが進みます。</p>
     </header>
 
     <div class="invitation reveal">
@@ -885,79 +910,295 @@
         <ol class="form-progress" aria-label="ご予約のステップ">
           <li class="is-current" aria-current="step" data-progress="0"><span class="pg-num" aria-hidden="true" translate="no">I</span><span class="pg-label">日程</span></li>
           <li data-progress="1"><span class="pg-num" aria-hidden="true" translate="no">II</span><span class="pg-label">衣裳</span></li>
-          <li data-progress="2"><span class="pg-num" aria-hidden="true" translate="no">III</span><span class="pg-label">お客さま情報</span></li>
+          <li data-progress="2"><span class="pg-num" aria-hidden="true" translate="no">III</span><span class="pg-label">サイズ</span></li>
+          <li data-progress="3"><span class="pg-num" aria-hidden="true" translate="no">IV</span><span class="pg-label">お客さま情報</span></li>
+          <li data-progress="4"><span class="pg-num" aria-hidden="true" translate="no">V</span><span class="pg-label">ご確認</span></li>
         </ol>
 
+        <!-- I. 日程 -->
         <fieldset class="form-step" data-step="0">
           <legend class="step-legend" tabindex="-1">ご希望の内容と日程</legend>
-          <fieldset class="choice-group" aria-describedby="purpose-error">
+          <fieldset class="choice-group">
             <legend class="field-label">ご利用の目的 <span class="req">必須</span></legend>
             <div class="choice-grid">
-              <label class="choice"><input type="radio" name="purpose" value="ご自宅試着(¥5,500)"><span>ご自宅試着(¥5,500)</span></label>
+              <label class="choice"><input type="radio" name="purpose" value="ご自宅試着(¥5,500)" required data-error="ご利用の目的をお選びください。"><span>ご自宅試着(¥5,500)</span></label>
               <label class="choice"><input type="radio" name="purpose" value="本使用レンタル(3泊4日)"><span>本使用レンタル(3泊4日)</span></label>
               <label class="choice"><input type="radio" name="purpose" value="銀座サロン試着"><span>銀座サロン試着</span></label>
               <label class="choice"><input type="radio" name="purpose" value="海外挙式・フォト相談"><span>海外挙式・フォト相談</span></label>
             </div>
-            <p class="field-error" id="purpose-error" hidden></p>
+            <p class="field-error" hidden></p>
           </fieldset>
-          <div class="field">
-            <label class="field-label" for="f-date">ご希望日 <span class="req">必須</span></label>
-            <input type="date" id="f-date" name="date" required autocomplete="off" aria-describedby="f-date-note f-date-error">
-            <p class="field-note" id="f-date-note">ご利用日の4ヶ月前〜10日前までご予約いただけます。</p>
-            <p class="field-error" id="f-date-error" hidden></p>
+          <fieldset class="choice-group">
+            <legend class="field-label">ご使用内容 <span class="req">必須</span></legend>
+            <div class="choice-grid is-compact">
+              <label class="choice"><input type="radio" name="occasion" value="結婚式" required data-error="ご使用内容をお選びください。"><span>結婚式</span></label>
+              <label class="choice"><input type="radio" name="occasion" value="フォト"><span>フォト</span></label>
+              <label class="choice"><input type="radio" name="occasion" value="結婚式・フォト両方"><span>両方</span></label>
+              <label class="choice"><input type="radio" name="occasion" value="未定"><span>未定</span></label>
+            </div>
+            <p class="field-error" hidden></p>
+          </fieldset>
+          <div class="field-row">
+            <div class="field">
+              <label class="field-label" for="f-date">ご試着希望日 第一希望 <span class="req">必須</span></label>
+              <input type="date" id="f-date" name="date1" required autocomplete="off" data-error="第一希望の日付をお選びください。">
+              <p class="field-note">ご利用日の4ヶ月前〜10日前までご予約いただけます。</p>
+              <p class="field-error" hidden></p>
+            </div>
+            <div class="field">
+              <label class="field-label" for="f-date2">第二希望 <span class="opt">任意</span></label>
+              <input type="date" id="f-date2" name="date2" autocomplete="off">
+              <p class="field-error" hidden></p>
+            </div>
           </div>
+          <div data-when="purpose:ご自宅試着(¥5,500),本使用レンタル(3泊4日),海外挙式・フォト相談">
+            <fieldset class="choice-group">
+              <legend class="field-label">お届け希望日 <span class="req">必須</span></legend>
+              <div class="choice-grid">
+                <label class="choice"><input type="radio" name="deliverDay" value="試着日の前日" required data-error="お届け希望日をお選びください。"><span>試着日の前日</span></label>
+                <label class="choice"><input type="radio" name="deliverDay" value="試着日の当日"><span>試着日の当日</span></label>
+              </div>
+              <p class="field-error" hidden></p>
+            </fieldset>
+            <fieldset class="choice-group">
+              <legend class="field-label">お届け時間帯 <span class="req">必須</span></legend>
+              <div class="choice-grid is-compact">
+                <label class="choice"><input type="radio" name="deliverTime" value="14〜16時" required data-error="お届け時間帯をお選びください。"><span>14〜16時</span></label>
+                <label class="choice"><input type="radio" name="deliverTime" value="16〜18時"><span>16〜18時</span></label>
+                <label class="choice"><input type="radio" name="deliverTime" value="18〜20時"><span>18〜20時</span></label>
+                <label class="choice"><input type="radio" name="deliverTime" value="19〜21時"><span>19〜21時</span></label>
+              </div>
+              <p class="field-error" hidden></p>
+            </fieldset>
+          </div>
+          <fieldset class="field-group">
+            <legend>本番のご予定</legend>
+            <p class="field-group-note">お決まりでしたらご記入ください。本使用レンタルのお申し込みでは必須です。</p>
+            <div class="field-row">
+              <div class="field">
+                <label class="field-label" for="f-event-date">本番ご利用日 <span class="req" data-when="purpose:本使用レンタル(3泊4日)">必須</span></label>
+                <input type="date" id="f-event-date" name="eventDate" autocomplete="off" data-required-when="purpose:本使用レンタル(3泊4日)" data-error="本使用レンタルでは本番ご利用日が必要です。">
+                <p class="field-error" hidden></p>
+              </div>
+              <div class="field">
+                <label class="field-label" for="f-venue">式場名・撮影場所 <span class="opt">任意</span></label>
+                <input type="text" id="f-venue" name="venue" autocomplete="off" placeholder="例: 〇〇ホテル／ハワイ・ワイキキ">
+              </div>
+            </div>
+          </fieldset>
         </fieldset>
 
+        <!-- II. 衣裳 -->
         <fieldset class="form-step" data-step="1" hidden>
           <legend class="step-legend" tabindex="-1">ご希望の衣裳</legend>
-          <fieldset class="choice-group" aria-describedby="category-error">
+          <fieldset class="choice-group">
+            <legend class="field-label">お申し込みされる方 <span class="req">必須</span></legend>
+            <div class="choice-grid">
+              <label class="choice"><input type="radio" name="who" value="新婦" required data-error="お申し込みされる方をお選びください。"><span>新婦のみ</span></label>
+              <label class="choice"><input type="radio" name="who" value="新郎" ><span>新郎のみ</span></label>
+              <label class="choice"><input type="radio" name="who" value="新郎新婦"><span>新郎新婦おふたり</span></label>
+            </div>
+            <p class="field-error" hidden></p>
+          </fieldset>
+          <fieldset class="choice-group">
             <legend class="field-label">衣裳カテゴリ <span class="req">必須</span></legend>
             <div class="choice-grid">
-              <label class="choice"><input type="radio" name="category" value="ウエディングドレス"><span>ウエディングドレス</span></label>
+              <label class="choice"><input type="radio" name="category" value="ウエディングドレス" required data-error="衣裳カテゴリをお選びください。"><span>ウエディングドレス</span></label>
               <label class="choice"><input type="radio" name="category" value="カラードレス"><span>カラードレス</span></label>
               <label class="choice"><input type="radio" name="category" value="タキシード"><span>タキシード</span></label>
               <label class="choice"><input type="radio" name="category" value="モーニング"><span>モーニング</span></label>
             </div>
-            <p class="field-error" id="category-error" hidden></p>
+            <p class="field-error" hidden></p>
           </fieldset>
           <div class="field">
-            <label class="field-label" for="f-dress">気になるドレス(任意)</label>
-            <select id="f-dress" name="dress" autocomplete="off">
-              <option value="" selected>未定・相談して決めたい</option>
-              <optgroup label="ウエディングドレス">
-                <option value="Lumière(HLD-00085-01)">Lumière(HLD-00085-01)</option>
-                <option value="Clair de Lune(HLD-00084-01)">Clair de Lune(HLD-00084-01)</option>
-                <option value="Étoile(HLD-00066)">Étoile(HLD-00066)</option>
-                <option value="Aurore(HLD-00059-01)">Aurore(HLD-00059-01)</option>
-                <option value="Blanche(HLD-00043-01)">Blanche(HLD-00043-01)</option>
-              </optgroup>
-              <optgroup label="カラードレス">
-                <option value="Azur(AY6001)">Azur(AY6001)</option>
-                <option value="Noisette(AY5601)">Noisette(AY5601)</option>
-                <option value="Mimosa(MVD-00392-05)">Mimosa(MVD-00392-05)</option>
-                <option value="Ballerine(BLD-00055-09)">Ballerine(BLD-00055-09)</option>
-              </optgroup>
-            </select>
+            <label class="field-label" for="f-code-1">ご希望の衣裳番号 <span class="opt">最大4点・未定でも可</span></label>
+            <div class="measure-grid">
+              <div class="measure"><label for="f-code-1">❶</label><input type="text" id="f-code-1" name="code1" data-short="❶" list="code-list" autocomplete="off" placeholder="HLD-00085-01" autocapitalize="characters"></div>
+              <div class="measure"><label for="f-code-2">❷</label><input type="text" id="f-code-2" name="code2" data-short="❷" list="code-list" autocomplete="off" autocapitalize="characters"></div>
+              <div class="measure"><label for="f-code-3">❸</label><input type="text" id="f-code-3" name="code3" data-short="❸" list="code-list" autocomplete="off" autocapitalize="characters"></div>
+              <div class="measure"><label for="f-code-4">❹</label><input type="text" id="f-code-4" name="code4" data-short="❹" list="code-list" autocomplete="off" autocapitalize="characters"></div>
+            </div>
+            <datalist id="code-list"></datalist>
+            <p class="field-note">衣裳の型番（商品ページの Code）をご記入ください。入力中に候補が出ます。</p>
+            <input type="hidden" id="f-size-hint" name="sizeHint" data-short="診断サイズ">
+            <p class="field-note" id="size-hint-note" hidden></p>
           </div>
         </fieldset>
 
+        <!-- III. サイズ -->
         <fieldset class="form-step" data-step="2" hidden>
-          <legend class="step-legend" tabindex="-1">お客さま情報</legend>
-          <div class="field">
-            <label class="field-label" for="f-name">お名前 <span class="req">必須</span></label>
-            <input type="text" id="f-name" name="name" required autocomplete="name" placeholder="例: 山田花子" aria-describedby="f-name-error">
-            <p class="field-error" id="f-name-error" hidden></p>
+          <legend class="step-legend" tabindex="-1">サイズ（ご採寸）</legend>
+          <p class="field-group-note">お手元のメジャーで、下着の上から水平に測った数値をcmでご記入ください。身長・バスト・ウエストがあれば、ほかは空欄でも承れます。</p>
+          <fieldset class="field-group measure-group" data-when="who:新婦,新郎新婦">
+            <legend>新婦さま</legend>
+            <div class="measure-grid">
+              <div class="measure"><label for="f-b-height">身長 <span class="req">必須</span></label><div class="measure-unit"><input type="number" id="f-b-height" name="brideHeight" data-short="身長" data-unit="cm" inputmode="decimal" min="130" max="200" step="0.5" required data-error="身長をご記入ください。" data-error-format="130〜200の数値でご記入ください。"><span>cm</span></div><p class="field-error" hidden></p></div>
+              <div class="measure"><label for="f-b-bust">バスト <span class="req">必須</span></label><div class="measure-unit"><input type="number" id="f-b-bust" name="brideBust" data-short="バスト" data-unit="cm" inputmode="decimal" min="60" max="150" step="0.5" required data-error="バストをご記入ください。" data-error-format="60〜150の数値でご記入ください。"><span>cm</span></div><p class="field-error" hidden></p></div>
+              <div class="measure"><label for="f-b-waist">ウエスト <span class="req">必須</span></label><div class="measure-unit"><input type="number" id="f-b-waist" name="brideWaist" data-short="ウエスト" data-unit="cm" inputmode="decimal" min="45" max="140" step="0.5" required data-error="ウエストをご記入ください。" data-error-format="45〜140の数値でご記入ください。"><span>cm</span></div><p class="field-error" hidden></p></div>
+              <div class="measure"><label for="f-b-hip">ヒップ</label><div class="measure-unit"><input type="number" id="f-b-hip" name="brideHip" data-short="ヒップ" data-unit="cm" inputmode="decimal" min="60" max="160" step="0.5"><span>cm</span></div></div>
+              <div class="measure"><label for="f-b-shoulder">肩幅</label><div class="measure-unit"><input type="number" id="f-b-shoulder" name="brideShoulder" data-short="肩幅" data-unit="cm" inputmode="decimal" min="25" max="60" step="0.5"><span>cm</span></div></div>
+              <div class="measure"><label for="f-b-sleeve">袖丈</label><div class="measure-unit"><input type="number" id="f-b-sleeve" name="brideSleeve" data-short="袖丈" data-unit="cm" inputmode="decimal" min="30" max="80" step="0.5"><span>cm</span></div></div>
+              <div class="measure"><label for="f-b-neck">首周り</label><div class="measure-unit"><input type="number" id="f-b-neck" name="brideNeck" data-short="首周り" data-unit="cm" inputmode="decimal" min="25" max="50" step="0.5"><span>cm</span></div></div>
+              <div class="measure"><label for="f-b-shoes">シューズ</label><div class="measure-unit"><input type="number" id="f-b-shoes" name="brideShoes" data-short="シューズ" data-unit="cm" inputmode="decimal" min="20" max="30" step="0.5"><span>cm</span></div></div>
+            </div>
+          </fieldset>
+          <fieldset class="field-group measure-group" data-when="who:新郎,新郎新婦">
+            <legend>新郎さま</legend>
+            <div class="measure-grid">
+              <div class="measure"><label for="f-g-height">身長 <span class="req">必須</span></label><div class="measure-unit"><input type="number" id="f-g-height" name="groomHeight" data-short="身長" data-unit="cm" inputmode="decimal" min="140" max="210" step="0.5" required data-error="身長をご記入ください。" data-error-format="140〜210の数値でご記入ください。"><span>cm</span></div><p class="field-error" hidden></p></div>
+              <div class="measure"><label for="f-g-chest">胸囲 <span class="req">必須</span></label><div class="measure-unit"><input type="number" id="f-g-chest" name="groomChest" data-short="胸囲" data-unit="cm" inputmode="decimal" min="70" max="150" step="0.5" required data-error="胸囲をご記入ください。" data-error-format="70〜150の数値でご記入ください。"><span>cm</span></div><p class="field-error" hidden></p></div>
+              <div class="measure"><label for="f-g-waist">ウエスト <span class="req">必須</span></label><div class="measure-unit"><input type="number" id="f-g-waist" name="groomWaist" data-short="ウエスト" data-unit="cm" inputmode="decimal" min="55" max="150" step="0.5" required data-error="ウエストをご記入ください。" data-error-format="55〜150の数値でご記入ください。"><span>cm</span></div><p class="field-error" hidden></p></div>
+              <div class="measure"><label for="f-g-shoulder">肩幅</label><div class="measure-unit"><input type="number" id="f-g-shoulder" name="groomShoulder" data-short="肩幅" data-unit="cm" inputmode="decimal" min="30" max="65" step="0.5"><span>cm</span></div></div>
+              <div class="measure"><label for="f-g-sleeve">袖丈</label><div class="measure-unit"><input type="number" id="f-g-sleeve" name="groomSleeve" data-short="袖丈" data-unit="cm" inputmode="decimal" min="40" max="90" step="0.5"><span>cm</span></div></div>
+              <div class="measure"><label for="f-g-neck">首周り</label><div class="measure-unit"><input type="number" id="f-g-neck" name="groomNeck" data-short="首周り" data-unit="cm" inputmode="decimal" min="30" max="55" step="0.5"><span>cm</span></div></div>
+              <div class="measure"><label for="f-g-inseam">股下</label><div class="measure-unit"><input type="number" id="f-g-inseam" name="groomInseam" data-short="股下" data-unit="cm" inputmode="decimal" min="55" max="100" step="0.5"><span>cm</span></div></div>
+              <div class="measure"><label for="f-g-shoes">シューズ</label><div class="measure-unit"><input type="number" id="f-g-shoes" name="groomShoes" data-short="シューズ" data-unit="cm" inputmode="decimal" min="22" max="32" step="0.5"><span>cm</span></div></div>
+            </div>
+          </fieldset>
+        </fieldset>
+
+        <!-- IV. お客さま情報・お届け先 -->
+        <fieldset class="form-step" data-step="3" hidden>
+          <legend class="step-legend" tabindex="-1">お客さま情報・お届け先</legend>
+          <div class="field-row">
+            <div class="field">
+              <label class="field-label" for="f-name">お名前 <span class="req">必須</span></label>
+              <input type="text" id="f-name" name="name" required autocomplete="name" placeholder="例: 山田花子" data-error="お名前をご入力ください。">
+              <p class="field-error" hidden></p>
+            </div>
+            <div class="field">
+              <label class="field-label" for="f-kana">ふりがな <span class="req">必須</span></label>
+              <input type="text" id="f-kana" name="kana" required autocomplete="off" placeholder="例: やまだはなこ" data-error="ふりがなをご入力ください。">
+              <p class="field-error" hidden></p>
+            </div>
+          </div>
+          <div class="field" data-when="who:新郎新婦">
+            <label class="field-label" for="f-partner">お相手のお名前 <span class="opt">任意</span></label>
+            <input type="text" id="f-partner" name="partner" autocomplete="off" placeholder="例: 山田太郎">
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label class="field-label" for="f-email">メールアドレス <span class="req">必須</span></label>
+              <input type="email" id="f-email" name="email" required autocomplete="email" inputmode="email" spellcheck="false" placeholder="例: hanako@example.com" data-error="メールアドレスをご入力ください。" data-error-format="メールアドレスの形式をご確認ください(例: hanako@example.com)。">
+              <p class="field-error" hidden></p>
+            </div>
+            <div class="field">
+              <label class="field-label" for="f-tel">お電話番号 <span class="req">必須</span></label>
+              <input type="tel" id="f-tel" name="tel" required autocomplete="tel" inputmode="tel" pattern="[0-9+\-\(\) ]{10,15}" placeholder="例: 09012345678" data-error="お電話番号をご入力ください。" data-error-format="お電話番号の形式をご確認ください(例: 09012345678)。">
+              <p class="field-error" hidden></p>
+            </div>
           </div>
           <div class="field">
-            <label class="field-label" for="f-email">メールアドレス <span class="req">必須</span></label>
-            <input type="email" id="f-email" name="email" required autocomplete="email" inputmode="email" spellcheck="false" placeholder="例: hanako@example.com" aria-describedby="f-email-error">
-            <p class="field-error" id="f-email-error" hidden></p>
+            <label class="field-label" for="f-address">ご自宅住所 <span class="req">必須</span></label>
+            <input type="text" id="f-address" name="address" required autocomplete="street-address" placeholder="例: 東京都中央区銀座1-20-11 〇〇マンション601" data-error="ご自宅住所をご入力ください。">
+            <p class="field-error" hidden></p>
           </div>
+
+          <div data-when="purpose:ご自宅試着(¥5,500),本使用レンタル(3泊4日),海外挙式・フォト相談">
+            <fieldset class="choice-group">
+              <legend class="field-label">試着衣裳のお届け先 <span class="req">必須</span></legend>
+              <div class="choice-grid">
+                <label class="choice"><input type="radio" name="tryonPlace" value="ご自宅（上記住所）" required data-error="お届け先をお選びください。"><span>ご自宅（上記住所）</span></label>
+                <label class="choice"><input type="radio" name="tryonPlace" value="別の場所"><span>別の場所へ届けてほしい</span></label>
+              </div>
+              <p class="field-error" hidden></p>
+            </fieldset>
+            <div class="field" data-when="tryonPlace:別の場所">
+              <label class="field-label" for="f-tryon-address">お届け先（場所名・住所・お名前・お電話番号） <span class="req">必須</span></label>
+              <textarea id="f-tryon-address" name="tryonAddress" required data-error="お届け先をご記入ください。" placeholder="例: 〇〇ホテル 1203号室／東京都…／山田花子／09012345678"></textarea>
+              <p class="field-error" hidden></p>
+            </div>
+          </div>
+
+          <fieldset class="field-group" data-when="purpose:本使用レンタル(3泊4日),海外挙式・フォト相談">
+            <legend>本番衣裳のお届け先</legend>
+            <fieldset class="choice-group">
+              <legend class="field-label">お届け先 <span class="req">必須</span></legend>
+              <div class="choice-grid is-compact">
+                <label class="choice"><input type="radio" name="mainPlace" value="新郎ご自宅" required data-error="お届け先をお選びください。"><span>新郎ご自宅</span></label>
+                <label class="choice"><input type="radio" name="mainPlace" value="新婦ご自宅"><span>新婦ご自宅</span></label>
+                <label class="choice"><input type="radio" name="mainPlace" value="空港止め"><span>空港止め</span></label>
+                <label class="choice"><input type="radio" name="mainPlace" value="その他"><span>その他</span></label>
+              </div>
+              <p class="field-error" hidden></p>
+            </fieldset>
+            <div class="field" data-when="mainPlace:その他">
+              <label class="field-label" for="f-main-address">送付先（場所名・住所・お名前・お電話番号） <span class="req">必須</span></label>
+              <textarea id="f-main-address" name="mainAddress" required data-error="送付先をご記入ください。"></textarea>
+              <p class="field-error" hidden></p>
+            </div>
+            <div data-when="mainPlace:空港止め">
+              <div class="field-row">
+                <div class="field">
+                  <label class="field-label" for="f-air-dep">出発空港・ターミナル <span class="req">必須</span></label>
+                  <input type="text" id="f-air-dep" name="airportDep" required placeholder="例: 羽田空港 第3ターミナル" data-error="出発空港をご記入ください。">
+                  <p class="field-error" hidden></p>
+                </div>
+                <div class="field">
+                  <label class="field-label" for="f-air-arr">行き先空港 <span class="req">必須</span></label>
+                  <input type="text" id="f-air-arr" name="airportArr" required placeholder="例: ホノルル" data-error="行き先空港をご記入ください。">
+                  <p class="field-error" hidden></p>
+                </div>
+              </div>
+              <div class="field-row">
+                <div class="field">
+                  <label class="field-label" for="f-air-flight">航空会社・便名 <span class="req">必須</span></label>
+                  <input type="text" id="f-air-flight" name="flight" required placeholder="例: JAL JL074" data-error="航空会社・便名をご記入ください。">
+                  <p class="field-error" hidden></p>
+                </div>
+                <div class="field">
+                  <label class="field-label" for="f-air-time">出発日・出発時刻 <span class="req">必須</span></label>
+                  <input type="text" id="f-air-time" name="departure" required placeholder="例: 2026年11月3日 21:55" data-error="出発日・出発時刻をご記入ください。">
+                  <p class="field-error" hidden></p>
+                </div>
+              </div>
+            </div>
+            <div class="field">
+              <label class="field-label" for="f-return">ご返却発送予定日 <span class="opt">任意</span></label>
+              <input type="date" id="f-return" name="returnDate" autocomplete="off">
+              <p class="field-error" hidden></p>
+            </div>
+          </fieldset>
+
+          <fieldset class="field-group">
+            <legend>ご希望のオプション</legend>
+            <fieldset class="choice-group" data-when="who:新婦,新郎新婦">
+              <legend class="field-label">新婦用 <span class="opt">任意</span></legend>
+              <div class="choice-grid is-compact">
+                <label class="choice"><input type="checkbox" name="brideOpt" value="ヴェール"><span>ヴェール</span></label>
+                <label class="choice"><input type="checkbox" name="brideOpt" value="パニエ"><span>パニエ</span></label>
+                <label class="choice"><input type="checkbox" name="brideOpt" value="パンプス"><span>パンプス</span></label>
+              </div>
+            </fieldset>
+            <fieldset class="choice-group" data-when="who:新郎,新郎新婦">
+              <legend class="field-label">新郎用 <span class="opt">任意</span></legend>
+              <div class="choice-grid is-compact">
+                <label class="choice"><input type="checkbox" name="groomOpt" value="タキシードシャツ"><span>タキシードシャツ</span></label>
+                <label class="choice"><input type="checkbox" name="groomOpt" value="シューズ"><span>シューズ</span></label>
+                <label class="choice"><input type="checkbox" name="groomOpt" value="メンズ小物5点セット"><span>メンズ小物5点セット</span></label>
+              </div>
+              <p class="field-note">小物5点セット: カフスボタン・アームバンド・サスペンダー・白チーフ・白グローブ</p>
+            </fieldset>
+          </fieldset>
           <div class="field">
-            <label class="field-label" for="f-tel">お電話番号 <span class="req">必須</span></label>
-            <input type="tel" id="f-tel" name="tel" required autocomplete="tel" inputmode="tel" placeholder="例: 09012345678" aria-describedby="f-tel-error">
-            <p class="field-error" id="f-tel-error" hidden></p>
+            <label class="field-label" for="f-message">ご要望・ご質問 <span class="opt">任意</span></label>
+            <textarea id="f-message" name="message" placeholder="気になっている点、ご相談したいことがあればご記入ください。"></textarea>
           </div>
+        </fieldset>
+
+        <!-- V. ご確認・規約への同意 -->
+        <fieldset class="form-step form-step-review" data-step="4" hidden>
+          <legend class="step-legend" tabindex="-1">ご入力内容の確認と規約への同意</legend>
+          <dl class="review-summary" id="review-summary"></dl>
+          <p class="field-label">レンタル規約</p>
+          <div class="terms-box" id="terms-box" tabindex="0" role="region" aria-label="レンタル規約の本文"></div>
+          <p class="terms-links">全文は <a id="terms-link" href="terms.html" target="_blank" rel="noopener">レンタル規約のページ</a> でもご覧いただけます。</p>
+          <div class="consent">
+            <label class="choice"><input type="checkbox" name="agree" value="同意" required data-error="お申し込みには規約への同意が必要です。"><span id="agree-label">上記の規約を確認し、同意します</span></label>
+            <p class="field-error" hidden></p>
+          </div>
+          <input type="hidden" id="f-terms-version" name="termsVersion">
+          <input type="hidden" id="f-terms-agreed-at" name="termsAgreedAt">
         </fieldset>
 
         <div class="form-nav">
@@ -973,11 +1214,8 @@
         <p class="complete-en" aria-hidden="true" translate="no">R.S.V.P.</p>
         <h3 class="complete-title" id="complete-title" tabindex="-1">ご予約を承りました</h3>
         <p class="complete-body"><span id="complete-name"></span> さま<br>このたびはアトリエユカにお申し込みいただき、誠にありがとうございます。一両日中に、担当スタイリストよりご確認のご連絡を差し上げます。</p>
-        <dl class="complete-summary">
-          <div><dt>ご希望日</dt><dd id="complete-date"></dd></div>
-          <div><dt>ご利用の目的</dt><dd id="complete-purpose"></dd></div>
-          <div><dt>ご希望の衣裳</dt><dd id="complete-category"></dd></div>
-        </dl>
+        <dl class="complete-summary" id="complete-summary"></dl>
+        <p class="complete-terms" id="complete-terms"></p>
         <p class="complete-body">お目にかかれる日を、スタッフ一同心より楽しみにしております。</p>
         <p class="complete-sign" translate="no">Atelier Yuka — Ginza Atelier</p>
         <button type="button" class="btn btn-ghost" id="btn-reset">最初から入力し直す</button>
@@ -1145,14 +1383,58 @@
     </ul>
     <p class="footer-company">松尾株式会社/MATSUO — 代表取締役 松尾 祐佳</p>
     <p class="footer-address">銀座アトリエ: 東京都中央区銀座1丁目20番地11号 6階 <span class="footer-sep" aria-hidden="true">|</span> <span translate="no">Hawaii Salon: 2270 Kalākaua Ave Suite 1220, Honolulu, HI 96815</span></p>
+    <ul class="footer-links"><li><a href="terms.html">レンタル規約</a></li><li><a href="#care">クリーニング・メンテナンス費</a></li><li><a href="#faq">FAQ</a></li></ul>
+    <p class="footer-partner">業者さま向け 新郎タキシード取寄せレンタル <a href="withawish/" translate="no">with a WISH</a> はこちら</p>
     <p class="footer-note">※ 本ページはサイトリプレイス提案「A案 Timeless Classic」のデザインデモです。ご予約フォームは動作サンプルで、送信されても実際のご予約は行われません。<br><a href="archive/index.html">4案の比較ページ（検討時のアーカイブ）</a></p>
     <p class="footer-copy" translate="no">© 2026 MATSUO Co., Ltd.</p>
   </div>
 </footer>
 
 
+<!-- デジタルカタログ（冊子ビューア） -->
+<dialog id="catalog-dialog" aria-labelledby="cat-title">
+  <div class="cat-shell">
+    <div class="cat-bar">
+      <p class="cat-title" id="cat-title">Atelier Yuka 2026 カタログ</p>
+      <div class="cat-acts">
+        <button type="button" class="cat-btn" id="cat-index" aria-expanded="false" aria-controls="cat-thumbs">目次</button>
+        <a class="cat-btn" href="assets/catalog/atelieryuka-catalog-2026.pdf" target="_blank" rel="noopener">PDFで開く<span class="cat-meta">58P / 25MB</span></a>
+        <button type="button" class="cat-x" data-close aria-label="カタログを閉じる">&times;</button>
+      </div>
+    </div>
+
+    <div class="cat-stage">
+      <button type="button" class="cat-nav cat-prev" id="cat-prev" aria-label="前のページ"><span aria-hidden="true">&lsaquo;</span></button>
+      <!-- ページはJSで流し込む。SPは1ページ＝1スナップ、PCは見開き＝1スナップ（CSSのみで切替） -->
+      <div class="cat-track" id="cat-track" tabindex="0" role="group" aria-label="カタログのページ送り（左右キー・スワイプで操作）"></div>
+      <button type="button" class="cat-nav cat-next" id="cat-next" aria-label="次のページ"><span aria-hidden="true">&rsaquo;</span></button>
+    </div>
+
+    <div class="cat-thumbs" id="cat-thumbs" hidden></div>
+
+    <div class="cat-foot">
+      <p class="cat-count" id="cat-count" role="status" aria-live="polite"></p>
+      <div class="cat-zoom" role="group" aria-label="表示倍率">
+        <button type="button" class="cat-zbtn" id="cat-zoom-out" aria-label="縮小">&minus;</button>
+        <button type="button" class="cat-zbtn cat-zval" id="cat-zoom-reset" aria-label="等倍に戻す"><span id="cat-zoom-val">100%</span></button>
+        <button type="button" class="cat-zbtn" id="cat-zoom-in" aria-label="拡大">&plus;</button>
+        <span class="cat-hint" id="cat-hint" hidden>ドラッグで移動</span>
+      </div>
+      <label class="cat-slider">
+        <span class="visually-hidden">ページ位置</span>
+        <input class="cat-range" type="range" id="cat-range" min="1" max="58" step="1" value="1">
+      </label>
+      <p class="cat-note">ダブルタップ・ピンチ・Ctrl＋ホイールでも拡大できます。</p>
+    </div>
+  </div>
+</dialog>
+
 <script src="assets/lightbox.js?v=4" defer></script>
-<script src="script.js?v=7" defer></script>
+<script src="script.js?v=8" defer></script>
 <script src="collection-filter.js?v=5" defer></script>
+<script src="catalog.js?v=1" defer></script>
+<script src="assets/data.js" defer></script>
+<script src="assets/terms.js" defer></script>
+<script src="reserve-form.js?v=1" defer></script>
 </body>
 </html>

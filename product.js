@@ -110,14 +110,6 @@
       window.AYLightbox.attach("#pd-gallery", ".pd-shot", {});
     }
 
-    /* ---- 希望日の範囲(10日後〜4ヶ月先) ---- */
-    var dateInput = el("f-date");
-    var fmt = function (d) { return d.toISOString().slice(0, 10); };
-    var min = new Date(); min.setDate(min.getDate() + 10);
-    var max = new Date(); max.setMonth(max.getMonth() + 4);
-    dateInput.min = fmt(min);
-    dateInput.max = fmt(max);
-
     /* ---- 関連(同じコレクションから3点) ---- */
     var grid = el("pd-related-grid");
     col.items.filter(function (it) { return it.code !== item.code; })
@@ -148,64 +140,59 @@
         grid.appendChild(li);
       });
 
-    /* ---- 申し込みフォーム(デモ) ---- */
-    var form = el("pd-form");
-    var fields = [
-      { input: el("f-date"), err: el("err-date"), test: function (v) { return v !== ""; } },
-      { input: el("f-name"), err: el("err-name"), test: function (v) { return v.trim().length > 0; } },
-      { input: el("f-email"), err: el("err-email"), test: function (v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); } },
-      { input: el("f-tel"), err: el("err-tel"), test: function (v) { return v.replace(/[^0-9]/g, "").length >= 10; } },
-    ];
+    /* ---- 予約フォーム(index.html)への引き継ぎ ---- */
+    var isDress = found.key === "wedding" || found.key === "color";
+    var who = isDress ? "新婦" : "新郎";
+    var reserveUrl = function (extra) {
+      var params = new URLSearchParams({ code: item.code, who: who });
+      Object.keys(extra || {}).forEach(function (k) { if (extra[k]) params.set(k, extra[k]); });
+      return "index.html?" + params.toString() + "#reserve";
+    };
+    el("pd-cta").href = reserveUrl();
 
-    fields.forEach(function (f) {
-      f.input.addEventListener("input", function () {
-        f.input.removeAttribute("aria-invalid");
-        f.err.hidden = true;
-      });
-    });
+    /* ---- サイズの目安(ドレスのみ) ---- */
+    var sizeSection = el("size");
+    if (!isDress || typeof AY.suggestDressSize !== "function") {
+      sizeSection.remove();
+      return;
+    }
+    el("sz-cta").href = reserveUrl();
+    var status = el("sz-chart-status");
+    if (AY.dressSizeChartStatus === "仮") {
+      status.textContent = "（対応表は仮のもので、正式版に差し替え予定です）";
+    }
 
-    form.addEventListener("submit", function (e) {
+    var num = function (id) { var v = parseFloat(el(id).value); return isNaN(v) ? 0 : v; };
+    el("size-form").addEventListener("submit", function (e) {
       e.preventDefault();
-      var firstError = null;
-      fields.forEach(function (f) {
-        var ok = f.test(f.input.value);
-        f.err.hidden = ok;
-        if (!ok) {
-          f.input.setAttribute("aria-invalid", "true");
-          if (!firstError) firstError = f.input;
-        }
+      var bust = num("sz-bust"), waist = num("sz-waist"), hip = num("sz-hip"), height = num("sz-height");
+      var r = AY.suggestDressSize(bust, waist, hip);
+      var result = el("sz-result");
+      var error = el("sz-error");
+      if (!r.ok) {
+        result.hidden = true;
+        error.textContent = r.reason;
+        error.hidden = false;
+        (bust ? el("sz-waist") : el("sz-bust")).focus();
+        return;
+      }
+      error.hidden = true;
+      el("sz-value").textContent = r.size;
+      el("sz-go").textContent = "参考: " + r.go + "（参考身長 " + AY.dressSizeRefHeight + "cm）";
+      var spec = el("sz-spec");
+      spec.textContent = "";
+      [["バスト", r.spec.bust], ["ウエスト", r.spec.waist], ["ヒップ", r.spec.hip]].forEach(function (row) {
+        var div = document.createElement("div");
+        var dt = document.createElement("dt"); dt.textContent = row[0];
+        var dd = document.createElement("dd"); dd.textContent = row[1] + " cm";
+        div.appendChild(dt); div.appendChild(dd);
+        spec.appendChild(div);
       });
-      if (firstError) { firstError.focus(); return; }
-
-      var submit = el("pd-submit");
-      var status = el("pd-status");
-      submit.disabled = true;
-      status.textContent = "送信中…";
-
-      var purpose = form.querySelector('input[name="purpose"]:checked').value;
-      var dateText = new Intl.DateTimeFormat("ja-JP", { year: "numeric", month: "long", day: "numeric", weekday: "short" })
-        .format(new Date(el("f-date").value + "T00:00:00"));
-
-      setTimeout(function () {
-        form.hidden = true;
-        var done = el("pd-done");
-        var summary = el("pd-done-summary");
-        summary.textContent = "";
-        [["お申し込みの衣裳", item.name + "(" + item.code + ")"],
-         ["ご利用の目的", purpose],
-         ["ご利用希望日", dateText],
-         ["お名前", el("f-name").value.trim() + " さま"]].forEach(function (row) {
-          var div = document.createElement("div");
-          var dt = document.createElement("dt");
-          dt.textContent = row[0];
-          var dd = document.createElement("dd");
-          dd.textContent = row[1];
-          div.appendChild(dt); div.appendChild(dd);
-          summary.appendChild(div);
-        });
-        done.hidden = false;
-        done.focus();
-      }, 800);
+      var caution = el("sz-caution");
+      caution.textContent = r.caution;
+      caution.hidden = !r.caution;
+      el("sz-cta").href = reserveUrl({ size: r.size, bust: bust, waist: waist, hip: hip, height: height });
+      result.hidden = false;
     });
   }
 

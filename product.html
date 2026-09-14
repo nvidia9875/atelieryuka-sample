@@ -10,13 +10,13 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Zen+Kaku+Gothic+New:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css?v=10">
-<link rel="stylesheet" href="style-b.css?v=7">
+<link rel="stylesheet" href="style-b.css?v=8">
 <link rel="stylesheet" href="assets/lightbox.css?v=5">
-<link rel="stylesheet" href="product.css?v=6">
+<link rel="stylesheet" href="product.css?v=7">
 <script src="assets/data.js" defer></script>
 <script src="assets/details.js?v=2" defer></script>
 <script src="assets/lightbox.js?v=4" defer></script>
-<script src="product.js?v=6" defer></script>
+<script src="product.js?v=7" defer></script>
 </head>
 <body id="top">
 <a class="skip-link" href="#main">本文へスキップ</a>
@@ -31,7 +31,8 @@
       <li><a href="index.html#collection">コレクション</a></li>
       <li><a href="index.html#flow">ご利用の流れ</a></li>
       <li><a href="index.html#pricing">料金</a></li>
-      <li><a class="nav-reserve" href="#apply">お申し込み</a></li>
+      <li><a class="nav-partner" href="withawish/">業者さまはこちら</a></li>
+      <li><a class="nav-reserve" href="index.html#reserve">ご予約</a></li>
     </ul>
   </nav>
 </header>
@@ -90,74 +91,42 @@
           <li>ご試着後の本使用予約もオンラインで完結します</li>
         </ul>
 
-        <p class="pd-cta-wrap"><a class="pd-cta" href="#apply">この衣裳で申し込む</a></p>
+        <p class="pd-cta-wrap"><a class="pd-cta" id="pd-cta" href="index.html#reserve">この衣裳で申し込む</a></p>
 
         <!-- 素材・デザイン・雰囲気・サイズ。項目ごとに有無が違うので JS で組み立てる -->
         <dl class="pd-spec" id="pd-spec" hidden></dl>
       </div>
     </div>
 
-    <!-- お申し込み -->
-    <section class="pd-apply" id="apply" aria-labelledby="apply-title">
+    <!-- サイズの目安（ドレスのみ）。結果と採寸値をトップの予約フォームへ引き継ぐ -->
+    <section class="pd-size" id="size" aria-labelledby="size-title">
       <header class="chapter-head">
-        <p class="chapter-no" aria-hidden="true" translate="no">R.S.V.P.</p>
-        <h2 class="chapter-title" id="apply-title">お申し込み</h2>
-        <p class="chapter-lede">招待状にご返信いただくように、必要事項をご記入ください。<br>お申し込みはデモです。送信は行われません。</p>
+        <p class="chapter-no" aria-hidden="true" translate="no">Size Guide</p>
+        <h2 class="chapter-title" id="size-title">サイズの目安を調べる</h2>
+        <p class="chapter-lede" id="size-lede">バスト・ウエスト・ヒップから、この衣裳の目安サイズをその場でご確認いただけます。<br>結果はそのままご予約フォームに引き継がれます。</p>
       </header>
 
-      <form class="pd-form" id="pd-form" novalidate>
-        <fieldset class="pd-field">
-          <legend>ご利用の目的<span class="req">必須</span></legend>
-          <div class="pd-choices">
-            <label class="pd-choice">
-              <input type="radio" name="purpose" value="ご自宅試着(¥5,500)" checked>
-              <span>ご自宅試着<small>1泊2日 ・ ¥5,500</small></span>
-            </label>
-            <label class="pd-choice">
-              <input type="radio" name="purpose" value="本使用レンタル(3泊4日)">
-              <span>本使用レンタル<small>3泊4日 ・ 表示価格</small></span>
-            </label>
-          </div>
-        </fieldset>
-
-        <div class="pd-field">
-          <label for="f-date">ご利用希望日<span class="req">必須</span></label>
-          <input type="date" id="f-date" name="date" autocomplete="off" required aria-describedby="err-date">
-          <p class="pd-hint">10日後〜4ヶ月先までご指定いただけます</p>
-          <p class="pd-err" id="err-date" hidden>ご利用希望日をお選びください</p>
+      <form class="pd-size-form" id="size-form" novalidate>
+        <div class="measure-grid">
+          <div class="measure"><label for="sz-bust">バスト <span class="req">必須</span></label><div class="measure-unit"><input type="number" id="sz-bust" name="bust" inputmode="decimal" min="60" max="150" step="0.5" autocomplete="off"><span>cm</span></div></div>
+          <div class="measure"><label for="sz-waist">ウエスト <span class="req">必須</span></label><div class="measure-unit"><input type="number" id="sz-waist" name="waist" inputmode="decimal" min="45" max="140" step="0.5" autocomplete="off"><span>cm</span></div></div>
+          <div class="measure"><label for="sz-hip">ヒップ</label><div class="measure-unit"><input type="number" id="sz-hip" name="hip" inputmode="decimal" min="60" max="160" step="0.5" autocomplete="off"><span>cm</span></div></div>
+          <div class="measure"><label for="sz-height">身長</label><div class="measure-unit"><input type="number" id="sz-height" name="height" inputmode="decimal" min="130" max="200" step="0.5" autocomplete="off"><span>cm</span></div></div>
         </div>
-
-        <div class="pd-field">
-          <label for="f-name">お名前<span class="req">必須</span></label>
-          <input type="text" id="f-name" name="name" autocomplete="name" placeholder="例: 山田 花子" required aria-describedby="err-name">
-          <p class="pd-err" id="err-name" hidden>お名前をご記入ください</p>
-        </div>
-
-        <div class="pd-field">
-          <label for="f-email">メールアドレス<span class="req">必須</span></label>
-          <input type="email" id="f-email" name="email" autocomplete="email" inputmode="email" spellcheck="false" placeholder="例: hanako@example.com" required aria-describedby="err-email">
-          <p class="pd-err" id="err-email" hidden>メールアドレスの形式をご確認ください</p>
-        </div>
-
-        <div class="pd-field">
-          <label for="f-tel">お電話番号<span class="req">必須</span></label>
-          <input type="tel" id="f-tel" name="tel" autocomplete="tel" inputmode="tel" placeholder="例: 09012345678" required aria-describedby="err-tel">
-          <p class="pd-err" id="err-tel" hidden>お電話番号をご記入ください</p>
-        </div>
-
-        <p class="pd-submit-wrap">
-          <button type="submit" class="pd-submit" id="pd-submit">この内容で申し込む</button>
-        </p>
-        <p class="pd-status" id="pd-status" role="status" aria-live="polite"></p>
+        <p class="pd-hint">下着の上から、メジャーを水平にして測った数値をご記入ください。</p>
+        <p class="pd-size-act"><button type="submit" class="pd-submit" id="sz-run">目安サイズを調べる</button></p>
       </form>
 
-      <div class="pd-done" id="pd-done" hidden tabindex="-1">
-        <p class="pd-done-en" translate="no">R.S.V.P.</p>
-        <h3 class="pd-done-title">ご予約を承りました</h3>
-        <p class="pd-done-text" id="pd-done-text">このたびはアトリエユカにお申し込みいただき、誠にありがとうございます。一両日中に、担当スタイリストよりご確認のご連絡を差し上げます。</p>
-        <dl class="pd-done-summary" id="pd-done-summary"></dl>
-        <p class="pd-done-note">※ このお申し込みはデザインサンプルのデモです。実際の送信は行われていません。</p>
+      <div class="pd-size-result" id="sz-result" role="status" aria-live="polite" hidden>
+        <p class="pd-size-en" translate="no">Your Size</p>
+        <p class="pd-size-value" id="sz-value" translate="no">—</p>
+        <p class="pd-size-go" id="sz-go"></p>
+        <dl class="pd-size-spec" id="sz-spec"></dl>
+        <p class="pd-size-caution" id="sz-caution" hidden></p>
+        <p class="pd-size-note">目安です。実際のフィット感はご自宅試着（1泊2日 ¥5,500）でお確かめください。<span id="sz-chart-status"></span></p>
+        <p class="pd-size-cta-wrap"><a class="pd-cta" id="sz-cta" href="index.html#reserve">この結果を添えて試着を申し込む</a></p>
       </div>
+      <p class="pd-size-error" id="sz-error" role="alert" hidden></p>
     </section>
 
     <!-- 同じコレクションより -->
@@ -175,6 +144,7 @@
   <div class="footer-inner">
     <p class="footer-mark" translate="no">Atelier Yuka</p>
     <p class="footer-company">松尾株式会社/MATSUO — 代表取締役 松尾 祐佳</p>
+    <ul class="footer-links"><li><a href="terms.html">レンタル規約</a></li><li><a href="index.html#faq">FAQ</a></li></ul>
     <p class="footer-note">※ 本ページはサイトリプレイス提案「A案 Timeless Classic」のデザインデモです。</p>
     <p class="footer-copy" translate="no">© 2026 MATSUO Co., Ltd.</p>
   </div>
