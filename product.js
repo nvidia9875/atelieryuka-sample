@@ -69,7 +69,7 @@
 
   function showMissing() {
     el("pd-missing").hidden = false;
-    document.title = "衣裳が見つかりません | Atelier Yuka(A案)";
+    document.title = "衣裳が見つかりません | Atelier Yuka";
   }
 
   function init() {
@@ -80,7 +80,7 @@
 
     var item = found.item;
     var col = found.collection;
-    document.title = item.name + " — " + col.label + " | Atelier Yuka(A案)";
+    document.title = item.name + " — " + col.label + " | Atelier Yuka";
 
     /* ---- 概要 ---- */
     el("crumb-cat").textContent = col.label;

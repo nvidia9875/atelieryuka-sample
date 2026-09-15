@@ -78,7 +78,7 @@ ${renderVariant(TERMS.overseas)}
   <div class="footer-inner">
     <p class="footer-mark" translate="no">Atelier Yuka</p>
     <p class="footer-company">松尾株式会社/MATSUO — 代表取締役 松尾 祐佳</p>
-    <p class="footer-note">※ 本ページはサイトリプレイス提案「A案 Timeless Classic」のデザインデモです。</p>
+    <p class="footer-note">※ 本ページはサイトリニューアルのデザインサンプルです。</p>
     <p class="footer-copy" translate="no">© 2026 MATSUO Co., Ltd.</p>
   </div>
 </footer>
