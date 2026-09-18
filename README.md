@@ -54,7 +54,7 @@
 - 現行ドメイン withawish.jp は残して `atelieryuka.com/withawish/` へ転送する方針（先方確認 2026-09-14）
 - with a WISH 側の戻り導線: 上部バーの「Atelier Yuka のサイトへ」とヘッダーの「ATELIER YUKA」
 - 単独リポジトリ時代の `archive/`（3案比較）は持ち込んでいない。元は `/Users/shun/Desktop/website/withawish`
-- with a WISH のカタログは自社版が未受領のため、`../assets/catalog/`（Atelier Yuka 2026）を参照している
+- with a WISH のカタログは自社版（2026-2027 vol.35）を `withawish/assets/catalog/` に配置済み（2026-09-18）。アトリエユカ側は `assets/catalog/`（Atelier Yuka 2026）
 
 ## デジタルカタログ
 

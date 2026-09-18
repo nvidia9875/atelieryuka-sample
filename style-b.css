@@ -598,3 +598,63 @@ input[aria-invalid="true"], .choice-group.has-error .choice { border-color: var(
 }
 .measure > input:hover { border-color: var(--gold); }
 .complete-summary dd { text-align: left; }
+
+/* ---------- ミニウエディングフォト（mini-photo.html） ----------
+   規約ページと同じ幅の単独ページ。料金は「プラン価格」と「オプション」の
+   2つしかないので、表ではなく定義リストで縦に読ませる。 */
+.mini-page { max-width: var(--w-narrow); margin: 0 auto; padding: var(--space-chapter) var(--pad-x); }
+.mini-tagline {
+  margin-top: 1.4rem;
+  font: italic 400 1.05rem/1.8 var(--font-jp);
+  color: var(--gold-ink);
+  text-align: center;
+}
+.mini-page .statement { margin-top: clamp(2rem, 4vw, 3rem); }
+.mini-facts {
+  display: grid; gap: 0.7rem;
+  margin: clamp(2rem, 4vw, 3rem) 0 0;
+}
+.mini-facts > div {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 1rem;
+  padding: 0.85em 1.1em;
+  background: var(--greige);
+}
+.mini-facts dt { font-size: 0.9rem; }
+.mini-facts dd { font-size: 0.95rem; }
+.mini-price {
+  font: 500 1.45rem/1.2 var(--font-en);
+  font-variant-numeric: lining-nums tabular-nums;
+  color: var(--gold-ink);
+}
+.mini-tax { font-size: 0.8rem; color: var(--muted); margin-left: 0.3em; }
+.mini-sec { margin-top: clamp(2.6rem, 5vw, 4rem); scroll-margin-top: 2rem; }
+.mini-sec-title {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 1rem;
+  font: 500 1.05rem/1.7 var(--font-jp);
+  letter-spacing: 0.08em;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid var(--line);
+}
+.mini-sec-price {
+  font: 500 1.1rem/1.2 var(--font-en);
+  font-variant-numeric: lining-nums tabular-nums;
+  color: var(--gold-ink);
+}
+.mini-list { display: grid; gap: 0; margin-top: 0.4rem; }
+.mini-list > div {
+  display: grid; grid-template-columns: 7.5em minmax(0, 1fr); gap: 1rem;
+  padding: 0.95em 0.2em;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.92rem;
+}
+.mini-list dt { color: var(--muted); }
+.mini-list-note { display: block; margin-top: 0.3em; font-size: 0.8rem; color: var(--muted); }
+.mini-cta {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 0.8rem;
+  margin-top: clamp(2.6rem, 5vw, 4rem);
+}
+.mini-note { margin-top: 1.4rem; text-align: center; font-size: 0.8rem; color: var(--muted); }
+@media (max-width: 560px) {
+  .mini-list > div { grid-template-columns: 1fr; gap: 0.25rem; }
+  .mini-sec-title { flex-direction: column; align-items: flex-start; gap: 0.2rem; }
+}

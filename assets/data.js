@@ -13,16 +13,12 @@ const AY = {
     tagline: "人生でいちばん美しい日を、いちばん確かな一着で。",
     statement:
       "アトリエユカは「洗練されたクラシック」をウェディングドレスの普遍美に進化させるドレスメゾン。インポートの素材を惜しみなく使い、国内最高峰のアトリエで一着ずつ仕立てるコレクションを、銀座とハワイのサロン、そしてオンラインからお届けします。",
+    // ブランドは Atelier Yuka に一本化（先方確認 2026-09-18。VICTRIA FRANCEZKA は統合）
     lines: [
       {
         name: "Atelier Yuka",
         desc: "「洗練されたクラシック」を普遍美に進化させたメゾンライン。インポート素材×国内最高峰アトリエの仕立て。",
         img: "brand-01.webp",
-      },
-      {
-        name: "VICTRIA FRANCEZKA",
-        desc: "ウェディングシーンに欠かせないクラシカルで上質な正統派スタイル。華やかな王道の美を意識した、誰からも愛される究極のコレクション。",
-        img: "brand-02.webp",
       },
     ],
   },
@@ -98,16 +94,16 @@ const AY = {
       label: "ウエディングドレス",
       labelEn: "Wedding Dress",
       items: [
-        { name: "Lumière", code: "HLD-00085-01", price: 330000, line: "VICTRIA FRANCEZKA", silhouette: "プリンセス", color: "ivory", img: "wd-01.webp", img2: "wd-01-b.webp" },
-        { name: "Clair de Lune", code: "HLD-00084-01", price: 330000, line: "VICTRIA FRANCEZKA", silhouette: "プリンセス", color: "ivory", img: "wd-02.webp", img2: "wd-02-b.webp" },
-        { name: "Étoile", code: "HLD-00066", price: 290000, line: "VICTRIA FRANCEZKA", silhouette: "プリンセス", color: "ivory", img: "wd-03.webp", img2: "wd-03-b.webp" },
-        { name: "Aurore", code: "HLD-00059-01", price: 290000, line: "VICTRIA FRANCEZKA", silhouette: "プリンセス", color: "white", img: "wd-04.webp", img2: "wd-04-b.webp" },
-        { name: "Blanche", code: "HLD-00043-01", price: 290000, line: "VICTRIA FRANCEZKA", silhouette: "Aライン", color: "ivory", img: "wd-05.webp", img2: "wd-05-b.webp" },
-        { name: "Camélia", code: "HLD-00051-01", price: 290000, line: "VICTRIA FRANCEZKA", silhouette: "Aライン", color: "white", img: "wd-06.webp", img2: "wd-06-b.webp" },
-        { name: "Séraphine", code: "HLD-00053-01", price: 290000, line: "VICTRIA FRANCEZKA", silhouette: "プリンセス", color: "ivory", img: "wd-07.webp", img2: "wd-07-b.webp" },
-        { name: "Gardenia", code: "HLD-00069-01", price: 290000, line: "VICTRIA FRANCEZKA", silhouette: "プリンセス", color: "white", img: "wd-08.webp", img2: "wd-08-b.webp" },
-        { name: "Mirabelle", code: "HLD-00070-01", price: 290000, line: "VICTRIA FRANCEZKA", silhouette: "プリンセス", color: "white", img: "wd-09.webp", img2: "wd-09-b.webp" },
-        { name: "Perle", code: "HLD-00071-01", price: 290000, line: "VICTRIA FRANCEZKA", silhouette: "Aライン", color: "ivory", img: "wd-10.webp", img2: "wd-10-b.webp" },
+        { name: "Lumière", code: "HLD-00085-01", price: 330000, line: "Atelier Yuka", silhouette: "プリンセス", color: "ivory", img: "wd-01.webp", img2: "wd-01-b.webp" },
+        { name: "Clair de Lune", code: "HLD-00084-01", price: 330000, line: "Atelier Yuka", silhouette: "プリンセス", color: "ivory", img: "wd-02.webp", img2: "wd-02-b.webp" },
+        { name: "Étoile", code: "HLD-00066", price: 290000, line: "Atelier Yuka", silhouette: "プリンセス", color: "ivory", img: "wd-03.webp", img2: "wd-03-b.webp" },
+        { name: "Aurore", code: "HLD-00059-01", price: 290000, line: "Atelier Yuka", silhouette: "プリンセス", color: "white", img: "wd-04.webp", img2: "wd-04-b.webp" },
+        { name: "Blanche", code: "HLD-00043-01", price: 290000, line: "Atelier Yuka", silhouette: "Aライン", color: "ivory", img: "wd-05.webp", img2: "wd-05-b.webp" },
+        { name: "Camélia", code: "HLD-00051-01", price: 290000, line: "Atelier Yuka", silhouette: "Aライン", color: "white", img: "wd-06.webp", img2: "wd-06-b.webp" },
+        { name: "Séraphine", code: "HLD-00053-01", price: 290000, line: "Atelier Yuka", silhouette: "プリンセス", color: "ivory", img: "wd-07.webp", img2: "wd-07-b.webp" },
+        { name: "Gardenia", code: "HLD-00069-01", price: 290000, line: "Atelier Yuka", silhouette: "プリンセス", color: "white", img: "wd-08.webp", img2: "wd-08-b.webp" },
+        { name: "Mirabelle", code: "HLD-00070-01", price: 290000, line: "Atelier Yuka", silhouette: "プリンセス", color: "white", img: "wd-09.webp", img2: "wd-09-b.webp" },
+        { name: "Perle", code: "HLD-00071-01", price: 290000, line: "Atelier Yuka", silhouette: "Aライン", color: "ivory", img: "wd-10.webp", img2: "wd-10-b.webp" },
       ],
     },
     color: {
@@ -141,7 +137,7 @@ const AY = {
       ],
     },
     morning: {
-      label: "モーニング",
+      label: "モーニング・マザードレス",
       labelEn: "Morning Coat",
       items: [
         { name: "Cérémonie I", code: "715S", price: 110000, line: "Atelier Yuka", color: "ivory", img: "mo-01.webp", img2: "mo-01-b.webp" },

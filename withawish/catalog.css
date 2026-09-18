@@ -249,6 +249,16 @@
     justify-content: flex-start;
     padding-right: 66px; padding-left: 2px;
   }
+  /* 見開き単位のPDF（1ページ＝左右2面）は、PCでも1画面に1ページ。
+     2ページ並べると4面ぶんになり、文字が読めなくなる */
+  .cat-single .cat-page,
+  .cat-single .cat-page:nth-child(odd),
+  .cat-single .cat-page:nth-child(even) {
+    flex-basis: 100%;
+    scroll-snap-align: start;
+    justify-content: center;
+    padding-left: 66px; padding-right: 66px;
+  }
 }
 
 @media (max-width: 860px) {

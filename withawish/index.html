@@ -101,7 +101,7 @@
     <div class="cat-lead reveal" id="catalogue">
       <button type="button" class="cat-lead-cover" data-catalog aria-label="デジタルカタログをめくって見る">
         <span class="p-frame">
-          <img src="../assets/catalog/pages/01.webp" alt="デジタルカタログの表紙" width="1200" height="1683" loading="lazy" decoding="async">
+          <img src="assets/catalog/pages/01.webp" alt="with a WISH カタログ 2026-2027 の表紙" width="1600" height="1066" loading="lazy" decoding="async">
         </span>
       </button>
       <div class="cat-lead-body">
@@ -109,15 +109,14 @@
         <h3 class="cat-lead-title">カタログを見る</h3>
         <p class="cat-lead-desc">冊子のカタログを、そのままブラウザでご覧いただけます。スマートフォンはスワイプ、PCは見開き。拡大すれば生地のディテールまでご確認いただけます。</p>
         <ul class="cat-lead-spec" role="list">
-          <li>全58ページ</li>
+          <li>全50ページ（見開き）</li>
           <li>ダウンロード不要</li>
-          <li>PDF 25MB</li>
+          <li>PDF 16MB</li>
         </ul>
         <div class="cat-lead-acts">
           <button type="button" class="btn btn-gold" data-catalog>ブラウザでめくる</button>
-          <a class="btn btn-quiet" href="../assets/catalog/atelieryuka-catalog-2026.pdf" target="_blank" rel="noopener">PDFを開く<span class="cat-lead-ext" aria-hidden="true">↗</span></a>
+          <a class="btn btn-quiet" href="assets/catalog/withawish-catalog-2026.pdf" target="_blank" rel="noopener">PDFを開く<span class="cat-lead-ext" aria-hidden="true">↗</span></a>
         </div>
-        <p class="cat-lead-note">本デモには Atelier Yuka 2026 カタログを仮置きしています。公開時は with a WISH のカタログに差し替えます。</p>
       </div>
     </div>
 
@@ -426,13 +425,13 @@
 
 
 <!-- デジタルカタログ（冊子ビューア） -->
-<dialog id="catalog-dialog" aria-labelledby="cat-title">
+<dialog id="catalog-dialog" class="cat-single" aria-labelledby="cat-title">
   <div class="cat-shell">
     <div class="cat-bar">
       <p class="cat-title" id="cat-title">デジタルカタログ<span class="chip-demo">デモ</span></p>
       <div class="cat-acts">
         <button type="button" class="cat-btn" id="cat-index" aria-expanded="false" aria-controls="cat-thumbs">目次</button>
-        <a class="cat-btn" href="../assets/catalog/atelieryuka-catalog-2026.pdf" target="_blank" rel="noopener">PDFで開く<span class="cat-meta">58P / 25MB</span></a>
+        <a class="cat-btn" href="assets/catalog/withawish-catalog-2026.pdf" target="_blank" rel="noopener">PDFで開く<span class="cat-meta">50P / 16MB</span></a>
         <button type="button" class="cat-x" data-close aria-label="カタログを閉じる">&times;</button>
       </div>
     </div>
@@ -456,9 +455,8 @@
       </div>
       <label class="cat-slider">
         <span class="vh">ページ位置</span>
-        <input class="cat-range" type="range" id="cat-range" min="1" max="58" step="1" value="1">
+        <input class="cat-range" type="range" id="cat-range" min="1" max="50" step="1" value="1">
       </label>
-      <p class="cat-note">本デモには Atelier Yuka 2026 カタログを仮置きしています。公開時は with a WISH のカタログに差し替えます。</p>
     </div>
   </div>
 </dialog>

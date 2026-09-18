@@ -25,8 +25,10 @@
 - 取引先の呼称は **「業者さま」**（先方確認 2026-09-14）。ナビ・CTA・見出しなど
   取引先に呼びかける導線はすべて業者さま。一方、新郎さま向けの説明文で
   お店そのものを指す場合は「衣裳店」のまま（例:「お近くの取扱い衣裳店でご試着」）
-- デジタルカタログには **Atelier Yuka 2026 カタログを仮置き**。先方より with a WISH 版の
-  カタログがある旨の回答あり（2026-09-14）。データ受領後に差し替える
+- デジタルカタログは **with a WISH 2026-2027 vol.35（50ページ・見開き単位）**。先方共有の
+  印刷用PDF（5.5GB）からトンボを落として `assets/catalog/` に生成（2026-09-18）。配布用PDFは
+  同じ画像から作り直した 16MB 版。1ページが冊子の見開きなので、ビューアは PC でも1画面1ページ
+  （`#catalog-dialog.cat-single`）
 
 ## 構成
 
@@ -42,7 +44,7 @@
 ├── assets/
 │   ├── data.js         コンテンツデータ（全125型）
 │   ├── img/            商品・ヒーロー・アバウト画像
-│   └── (catalog/)      with a WISH 版カタログの置き場（未受領。現在は ../assets/catalog/ の Atelier Yuka 版を参照）
+│   └── catalog/        カタログ（pages/ 50枚 1600×1066・thumbs/ 50枚・配布用PDF 16MB）
 └── data/products.json  商品データ元ファイル
 ```
 
@@ -55,16 +57,18 @@ python3 -m http.server 8942
 
 ## デジタルカタログの差し替え手順
 
-with a WISH 版のPDFが届いたら `assets/catalog/` を作り、`catalog.js` の `DIR` と `index.html` の
-`../assets/catalog/` 参照を `assets/catalog/` に戻します。ページ画像は次の手順で作ります。
+印刷用PDFにはトンボと色見本が付いているので、`pdfinfo -box` の TrimBox で切ってから WebP にします。
 
 ```bash
-pdftoppm -jpeg -jpegopt quality=92 -r 144 新しいカタログ.pdf raw/pg
-for f in raw/pg-*.jpg; do
-  n=$(basename "$f" .jpg); n=${n#pg-}
-  cwebp -q 76 -m 6 -resize 1200 0 "$f" -o assets/catalog/pages/$n.webp
-  cwebp -q 70 -m 6 -resize 220 0 "$f" -o assets/catalog/thumbs/$n.webp
+pdftoppm -jpeg -jpegopt quality=92 -r 110 カタログ.pdf raw/pg          # 見開き1面 ≒ 1930px 幅
+pdfinfo -box -f 1 -l 50 カタログ.pdf > boxes.txt                       # ページごとの TrimBox
+# TrimBox × (110/72) の矩形で sips -c/--cropOffset して crop/NN.jpg を作る
+for f in crop/*.jpg; do n=$(basename "$f" .jpg)
+  cwebp -q 76 -m 6 -resize 1600 0 "$f" -o assets/catalog/pages/$n.webp
+  cwebp -q 70 -m 6 -resize 240 0 "$f" -o assets/catalog/thumbs/$n.webp
+  sips -s format pdf "$f" --out onepage/$n.pdf                          # 配布用PDFの材料
 done
+pdfunite onepage/*.pdf assets/catalog/withawish-catalog-2026.pdf
 ```
 
 ページ数が変わる場合は `catalog.js` の `PAGES` と、`index.html` の

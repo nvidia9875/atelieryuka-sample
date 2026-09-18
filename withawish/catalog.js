@@ -11,12 +11,12 @@
 (function () {
   "use strict";
 
-  var PAGES = 58;
-  /* カタログ本体は親サイト（Atelier Yuka）側に置く。with a WISH 版のPDFが届いたら
-     withawish/assets/catalog/ に生成して "assets/catalog/" に戻す */
-  var DIR = "../assets/catalog/";
-  var W = 1200;
-  var H = 1683;
+  var PAGES = 50;
+  /* with a WISH 版カタログ（2026-2027 vol.35、先方より 2026-09-18 受領）。
+     PDFの1ページが冊子の見開き1面なので、画像は横長 */
+  var DIR = "assets/catalog/";
+  var W = 1600;
+  var H = 1066;
   /* 開いた直後に見える範囲だけ先に読む。残りは lazy に任せる */
   var EAGER = 4;
 
@@ -84,8 +84,8 @@
       var timg = document.createElement("img");
       timg.src = DIR + "thumbs/" + pad(n) + ".webp";
       timg.alt = "";
-      timg.width = 220;
-      timg.height = 309;
+      timg.width = 240;
+      timg.height = 160;
       timg.loading = "lazy";
       timg.decoding = "async";
       var label = document.createElement("span");
