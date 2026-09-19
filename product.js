@@ -61,10 +61,31 @@
       dt.appendChild(document.createTextNode(row.ja));
       var dd = document.createElement("dd");
       dd.textContent = row.value;
+      if (row.en === "Size") appendSizeNote(dd, row.value);
       div.appendChild(dt); div.appendChild(dd);
       spec.appendChild(div);
     });
     spec.hidden = false;
+  }
+
+  /**
+   * サイズ記号（7FTTT など）の読み方を添える。
+   * 1サイズなら「（7〜9号相当・身長170cm基準）」、複数なら凡例を1行。読めない記号なら何も足さない。
+   */
+  function appendSizeNote(dd, value) {
+    if (typeof AY.describeDressSize !== "function") return;
+    var sizes = value.split("・");
+    var note = document.createElement("small");
+    note.className = "pd-spec-note";
+    if (sizes.length === 1) {
+      var desc = AY.describeDressSize(sizes[0]);
+      if (!desc) return;
+      note.textContent = "（" + desc + "）";
+    } else {
+      if (!sizes.some(AY.describeDressSize)) return;
+      note.textContent = "数字＝号数相当 ／ T＝身長160cm基準、TT＝165cm、TTT＝170cm";
+    }
+    dd.appendChild(note);
   }
 
   function showMissing() {
@@ -162,11 +183,44 @@
       status.textContent = "（対応表は仮のもので、正式版に差し替え予定です）";
     }
 
+    /* このドレスの展開（details.js の size。「3FT・7FT・…」の中黒区切り）。
+       バストは DESIGN にビスチェがあればビスチェの列で見る。DESIGN の記載が無いドレスもビスチェ扱い（先方に伝えた基準） */
+    var detail = typeof AY_DETAILS !== "undefined" ? AY_DETAILS[item.code] : null;
+    var available = detail && detail.size ? detail.size.split("・") : [];
+    var design = detail ? detail.design : [];
+    var isBustier = !(design.length && design.indexOf("ビスチェ") === -1);
+
+    /* 目安サイズと、このドレスの展開との照合文 */
+    var availabilityText = function (r) {
+      var head = "このドレスのご用意: " + available.join(" / ");
+      var mine = AY.parseDressSize(r.size);
+      var sameNumber = available.some(function (s) {
+        var p = AY.parseDressSize(s);
+        return p && mine && p.number === mine.number;
+      });
+      if (!sameNumber) return head + " — 目安サイズとは異なります。お直しやご相談が必要な場合がありますので、お問い合わせください。";
+      if (!r.heightGiven) return head + " — 号数は同じです。丈は身長が未入力のため判定していません。";
+      if (available.indexOf(r.size) !== -1 && r.tierConfirmed) return head + " — 目安サイズと同じです。";
+      return head + " — 号数は同じですが、丈の基準身長が異なります。ご試着時に丈をお確かめください。";
+    };
+
+    /* 結果2行目: 号数の幅と、丈（身長の段階）の扱い */
+    var heightText = function (r) {
+      if (!r.heightGiven) return "丈の段階は身長が未入力のため付けていません";
+      if (r.tierConfirmed) return "丈は身長" + r.height + "cm基準";
+      return "身長" + r.height + "cm向けの丈（" + r.heightSuffix + "）はサイズ表に記載がないため、号数のみでご案内しています。丈はご試着時にご相談ください";
+    };
+
     var num = function (id) { var v = parseFloat(el(id).value); return isNaN(v) ? 0 : v; };
+    /* 任意項目: 空欄は 0（未入力）、何か入っていて数値にならない・0 のときは -1 にして範囲検証で弾く */
+    var optional = function (id) {
+      var raw = el(id).value.trim();
+      return raw === "" ? 0 : (parseFloat(raw) || -1);
+    };
     el("size-form").addEventListener("submit", function (e) {
       e.preventDefault();
-      var bust = num("sz-bust"), waist = num("sz-waist"), hip = num("sz-hip"), height = num("sz-height");
-      var r = AY.suggestDressSize(bust, waist, hip);
+      var bust = num("sz-bust"), waist = num("sz-waist"), hip = optional("sz-hip"), height = optional("sz-height");
+      var r = AY.suggestDressSize(bust, waist, hip, { height: height, bustier: isBustier });
       var result = el("sz-result");
       var error = el("sz-error");
       if (!r.ok) {
@@ -178,20 +232,28 @@
       }
       error.hidden = true;
       el("sz-value").textContent = r.size;
-      el("sz-go").textContent = "参考: " + r.go + "（参考身長 " + AY.dressSizeRefHeight + "cm）";
+      el("sz-go").textContent = r.go + "相当 ・ " + heightText(r);
       var spec = el("sz-spec");
       spec.textContent = "";
-      [["バスト", r.spec.bust], ["ウエスト", r.spec.waist], ["ヒップ", r.spec.hip]].forEach(function (row) {
+      [["バスト（" + r.bustColumn + "）", r.spec.bust], ["ウエスト", r.spec.waist], [hip ? "ヒップ" : "ヒップ（未入力・参考）", r.spec.hip]].forEach(function (row) {
         var div = document.createElement("div");
         var dt = document.createElement("dt"); dt.textContent = row[0];
         var dd = document.createElement("dd"); dd.textContent = row[1] + " cm";
         div.appendChild(dt); div.appendChild(dd);
         spec.appendChild(div);
       });
+      var avail = el("sz-avail");
+      avail.textContent = available.length ? availabilityText(r) : "";
+      avail.hidden = !available.length;
       var caution = el("sz-caution");
       caution.textContent = r.caution;
       caution.hidden = !r.caution;
-      el("sz-cta").href = reserveUrl({ size: r.size, bust: bust, waist: waist, hip: hip, height: height });
+      /* 予約フォームには判定の状態も添える（f-size-hint に入り、送信内容に含まれる）。
+         丈が未確認・未判定のまま「9FT」だけ渡すと、160cm基準で確定した結果と区別がつかないため */
+      var sizeForForm = !r.heightGiven ? r.size + "（丈は身長未入力のため未判定）"
+        : !r.tierConfirmed ? r.size + "（身長" + r.height + "cm向けの丈は要確認）"
+        : r.size;
+      el("sz-cta").href = reserveUrl({ size: sizeForForm, bust: bust, waist: waist, hip: hip > 0 ? hip : 0, height: height > 0 ? height : 0 });
       result.hidden = false;
     });
   }
