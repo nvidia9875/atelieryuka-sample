@@ -324,6 +324,21 @@
   text-decoration: underline; text-underline-offset: 4px;
 }
 .family-line a:hover { color: var(--gold); }
+/* SNS（現行 withawish.jp と同じアカウント）。文字リンクの列で、罫線の下に控えめに置く */
+.footer-social {
+  display: flex; flex-wrap: wrap; justify-content: center;
+  gap: 0.4em 2em;
+  margin: 1.6rem auto 0;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--line);
+  max-width: 560px;
+}
+.footer-social a {
+  font-family: var(--serif-en); font-size: 0.95rem; letter-spacing: 0.22em;
+  color: var(--ivory-dim); text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+.footer-social a:hover { color: var(--gold-text); border-bottom-color: var(--gold); }
 .footer-note {
   max-width: 620px; margin: 1.8em auto 0;
   font-size: var(--fs-xs); color: var(--ivory-faint);
