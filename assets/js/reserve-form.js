@@ -6,7 +6,7 @@
      ときだけ表示。隠れた要素の入力欄は disabled にして検証・送信・要約から外す
    - 検証: 表示中のステップ内の [required] を総当たり。個別のエラー文は data-error
    - 引き継ぎ: ?code= / ?size= / ?height= などのURL引数を初期値に入れる（商品ページから）
-   - 規約: assets/terms.js を、ご利用の目的（海外＝国外規約）で切り替えて描画 */
+   - 規約: assets/js/terms.js を、ご利用の目的（海外＝国外規約）で切り替えて描画 */
 (function () {
   "use strict";
 
@@ -338,7 +338,7 @@
     showStep(0, true);
   });
 
-  /* ---------- 衣裳番号の候補（assets/data.js があれば） ---------- */
+  /* ---------- 衣裳番号の候補（assets/js/data.js があれば） ---------- */
   var fillCodeList = function () {
     var list = document.getElementById("code-list");
     if (!list || typeof AY === "undefined") return;

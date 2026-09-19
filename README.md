@@ -13,28 +13,34 @@
 
 ```
 /
-├── index.html            A案トップ（決定案）
+├── index.html            トップ
 ├── product.html          衣裳詳細（?code=型番）。サイズの目安診断（正式表） → トップの予約フォームへ引き継ぐ
-├── terms.html            レンタル規約（国内・国外）。tools/build-terms.mjs が assets/terms.js から生成
-├── style.css             基本スタイル（デザイントークン・レイアウト）
-├── style-b.css           セクション別スタイル
-├── collection-filter.css コレクション絞り込みのスタイル
-├── catalog.css / .js     デジタルカタログ（冊子ビューア。with a WISH から移植）
-├── script.js             フェードイン / カテゴリタブ
-├── reserve-form.js       予約フォーム（5ステップ・申込書の項目・規約同意）
-├── collection-filter.js  コレクションの絞り込み・並び替え
-├── product.js            衣裳詳細（assets/data.js から描画）＋サイズ診断
-├── 404.html / robots.txt / .nojekyll
+├── terms.html            レンタル規約（国内・国外）。tools/build-terms.mjs が assets/js/terms.js から生成
+├── mini-photo.html       銀座アトリエの「ミニ」ウエディングフォト
+├── 404.html / robots.txt / favicon.ico / .nojekyll   （GitHub Pages の都合で直下に置く）
 │
 ├── assets/
-│   ├── data.js           ★全コンテンツの正（商品・色・価格・FAQ・ドレスのサイズ表 等）
-│   ├── details.js        衣裳の説明文・素材（自動生成。衣裳詳細ページのみ読み込む）
-│   ├── terms.js          レンタル規約の本文（国内・国外）。terms.html と予約フォームの同意ステップの元
+│   ├── css/
+│   │   ├── style.css             基本スタイル（デザイントークン・レイアウト）
+│   │   ├── style-b.css           セクション別スタイル
+│   │   ├── collection-filter.css コレクション絞り込み
+│   │   ├── product.css           衣裳詳細
+│   │   ├── catalog.css           デジタルカタログ（冊子ビューア。with a WISH から移植）
+│   │   └── lightbox.css          画像拡大表示
+│   ├── js/
+│   │   ├── data.js               ★全コンテンツの正（商品・色・価格・FAQ・ドレスのサイズ表 等）
+│   │   ├── details.js            衣裳の説明文・素材・サイズ（自動生成。衣裳詳細ページのみ読み込む）
+│   │   ├── terms.js              レンタル規約の本文（国内・国外）。terms.html と予約フォームの同意ステップの元
+│   │   ├── script.js             フェードイン / カテゴリタブ
+│   │   ├── reserve-form.js       予約フォーム（5ステップ・申込書の項目・規約同意）
+│   │   ├── collection-filter.js  コレクションの絞り込み・並び替え
+│   │   ├── product.js            衣裳詳細（data.js から描画）＋サイズ診断
+│   │   ├── catalog.js            デジタルカタログ
+│   │   └── lightbox.js           画像拡大表示
 │   ├── catalog/          Atelier Yuka 2026 カタログ（PDF・ページ画像 58枚・サムネイル）
 │   ├── img/              公開用 WebP（自動生成）
 │   ├── img-src/          画像の原本（再生成用。公開ページからは参照しない）
-│   ├── img-widths.json   srcset の幅記述子用（自動生成）
-│   └── lightbox.js/.css  共通の画像拡大表示
+│   └── img-widths.json   srcset の幅記述子用（自動生成）
 │
 ├── archive/              検討時のアーカイブ
 │   ├── index.html        4案の比較ページ
@@ -42,8 +48,11 @@
 │
 ├── withawish/            with a WISH（業者さま向け・新郎タキシード）のサイト。黒背景のまま下層に統合
 ├── data/                 出典データ（Shopify から取得した実データ）
+├── docs/                 社内メモ・先方とのやり取り・検証スクリーンショット（コミットしない）
 └── tools/                メンテナンス用スクリプト
 ```
+
+HTML はすべて直下に置く。先方に共有済みの URL（`/product.html?code=…` `/terms.html` など）を変えないため。
 
 ## with a WISH との統合（2026-09-09〜）
 
@@ -72,7 +81,7 @@ for f in raw/pg-*.jpg; do
 done
 ```
 
-ページ数が変わる場合は `catalog.js` の `PAGES` と、`index.html` の `#cat-range` の `max`・「全58ページ」表記を合わせる。
+ページ数が変わる場合は `assets/js/catalog.js` の `PAGES` と、`index.html` の `#cat-range` の `max`・「全58ページ」表記を合わせる。
 
 ## 予約フォームと規約
 
@@ -81,7 +90,7 @@ done
 
 - 条件表示は `data-when="ラジオ名:値,値"`、条件つき必須は `data-required-when`。隠れた欄は disabled になり、検証・要約から外れる
 - 規約はご利用の目的で切り替える（海外挙式・フォト相談 → 国外、それ以外 → 国内）。同意しないと送信できず、同意した規約名と日時を送信内容に含める
-- 規約本文は `assets/terms.js` だけを編集し、`node tools/build-terms.mjs` で `terms.html` を再生成する
+- 規約本文は `assets/js/terms.js` だけを編集し、`node tools/build-terms.mjs` で `terms.html` を再生成する
 - 送信はデモ（完了画面に送信内容をそのまま表示）。本番の送信先は未定
 
 ## サイズの目安（衣裳詳細ページ）
@@ -96,11 +105,11 @@ done
 
 - **サイズ記号の読み方**（表の参考身長から推定。先方に確認中）: 数字＝号数相当、F＝サイズフリー（寸法を範囲で合わせる）、T の数＝身長の段階（T=160cm・TT=165cm・TTT=170cm）。判定は 160cm の行で行い、身長から段階を決める（`AY.dressHeightTiers`。ちょうど中間は低い方）
 - **身長違いの記号は表にあるものだけ返す**（`AY.dressHeightVariants` = 7FTT / 7FTTT）。表に無い「9FTTT」のような記号は作らず、号数の記号（9FT）に「身長170cm向けの丈は表に記載がない」旨を添える。先方から他の号数にも TT/TTT があると回答があれば `AY.dressHeightTiersForAllSizes` を true にする
-- **バストはビスチェの列で判定**（先方に伝えた基準）。`assets/details.js` の DESIGN に記載があってビスチェを含まないドレス（現状 `HLD-00084-01` 長袖のみ）だけレギュラーの列。DESIGN の記載が無い4点（HLD-00085-01 / HLD-00066 / AY6001 / AY5601）はビスチェ扱い
-- **このドレスの展開**（`assets/details.js` の `size`）を結果に添え、号数が違う／号数は同じで丈が未判定（身長未入力）／一致／号数のみ一致で案内文を変える。18点は `7FTTT` の1サイズ
+- **バストはビスチェの列で判定**（先方に伝えた基準）。`assets/js/details.js` の DESIGN に記載があってビスチェを含まないドレス（現状 `HLD-00084-01` 長袖のみ）だけレギュラーの列。DESIGN の記載が無い4点（HLD-00085-01 / HLD-00066 / AY6001 / AY5601）はビスチェ扱い
+- **このドレスの展開**（`assets/js/details.js` の `size`）を結果に添え、号数が違う／号数は同じで丈が未判定（身長未入力）／一致／号数のみ一致で案内文を変える。18点は `7FTTT` の1サイズ
 - 入力の検証は `AY.suggestDressSize` 側で行う（バスト 60〜150・ウエスト 45〜140・ヒップ 60〜160・身長 130〜200。フォームは `novalidate`）
-- スキャンの手書き訂正は印刷値を採用し、誤植が疑われる 3FT バスト(レギュラー)「76-84」も推測で直さない（判定に使う寸法には手書き訂正なし）。詳細は `assets/data.js` のコメント
-- 診断ロジックの単体確認: `node -e "const AY=require('./assets/data.js');console.log(AY.suggestDressSize(84,64,92,{height:170}))"`
+- スキャンの手書き訂正は印刷値を採用し、誤植が疑われる 3FT バスト(レギュラー)「76-84」も推測で直さない（判定に使う寸法には手書き訂正なし）。詳細は `assets/js/data.js` のコメント
+- 診断ロジックの単体確認: `node -e "const AY=require('./assets/js/data.js');console.log(AY.suggestDressSize(84,64,92,{height:170}))"`
 
 ## コレクションの絞り込み
 
@@ -115,18 +124,18 @@ done
 ### サイズでの絞り込みについて
 
 **サイズ軸は未実装**です（サイズの目安診断は衣裳詳細ページにあります。下記「サイズの目安」参照）。サイズ情報自体は現行サイトにあり（購入バリエーションの選択肢。
-`assets/details.js` に取り込み済みで衣裳詳細ページに表示しています）、ただし
+`assets/js/details.js` に取り込み済みで衣裳詳細ページに表示しています）、ただし
 **ドレス20点のうち18点が同じ `7FTTT` の1サイズ**のため、絞り込みの軸としては機能しません
 （選択肢が実質1つ）。複数サイズがあるのは `AY6001` と `AY5601` のみ、
 タキシード・モーニング12点にはサイズ設定がありません。
 
-各衣裳のサイズ展開が増えた場合は、`assets/details.js` の `size` を軸に使う形で
+各衣裳のサイズ展開が増えた場合は、`assets/js/details.js` の `size` を軸に使う形で
 同じ仕組みに1軸足すだけで対応できます。
 
 ### 色データについて
 
 商品画像を1点ずつ目視確認して色系統を割り当てています（自動抽出だけではタキシードで
-背景や肌色を拾ってしまうため）。定義は `assets/data.js` の `colors` にあります。
+背景や肌色を拾ってしまうため）。定義は `assets/js/data.js` の `colors` にあります。
 
 ---
 
@@ -134,7 +143,7 @@ done
 
 **欧文・数字 = Cormorant Garamond ／ 和文 = Zen Kaku Gothic New** の2書体構成です。
 
-トークンは `style.css` の `:root` にあります。和文用スタック（`--font-jp` / `--font-body`）は
+トークンは `assets/css/style.css` の `:root` にあります。和文用スタック（`--font-jp` / `--font-body`）は
 先頭に欧文書体を置いているため、日本語の文中でも英数字だけが Cormorant Garamond で組まれます
 （ブラウザがグリフ単位でフォールバックする性質を利用）。
 
@@ -155,7 +164,7 @@ done
 ## 衣裳の説明文・素材・サイズ
 
 現行サイト（atelieryuka.com / Shopify）から、説明文・MATERIAL・DESIGN・GENRES・SIZE を
-取得して `assets/details.js` に落とし、衣裳詳細ページに表示しています。文言は原文のままです。
+取得して `assets/js/details.js` に落とし、衣裳詳細ページに表示しています。文言は原文のままです。
 
 ```bash
 node tools/fetch-product-details.mjs
@@ -178,7 +187,7 @@ node tools/fetch-product-details.mjs
 
 ### コンテンツを変更する
 
-`assets/data.js` が唯一の正です。商品の追加・価格変更・色の修正はここを編集し、
+`assets/js/data.js` が唯一の正です。商品の追加・価格変更・色の修正はここを編集し、
 コレクション部分のHTMLを再生成します。
 
 ```bash

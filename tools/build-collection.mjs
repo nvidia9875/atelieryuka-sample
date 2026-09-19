@@ -1,9 +1,9 @@
 /**
- * コレクション章のHTMLを assets/data.js から生成し、index.html に差し込む。
+ * コレクション章のHTMLを assets/js/data.js から生成し、index.html に差し込む。
  *
  *   使い方: node tools/build-collection.mjs
  *
- * assets/data.js を唯一の正とし、index.html の
+ * assets/js/data.js を唯一の正とし、index.html の
  *   <!-- COLLECTION:START --> 〜 <!-- COLLECTION:END -->
  * の間を丸ごと置き換える。生成結果はコミットするので、公開時にビルドは不要。
  *
@@ -15,7 +15,7 @@ import { resolve } from "node:path";
 
 const ROOT = resolve(import.meta.dirname, "..");
 const require = createRequire(import.meta.url);
-const AY = require(resolve(ROOT, "assets/data.js"));
+const AY = require(resolve(ROOT, "assets/js/data.js"));
 
 /** 生成済み画像の実寸（tools/optimize-images.sh が書き出す）。srcset の幅記述子に使う */
 const IMG_WIDTHS = JSON.parse(readFileSync(resolve(ROOT, "assets/img-widths.json"), "utf8"));

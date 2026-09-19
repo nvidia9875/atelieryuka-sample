@@ -1,4 +1,4 @@
-/* A案 Timeless Classic — 衣裳詳細ページ(データは assets/data.js の AY を参照) */
+/* A案 Timeless Classic — 衣裳詳細ページ(データは assets/js/data.js の AY を参照) */
 (function () {
   "use strict";
 
@@ -22,7 +22,7 @@
   function el(id) { return document.getElementById(id); }
 
   /**
-   * 説明文・素材(assets/details.js)を描画する。
+   * 説明文・素材(assets/js/details.js)を描画する。
    * 実サイトに記載のない衣裳もあるため、値のある項目だけを出し、
    * 何も無ければブロックごと隠したままにする。
    */

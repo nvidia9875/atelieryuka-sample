@@ -1,7 +1,7 @@
 /**
- * assets/terms.js から terms.html（レンタル規約ページ）を生成する。
+ * assets/js/terms.js から terms.html（レンタル規約ページ）を生成する。
  * 使い方: node tools/build-terms.mjs
- * 規約本文は assets/terms.js だけを編集し、このスクリプトで再生成する（二重管理しない）。
+ * 規約本文は assets/js/terms.js だけを編集し、このスクリプトで再生成する（二重管理しない）。
  */
 import { readFileSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
@@ -9,7 +9,7 @@ import { createRequire } from "node:module";
 
 const ROOT = resolve(import.meta.dirname, "..");
 const require = createRequire(import.meta.url);
-const TERMS = require(resolve(ROOT, "assets/terms.js"));
+const TERMS = require(resolve(ROOT, "assets/js/terms.js"));
 
 const esc = (s) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
@@ -42,11 +42,11 @@ const html = `<!DOCTYPE html>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Zen+Kaku+Gothic+New:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=10">
-<link rel="stylesheet" href="style-b.css?v=8">
+<link rel="stylesheet" href="assets/css/style.css?v=10">
+<link rel="stylesheet" href="assets/css/style-b.css?v=8">
 </head>
 <body>
-<!-- このファイルは tools/build-terms.mjs が assets/terms.js から生成する。直接編集しないこと -->
+<!-- このファイルは tools/build-terms.mjs が assets/js/terms.js から生成する。直接編集しないこと -->
 <a class="skip-link" href="#main">本文へスキップ</a>
 
 <header class="site-header">

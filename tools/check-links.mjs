@@ -68,6 +68,10 @@ for (const file of collect(ROOT)) {
         ? path.slice(BASE_PATH.length) || "/"
         : path;
       target = join(ROOT, withoutBase);
+    } else if (extname(file) === ".js") {
+      /* JS の文字列パスは実行時に読み込み元のページ基準で解決される。
+         サイトの HTML はすべて直下にあるので、JS の場所ではなくルート基準で見る */
+      target = resolve(ROOT, path);
     } else {
       target = resolve(dirname(file), path);
     }

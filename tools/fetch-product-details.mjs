@@ -1,6 +1,6 @@
 /**
  * 実サイト(atelieryuka.com / Shopify)から衣裳の説明文・素材を取得して
- * assets/details.js を生成する。
+ * assets/js/details.js を生成する。
  *
  *   node tools/fetch-product-details.mjs
  *
@@ -8,7 +8,7 @@
  * 型番(code)は handle ではなく商品タイトルで突き合わせる
  * (handle は実サイト側で型番とズレている商品があるため。例: BLD-00055-11 → handle は bld-00055-10)。
  *
- * 出力は assets/data.js の items[].code をキーにした辞書:
+ * 出力は assets/js/data.js の items[].code をキーにした辞書:
  *   AY_DETAILS = { "HLD-00084-01": { desc, material[], genres[], design[], size, source } }
  *
  * 生成結果はコミットする(公開時にビルド不要)。実サイトの文言が更新されたら再実行する。
@@ -19,12 +19,12 @@ import { dirname, join } from "node:path";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const SHOP = "https://atelieryuka.com";
-const OUT = join(ROOT, "assets", "details.js");
+const OUT = join(ROOT, "assets", "js", "details.js");
 
-/* ---- 1. assets/data.js から対象の型番を集める ---- */
+/* ---- 1. assets/js/data.js から対象の型番を集める ---- */
 
 async function targetCodes() {
-  const src = await readFile(join(ROOT, "assets", "data.js"), "utf8");
+  const src = await readFile(join(ROOT, "assets", "js", "data.js"), "utf8");
   const mod = { exports: {} };
   new Function("module", src)(mod);
   const AY = mod.exports;

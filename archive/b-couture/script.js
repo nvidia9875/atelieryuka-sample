@@ -272,7 +272,7 @@
   });
 })();
 
-/* ---------- 画像ライトボックス(共通 assets/lightbox.js) ---------- */
+/* ---------- 画像ライトボックス(共通 assets/js/lightbox.js) ---------- */
 (function () {
   "use strict";
   if (!window.AYLightbox) return;
