@@ -114,6 +114,12 @@
       return isNaN(v) || v <= 0 ? -1 : v; // 入っているのに数値にならないときは -1 にして範囲検証で弾く
     };
 
+    /* 表の「9〜11号」を、表示中の言語の書き方（t.go_range）にする */
+    function goLabel(go) {
+      var m = /^(\d+)〜(\d+)号$/.exec(go);
+      return m && t.go_range ? format(t.go_range, { from: m[1], to: m[2] }) : go;
+    }
+
     function heightText(r) {
       if (!r.heightGiven) return t.height_none;
       if (r.tierConfirmed) return format(t.height_confirmed, { height: r.height });
@@ -173,7 +179,7 @@
       }
       error.hidden = true;
       q("[data-size-value]").textContent = r.size;
-      q("[data-size-go]").textContent = format(t.go_line, { go: r.go, height: heightText(r) });
+      q("[data-size-go]").textContent = format(t.go_line, { go: goLabel(r.go), height: heightText(r) });
       renderSpec(r, hip > 0);
 
       var avail = q("[data-size-avail]");

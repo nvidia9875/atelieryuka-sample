@@ -134,6 +134,7 @@
     "result": {
       "caution_far": "Your measurements are outside the size chart. Alterations may be needed, so please contact us.",
       "go_line": "About Japanese size {go} · {height}",
+      "go_range": "Japanese size {from}–{to}",
       "height_none": "Length not set because height was not entered",
       "height_confirmed": "Length for {height} cm height",
       "height_unconfirmed": "The chart has no length for {height} cm ({suffix}), so only the size number is shown. Please ask about length at your fitting",

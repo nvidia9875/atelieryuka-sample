@@ -134,6 +134,7 @@
     "result": {
       "caution_far": "ご入力の寸法はサイズ表の範囲から離れています。お直しやご相談が必要な場合がありますので、お問い合わせください。",
       "go_line": "{go}相当 ・ {height}",
+      "go_range": "{from}〜{to}号",
       "height_none": "丈の段階は身長が未入力のため付けていません",
       "height_confirmed": "丈は身長{height}cm基準",
       "height_unconfirmed": "身長{height}cm向けの丈（{suffix}）はサイズ表に記載がないため、号数のみでご案内しています。丈はご試着時にご相談ください",

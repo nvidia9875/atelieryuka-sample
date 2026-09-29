@@ -134,6 +134,7 @@
     "result": {
       "caution_far": "입력하신 치수가 사이즈표의 범위에서 벗어나 있습니다. 수선이나 상담이 필요할 수 있으니 문의해 주십시오.",
       "go_line": "{go} 상당 · {height}",
+      "go_range": "일본 사이즈 {from}~{to}호",
       "height_none": "키가 입력되지 않아 기장 단계는 표시하지 않았습니다",
       "height_confirmed": "기장은 키 {height}cm 기준",
       "height_unconfirmed": "키 {height}cm용 기장({suffix})은 사이즈표에 기재되어 있지 않아 호수만 안내해 드립니다. 기장은 피팅 시 상담해 주십시오",

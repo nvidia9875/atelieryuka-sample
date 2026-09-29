@@ -134,6 +134,7 @@
     "result": {
       "caution_far": "您输入的尺寸超出尺码表范围，可能需要修改或咨询，敬请联系我们。",
       "go_line": "相当于{go} · {height}",
+      "go_range": "日本尺码 {from}–{to}号",
       "height_none": "未输入身高，因此未标注衣长档位",
       "height_confirmed": "衣长以身高{height}cm为基准",
       "height_unconfirmed": "尺码表中没有适合身高{height}cm的衣长（{suffix}），因此仅提供号数参考。衣长请在试穿时咨询",
