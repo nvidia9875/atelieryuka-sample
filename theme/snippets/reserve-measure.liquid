@@ -1,0 +1,42 @@
+{% comment %}
+  予約フォームの採寸欄1つ（cm）。
+
+  使い方:
+    {% render 'reserve-measure', who: 'bride', field: 'height', min: 130, max: 200, required: true %}
+  - name は who + Field（例: brideHeight）
+  - 確認画面・メールでは「身長 158 cm」のように data-short と data-unit で組み立てる
+{% endcomment %}
+{%- liquid
+  assign label_key = 'reserve.size.fields.' | append: field
+  assign label = label_key | t
+  assign field_cap = field | capitalize
+  assign input_name = who | append: field_cap
+  assign input_id = 'f-' | append: who | append: '-' | append: field
+  assign min_text = min | append: ''
+  assign max_text = max | append: ''
+  assign error_required = 'reserve.size.error_required' | t | replace: '{field}', label
+  assign error_range = 'reserve.size.error_range' | t | replace: '{min}', min_text | replace: '{max}', max_text
+-%}
+<div class="measure">
+  <label for="{{ input_id }}">
+    {{- label -}}
+    {%- if required -%}<span class="req">{{ 'reserve.required' | t }}</span>{%- endif -%}
+  </label>
+  <div class="measure-unit">
+    <input
+      type="number"
+      id="{{ input_id }}"
+      name="{{ input_name }}"
+      data-short="{{ label | escape }}"
+      data-unit="cm"
+      inputmode="decimal"
+      min="{{ min }}"
+      max="{{ max }}"
+      step="0.5"
+      {% if required %}required data-error="{{ error_required | escape }}"{% endif %}
+      data-error-format="{{ error_range | escape }}"
+    >
+    <span>cm</span>
+  </div>
+  <p class="field-error" hidden></p>
+</div>

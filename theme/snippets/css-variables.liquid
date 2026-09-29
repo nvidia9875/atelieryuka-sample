@@ -1,0 +1,51 @@
+{% comment %}
+  デザイントークン。色はテーマ設定（管理画面）から変えられる。
+  初期値はサンプルサイト assets/css/style.css の :root と同じ。
+{% endcomment %}
+{% style %}
+  :root {
+    --ivory: {{ settings.color_ivory }};
+    --ink: {{ settings.color_ink }};
+    --gold: {{ settings.color_gold }};
+    --gold-ink: {{ settings.color_gold_ink }};
+    --greige: {{ settings.color_greige }};
+    --paper: {{ settings.color_paper }};
+    --line: {{ settings.color_line }};
+    --muted: {{ settings.color_muted }};
+    --error: {{ settings.color_error }};
+
+    /* フッターなど墨地の上の文字 */
+    --on-ink: #EFE9DD;
+    --on-ink-muted: #B7B0A4;
+
+    /* 欧文・数字 = Cormorant Garamond ／ 和文 = Zen Kaku Gothic New の2書体構成。
+       和文スタックの先頭に欧文書体を置くと、日本語の文中でも英数字だけが
+       Cormorant Garamond で組まれる。--font-latin に総称ファミリ(serif)を
+       含めないのは、途中で serif に落ちると和文が明朝で拾われてしまうため。 */
+    --font-latin: "Cormorant Garamond", Georgia, "Times New Roman";
+    --font-gothic: "Zen Kaku Gothic New", "Hiragino Kaku Gothic ProN", "Yu Gothic Medium", "Yu Gothic", Meiryo, sans-serif;
+    --font-en: var(--font-latin), serif;
+    --font-jp: var(--font-latin), var(--font-gothic);
+    --font-body: var(--font-latin), var(--font-gothic);
+    --font-ui: var(--font-gothic);
+
+    --w-narrow: 680px;
+    --w-mid: 900px;
+    --w-wide: 1120px;
+    --space-chapter: clamp(4.5rem, 3rem + 5vw, 8.5rem);
+    --pad-x: clamp(16px, 4vw, 40px);
+
+    --duration-fast: 150ms;
+
+    --z-header-pop: 40;
+    --z-pill: 50;
+    --z-skip: 100;
+
+    /* 雛形（Skeleton）由来のセクションが参照する名前。置き換えが済むまで残す */
+    --color-background: var(--ivory);
+    --color-foreground: var(--ink);
+    --page-width: var(--w-wide);
+    --page-margin: var(--pad-x);
+    --style-border-radius-inputs: 0;
+  }
+{% endstyle %}

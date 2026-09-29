@@ -1,0 +1,236 @@
+/* ============================================================
+   Atelier Yuka — 衣裳の詳細ページ
+   サンプル assets/css/product.css から移植（予約フォームのパネル・関連の JS 描画用は除く）。
+   採寸欄（.measure*）はサンプル style-b.css の予約フォームと同じ見た目。
+   ============================================================ */
+
+.pd {
+  max-width: var(--w-wide);
+  margin: 0 auto;
+  padding: clamp(2rem, 1.2rem + 3vw, 4rem) var(--pad-x) 0;
+  box-sizing: content-box;
+}
+
+/* ---- パンくず ---- */
+.pd-crumb {
+  display: flex; flex-wrap: wrap; gap: 0.6em;
+  font-size: 0.8rem; color: var(--muted);
+  margin-bottom: clamp(1.6rem, 3vw, 2.8rem);
+}
+.pd-crumb a { color: var(--muted); text-decoration: none; }
+.pd-crumb a:hover, .pd-crumb a:focus-visible { color: var(--gold-ink); text-decoration: underline; }
+.pd-crumb [aria-current] { color: var(--ink); font-variant-numeric: lining-nums; }
+
+/* ---- 上段: ギャラリー+情報 ---- */
+.pd-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: clamp(2rem, 4vw, 4.5rem);
+  align-items: start;
+}
+.pd-gallery {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(1rem, 2vw, 1.6rem);
+}
+.pd-shot {
+  margin: 0;
+  border: 1px solid var(--line);
+  padding: clamp(0.6rem, 1.2vw, 1rem);
+  background: var(--paper);
+}
+.pd-shot img,
+.pd-shot .pd-placeholder { display: block; width: 100%; height: auto; aspect-ratio: 3 / 4; object-fit: cover; }
+.pd-shot .pd-placeholder { background: var(--greige); fill: var(--line); }
+
+.pd-info { min-width: 0; }
+.pd-info .chapter-label { justify-content: flex-start; margin-top: 0; }
+.pd-info .chapter-label::before { display: none; }
+.pd-line { font-size: 0.8rem; letter-spacing: 0.14em; color: var(--gold-ink); text-transform: uppercase; margin: 1.2rem 0 0.4rem; }
+.pd-name {
+  font-family: var(--font-en);
+  font-weight: 500;
+  font-size: clamp(2.2rem, 1.6rem + 2.4vw, 3.4rem);
+  font-variant-numeric: lining-nums;
+  line-height: 1.15;
+  margin: 0 0 0.35em;
+  text-wrap: balance;
+}
+.pd-code { font-size: 0.85rem; color: var(--muted); display: flex; flex-wrap: wrap; gap: 0.3em 1em; margin-bottom: 1.6rem; font-variant-numeric: lining-nums tabular-nums; }
+
+/* ---- 衣裳の説明（Shopify の商品説明そのまま） ---- */
+.pd-desc {
+  margin: 0 0 1.8rem;
+  font-size: 0.95rem;
+  line-height: 2.1;
+  color: color-mix(in srgb, var(--ink) 88%, var(--ivory));
+}
+.pd-desc p + p { margin-top: 0.9em; }
+.pd-desc img { margin-block: 1em; }
+
+/* ---- 料金 ---- */
+.pd-price { border-top: 1px solid var(--line); margin: 0 0 1.4rem; }
+.pd-price > div {
+  display: flex; justify-content: space-between; align-items: baseline; gap: 1em;
+  padding: 0.85em 0; border-bottom: 1px solid var(--line);
+}
+.pd-price dt { font-size: 0.85rem; color: var(--muted); }
+.pd-price dd { margin: 0; text-align: right; font-family: var(--font-en); font-size: 1.35rem; font-variant-numeric: lining-nums tabular-nums; }
+.pd-price-note { display: block; font-family: var(--font-body); font-size: 0.72rem; color: var(--muted); }
+.pd-price-single { font: 400 1.35rem/1.5 var(--font-en); font-variant-numeric: lining-nums tabular-nums; margin-bottom: 1.4rem; }
+
+.pd-notes { list-style: none; margin: 0 0 2rem; padding: 0; }
+.pd-notes li {
+  position: relative; padding-left: 1.2em;
+  font-size: 0.85rem; color: var(--muted); line-height: 1.9;
+}
+.pd-notes li::before { content: "—"; position: absolute; left: 0; color: var(--gold); }
+
+.pd-cta-wrap { margin: 0; }
+.pd-cta {
+  display: inline-block;
+  background: var(--ink);
+  color: var(--ivory);
+  text-decoration: none;
+  font-size: 0.95rem;
+  letter-spacing: 0.1em;
+  padding: 1em 2.6em;
+  border: 1px solid var(--ink);
+  transition: background-color 180ms ease, color 180ms ease;
+}
+.pd-cta:hover, .pd-cta:focus-visible { background: transparent; color: var(--ink); }
+
+/* ---- 取扱サイズ ---- */
+.pd-spec { margin: 0 0 1.6rem; }
+.pd-spec > div {
+  display: grid;
+  grid-template-columns: 7.5rem minmax(0, 1fr);
+  gap: 0 1.2rem;
+  padding: 0.9em 0;
+  border-bottom: 1px solid var(--line);
+}
+.pd-spec > div:first-child { border-top: 1px solid var(--line); }
+/* 料金のすぐ下に続くときは、罫線が二重にならないよう上の線を省いて1本の表に見せる */
+.pd-price:has(+ .pd-spec) { margin-bottom: 0; }
+.pd-price + .pd-spec > div:first-child { border-top: 0; }
+.pd-spec dt { font-size: 0.78rem; color: var(--muted); line-height: 1.7; }
+.pd-spec-en {
+  display: block;
+  font-family: var(--font-en);
+  font-size: 0.95rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold-ink);
+  line-height: 1.4;
+}
+.pd-spec dd { margin: 0; font-size: 0.88rem; line-height: 1.9; font-variant-numeric: lining-nums; }
+.pd-spec-note { display: block; font-size: 0.76rem; color: var(--muted); line-height: 1.7; }
+
+@media (max-width: 400px) {
+  .pd-spec > div { grid-template-columns: 1fr; gap: 0.35em; }
+}
+
+/* ---- サイズの目安 ---- */
+.pd-size { max-width: var(--w-narrow); margin: var(--space-chapter) auto 0; }
+.pd-size-form {
+  border: 1px solid var(--gold);
+  outline: 1px solid var(--line);
+  outline-offset: 6px;
+  background: var(--paper);
+  padding: clamp(1.6rem, 4vw, 3rem);
+  margin-top: 2.2rem;
+}
+.pd-size-form .measure-grid { margin-bottom: 0.6rem; }
+.req {
+  font-size: 0.68rem; color: var(--gold-ink);
+  border: 1px solid var(--gold); border-radius: 0;
+  padding: 0.05em 0.5em; margin-left: 0.6em; vertical-align: middle;
+}
+.pd-hint { font-size: 0.75rem; color: var(--muted); margin: 0.5em 0 0; }
+.pd-size-act { text-align: center; margin: 1.8rem 0 0; }
+.pd-submit {
+  font: inherit;
+  letter-spacing: 0.1em;
+  background: var(--ink);
+  color: var(--ivory);
+  border: 1px solid var(--ink);
+  padding: 1em 3em;
+  cursor: pointer;
+  transition: background-color 180ms ease, color 180ms ease;
+}
+.pd-submit:hover, .pd-submit:focus-visible { background: transparent; color: var(--ink); }
+.pd-size-error { text-align: center; font-size: 0.85rem; color: var(--error); margin: 1rem 0 0; }
+.pd-size-error::before { content: "※ "; }
+
+.pd-size-result {
+  text-align: center;
+  margin-top: 2rem;
+  padding: clamp(1.6rem, 4vw, 2.6rem);
+  border: 1px solid var(--line);
+  background: var(--greige);
+}
+.pd-size-en { font-family: var(--font-en); font-style: italic; letter-spacing: 0.2em; color: var(--gold-ink); margin: 0; }
+.pd-size-value { font: 500 clamp(2.4rem, 2rem + 2vw, 3.2rem)/1.2 var(--font-en); margin: 0.2em 0 0; letter-spacing: 0.06em; }
+.pd-size-go { font-size: 0.9rem; color: var(--muted); margin: 0.4em 0 0; }
+.pd-size-spec {
+  display: flex; justify-content: center; flex-wrap: wrap; gap: 0.6em 2.2em;
+  margin: 1.4rem 0 0;
+}
+.pd-size-spec div { display: flex; gap: 0.6em; font-size: 0.86rem; }
+.pd-size-spec dt { color: var(--muted); }
+.pd-size-spec dd { margin: 0; font-variant-numeric: lining-nums tabular-nums; }
+.pd-size-avail { font-size: 0.86rem; line-height: 1.9; margin: 1.2rem 0 0; }
+.pd-size-caution { font-size: 0.84rem; color: var(--error); margin: 1.2rem 0 0; }
+.pd-size-note { font-size: 0.78rem; color: var(--muted); line-height: 1.9; margin: 1.2rem 0 0; }
+.pd-size-cta-wrap { margin: 1.6rem 0 0; }
+
+/* ---- 採寸欄（予約フォームと同じ部品） ---- */
+.measure-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.9rem 0.8rem;
+  margin-bottom: 1.4rem;
+}
+@media (min-width: 560px) { .measure-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.measure {
+  display: grid; gap: 0.35rem;
+  /* 隣の欄にエラー文が出て行が高くなっても、ラベルと入力欄は上に詰めたまま */
+  align-content: start;
+  font-size: 0.8rem;
+}
+.measure-unit {
+  display: flex; align-items: center;
+  border: 1px solid var(--line);
+  background: #FFFFFF;
+  transition: border-color var(--duration-fast) ease-out;
+}
+.measure-unit:hover { border-color: var(--gold); }
+.measure-unit input {
+  width: 100%; min-width: 0; min-height: 46px;
+  border: 0; background: none;
+  padding: 0.5em 0.2em 0.5em 0.8em;
+  /* iOS で入力時にズームされないよう 16px を下回らせない */
+  font: 400 1rem/1.5 var(--font-ui);
+  color: var(--ink);
+  font-variant-numeric: lining-nums tabular-nums;
+}
+/* フォーカスの枠は「数値＋cm」の枠全体に付ける（入力欄だけだと cm が枠の外に出て見える） */
+.measure-unit:focus-within { outline: 2px solid var(--gold-ink); outline-offset: 1px; }
+.measure-unit input:focus-visible { outline: none; }
+.measure-unit span { padding: 0 0.7em 0 0.2em; font-size: 0.78rem; color: var(--muted); }
+
+/* ---- 関連（こちらもおすすめ） ---- */
+.pd-related { max-width: var(--w-wide); margin: var(--space-chapter) auto 0; padding: 0 var(--pad-x) var(--space-chapter); box-sizing: content-box; }
+/* おすすめが0件（または取得前）のときは余白を持たない */
+.pd-related:not(:has(.product)) { margin: 0; padding: 0; }
+
+@media (max-width: 860px) {
+  .pd-grid { grid-template-columns: 1fr; }
+  .pd-gallery { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 520px) {
+  .pd-gallery { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pd-cta, .pd-submit { transition: none; }
+}

@@ -1,0 +1,235 @@
+{% comment %}
+  商品ページ（衣裳の詳細）。サンプル product.html から移植。
+  - 料金は「レンタル料金」オプションの値ごとに出す（試着は「ご自宅試着」、それ以外は「本使用レンタル（3泊4日）」など）
+  - 取扱サイズは「サイズ」オプションの値
+  - サイズの目安はドレスだけ（種類に「ドレス」を含む商品）。判定は assets/size-guide.js
+  - 「この衣裳で申し込む」は予約ページに型番（code）と誰の衣裳か（who）を付けて渡す
+{% endcomment %}
+{{ 'product.css' | asset_url | stylesheet_tag }}
+
+{%- capture code -%}{% render 'product-code', product: product %}{%- endcapture -%}
+{%- liquid
+  assign line = product.metafields.custom.line.value
+  assign silhouettes = product.metafields.custom.silhouette.value
+  assign is_dress = false
+  if product.type contains 'ドレス'
+    assign is_dress = true
+  endif
+  if is_dress
+    assign who = 'bride'
+  else
+    assign who = 'groom'
+  endif
+
+  assign price_option = nil
+  assign size_option = nil
+  for option in product.options_with_values
+    if option.name contains '料金'
+      assign price_option = option
+    elsif option.name == 'サイズ'
+      assign size_option = option
+    endif
+  endfor
+
+  # サンプルと同じ基準: DESIGN の記載にビスチェがあるか、DESIGN の記載が無いドレスはビスチェの列で見る
+  assign is_bustier = true
+  if product.description contains 'DESIGN'
+    unless product.description contains 'ビスチェ'
+      assign is_bustier = false
+    endunless
+  endif
+
+  assign reserve_base = section.settings.reserve_link | default: '/pages/reserve'
+  assign code_param = code | url_encode
+  assign reserve_url = reserve_base | append: '?code=' | append: code_param | append: '&who=' | append: who
+  if collection
+    assign crumb_collection = collection
+  else
+    assign crumb_collection = product.collections.first
+  endif
+-%}
+
+<article class="pd full-width">
+  <nav class="pd-crumb" aria-label="{{ 'products.breadcrumb' | t }}">
+    <a href="{{ routes.root_url }}">{{ 'products.home' | t }}</a>
+    {%- if crumb_collection -%}
+      <span aria-hidden="true">/</span>
+      <a href="{{ crumb_collection.url }}">{{ crumb_collection.title }}</a>
+    {%- endif -%}
+    <span aria-hidden="true">/</span>
+    <span aria-current="page" translate="no">{{ code }}</span>
+  </nav>
+
+  <div class="pd-grid">
+    <div class="pd-gallery">
+      {%- for media in product.media -%}
+        {%- if media.media_type == 'image' -%}
+          <figure class="pd-shot">
+            {%- liquid
+              if forloop.first
+                assign loading = 'eager'
+                assign priority = 'high'
+              else
+                assign loading = 'lazy'
+                assign priority = 'auto'
+              endif
+            -%}
+            {{
+              media
+              | image_url: width: 1400
+              | image_tag:
+                widths: '480, 700, 900, 1100, 1400',
+                sizes: '(max-width: 520px) 92vw, (max-width: 860px) 46vw, 600px',
+                loading: loading,
+                fetchpriority: priority,
+                alt: media.alt | default: product.title
+            }}
+          </figure>
+        {%- endif -%}
+      {%- else -%}
+        <figure class="pd-shot">{{ 'product-apparel-1' | placeholder_svg_tag: 'pd-placeholder' }}</figure>
+      {%- endfor -%}
+    </div>
+
+    <div class="pd-info">
+      <p class="chapter-label" translate="no">{{ section.settings.eyebrow }}</p>
+      {%- if line != blank -%}
+        <p class="pd-line" translate="no">{{ line }}</p>
+      {%- endif -%}
+      <h1 class="pd-name" translate="no">{{ code }}</h1>
+      <p class="pd-code">
+        <span>{{ product.type }}</span>
+        {%- if silhouettes != blank -%}
+          <span>
+            {{- 'products.silhouette' | t -}}:
+            {% for s in silhouettes %}{{ s.name.value }}{% unless forloop.last %}・{% endunless %}{% endfor %}
+          </span>
+        {%- endif -%}
+      </p>
+
+      {%- if product.description != blank -%}
+        <div class="pd-desc">{{ product.description }}</div>
+      {%- endif -%}
+
+      {%- if price_option -%}
+        {%- comment -%} 本使用レンタル（3泊4日・7泊8日…）を先に、ご自宅試着を最後に出す（サンプルと同じ順） {%- endcomment -%}
+        <dl class="pd-price">
+          {%- assign passes = 'rental,trial' | split: ',' -%}
+          {%- for pass in passes -%}
+            {%- for value in price_option.values -%}
+              {%- liquid
+                assign is_trial = false
+                if value contains '試着'
+                  assign is_trial = true
+                endif
+                if pass == 'rental' and is_trial
+                  continue
+                endif
+                if pass == 'trial' and is_trial == false
+                  continue
+                endif
+                assign option_index = price_option.position | minus: 1
+                assign value_price = 0
+                for variant in product.variants
+                  if variant.options[option_index] == value
+                    if value_price == 0 or variant.price < value_price
+                      assign value_price = variant.price
+                    endif
+                  endif
+                endfor
+              -%}
+              <div>
+                <dt>
+                  {%- if is_trial -%}
+                    {{ 'products.price.trial' | t }}
+                  {%- else -%}
+                    {{ 'products.price.rental' | t: period: value }}
+                  {%- endif -%}
+                </dt>
+                <dd>
+                  {{ value_price | money }}
+                  {%- comment -%} シューズオプションはドレス（新婦）の試着だけ。タキシードにも要るかは先方に確認中 {%- endcomment -%}
+                  {%- if is_trial and is_dress and section.settings.trial_note != blank -%}
+                    <span class="pd-price-note">{{ section.settings.trial_note }}</span>
+                  {%- endif -%}
+                </dd>
+              </div>
+            {%- endfor -%}
+          {%- endfor -%}
+        </dl>
+      {%- else -%}
+        <p class="pd-price-single">{{ product.price | money }}</p>
+      {%- endif -%}
+
+      {%- if size_option -%}
+        <dl class="pd-spec pd-sizes">
+          <div>
+            <dt><span class="pd-spec-en" translate="no">Size</span>{{ 'products.sizes' | t }}</dt>
+            <dd>
+              <span translate="no">{{ size_option.values | join: ' / ' }}</span>
+              {%- if is_dress -%}
+                <small class="pd-spec-note">{{ 'products.size_legend' | t }}</small>
+              {%- endif -%}
+            </dd>
+          </div>
+        </dl>
+      {%- endif -%}
+
+      {%- if section.settings.notes != blank -%}
+        <ul class="pd-notes">
+          {%- assign notes = section.settings.notes | newline_to_br | split: '<br />' -%}
+          {%- for note in notes -%}
+            {%- assign note = note | strip -%}
+            {%- if note != blank -%}<li>{{ note }}</li>{%- endif -%}
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+
+      <p class="pd-cta-wrap"><a class="pd-cta" href="{{ reserve_url }}">{{ 'products.reserve' | t }}</a></p>
+    </div>
+  </div>
+
+  {%- if is_dress and section.settings.show_size_guide -%}
+    {%- render 'size-guide', section_id: section.id, size_option: size_option, is_bustier: is_bustier, reserve_url: reserve_url -%}
+  {%- endif -%}
+</article>
+
+{% schema %}
+{
+  "name": "t:general.product",
+  "class": "section-product",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "t:labels.eyebrow",
+      "default": "Collection — Détail"
+    },
+    {
+      "type": "text",
+      "id": "trial_note",
+      "label": "t:labels.trial_note",
+      "default": "シューズオプション +¥1,500"
+    },
+    {
+      "type": "textarea",
+      "id": "notes",
+      "label": "t:labels.product_notes",
+      "info": "t:info.product_notes",
+      "default": "ご利用日の4ヶ月前〜10日前までご予約いただけます\nヤマト運輸がご指定の場所へお届け・ご返送はそのまま(お客様でのクリーニングは不要)\nご試着後の本使用予約もオンラインで完結します"
+    },
+    {
+      "type": "url",
+      "id": "reserve_link",
+      "label": "t:labels.reserve_link",
+      "info": "t:info.reserve_link"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_size_guide",
+      "label": "t:labels.show_size_guide",
+      "default": true
+    }
+  ]
+}
+{% endschema %}

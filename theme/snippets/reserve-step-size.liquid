@@ -1,0 +1,36 @@
+{%- comment -%}
+  ご予約フォーム ステップ III：サイズ（ご採寸）
+  範囲はサンプルと同じ。身長・バスト（胸囲）・ウエストだけ必須
+{%- endcomment -%}
+<fieldset class="form-step" data-step="2">
+  <legend class="step-legend" tabindex="-1">{{ 'reserve.legends.size' | t }}</legend>
+  <p class="field-group-note">{{ 'reserve.size.note' | t }}</p>
+
+  <fieldset class="field-group measure-group" data-when="who:bride,both">
+    <legend>{{ 'reserve.size.bride' | t }}</legend>
+    <div class="measure-grid">
+      {% render 'reserve-measure', who: 'bride', field: 'height', min: 130, max: 200, required: true %}
+      {% render 'reserve-measure', who: 'bride', field: 'bust', min: 60, max: 150, required: true %}
+      {% render 'reserve-measure', who: 'bride', field: 'waist', min: 45, max: 140, required: true %}
+      {% render 'reserve-measure', who: 'bride', field: 'hip', min: 60, max: 160 %}
+      {% render 'reserve-measure', who: 'bride', field: 'shoulder', min: 25, max: 60 %}
+      {% render 'reserve-measure', who: 'bride', field: 'sleeve', min: 30, max: 80 %}
+      {% render 'reserve-measure', who: 'bride', field: 'neck', min: 25, max: 50 %}
+      {% render 'reserve-measure', who: 'bride', field: 'shoes', min: 20, max: 30 %}
+    </div>
+  </fieldset>
+
+  <fieldset class="field-group measure-group" data-when="who:groom,both">
+    <legend>{{ 'reserve.size.groom' | t }}</legend>
+    <div class="measure-grid">
+      {% render 'reserve-measure', who: 'groom', field: 'height', min: 140, max: 210, required: true %}
+      {% render 'reserve-measure', who: 'groom', field: 'chest', min: 70, max: 150, required: true %}
+      {% render 'reserve-measure', who: 'groom', field: 'waist', min: 55, max: 150, required: true %}
+      {% render 'reserve-measure', who: 'groom', field: 'shoulder', min: 30, max: 65 %}
+      {% render 'reserve-measure', who: 'groom', field: 'sleeve', min: 40, max: 90 %}
+      {% render 'reserve-measure', who: 'groom', field: 'neck', min: 30, max: 55 %}
+      {% render 'reserve-measure', who: 'groom', field: 'inseam', min: 55, max: 100 %}
+      {% render 'reserve-measure', who: 'groom', field: 'shoes', min: 22, max: 32 %}
+    </div>
+  </fieldset>
+</fieldset>

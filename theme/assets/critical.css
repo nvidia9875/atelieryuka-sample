@@ -1,0 +1,176 @@
+/* ============================================================
+   Atelier Yuka — 全ページ共通の土台
+   サンプル assets/css/style.css（A案 Timeless Classic）から移植。
+   トークン（:root）は snippets/css-variables.liquid が出す。
+   ============================================================ */
+
+/* ---------- リセット・ベース ---------- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 1.5rem;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100svh;
+  background: var(--ivory);
+  color: var(--ink);
+  font: 300 1rem/1.95 var(--font-body);
+  /* Cormorant Garamond の既定はオールドスタイル数字(高さが不揃い)。
+     型番・価格・日付が主役の内容なので、サイト全体でライニング数字に揃える */
+  font-variant-numeric: lining-nums;
+  overflow-wrap: break-word;
+  min-width: 320px;
+}
+
+main { flex: 1 0 auto; }
+
+a, button, summary, label, input, select { touch-action: manipulation; }
+a, button, summary, label { -webkit-tap-highlight-color: transparent; }
+
+img, picture, video, canvas, svg { display: block; max-width: 100%; height: auto; }
+
+ul, ol { list-style: none; }
+
+input, textarea, select, button { font: inherit; color: inherit; }
+
+[hidden] { display: none !important; }
+
+::selection { background: var(--gold); color: var(--ink); }
+
+:focus-visible { outline: 2px solid var(--gold-ink); outline-offset: 3px; }
+
+h1, h2, h3 { text-wrap: balance; font-weight: 500; }
+/* 和文の見出し・コピーは文節の途中や助詞の前で折り返さない（未対応ブラウザは従来どおり） */
+:lang(ja) :is(h1, h2, h3, .hero-tagline, .footer-tagline, .footer-address, .footer-partner, .field-error, .field-note) { word-break: auto-phrase; }
+p { text-wrap: pretty; }
+p:empty { display: none; }
+
+html:has(dialog[scroll-lock][open], details[scroll-lock][open]) { overflow: hidden; }
+
+dialog { background: var(--ivory); color: var(--ink); }
+
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+/* ---------- セクションの配置 ----------
+   雛形由来のセクションは中央の列に収める。
+   このテーマで作るセクションは .full-width を付けて、幅と余白を自分で持つ。 */
+.shopify-section {
+  --content-width: min(
+    calc(var(--page-width) - var(--page-margin) * 2),
+    calc(100% - var(--page-margin) * 2)
+  );
+  --content-margin: minmax(var(--page-margin), 1fr);
+  position: relative;
+  display: grid;
+  grid-template-columns: var(--content-margin) var(--content-width) var(--content-margin);
+  width: 100%;
+}
+.shopify-section > * { grid-column: 2; }
+.shopify-section > .full-width { grid-column: 1 / -1; }
+
+/* ---------- スキップリンク ---------- */
+.skip-link {
+  position: fixed; top: 10px; left: 10px; z-index: var(--z-skip);
+  background: var(--ink); color: var(--ivory);
+  padding: 0.7em 1.3em; font-size: 0.85rem; text-decoration: none;
+  transform: translateY(-300%);
+  transition: transform var(--duration-fast) ease-out;
+}
+.skip-link:focus { transform: none; }
+
+/* ---------- フェードイン(静かに) ---------- */
+html.js .reveal {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+html.js .reveal.is-in { opacity: 1; transform: none; }
+
+/* ---------- 装飾(フルーロン) ---------- */
+.fleuron {
+  width: 7px; height: 7px;
+  margin: clamp(1.6rem, 3vw, 2.4rem) auto;
+  border: 1px solid var(--gold);
+  transform: rotate(45deg);
+}
+
+/* ---------- ボタン ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  gap: 0.7em;
+  min-height: 52px;
+  padding: 0.85em 2.1em;
+  border: 1px solid var(--ink);
+  font: 400 0.95rem/1.4 var(--font-body);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.18s ease-out, color 0.18s ease-out, border-color 0.18s ease-out;
+}
+.btn .price { font-variant-numeric: lining-nums tabular-nums; }
+.btn-primary { background: var(--ink); color: var(--ivory); }
+.btn-primary:hover { background: var(--gold-ink); border-color: var(--gold-ink); color: var(--paper); }
+.btn-ghost { background: transparent; color: var(--ink); }
+.btn-ghost:hover { border-color: var(--gold-ink); color: var(--gold-ink); }
+.btn:disabled { opacity: 0.55; cursor: default; }
+
+/* ---------- 章(チャプター) ---------- */
+.chapter { padding: var(--space-chapter) var(--pad-x); }
+.chapter-tinted { background: var(--greige); }
+.chapter-last { padding-bottom: calc(var(--space-chapter) + 1rem); }
+section[id] { scroll-margin-top: 1.5rem; }
+
+.chapter-head {
+  max-width: var(--w-narrow);
+  margin: 0 auto clamp(2.6rem, 5vw, 4.2rem);
+  text-align: center;
+}
+.chapter-no {
+  font: italic 400 clamp(2.2rem, 1.8rem + 1.6vw, 3.2rem)/1 var(--font-en);
+  color: var(--gold-ink);
+}
+.chapter-label {
+  display: flex; align-items: center; justify-content: center;
+  gap: 18px;
+  margin-top: 0.9rem;
+  font: 400 0.72rem/1.6 var(--font-body);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold-ink);
+}
+.chapter-label::before,
+.chapter-label::after {
+  content: "";
+  width: clamp(32px, 6vw, 64px); height: 1px;
+  background: var(--gold);
+}
+.chapter-title {
+  margin-top: 1.1rem;
+  /* 和文がゴシックになった分、大見出しは1段軽く(400)+わずかに字間を開けて
+     細い罫線・欧文セリフと釣り合わせる */
+  font: 400 clamp(1.5rem, 1.2rem + 1.4vw, 2.25rem)/1.6 var(--font-jp);
+  letter-spacing: 0.04em;
+}
+.chapter-lede {
+  margin-top: 1.2rem;
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+/* ---------- Reduced Motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  html.js .reveal { opacity: 1; transform: none; transition: none; }
+  *, *::before, *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}

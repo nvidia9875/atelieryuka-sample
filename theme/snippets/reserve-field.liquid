@@ -1,0 +1,66 @@
+{% comment %}
+  予約フォームの入力欄1つ（テキスト・日付・メール・電話・複数行）。
+
+  使い方:
+    {% render 'reserve-field', name: 'email', key: 'reserve.customer.email', type: 'email', required: true, autocomplete: 'email', inputmode: 'email', placeholder: true, format: true %}
+
+  文言は {key}.label / .error（required のとき）、placeholder: true なら .placeholder、
+  note: true なら .note、format: true なら .error_format（形式が違うときのエラー）。
+  - type: text（既定）/ date / email / tel / textarea
+  - date は reserve.js が「今日以降」だけ選べるようにする
+  - before: 'date1' を渡すと、その欄の日付より前でないとエラー（文言は {key}.error_before）
+{% endcomment %}
+{%- liquid
+  assign input_type = type | default: 'text'
+  assign input_id = 'f-' | append: name
+  assign label_key = key | append: '.label'
+  assign placeholder_key = key | append: '.placeholder'
+  assign error_key = key | append: '.error'
+  assign format_key = key | append: '.error_format'
+  assign note_key = key | append: '.note'
+  assign placeholder_text = blank
+  if placeholder
+    assign placeholder_text = placeholder_key | t
+  endif
+  assign note_text = blank
+  if note
+    assign note_text = note_key | t
+  endif
+-%}
+<div class="field">
+  <label class="field-label" for="{{ input_id }}">
+    {{- label_key | t -}}
+    {%- if required -%}
+      <span class="req">{{ 'reserve.required' | t }}</span>
+    {%- else -%}
+      <span class="opt">{{ 'reserve.optional' | t }}</span>
+    {%- endif -%}
+  </label>
+  {%- if input_type == 'textarea' -%}
+    <textarea
+      id="{{ input_id }}"
+      name="{{ name }}"
+      {% if placeholder_text != blank %}placeholder="{{ placeholder_text | escape }}"{% endif %}
+      {% if required %}required data-error="{{ error_key | t | escape }}"{% endif %}
+    ></textarea>
+  {%- else -%}
+    <input
+      type="{{ input_type }}"
+      id="{{ input_id }}"
+      name="{{ name }}"
+      autocomplete="{{ autocomplete | default: 'off' }}"
+      {% if inputmode %}inputmode="{{ inputmode }}"{% endif %}
+      {% if pattern %}pattern="{{ pattern }}"{% endif %}
+      {% if input_type == 'email' %}spellcheck="false"{% endif %}
+      {% if placeholder_text != blank %}placeholder="{{ placeholder_text | escape }}"{% endif %}
+      {% if note_text != blank %}aria-describedby="{{ input_id }}-note"{% endif %}
+      {% if required %}required data-error="{{ error_key | t | escape }}"{% endif %}
+      {% if format %}data-error-format="{{ format_key | t | escape }}"{% endif %}
+      {% if before %}data-before="{{ before }}" data-before-error="{{ key | append: '.error_before' | t | escape }}"{% endif %}
+    >
+  {%- endif -%}
+  {%- if note_text != blank -%}
+    <p class="field-note" id="{{ input_id }}-note">{{ note_text }}</p>
+  {%- endif -%}
+  <p class="field-error" hidden></p>
+</div>

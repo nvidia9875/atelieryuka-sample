@@ -1,0 +1,187 @@
+{%- liquid
+  assign primary_url = section.settings.primary_link | default: '/pages/reserve'
+  assign secondary_url = section.settings.secondary_link | default: routes.all_products_collection_url
+-%}
+
+<section class="hero full-width" aria-labelledby="hero-title-{{ section.id }}">
+  {%- if section.settings.eyebrow != blank -%}
+    <p class="hero-eyebrow reveal" translate="no">{{ section.settings.eyebrow }}</p>
+  {%- endif -%}
+  <h1 class="hero-title reveal" id="hero-title-{{ section.id }}" translate="no">
+    {{ section.settings.title | default: settings.brand_name }}
+  </h1>
+  {%- if section.settings.tagline != blank -%}
+    <p class="hero-tagline reveal">{{ section.settings.tagline }}</p>
+  {%- endif -%}
+
+  <div class="fleuron" aria-hidden="true"></div>
+
+  <figure class="hero-frame reveal">
+    {%- if section.settings.image != blank -%}
+      {{
+        section.settings.image
+        | image_url: width: 1600
+        | image_tag:
+          widths: '560, 800, 1100, 1600',
+          sizes: '(max-width: 620px) 86vw, 524px',
+          fetchpriority: 'high',
+          loading: 'eager',
+          style: 'object-position: var(--hero-focal)'
+      }}
+    {%- else -%}
+      {{ 'image' | placeholder_svg_tag: 'hero-placeholder' }}
+    {%- endif -%}
+  </figure>
+
+  <div class="hero-cta reveal">
+    {%- if section.settings.primary_label != blank -%}
+      <a class="btn btn-primary" href="{{ primary_url }}">
+        {{- section.settings.primary_label -}}
+        {%- if section.settings.primary_price != blank %}
+          <span class="price">{{ section.settings.primary_price }}</span>
+        {%- endif -%}
+      </a>
+    {%- endif -%}
+    {%- if section.settings.secondary_label != blank -%}
+      <a class="btn btn-ghost" href="{{ secondary_url }}">{{ section.settings.secondary_label }}</a>
+    {%- endif -%}
+    {%- if section.settings.note != blank -%}
+      <p class="hero-note">{{ section.settings.note }}</p>
+    {%- endif -%}
+  </div>
+</section>
+
+{% style %}
+  #shopify-section-{{ section.id }} .hero-frame {
+    --hero-focal: {{ section.settings.image.presentation.focal_point | default: '50% 100%' }};
+  }
+{% endstyle %}
+
+{% stylesheet %}
+  .hero {
+    text-align: center;
+    padding: clamp(3rem, 6vw, 5.5rem) var(--pad-x) clamp(3rem, 6vw, 5rem);
+  }
+  .hero-eyebrow {
+    font: 400 0.72rem/1.6 var(--font-body);
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--gold-ink);
+  }
+  .hero-title {
+    margin-top: 0.5em;
+    font: 400 clamp(2.9rem, 1.6rem + 6.5vw, 6.2rem)/1.08 var(--font-en);
+  }
+  .hero-tagline {
+    margin-top: 1.1em;
+    font: 400 clamp(1rem, 0.9rem + 0.7vw, 1.3rem)/2 var(--font-jp);
+    letter-spacing: 0.05em;
+    text-wrap: balance;
+  }
+
+  .hero-frame {
+    /* 縦位置の写真を額装する */
+    max-width: 560px;
+    margin: 0 auto;
+    padding: clamp(10px, 2vw, 18px);
+    border: 1px solid var(--gold);
+    background: var(--paper);
+  }
+  .hero-frame img,
+  .hero-frame .hero-placeholder {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+  }
+  .hero-frame .hero-placeholder { background: var(--greige); fill: var(--line); }
+
+  .hero-cta {
+    padding-top: clamp(2rem, 4vw, 3rem);
+    display: flex; flex-direction: column; align-items: center; gap: 0.9rem;
+  }
+  .hero-note {
+    font-size: 0.82rem;
+    color: var(--muted);
+  }
+  @media (min-width: 720px) {
+    .hero-cta { flex-direction: row; flex-wrap: wrap; justify-content: center; }
+    .hero-note { width: 100%; text-align: center; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:general.hero",
+  "class": "section-hero",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "t:labels.eyebrow",
+      "default": "Ginza & Hawaii — Wedding Dress Maison"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "t:labels.heading",
+      "default": "Atelier Yuka"
+    },
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "t:labels.tagline",
+      "default": "人生でいちばん美しい日を、いちばん確かな一着で。"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "t:labels.image",
+      "info": "t:info.hero_image"
+    },
+    {
+      "type": "header",
+      "content": "t:labels.buttons"
+    },
+    {
+      "type": "text",
+      "id": "primary_label",
+      "label": "t:labels.primary_label",
+      "default": "ご自宅試着を予約する"
+    },
+    {
+      "type": "text",
+      "id": "primary_price",
+      "label": "t:labels.primary_price",
+      "default": "¥5,500"
+    },
+    {
+      "type": "url",
+      "id": "primary_link",
+      "label": "t:labels.primary_link"
+    },
+    {
+      "type": "text",
+      "id": "secondary_label",
+      "label": "t:labels.secondary_label",
+      "default": "コレクションを見る"
+    },
+    {
+      "type": "url",
+      "id": "secondary_link",
+      "label": "t:labels.secondary_link"
+    },
+    {
+      "type": "text",
+      "id": "note",
+      "label": "t:labels.note",
+      "default": "1泊2日でご自宅へお届け。お手入れはアトリエユカで行いますので、そのままご返送いただけます。"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:general.hero"
+    }
+  ]
+}
+{% endschema %}

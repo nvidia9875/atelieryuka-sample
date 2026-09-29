@@ -1,0 +1,125 @@
+{% comment %}
+  絞り込みの1項目（collection.filters / search.filters の1つ）。
+
+  使い方:
+    {% render 'collection-filter', filter: filter, form_id: 'collection-filters-xxx' %}
+
+  - 色（custom.color）は色の丸、それ以外のリストはチップ、価格は下限・上限の入力欄
+  - レンタル料金（custom.rental_price）は金額に整えたチップを安い順に並べる
+  - 色とシルエットは、メタオブジェクトの「並び順」の小さい順に並べる（管理画面で変えられる）。
+    並び順に無い値は、そのあとに Shopify の順で出す
+{% endcomment %}
+{%- liquid
+  assign is_color = false
+  assign entries = nil
+  if filter.param_name contains 'custom.color'
+    assign is_color = true
+    assign entries = shop.metaobjects.dress_color.values
+  elsif filter.param_name contains 'custom.silhouette'
+    assign entries = shop.metaobjects.silhouette.values
+  endif
+  assign is_money = false
+  if filter.param_name contains 'custom.rental_price'
+    assign is_money = true
+  endif
+
+  # 「並び順|名前|色見本」を並び順でソートできる形（5桁）にして並べる
+  assign order_joined = ''
+  if entries
+    for entry in entries
+      assign position = entry.position.value | default: 9999 | plus: 10000
+      assign order_joined = order_joined | append: position | append: '|' | append: entry.name.value | append: '|' | append: entry.swatch.value | append: '§'
+    endfor
+  endif
+  if is_money
+    # 金額は文字列のままだと 88000 が 132000 より後ろに来るので、桁をそろえてから並べる
+    for value in filter.values
+      assign padded = value.label | plus: 10000000000
+      assign order_joined = order_joined | append: padded | append: '|' | append: value.label | append: '|§'
+    endfor
+  endif
+  assign order = order_joined | split: '§' | sort
+  assign id_prefix = form_id | append: '-' | append: filter.param_name | handleize
+-%}
+
+{%- case filter.type -%}
+  {%- when 'list', 'boolean' -%}
+    <fieldset class="filter-group">
+      <legend class="filter-legend">{{ filter.label }}</legend>
+      <div class="{% if is_color %}swatches{% else %}chips{% endif %}">
+        {%- for item in order -%}
+          {%- liquid
+            assign parts = item | split: '|'
+            assign label = parts[1]
+            assign swatch = parts[2]
+            unless is_color
+              assign swatch = blank
+            endunless
+          -%}
+          {%- for value in filter.values -%}
+            {%- if value.label == label -%}
+              {%- assign input_id = id_prefix | append: '-' | append: forloop.index -%}
+              {% render 'filter-value', value: value, input_id: input_id, swatch: swatch, is_money: is_money %}
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endfor -%}
+
+        {%- for value in filter.values -%}
+          {%- liquid
+            assign needle = '|' | append: value.label | append: '|'
+            if order_joined contains needle
+              continue
+            endif
+            assign input_id = id_prefix | append: '-' | append: forloop.index
+            assign swatch = blank
+            if is_color
+              assign swatch = '#E4DCCB'
+            endif
+          -%}
+          {% render 'filter-value', value: value, input_id: input_id, swatch: swatch %}
+        {%- endfor -%}
+      </div>
+    </fieldset>
+
+  {%- when 'price_range' -%}
+    {%- liquid
+      # 金額はストアの通貨の最小単位で来るので、表示用の数値に直す（Dawn と同じやり方）
+      assign max_price = filter.range_max | money_without_currency | remove: ','
+      assign min_current = filter.min_value.value | money_without_currency | remove: ','
+      assign max_current = filter.max_value.value | money_without_currency | remove: ','
+    -%}
+    <fieldset class="filter-group filter-price">
+      <legend class="filter-legend">{{ filter.label }}</legend>
+      <div class="price-range">
+        <label class="price-field">
+          <span class="visually-hidden">{{ 'collections.filter.price_min' | t }}</span>
+          <span class="price-currency" aria-hidden="true">{{ cart.currency.symbol }}</span>
+          <input
+            type="number"
+            inputmode="numeric"
+            name="{{ filter.min_value.param_name }}"
+            value="{% if filter.min_value.value %}{{ min_current }}{% endif %}"
+            placeholder="0"
+            min="0"
+            max="{{ max_price }}"
+            step="1000"
+          >
+        </label>
+        <span class="price-sep" aria-hidden="true">〜</span>
+        <label class="price-field">
+          <span class="visually-hidden">{{ 'collections.filter.price_max' | t }}</span>
+          <span class="price-currency" aria-hidden="true">{{ cart.currency.symbol }}</span>
+          <input
+            type="number"
+            inputmode="numeric"
+            name="{{ filter.max_value.param_name }}"
+            value="{% if filter.max_value.value %}{{ max_current }}{% endif %}"
+            placeholder="{{ max_price }}"
+            min="0"
+            max="{{ max_price }}"
+            step="1000"
+          >
+        </label>
+      </div>
+    </fieldset>
+{%- endcase -%}

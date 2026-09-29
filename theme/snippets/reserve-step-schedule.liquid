@@ -1,0 +1,31 @@
+{%- comment -%} ご予約フォーム ステップ I：ご希望の内容と日程 {%- endcomment -%}
+<fieldset class="form-step" data-step="0">
+  <legend class="step-legend" tabindex="-1">{{ 'reserve.legends.schedule' | t }}</legend>
+
+  {% render 'reserve-choices', name: 'purpose', key: 'reserve.purpose', ids: 'home,rental,salon,overseas', required: true %}
+  {% render 'reserve-choices', name: 'occasion', key: 'reserve.occasion', ids: 'wedding,photo,both,undecided', required: true, compact: true %}
+
+  <div class="field-row">
+    {% render 'reserve-field', name: 'date1', key: 'reserve.date1', type: 'date', required: true, note: true %}
+    {% render 'reserve-field', name: 'date2', key: 'reserve.date2', type: 'date' %}
+  </div>
+
+  {%- comment -%} 衣裳をお届けする目的のときだけ、お届け日時を聞く {%- endcomment -%}
+  <div data-when="purpose:home,rental,overseas">
+    {% render 'reserve-choices', name: 'deliverDay', key: 'reserve.deliver_day', ids: 'before,same,other', required: true %}
+    <div data-when="deliverDay:other">
+      {% render 'reserve-field', name: 'deliverDate', key: 'reserve.deliver_date', type: 'date', required: true, note: true, before: 'date1' %}
+    </div>
+    {% render 'reserve-choices', name: 'deliverTime', key: 'reserve.deliver_time', ids: 't14,t16,t18,t19', required: true, compact: true %}
+  </div>
+
+  <fieldset class="field-group">
+    <legend>{{ 'reserve.event.legend' | t }}</legend>
+    <p class="field-group-note">{{ 'reserve.event.note' | t }}</p>
+    <div class="field-row">
+      {%- comment -%} 挙式日（本番ご利用日）は必須（2026-09-29 打ち合わせ「挙式日と衣裳は必須」） {%- endcomment -%}
+      {% render 'reserve-field', name: 'eventDate', key: 'reserve.event.date', type: 'date', required: true %}
+      {% render 'reserve-field', name: 'venue', key: 'reserve.event.venue', placeholder: true, note: true %}
+    </div>
+  </fieldset>
+</fieldset>

@@ -1,0 +1,57 @@
+{%- comment -%} ご予約フォーム ステップ IV：お客さま情報・お届け先 {%- endcomment -%}
+<fieldset class="form-step" data-step="3">
+  <legend class="step-legend" tabindex="-1">{{ 'reserve.legends.customer' | t }}</legend>
+
+  <div class="field-row">
+    {% render 'reserve-field', name: 'name', key: 'reserve.customer.name', required: true, autocomplete: 'name', placeholder: true %}
+    {% render 'reserve-field', name: 'kana', key: 'reserve.customer.kana', required: true, placeholder: true %}
+  </div>
+  <div data-when="who:both">
+    {% render 'reserve-field', name: 'partner', key: 'reserve.customer.partner', placeholder: true %}
+  </div>
+  <div class="field-row">
+    {% render 'reserve-field', name: 'email', key: 'reserve.customer.email', type: 'email', required: true, autocomplete: 'email', inputmode: 'email', placeholder: true, format: true %}
+    {% render 'reserve-field', name: 'tel', key: 'reserve.customer.tel', type: 'tel', required: true, autocomplete: 'tel', inputmode: 'tel', pattern: '[0-9+\-\(\) ]{10,15}', placeholder: true, format: true %}
+  </div>
+  {% render 'reserve-field', name: 'address', key: 'reserve.customer.address', required: true, autocomplete: 'street-address', placeholder: true %}
+
+  {%- comment -%} 試着の衣裳をお届けする目的のときだけ {%- endcomment -%}
+  <div data-when="purpose:home,rental,overseas">
+    {% render 'reserve-choices', name: 'tryonPlace', key: 'reserve.customer.tryon_place', ids: 'home,other', required: true %}
+    <div data-when="tryonPlace:other">
+      {% render 'reserve-field', name: 'tryonAddress', key: 'reserve.customer.tryon_address', type: 'textarea', required: true, placeholder: true %}
+    </div>
+  </div>
+
+  {%- comment -%} 本番の衣裳を送る目的のときだけ {%- endcomment -%}
+  <fieldset class="field-group" data-when="purpose:rental,overseas">
+    <legend>{{ 'reserve.customer.main.legend' | t }}</legend>
+    {% render 'reserve-choices', name: 'mainPlace', key: 'reserve.customer.main', ids: 'groom_home,bride_home,airport,other', required: true, compact: true %}
+    <div data-when="mainPlace:other">
+      {% render 'reserve-field', name: 'mainAddress', key: 'reserve.customer.main_address', type: 'textarea', required: true %}
+    </div>
+    <div data-when="mainPlace:airport">
+      <div class="field-row">
+        {% render 'reserve-field', name: 'airportDep', key: 'reserve.customer.airport_dep', required: true, placeholder: true %}
+        {% render 'reserve-field', name: 'airportArr', key: 'reserve.customer.airport_arr', required: true, placeholder: true %}
+      </div>
+      <div class="field-row">
+        {% render 'reserve-field', name: 'flight', key: 'reserve.customer.flight', required: true, placeholder: true %}
+        {% render 'reserve-field', name: 'departure', key: 'reserve.customer.departure', required: true, placeholder: true %}
+      </div>
+    </div>
+    {% render 'reserve-field', name: 'returnDate', key: 'reserve.customer.return_date', type: 'date' %}
+  </fieldset>
+
+  <fieldset class="field-group">
+    <legend>{{ 'reserve.customer.options.legend' | t }}</legend>
+    <div data-when="who:bride,both">
+      {% render 'reserve-choices', name: 'brideOpt', key: 'reserve.customer.options', label_key: 'reserve.customer.options.bride', items_key: 'reserve.customer.options.bride_items', ids: 'veil,pannier,pumps', type: 'checkbox', compact: true %}
+    </div>
+    <div data-when="who:groom,both">
+      {% render 'reserve-choices', name: 'groomOpt', key: 'reserve.customer.options', label_key: 'reserve.customer.options.groom', items_key: 'reserve.customer.options.groom_items', ids: 'shirt,shoes,set5', type: 'checkbox', compact: true, note_key: 'reserve.customer.options.set5_note' %}
+    </div>
+  </fieldset>
+
+  {% render 'reserve-field', name: 'message', key: 'reserve.customer.message', type: 'textarea', placeholder: true %}
+</fieldset>

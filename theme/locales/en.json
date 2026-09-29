@@ -1,0 +1,420 @@
+{
+  "404": {
+    "title": "404",
+    "not_found": "Page not found.",
+    "back_to_shopping": "Back to the top page"
+  },
+  "accessibility": {
+    "skip_to_content": "Skip to content"
+  },
+  "general": {
+    "language": "Language",
+    "main_navigation": "Main navigation",
+    "opens_in_new_window": "(opens in a new window)"
+  },
+  "header": {
+    "partner_link": "For partners",
+    "reserve": "Reserve"
+  },
+  "footer": {
+    "navigation": "Footer links",
+    "social": {
+      "instagram": "Instagram",
+      "tiktok": "TikTok",
+      "pinterest": "Pinterest"
+    }
+  },
+  "blog": {
+    "article_comments": "Comments",
+    "article_metadata_html": "{{ date }} by {{ author }}",
+    "comment_form_body": "Comment",
+    "comment_form_email": "Email",
+    "comment_form_name": "Name",
+    "comment_form_submit": "Post",
+    "comment_form_title": "Add a comment"
+  },
+  "cart": {
+    "checkout": "Checkout",
+    "title": "Cart",
+    "update": "Update",
+    "remove": "Remove"
+  },
+  "customers": {
+    "login": {
+      "email": "Email",
+      "password": "Password",
+      "submit": "Sign in",
+      "title": "Login"
+    }
+  },
+  "collections": {
+    "title": "Collections",
+    "categories": "Categories",
+    "result_count": {
+      "one": "{{ count }} item",
+      "other": "{{ count }} items"
+    },
+    "no_result": "No items match these filters. Try removing some of them.",
+    "filter": {
+      "title": "Filter",
+      "active_count": "{{ count }} selected",
+      "apply": "Apply filters",
+      "clear": "Clear filters",
+      "price_min": "Minimum price",
+      "price_max": "Maximum price"
+    },
+    "sort": {
+      "label": "Sort by"
+    },
+    "pagination": {
+      "label": "Pagination",
+      "previous": "Previous",
+      "next": "Next"
+    }
+  },
+  "gift_card": {
+    "add_to_apple_wallet": "Add to Apple Wallet",
+    "card": "Gift card",
+    "expired": "This gift card has expired",
+    "expires_on": "Expires on {{ expires_on }}",
+    "use_at_checkout": "Use this gift card at checkout"
+  },
+  "password": {
+    "title": "This shop is private",
+    "password": "Password",
+    "enter": "Enter"
+  },
+  "search": {
+    "title": "Search",
+    "placeholder": "Search by name or style number",
+    "submit": "Search",
+    "no_results_html": "No results found for {{ terms }}",
+    "results_for_html": "{{ count }} results found for {{ terms }}"
+  },
+  "products": {
+    "price_from_html": "From {{ price }}",
+    "breadcrumb": "Breadcrumb",
+    "home": "Home",
+    "silhouette": "Silhouette",
+    "sizes": "Available sizes",
+    "size_legend": "Number = Japanese dress size; T = for 160 cm height, TT = 165 cm, TTT = 170 cm",
+    "reserve": "Reserve this item",
+    "price": {
+      "trial": "Try at home (2 days, 1 night)",
+      "rental": "Rental ({{ period }})"
+    }
+  },
+  "size_guide": {
+    "title": "Find your size",
+    "lede_html": "Enter your bust, waist, hips and height to see the recommended size for this dress.<br>The result is passed on to the reservation form.",
+    "fields": {
+      "bust": "Bust",
+      "waist": "Waist",
+      "hip": "Hips",
+      "height": "Height"
+    },
+    "required": "Required",
+    "hint": "Measure over underwear, keeping the tape level.",
+    "submit": "Find my size",
+    "note": "This is a guide only. Please check the fit when you try the dress on.",
+    "cta": "Book a fitting with this result",
+    "errors": {
+      "need_bust_waist": "Please enter your bust and waist.",
+      "check_values": "Please check the numbers."
+    },
+    "result": {
+      "caution_far": "Your measurements are outside the size chart. Alterations may be needed, so please contact us.",
+      "go_line": "About Japanese size {go} · {height}",
+      "height_none": "Length not set because height was not entered",
+      "height_confirmed": "Length for {height} cm height",
+      "height_unconfirmed": "The chart has no length for {height} cm ({suffix}), so only the size number is shown. Please ask about length at your fitting",
+      "avail_head": "Available for this dress: {sizes}",
+      "avail_diff": " — Different from your recommended size. Please contact us about alterations.",
+      "avail_no_height": " — Same size number. Length was not checked because height was not entered.",
+      "avail_same": " — Same as your recommended size.",
+      "avail_tier_diff": " — Same size number, but a different length. Please check the length at your fitting.",
+      "spec_bust": "Bust ({column})",
+      "column_bustier": "bustier",
+      "column_regular": "regular",
+      "spec_waist": "Waist",
+      "spec_hip": "Hips",
+      "spec_hip_ref": "Hips (not entered, for reference)",
+      "form_size_no_height": "{size} (length not checked: no height entered)",
+      "form_size_unconfirmed": "{size} (length for {height} cm to be confirmed)"
+    }
+  },
+  "reserve": {
+    "eyebrow": "Reservation",
+    "title": "Reservation",
+    "lede": "Like replying to an invitation, you can reserve in five steps. We ask for your measurements and delivery details all at once, so no follow-up confirmation email is needed.",
+    "noscript": "This form needs JavaScript. Please enable it in your browser, or reserve by phone.",
+    "required": "Required",
+    "optional": "Optional",
+    "progress_label": "Reservation steps",
+    "steps": {
+      "schedule": "Dates",
+      "items": "Items",
+      "size": "Size",
+      "customer": "Your details",
+      "review": "Review"
+    },
+    "legends": {
+      "schedule": "What you would like and when",
+      "items": "Items you would like",
+      "size": "Size (your measurements)",
+      "customer": "Your details and delivery address",
+      "review": "Review your details and agree to the terms"
+    },
+    "purpose": {
+      "label": "Purpose",
+      "error": "Please choose a purpose.",
+      "options": {
+        "home": "Try on at home (¥5,500)",
+        "rental": "Rental for the day (4 days, 3 nights)",
+        "salon": "Fitting at the Ginza salon",
+        "overseas": "Overseas wedding or photo shoot"
+      }
+    },
+    "occasion": {
+      "label": "Occasion",
+      "error": "Please choose an occasion.",
+      "options": {
+        "wedding": "Wedding",
+        "photo": "Photo shoot",
+        "both": "Both",
+        "undecided": "Not decided"
+      }
+    },
+    "date1": {
+      "label": "Preferred fitting date (1st choice)",
+      "error": "Please choose your first-choice date.",
+      "note": "Reservations are accepted from 4 months to 10 days before the day of use."
+    },
+    "date2": {
+      "label": "2nd choice"
+    },
+    "deliver_day": {
+      "label": "Delivery day",
+      "error": "Please choose a delivery day.",
+      "options": {
+        "before": "The day before the fitting",
+        "same": "The day of the fitting",
+        "other": "Choose a date"
+      }
+    },
+    "deliver_time": {
+      "label": "Delivery time",
+      "error": "Please choose a delivery time.",
+      "options": {
+        "t14": "14:00–16:00",
+        "t16": "16:00–18:00",
+        "t18": "18:00–20:00",
+        "t19": "19:00–21:00"
+      }
+    },
+    "event": {
+      "legend": "Your wedding or shoot",
+      "note": "If the date is not decided yet, choose an approximate date and write \"not decided\" in the message.",
+      "date": {
+        "label": "Date of use (wedding or shoot)",
+        "error": "Please choose the date of use."
+      },
+      "venue": {
+        "label": "Venue or location",
+        "placeholder": "e.g. XX Hotel / Waikiki, Hawaii",
+        "note": "If you are renting, please check with your venue that you may bring in Atelier Yuka items."
+      }
+    },
+    "who": {
+      "label": "Who is this for?",
+      "error": "Please choose who this is for.",
+      "options": {
+        "bride": "Bride only",
+        "groom": "Groom only",
+        "both": "Bride and groom"
+      }
+    },
+    "category": {
+      "label": "Category",
+      "error": "Please choose a category.",
+      "options": {
+        "wedding": "Wedding dress",
+        "color": "Color dress",
+        "tuxedo": "Tuxedo",
+        "morning": "Morning coat / mother's dress"
+      }
+    },
+    "codes": {
+      "label": "Item numbers",
+      "hint": "up to 4, may be left blank",
+      "note": "Enter the item number shown on the product page. Suggestions appear as you type.",
+      "size_hint_short": "Size guide result",
+      "size_hint_note": "Your size guide result \"{size}\" will be sent with this reservation."
+    },
+    "size": {
+      "note": "Measure over underwear with the tape level and enter the numbers in cm. Height, bust (chest) and waist are enough.",
+      "bride": "Bride",
+      "groom": "Groom",
+      "fields": {
+        "height": "Height",
+        "bust": "Bust",
+        "waist": "Waist",
+        "hip": "Hips",
+        "shoulder": "Shoulder width",
+        "sleeve": "Sleeve length",
+        "neck": "Neck",
+        "shoes": "Shoe size",
+        "chest": "Chest",
+        "inseam": "Inseam"
+      },
+      "error_required": "Please enter your {field}.",
+      "error_range": "Please enter a number from {min} to {max}."
+    },
+    "customer": {
+      "name": {
+        "label": "Name",
+        "placeholder": "e.g. Hanako Yamada",
+        "error": "Please enter your name."
+      },
+      "kana": {
+        "label": "Name reading (kana) or name in Latin letters",
+        "placeholder": "e.g. やまだはなこ / Hanako Yamada",
+        "error": "Please enter the reading of your name."
+      },
+      "partner": {
+        "label": "Partner's name",
+        "placeholder": "e.g. Taro Yamada"
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "e.g. hanako@example.com",
+        "error": "Please enter your email.",
+        "error_format": "Please check the email address (e.g. hanako@example.com)."
+      },
+      "tel": {
+        "label": "Phone",
+        "placeholder": "e.g. 09012345678",
+        "error": "Please enter your phone number.",
+        "error_format": "Please check the phone number (e.g. 09012345678)."
+      },
+      "address": {
+        "label": "Home address",
+        "placeholder": "e.g. 1-20-11 Ginza, Chuo-ku, Tokyo, Apt 601",
+        "error": "Please enter your home address."
+      },
+      "tryon_place": {
+        "label": "Where to deliver the fitting items",
+        "error": "Please choose a delivery address.",
+        "options": {
+          "home": "My home (address above)",
+          "other": "Somewhere else"
+        }
+      },
+      "tryon_address": {
+        "label": "Delivery address (place, address, name, phone)",
+        "placeholder": "e.g. XX Hotel Room 1203 / Tokyo … / Hanako Yamada / 09012345678",
+        "error": "Please enter the delivery address."
+      },
+      "main": {
+        "legend": "Where to deliver the items for the day",
+        "label": "Delivery address",
+        "error": "Please choose a delivery address.",
+        "options": {
+          "groom_home": "Groom's home",
+          "bride_home": "Bride's home",
+          "airport": "Airport pickup",
+          "other": "Other"
+        }
+      },
+      "main_address": {
+        "label": "Delivery address (place, address, name, phone)",
+        "error": "Please enter the delivery address."
+      },
+      "airport_dep": {
+        "label": "Departure airport and terminal",
+        "placeholder": "e.g. Haneda Airport Terminal 3",
+        "error": "Please enter the departure airport."
+      },
+      "airport_arr": {
+        "label": "Destination airport",
+        "placeholder": "e.g. Honolulu",
+        "error": "Please enter the destination airport."
+      },
+      "flight": {
+        "label": "Airline and flight number",
+        "placeholder": "e.g. JAL JL074",
+        "error": "Please enter the airline and flight number."
+      },
+      "departure": {
+        "label": "Departure date and time",
+        "placeholder": "e.g. 3 Nov 2026, 21:55",
+        "error": "Please enter the departure date and time."
+      },
+      "return_date": {
+        "label": "Planned return shipping date"
+      },
+      "options": {
+        "legend": "Options",
+        "bride": "For the bride",
+        "groom": "For the groom",
+        "bride_items": {
+          "veil": "Veil",
+          "pannier": "Pannier",
+          "pumps": "Pumps"
+        },
+        "groom_items": {
+          "shirt": "Tuxedo shirt",
+          "shoes": "Shoes",
+          "set5": "Men's accessory set (5 items)"
+        },
+        "set5_note": "Accessory set: cufflinks, armbands, suspenders, white pocket square, white gloves"
+      },
+      "message": {
+        "label": "Requests or questions",
+        "placeholder": "Let us know anything you would like to ask or discuss."
+      }
+    },
+    "review": {
+      "terms_label": "Rental terms",
+      "terms_region": "Rental terms",
+      "terms_link_html": "You can also read the full terms on the <a href=\"{{ url }}\" target=\"_blank\" rel=\"noopener\">rental terms page</a> (in Japanese).",
+      "agree": "I have read and agree to the terms above",
+      "agree_with_title": "I have read and agree to the {title} above",
+      "agree_error": "You need to agree to the terms to reserve.",
+      "terms_line": "Agreed to {title} {version} ({date})"
+    },
+    "nav": {
+      "prev": "Back",
+      "next": "Next",
+      "submit": "Send reservation",
+      "sending": "Sending…",
+      "step_status": "Step {current}/{total}: {legend}"
+    },
+    "foot_note": "We use the information you send only to confirm your reservation and contact you.",
+    "errors": {
+      "generic": "Please fill this in.",
+      "format": "Please check the format.",
+      "past_date": "Please choose today or a later date.",
+      "server": "We could not send your reservation. Please check your details and try again."
+    },
+    "complete": {
+      "en": "R.S.V.P.",
+      "title": "Thank you for your reservation",
+      "greeting": "Dear {name},",
+      "body": "Thank you for choosing Atelier Yuka. Your stylist will contact you within a day or two to confirm.",
+      "closing": "We look forward to meeting you.",
+      "sign": "Atelier Yuka — Ginza Atelier",
+      "again": "Make another reservation"
+    },
+    "mail": {
+      "subject": "[Reservation] {name} ({purpose})",
+      "header": "Reservation from the Atelier Yuka reservation form"
+    },
+    "deliver_date": {
+      "label": "Delivery date",
+      "error": "Please choose a delivery date.",
+      "note": "Please choose a date before your fitting.",
+      "error_before": "Please choose a date before your first-choice fitting date."
+    }
+  }
+}

@@ -1,0 +1,205 @@
+{% comment %}
+  コレクション（衣裳の一覧）。
+  - 絞り込みの条件は Search & Discovery アプリで設定したものがそのまま出る（collection.filters）
+  - 色の丸は、メタオブジェクト「ドレスの色」(dress_color) の色見本から引く
+  - 条件を変えると assets/collection.js が一覧だけ差し替える。JS が無くてもフォーム送信で動く
+{% endcomment %}
+{{ 'collection.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'collection.js' | asset_url }}" defer></script>
+
+{%- liquid
+  assign per_page = section.settings.products_per_page
+  assign sort_by = collection.sort_by | default: collection.default_sort_by
+  assign form_id = 'collection-filters-' | append: section.id
+
+  assign active_count = 0
+  for filter in collection.filters
+    if filter.type == 'price_range'
+      if filter.min_value.value != blank or filter.max_value.value != blank
+        assign active_count = active_count | plus: 1
+      endif
+    else
+      assign active_count = active_count | plus: filter.active_values.size
+    endif
+  endfor
+
+  assign clear_url = collection.url | append: '?sort_by=' | append: sort_by
+-%}
+
+<section
+  class="chapter collection full-width"
+  aria-labelledby="collection-title-{{ section.id }}"
+  data-collection
+  data-section-id="{{ section.id }}"
+>
+  <header class="chapter-head">
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="chapter-label" translate="no">{{ section.settings.eyebrow }}</p>
+    {%- endif -%}
+    <h1 class="chapter-title" id="collection-title-{{ section.id }}">{{ collection.title }}</h1>
+    {%- if collection.description != blank -%}
+      <div class="chapter-lede">{{ collection.description }}</div>
+    {%- endif -%}
+  </header>
+
+  {%- if section.settings.tab_collections.size > 0 -%}
+    <nav class="collection-tabs" aria-label="{{ 'collections.categories' | t }}">
+      <ul>
+        {%- for tab in section.settings.tab_collections -%}
+          <li>
+            <a
+              href="{{ tab.url }}"
+              {% if tab.handle == collection.handle %}
+                aria-current="page"
+              {% endif %}
+            >
+              {{- tab.title -}}
+            </a>
+          </li>
+        {%- endfor -%}
+      </ul>
+    </nav>
+  {%- endif -%}
+
+  {%- paginate collection.products by per_page -%}
+    <div class="collection-body">
+      {%- if collection.filters.size > 0 -%}
+        <details class="filter" data-filter-panel {% if active_count > 0 %}open{% endif %}>
+          <summary class="filter-summary">
+            <span class="filter-summary-label">{{ 'collections.filter.title' | t }}</span>
+            {%- if active_count > 0 -%}
+              <span class="filter-summary-badge">
+                {{- 'collections.filter.active_count' | t: count: active_count -}}
+              </span>
+            {%- endif -%}
+          </summary>
+
+          <form class="filter-body" id="{{ form_id }}" action="{{ collection.url }}" data-filter-form>
+            <input type="hidden" name="sort_by" value="{{ sort_by }}">
+            {%- for filter in collection.filters -%}
+              {%- render 'collection-filter', filter: filter, form_id: form_id -%}
+            {%- endfor -%}
+            <noscript>
+              <button type="submit" class="btn btn-ghost filter-submit">{{ 'collections.filter.apply' | t }}</button>
+            </noscript>
+          </form>
+        </details>
+      {%- endif -%}
+
+      <div class="result-bar">
+        <p class="result-count" role="status" aria-live="polite">
+          {{- 'collections.result_count' | t: count: collection.products_count -}}
+        </p>
+        <div class="result-tools">
+          {%- if active_count > 0 -%}
+            <a class="filter-clear" href="{{ clear_url }}" data-filter-link>{{ 'collections.filter.clear' | t }}</a>
+          {%- endif -%}
+          <span class="sort-field">
+            <label for="sort-{{ section.id }}">{{ 'collections.sort.label' | t }}</label>
+            <select id="sort-{{ section.id }}" name="sort_by" form="{{ form_id }}" data-sort>
+              {%- for option in collection.sort_options -%}
+                {%- comment -%}
+                  出すのは「おすすめ・新着・ベストセラー」だけ。
+                  価格順は試着（¥5,500）のバリエーションで全商品が同じ値になり、名前順は型番の並び、
+                  関連性は検索語が無い一覧では意味がないので出さない
+                {%- endcomment -%}
+                {%- unless option.value == 'manual' or option.value == 'created-descending' or option.value == 'best-selling' -%}
+                  {%- continue -%}
+                {%- endunless -%}
+                <option value="{{ option.value }}" {% if option.value == sort_by %}selected{% endif %}>
+                  {{- option.name -}}
+                </option>
+              {%- endfor -%}
+            </select>
+          </span>
+        </div>
+      </div>
+
+      {%- if collection.products.size > 0 -%}
+        <ul class="product-grid" id="product-grid-{{ section.id }}">
+          {%- for product in collection.products -%}
+            {%- liquid
+              assign eager = false
+              if forloop.index <= 3 and paginate.current_page == 1
+                assign eager = true
+              endif
+            -%}
+            {% render 'product-card', product: product, eager: eager %}
+          {%- endfor -%}
+        </ul>
+      {%- else -%}
+        <div class="no-result">
+          <p>{{ 'collections.no_result' | t }}</p>
+          {%- if active_count > 0 -%}
+            <p><a class="filter-clear" href="{{ clear_url }}" data-filter-link>{{ 'collections.filter.clear' | t }}</a></p>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+      {%- if paginate.pages > 1 -%}
+        <nav class="pagination" aria-label="{{ 'collections.pagination.label' | t }}">
+          <ul>
+            {%- if paginate.previous -%}
+              <li>
+                <a class="pagination-step" href="{{ paginate.previous.url }}" data-filter-link>
+                  <span aria-hidden="true">&lsaquo;</span>
+                  {{ 'collections.pagination.previous' | t }}
+                </a>
+              </li>
+            {%- endif -%}
+            {%- for part in paginate.parts -%}
+              <li>
+                {%- if part.is_link -%}
+                  <a href="{{ part.url }}" data-filter-link>{{ part.title }}</a>
+                {%- elsif part.title == paginate.current_page -%}
+                  <span aria-current="page">{{ part.title }}</span>
+                {%- else -%}
+                  <span class="pagination-gap">{{ part.title }}</span>
+                {%- endif -%}
+              </li>
+            {%- endfor -%}
+            {%- if paginate.next -%}
+              <li>
+                <a class="pagination-step" href="{{ paginate.next.url }}" data-filter-link>
+                  {{ 'collections.pagination.next' | t }}
+                  <span aria-hidden="true">&rsaquo;</span>
+                </a>
+              </li>
+            {%- endif -%}
+          </ul>
+        </nav>
+      {%- endif -%}
+    </div>
+  {%- endpaginate -%}
+</section>
+
+{% schema %}
+{
+  "name": "t:general.collection",
+  "class": "section-collection",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "t:labels.eyebrow",
+      "default": "Collection"
+    },
+    {
+      "type": "collection_list",
+      "id": "tab_collections",
+      "label": "t:labels.tab_collections",
+      "info": "t:info.tab_collections",
+      "limit": 12
+    },
+    {
+      "type": "range",
+      "id": "products_per_page",
+      "min": 6,
+      "max": 48,
+      "step": 3,
+      "label": "t:labels.products_per_page",
+      "default": 15
+    }
+  ]
+}
+{% endschema %}

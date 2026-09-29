@@ -1,0 +1,74 @@
+{% comment %}
+  「こちらもおすすめ」（関連の衣裳）。Shopify のおすすめ機能（/recommendations/products）を使う。
+  おすすめの中身は Search & Discovery アプリの「おすすめ」で手動で足せる。
+  ページを開いたあとに JS で自分自身を取り直して中身を入れる（Shopify 標準テーマと同じやり方）。
+{% endcomment %}
+{%- liquid
+  assign limit = section.settings.products_to_show
+  assign recommend_url = routes.product_recommendations_url | append: '?section_id=' | append: section.id | append: '&product_id=' | append: product.id | append: '&limit=' | append: limit | append: '&intent=related'
+-%}
+<section
+  class="pd-related full-width"
+  aria-labelledby="related-title-{{ section.id }}"
+  data-recommendations
+  data-url="{{ recommend_url }}"
+>
+  {%- if recommendations.performed and recommendations.products_count > 0 -%}
+    <header class="chapter-head">
+      <p class="chapter-no" aria-hidden="true" translate="no">✦</p>
+      <h2 class="chapter-title" id="related-title-{{ section.id }}">{{ section.settings.heading }}</h2>
+    </header>
+    <ul class="product-grid pd-related-grid">
+      {%- for rec in recommendations.products -%}
+        {% render 'product-card', product: rec, eager: false %}
+      {%- endfor -%}
+    </ul>
+  {%- endif -%}
+</section>
+
+{%- unless recommendations.performed -%}
+  {{ 'collection.css' | asset_url | stylesheet_tag }}
+  <script>
+    (function () {
+      var root = document.querySelector("[data-recommendations]");
+      if (!root || !("IntersectionObserver" in window)) return;
+      // 画面に近づいてから取りに行く（最初の表示を遅くしない）
+      var io = new IntersectionObserver(function (entries) {
+        if (!entries[0].isIntersecting) return;
+        io.disconnect();
+        fetch(root.getAttribute("data-url"))
+          .then(function (res) { return res.ok ? res.text() : ""; })
+          .then(function (html) {
+            var next = new DOMParser().parseFromString(html, "text/html").querySelector("[data-recommendations]");
+            if (next && next.innerHTML.trim()) root.innerHTML = next.innerHTML;
+          })
+          .catch(function () { /* おすすめが取れなくてもページは成り立つので、何も出さない */ });
+      }, { rootMargin: "0px 0px 400px 0px" });
+      io.observe(root);
+    })();
+  </script>
+{%- endunless -%}
+
+{% schema %}
+{
+  "name": "t:general.recommendations",
+  "class": "section-recommendations",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:labels.heading",
+      "default": "こちらもおすすめ"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 3,
+      "max": 9,
+      "step": 3,
+      "label": "t:labels.products_to_show",
+      "default": 3
+    }
+  ]
+}
+{% endschema %}

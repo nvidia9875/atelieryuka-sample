@@ -1,0 +1,12 @@
+{% comment %}
+  書体の読み込み。Zen Kaku Gothic New は Shopify の書体ライブラリに無いため Google Fonts から読む。
+  Google Fonts は和文を unicode-range で分割配信するので、使った字の分だけ落ちてくる。
+{% endcomment %}
+{% # theme-check-disable RemoteAsset %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Zen+Kaku+Gothic+New:wght@300;400;500&display=swap"
+>
+{% # theme-check-enable RemoteAsset %}

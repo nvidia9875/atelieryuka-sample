@@ -1,0 +1,113 @@
+{% comment %}
+  サイズの目安（ドレスの商品ページ）。判定は assets/size-guide.js。
+  結果と採寸値は「この結果を添えて試着を申し込む」のリンクで予約ページへ渡す。
+
+  使い方:
+    {% render 'size-guide', section_id: section.id, size_option: size_option, is_bustier: true, reserve_url: '/pages/reserve?code=…' %}
+{% endcomment %}
+{%- liquid
+  assign available = ''
+  if size_option
+    assign available = size_option.values | join: ','
+  endif
+  assign prefix = 'size-' | append: section_id
+-%}
+<script src="{{ 'size-guide.js' | asset_url }}" defer></script>
+
+<section
+  class="pd-size"
+  id="size"
+  aria-labelledby="{{ prefix }}-title"
+  data-size-guide
+  data-available="{{ available | escape }}"
+  data-bustier="{{ is_bustier }}"
+  data-reserve-url="{{ reserve_url | escape }}"
+>
+  <script type="application/json" data-size-guide-strings>
+    {
+      "need_bust_waist": {{ 'size_guide.errors.need_bust_waist' | t | json }},
+      "check_values": {{ 'size_guide.errors.check_values' | t | json }},
+      "caution_far": {{ 'size_guide.result.caution_far' | t | json }},
+      "go_line": {{ 'size_guide.result.go_line' | t | json }},
+      "height_none": {{ 'size_guide.result.height_none' | t | json }},
+      "height_confirmed": {{ 'size_guide.result.height_confirmed' | t | json }},
+      "height_unconfirmed": {{ 'size_guide.result.height_unconfirmed' | t | json }},
+      "avail_head": {{ 'size_guide.result.avail_head' | t | json }},
+      "avail_diff": {{ 'size_guide.result.avail_diff' | t | json }},
+      "avail_no_height": {{ 'size_guide.result.avail_no_height' | t | json }},
+      "avail_same": {{ 'size_guide.result.avail_same' | t | json }},
+      "avail_tier_diff": {{ 'size_guide.result.avail_tier_diff' | t | json }},
+      "spec_bust": {{ 'size_guide.result.spec_bust' | t | json }},
+      "column_bustier": {{ 'size_guide.result.column_bustier' | t | json }},
+      "column_regular": {{ 'size_guide.result.column_regular' | t | json }},
+      "spec_waist": {{ 'size_guide.result.spec_waist' | t | json }},
+      "spec_hip": {{ 'size_guide.result.spec_hip' | t | json }},
+      "spec_hip_ref": {{ 'size_guide.result.spec_hip_ref' | t | json }},
+      "form_size_no_height": {{ 'size_guide.result.form_size_no_height' | t | json }},
+      "form_size_unconfirmed": {{ 'size_guide.result.form_size_unconfirmed' | t | json }}
+    }
+  </script>
+
+  <header class="chapter-head">
+    <p class="chapter-no" aria-hidden="true" translate="no">Size Guide</p>
+    <h2 class="chapter-title" id="{{ prefix }}-title">{{ 'size_guide.title' | t }}</h2>
+    <p class="chapter-lede">{{ 'size_guide.lede_html' | t }}</p>
+  </header>
+
+  <form class="pd-size-form" data-size-form novalidate>
+    <div class="measure-grid">
+      {%- assign fields = 'bust,waist,hip,height' | split: ',' -%}
+      {%- for field in fields -%}
+        {%- liquid
+          assign label_key = 'size_guide.fields.' | append: field
+          case field
+            when 'bust'
+              assign range = '60,150'
+            when 'waist'
+              assign range = '45,140'
+            when 'hip'
+              assign range = '60,160'
+            else
+              assign range = '130,200'
+          endcase
+          assign range = range | split: ','
+        -%}
+        <div class="measure">
+          <label for="{{ prefix }}-{{ field }}">
+            {{- label_key | t -}}
+            {%- if field == 'bust' or field == 'waist' -%}
+              <span class="req">{{ 'size_guide.required' | t }}</span>
+            {%- endif -%}
+          </label>
+          <div class="measure-unit">
+            <input
+              type="number"
+              id="{{ prefix }}-{{ field }}"
+              name="{{ field }}"
+              inputmode="decimal"
+              min="{{ range[0] }}"
+              max="{{ range[1] }}"
+              step="0.5"
+              autocomplete="off"
+            >
+            <span>cm</span>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+    <p class="pd-hint">{{ 'size_guide.hint' | t }}</p>
+    <p class="pd-size-act"><button type="submit" class="pd-submit">{{ 'size_guide.submit' | t }}</button></p>
+  </form>
+
+  <div class="pd-size-result" data-size-result role="status" aria-live="polite" hidden>
+    <p class="pd-size-en" translate="no">Your Size</p>
+    <p class="pd-size-value" data-size-value translate="no">—</p>
+    <p class="pd-size-go" data-size-go></p>
+    <dl class="pd-size-spec" data-size-spec></dl>
+    <p class="pd-size-avail" data-size-avail hidden></p>
+    <p class="pd-size-caution" data-size-caution hidden></p>
+    <p class="pd-size-note">{{ 'size_guide.note' | t }}</p>
+    <p class="pd-size-cta-wrap"><a class="pd-cta" data-size-cta href="{{ reserve_url }}">{{ 'size_guide.cta' | t }}</a></p>
+  </div>
+  <p class="pd-size-error" data-size-error role="alert" hidden></p>
+</section>

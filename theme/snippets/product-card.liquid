@@ -1,0 +1,86 @@
+{% comment %}
+  商品カード（サンプルのコレクションと同じ額装のカード）。
+
+  使い方:
+    {% render 'product-card', product: product, eager: forloop.index <= 3 %}
+
+  - 名前は商品名から種類（「ウエディングドレス」など）を外した型番
+  - 2枚目の写真があれば、ホバーで切り替える
+  - 価格は「試着」（¥5,500）のバリエーションを除いたレンタル料金。幅があるとき「〜」を付ける
+{% endcomment %}
+{%- capture code -%}{% render 'product-code', product: product %}{%- endcapture -%}
+{%- liquid
+  assign line = product.metafields.custom.line.value
+  assign second_media = product.media[1]
+  if eager
+    assign loading = 'eager'
+  else
+    assign loading = 'lazy'
+  endif
+  assign sizes = '(max-width: 559px) 46vw, (max-width: 919px) 45vw, 350px'
+
+  # 試着のバリエーションはどの商品にもあるので、価格の表示から外す
+  assign rental_min = 0
+  assign rental_max = 0
+  for variant in product.variants
+    if variant.title contains '試着'
+      continue
+    endif
+    if rental_min == 0 or variant.price < rental_min
+      assign rental_min = variant.price
+    endif
+    if variant.price > rental_max
+      assign rental_max = variant.price
+    endif
+  endfor
+  if rental_min == 0
+    assign rental_min = product.price_min
+    assign rental_max = product.price_max
+  endif
+  assign rental_min_money = rental_min | money
+-%}
+<li class="product">
+  <figure class="product-media">
+    {%- if product.featured_media -%}
+      {{
+        product.featured_media
+        | image_url: width: 700
+        | image_tag:
+          widths: '240, 360, 480, 700',
+          sizes: sizes,
+          loading: loading,
+          alt: product.featured_media.alt | default: product.title
+      }}
+    {%- else -%}
+      {{ 'product-apparel-1' | placeholder_svg_tag: 'product-placeholder' }}
+    {%- endif -%}
+    {%- if second_media and second_media.media_type == 'image' -%}
+      {{
+        second_media
+        | image_url: width: 700
+        | image_tag:
+          class: 'alt-img',
+          widths: '240, 360, 480, 700',
+          sizes: sizes,
+          loading: 'lazy',
+          alt: ''
+      }}
+    {%- endif -%}
+    <span class="float-code" aria-hidden="true" translate="no">{{ code }}</span>
+    <a class="product-media-link" href="{{ product.url }}" tabindex="-1" aria-hidden="true"></a>
+  </figure>
+  <h3 class="product-name" translate="no"><a href="{{ product.url }}">{{ code }}</a></h3>
+  <p class="product-meta">
+    {{- product.type -}}
+    {%- if line != blank -%}
+      <span class="product-line" translate="no"> — {{ line }}</span>
+    {%- endif -%}
+  </p>
+  <p class="product-price">
+    {%- if rental_max > rental_min -%}
+      {{ 'products.price_from_html' | t: price: rental_min_money }}
+    {%- else -%}
+      {{ rental_min_money }}
+    {%- endif -%}
+  </p>
+</li>

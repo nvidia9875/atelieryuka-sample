@@ -1,0 +1,420 @@
+{
+  "404": {
+    "title": "404",
+    "not_found": "お探しのページが見つかりませんでした。",
+    "back_to_shopping": "トップページへ戻る"
+  },
+  "accessibility": {
+    "skip_to_content": "本文へスキップ"
+  },
+  "general": {
+    "language": "言語",
+    "main_navigation": "メインナビゲーション",
+    "opens_in_new_window": "（新しいウィンドウで開きます）"
+  },
+  "header": {
+    "partner_link": "業者さまはこちら",
+    "reserve": "ご予約"
+  },
+  "footer": {
+    "navigation": "フッターのリンク",
+    "social": {
+      "instagram": "Instagram",
+      "tiktok": "TikTok",
+      "pinterest": "Pinterest"
+    }
+  },
+  "blog": {
+    "article_comments": "コメント",
+    "article_metadata_html": "{{ date }}・{{ author }}",
+    "comment_form_body": "コメント",
+    "comment_form_email": "メールアドレス",
+    "comment_form_name": "お名前",
+    "comment_form_submit": "投稿する",
+    "comment_form_title": "コメントを書く"
+  },
+  "cart": {
+    "checkout": "ご購入手続きへ",
+    "title": "カート",
+    "update": "更新",
+    "remove": "削除"
+  },
+  "customers": {
+    "login": {
+      "email": "メールアドレス",
+      "password": "パスワード",
+      "submit": "ログイン",
+      "title": "ログイン"
+    }
+  },
+  "collections": {
+    "title": "コレクション",
+    "categories": "衣裳の種類",
+    "result_count": {
+      "one": "{{ count }}件",
+      "other": "{{ count }}件"
+    },
+    "no_result": "条件に合う衣裳が見つかりませんでした。条件を減らしてお試しください。",
+    "filter": {
+      "title": "絞り込む",
+      "active_count": "{{ count }}件選択中",
+      "apply": "この条件で絞り込む",
+      "clear": "条件をクリア",
+      "price_min": "下限の金額",
+      "price_max": "上限の金額"
+    },
+    "sort": {
+      "label": "並び替え"
+    },
+    "pagination": {
+      "label": "ページ送り",
+      "previous": "前へ",
+      "next": "次へ"
+    }
+  },
+  "gift_card": {
+    "add_to_apple_wallet": "Apple Wallet に追加",
+    "card": "ギフトカード",
+    "expired": "このギフトカードは有効期限が切れています",
+    "expires_on": "有効期限：{{ expires_on }}",
+    "use_at_checkout": "ご購入手続きの際にお使いください"
+  },
+  "password": {
+    "title": "このストアは現在公開準備中です",
+    "password": "パスワード",
+    "enter": "入る"
+  },
+  "search": {
+    "title": "検索",
+    "placeholder": "衣裳名・型番などで検索",
+    "submit": "検索",
+    "no_results_html": "「{{ terms }}」に一致するものは見つかりませんでした",
+    "results_for_html": "「{{ terms }}」の検索結果 {{ count }}件"
+  },
+  "products": {
+    "price_from_html": "{{ price }}〜",
+    "breadcrumb": "パンくずリスト",
+    "home": "トップ",
+    "silhouette": "シルエット",
+    "sizes": "取扱サイズ",
+    "size_legend": "数字＝号数相当 ／ T＝身長160cm基準、TT＝165cm、TTT＝170cm",
+    "reserve": "この衣裳で申し込む",
+    "price": {
+      "trial": "ご自宅試着（1泊2日）",
+      "rental": "本使用レンタル（{{ period }}）"
+    }
+  },
+  "size_guide": {
+    "title": "サイズの目安を調べる",
+    "lede_html": "バスト・ウエスト・ヒップ・身長から、この衣裳の目安サイズをその場でご確認いただけます。<br>結果はそのままご予約フォームに引き継がれます。",
+    "fields": {
+      "bust": "バスト",
+      "waist": "ウエスト",
+      "hip": "ヒップ",
+      "height": "身長"
+    },
+    "required": "必須",
+    "hint": "下着の上から、メジャーを水平にして測った数値をご記入ください。",
+    "submit": "目安サイズを調べる",
+    "note": "算出されたサイズはあくまでも目安です。実際のフィット感はご試着時にお確かめください。",
+    "cta": "この結果を添えて試着を申し込む",
+    "errors": {
+      "need_bust_waist": "バストとウエストをご入力ください。",
+      "check_values": "数値をご確認ください。"
+    },
+    "result": {
+      "caution_far": "ご入力の寸法はサイズ表の範囲から離れています。お直しやご相談が必要な場合がありますので、お問い合わせください。",
+      "go_line": "{go}相当 ・ {height}",
+      "height_none": "丈の段階は身長が未入力のため付けていません",
+      "height_confirmed": "丈は身長{height}cm基準",
+      "height_unconfirmed": "身長{height}cm向けの丈（{suffix}）はサイズ表に記載がないため、号数のみでご案内しています。丈はご試着時にご相談ください",
+      "avail_head": "このドレスのご用意: {sizes}",
+      "avail_diff": " — 目安サイズとは異なります。お直しやご相談が必要な場合がありますので、お問い合わせください。",
+      "avail_no_height": " — 号数は同じです。丈は身長が未入力のため判定していません。",
+      "avail_same": " — 目安サイズと同じです。",
+      "avail_tier_diff": " — 号数は同じですが、丈の基準身長が異なります。ご試着時に丈をお確かめください。",
+      "spec_bust": "バスト（{column}）",
+      "column_bustier": "ビスチェ",
+      "column_regular": "レギュラー",
+      "spec_waist": "ウエスト",
+      "spec_hip": "ヒップ",
+      "spec_hip_ref": "ヒップ（未入力・参考）",
+      "form_size_no_height": "{size}（丈は身長未入力のため未判定）",
+      "form_size_unconfirmed": "{size}（身長{height}cm向けの丈は要確認）"
+    }
+  },
+  "reserve": {
+    "eyebrow": "Reservation",
+    "title": "ご予約",
+    "lede": "招待状にご返信いただくように、5つのステップでご予約いただけます。ご採寸やお届け先まで一度にお伺いするので、折り返しの確認メールなしでお手続きが進みます。",
+    "noscript": "ご予約フォームは JavaScript を使っています。ブラウザの設定で有効にしていただくか、お電話でお申し込みください。",
+    "required": "必須",
+    "optional": "任意",
+    "progress_label": "ご予約のステップ",
+    "steps": {
+      "schedule": "日程",
+      "items": "衣裳",
+      "size": "サイズ",
+      "customer": "お客さま情報",
+      "review": "ご確認"
+    },
+    "legends": {
+      "schedule": "ご希望の内容と日程",
+      "items": "ご希望の衣裳",
+      "size": "サイズ（ご採寸）",
+      "customer": "お客さま情報・お届け先",
+      "review": "ご入力内容の確認と規約への同意"
+    },
+    "purpose": {
+      "label": "ご利用の目的",
+      "error": "ご利用の目的をお選びください。",
+      "options": {
+        "home": "ご自宅試着(¥5,500)",
+        "rental": "本使用レンタル(3泊4日)",
+        "salon": "銀座サロン試着",
+        "overseas": "海外挙式・フォト相談"
+      }
+    },
+    "occasion": {
+      "label": "ご使用内容",
+      "error": "ご使用内容をお選びください。",
+      "options": {
+        "wedding": "結婚式",
+        "photo": "フォト",
+        "both": "両方",
+        "undecided": "未定"
+      }
+    },
+    "date1": {
+      "label": "ご試着希望日 第一希望",
+      "error": "第一希望の日付をお選びください。",
+      "note": "ご利用日の4ヶ月前〜10日前までご予約いただけます。"
+    },
+    "date2": {
+      "label": "第二希望"
+    },
+    "deliver_day": {
+      "label": "お届け希望日",
+      "error": "お届け希望日をお選びください。",
+      "options": {
+        "before": "試着日の前日",
+        "same": "試着日の当日",
+        "other": "日付を指定する"
+      }
+    },
+    "deliver_time": {
+      "label": "お届け時間帯",
+      "error": "お届け時間帯をお選びください。",
+      "options": {
+        "t14": "14〜16時",
+        "t16": "16〜18時",
+        "t18": "18〜20時",
+        "t19": "19〜21時"
+      }
+    },
+    "event": {
+      "legend": "本番のご予定",
+      "note": "挙式・撮影の日がお決まりでない場合は、おおよその時期の日付をお選びいただき、ご要望欄に「未定」とお書き添えください。",
+      "date": {
+        "label": "本番ご利用日（挙式・撮影日）",
+        "error": "本番ご利用日をお選びください。"
+      },
+      "venue": {
+        "label": "式場名・撮影場所",
+        "placeholder": "例: 〇〇ホテル／ハワイ・ワイキキ",
+        "note": "レンタルをご希望の場合は、式場に Atelier Yuka の衣裳を持ち込み可能かどうか、事前にご確認ください。"
+      }
+    },
+    "who": {
+      "label": "お申し込みされる方",
+      "error": "お申し込みされる方をお選びください。",
+      "options": {
+        "bride": "新婦のみ",
+        "groom": "新郎のみ",
+        "both": "新郎新婦おふたり"
+      }
+    },
+    "category": {
+      "label": "衣裳カテゴリ",
+      "error": "衣裳カテゴリをお選びください。",
+      "options": {
+        "wedding": "ウエディングドレス",
+        "color": "カラードレス",
+        "tuxedo": "タキシード",
+        "morning": "モーニング・マザードレス"
+      }
+    },
+    "codes": {
+      "label": "ご希望の衣裳番号",
+      "hint": "最大4点・未定でも可",
+      "note": "衣裳の型番（商品ページの型番）をご記入ください。入力中に候補が出ます。",
+      "size_hint_short": "診断サイズ",
+      "size_hint_note": "商品ページのサイズ診断結果「{size}」を添えてお送りします。"
+    },
+    "size": {
+      "note": "お手元のメジャーで、下着の上から水平に測った数値をcmでご記入ください。身長・バスト・ウエストがあれば、ほかは空欄でも承れます。",
+      "bride": "新婦さま",
+      "groom": "新郎さま",
+      "fields": {
+        "height": "身長",
+        "bust": "バスト",
+        "waist": "ウエスト",
+        "hip": "ヒップ",
+        "shoulder": "肩幅",
+        "sleeve": "袖丈",
+        "neck": "首周り",
+        "shoes": "シューズ",
+        "chest": "胸囲",
+        "inseam": "股下"
+      },
+      "error_required": "{field}をご記入ください。",
+      "error_range": "{min}〜{max}の数値でご記入ください。"
+    },
+    "customer": {
+      "name": {
+        "label": "お名前",
+        "placeholder": "例: 山田花子",
+        "error": "お名前をご入力ください。"
+      },
+      "kana": {
+        "label": "ふりがな",
+        "placeholder": "例: やまだはなこ",
+        "error": "ふりがなをご入力ください。"
+      },
+      "partner": {
+        "label": "お相手のお名前",
+        "placeholder": "例: 山田太郎"
+      },
+      "email": {
+        "label": "メールアドレス",
+        "placeholder": "例: hanako@example.com",
+        "error": "メールアドレスをご入力ください。",
+        "error_format": "メールアドレスの形式をご確認ください(例: hanako@example.com)。"
+      },
+      "tel": {
+        "label": "お電話番号",
+        "placeholder": "例: 09012345678",
+        "error": "お電話番号をご入力ください。",
+        "error_format": "お電話番号の形式をご確認ください(例: 09012345678)。"
+      },
+      "address": {
+        "label": "ご自宅住所",
+        "placeholder": "例: 東京都中央区銀座1-20-11 〇〇マンション601",
+        "error": "ご自宅住所をご入力ください。"
+      },
+      "tryon_place": {
+        "label": "試着衣裳のお届け先",
+        "error": "お届け先をお選びください。",
+        "options": {
+          "home": "ご自宅（上記住所）",
+          "other": "別の場所へ届けてほしい"
+        }
+      },
+      "tryon_address": {
+        "label": "お届け先（場所名・住所・お名前・お電話番号）",
+        "placeholder": "例: 〇〇ホテル 1203号室／東京都…／山田花子／09012345678",
+        "error": "お届け先をご記入ください。"
+      },
+      "main": {
+        "legend": "本番衣裳のお届け先",
+        "label": "お届け先",
+        "error": "お届け先をお選びください。",
+        "options": {
+          "groom_home": "新郎ご自宅",
+          "bride_home": "新婦ご自宅",
+          "airport": "空港止め",
+          "other": "その他"
+        }
+      },
+      "main_address": {
+        "label": "送付先（場所名・住所・お名前・お電話番号）",
+        "error": "送付先をご記入ください。"
+      },
+      "airport_dep": {
+        "label": "出発空港・ターミナル",
+        "placeholder": "例: 羽田空港 第3ターミナル",
+        "error": "出発空港をご記入ください。"
+      },
+      "airport_arr": {
+        "label": "行き先空港",
+        "placeholder": "例: ホノルル",
+        "error": "行き先空港をご記入ください。"
+      },
+      "flight": {
+        "label": "航空会社・便名",
+        "placeholder": "例: JAL JL074",
+        "error": "航空会社・便名をご記入ください。"
+      },
+      "departure": {
+        "label": "出発日・出発時刻",
+        "placeholder": "例: 2026年11月3日 21:55",
+        "error": "出発日・出発時刻をご記入ください。"
+      },
+      "return_date": {
+        "label": "ご返却発送予定日"
+      },
+      "options": {
+        "legend": "ご希望のオプション",
+        "bride": "新婦用",
+        "groom": "新郎用",
+        "bride_items": {
+          "veil": "ヴェール",
+          "pannier": "パニエ",
+          "pumps": "パンプス"
+        },
+        "groom_items": {
+          "shirt": "タキシードシャツ",
+          "shoes": "シューズ",
+          "set5": "メンズ小物5点セット"
+        },
+        "set5_note": "小物5点セット: カフスボタン・アームバンド・サスペンダー・白チーフ・白グローブ"
+      },
+      "message": {
+        "label": "ご要望・ご質問",
+        "placeholder": "気になっている点、ご相談したいことがあればご記入ください。"
+      }
+    },
+    "review": {
+      "terms_label": "レンタル規約",
+      "terms_region": "レンタル規約の本文",
+      "terms_link_html": "全文は <a href=\"{{ url }}\" target=\"_blank\" rel=\"noopener\">レンタル規約のページ</a> でもご覧いただけます。",
+      "agree": "上記の規約を確認し、同意します",
+      "agree_with_title": "上記の{title}を確認し、同意します",
+      "agree_error": "お申し込みには規約への同意が必要です。",
+      "terms_line": "{title} {version} に同意（{date}）"
+    },
+    "nav": {
+      "prev": "戻る",
+      "next": "次へ進む",
+      "submit": "この内容で申し込む",
+      "sending": "送信中…",
+      "step_status": "ステップ{current}/{total}: {legend}"
+    },
+    "foot_note": "お送りいただいた内容は、ご予約の確認とご連絡のためにのみ使用します。",
+    "errors": {
+      "generic": "ご入力ください。",
+      "format": "入力形式をご確認ください。",
+      "past_date": "本日以降の日付をお選びください。",
+      "server": "送信できませんでした。内容をご確認のうえ、もう一度お試しください。"
+    },
+    "complete": {
+      "en": "R.S.V.P.",
+      "title": "ご予約を承りました",
+      "closing": "お目にかかれる日を、スタッフ一同心より楽しみにしております。",
+      "sign": "Atelier Yuka — Ginza Atelier",
+      "again": "続けて別のお申し込みをする",
+      "greeting": "{name} さま",
+      "body": "このたびはアトリエユカにお申し込みいただき、誠にありがとうございます。一両日中に、担当スタイリストよりご確認のご連絡を差し上げます。"
+    },
+    "mail": {
+      "subject": "【ご予約】{name} さま（{purpose}）",
+      "header": "Atelier Yuka ご予約フォームからのお申し込み"
+    },
+    "deliver_date": {
+      "label": "お届け希望日（日付）",
+      "error": "お届け希望日をお選びください。",
+      "note": "ご試着日より前の日付をお選びください。",
+      "error_before": "ご試着希望日（第一希望）より前の日付をお選びください。"
+    }
+  }
+}

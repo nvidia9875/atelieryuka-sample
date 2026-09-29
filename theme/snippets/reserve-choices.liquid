@@ -1,0 +1,52 @@
+{% comment %}
+  予約フォームの選択肢（ラジオ or チェックボックス）の1グループ。
+
+  使い方:
+    {% render 'reserve-choices', name: 'purpose', key: 'reserve.purpose', ids: 'home,rental,salon,overseas', required: true %}
+    {% render 'reserve-choices', name: 'brideOpt', key: 'reserve.customer.options', label_key: 'reserve.customer.options.bride', items_key: 'reserve.customer.options.bride_items', ids: 'veil,pannier,pumps', type: 'checkbox', compact: true %}
+
+  - 値は英字の ID（条件表示 data-when もこの ID で書く）。メールに載るのは画面の文言（reserve.js が拾う）
+  - 文言は {key}.label（見出し）、{key}.options.{id}（選択肢）、{key}.error（未選択のとき）
+    label_key / items_key を渡すと、見出し・選択肢の文言の場所を変えられる
+{% endcomment %}
+{%- liquid
+  assign input_type = type | default: 'radio'
+  if label_key == blank
+    assign label_key = key | append: '.label'
+  endif
+  if items_key == blank
+    assign items_key = key | append: '.options'
+  endif
+  assign error_key = key | append: '.error'
+  assign id_list = ids | split: ','
+-%}
+<fieldset class="choice-group">
+  <legend class="field-label">
+    {{- label_key | t -}}
+    {%- if required -%}
+      <span class="req">{{ 'reserve.required' | t }}</span>
+    {%- else -%}
+      <span class="opt">{{ 'reserve.optional' | t }}</span>
+    {%- endif -%}
+  </legend>
+  <div class="choice-grid{% if compact %} is-compact{% endif %}">
+    {%- for id in id_list -%}
+      {%- assign option_key = items_key | append: '.' | append: id -%}
+      <label class="choice">
+        <input
+          type="{{ input_type }}"
+          name="{{ name }}"
+          value="{{ id }}"
+          {% if required and forloop.first %}
+            required data-error="{{ error_key | t | escape }}"
+          {% endif %}
+        >
+        <span>{{ option_key | t }}</span>
+      </label>
+    {%- endfor -%}
+  </div>
+  {%- if note_key -%}
+    <p class="field-note">{{ note_key | t }}</p>
+  {%- endif -%}
+  <p class="field-error" hidden></p>
+</fieldset>

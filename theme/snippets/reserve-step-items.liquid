@@ -1,0 +1,37 @@
+{%- comment -%} ご予約フォーム ステップ II：ご希望の衣裳 {%- endcomment -%}
+<fieldset class="form-step" data-step="1">
+  <legend class="step-legend" tabindex="-1">{{ 'reserve.legends.items' | t }}</legend>
+
+  {% render 'reserve-choices', name: 'who', key: 'reserve.who', ids: 'bride,groom,both', required: true %}
+  {% render 'reserve-choices', name: 'category', key: 'reserve.category', ids: 'wedding,color,tuxedo,morning', required: true %}
+
+  <div class="field">
+    <label class="field-label" for="f-code-1">
+      {{- 'reserve.codes.label' | t -}}
+      <span class="opt">{{ 'reserve.codes.hint' | t }}</span>
+    </label>
+    <div class="measure-grid">
+      {%- assign marks = '❶,❷,❸,❹' | split: ',' -%}
+      {%- for mark in marks -%}
+        <div class="measure">
+          <label for="f-code-{{ forloop.index }}">{{ mark }}</label>
+          <input
+            type="text"
+            id="f-code-{{ forloop.index }}"
+            name="code{{ forloop.index }}"
+            data-short="{{ mark }}"
+            list="code-list"
+            autocomplete="off"
+            autocapitalize="characters"
+            data-code-input
+          >
+        </div>
+      {%- endfor -%}
+    </div>
+    {%- comment -%} 候補は reserve.js が Shopify の検索候補（/search/suggest.json）から入れる {%- endcomment -%}
+    <datalist id="code-list"></datalist>
+    <p class="field-note">{{ 'reserve.codes.note' | t }}</p>
+    <input type="hidden" id="f-size-hint" name="sizeHint" data-short="{{ 'reserve.codes.size_hint_short' | t | escape }}">
+    <p class="field-note" id="size-hint-note" hidden></p>
+  </div>
+</fieldset>

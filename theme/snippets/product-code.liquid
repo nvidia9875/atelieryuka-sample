@@ -1,0 +1,14 @@
+{%- comment -%}
+  商品名から種類（「ウエディングドレス」など）と全角スペースを外した型番を出す。
+  例: 「カラードレス　AY6001」→「AY6001」。種類を外すと空になるときは商品名そのまま。
+
+  使い方:
+    {%- capture code -%}{% render 'product-code', product: product %}{%- endcapture -%}
+{%- endcomment -%}
+{%- liquid
+  assign code = product.title | remove_first: product.type | remove: '　' | strip
+  if code == blank
+    assign code = product.title
+  endif
+  echo code
+-%}

@@ -1,0 +1,35 @@
+{% comment %}
+  言語切り替え。ストアで2つ以上の言語が公開されているときだけ出す。
+  各言語のボタンがそのまま localization フォームを送信するので、JS が無くても動く。
+
+  使い方: {% render 'language-selector' %}
+{% endcomment %}
+{%- if localization.available_languages.size > 1 -%}
+  <details class="lang">
+    <summary class="lang-toggle">
+      <span class="visually-hidden">{{ 'general.language' | t }}:</span>
+      <span lang="{{ localization.language.iso_code }}">{{ localization.language.endonym_name }}</span>
+      <span class="lang-caret" aria-hidden="true"></span>
+    </summary>
+    {%- form 'localization', class: 'lang-menu' -%}
+      <input type="hidden" name="return_to" value="{{ request.path }}">
+      <ul>
+        {%- for language in localization.available_languages -%}
+          <li>
+            <button
+              type="submit"
+              name="language_code"
+              value="{{ language.iso_code }}"
+              lang="{{ language.iso_code }}"
+              {% if language.iso_code == localization.language.iso_code %}
+                aria-current="true"
+              {% endif %}
+            >
+              {{ language.endonym_name }}
+            </button>
+          </li>
+        {%- endfor -%}
+      </ul>
+    {%- endform -%}
+  </details>
+{%- endif -%}

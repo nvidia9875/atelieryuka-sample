@@ -1,0 +1,122 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Atelier Yuka",
+    "theme_version": "0.1.0",
+    "theme_author": "Atelier Yuka",
+    "theme_documentation_url": "https://help.shopify.com/manual/online-store/themes",
+    "theme_support_url": "https://support.shopify.com/"
+  },
+  {
+    "name": "t:general.brand",
+    "settings": [
+      {
+        "type": "text",
+        "id": "brand_name",
+        "label": "t:labels.brand_name",
+        "info": "t:info.brand_name",
+        "default": "Atelier Yuka"
+      }
+    ]
+  },
+  {
+    "name": "t:general.colors",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "t:info.colors"
+      },
+      {
+        "type": "color",
+        "id": "color_ivory",
+        "label": "t:labels.color_ivory",
+        "default": "#FBF9F5"
+      },
+      {
+        "type": "color",
+        "id": "color_ink",
+        "label": "t:labels.color_ink",
+        "default": "#2B2724"
+      },
+      {
+        "type": "color",
+        "id": "color_gold",
+        "label": "t:labels.color_gold",
+        "info": "t:info.color_gold",
+        "default": "#B49B57"
+      },
+      {
+        "type": "color",
+        "id": "color_gold_ink",
+        "label": "t:labels.color_gold_ink",
+        "info": "t:info.color_gold_ink",
+        "default": "#7A6027"
+      },
+      {
+        "type": "color",
+        "id": "color_greige",
+        "label": "t:labels.color_greige",
+        "default": "#F3EEE4"
+      },
+      {
+        "type": "color",
+        "id": "color_paper",
+        "label": "t:labels.color_paper",
+        "default": "#FFFDF9"
+      },
+      {
+        "type": "color",
+        "id": "color_line",
+        "label": "t:labels.color_line",
+        "default": "#E4DCCB"
+      },
+      {
+        "type": "color",
+        "id": "color_muted",
+        "label": "t:labels.color_muted",
+        "default": "#6B645C"
+      },
+      {
+        "type": "color",
+        "id": "color_error",
+        "label": "t:labels.color_error",
+        "default": "#96372A"
+      }
+    ]
+  },
+  {
+    "name": "t:general.social_media",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "t:info.social_media"
+      },
+      {
+        "type": "url",
+        "id": "social_instagram_link",
+        "label": "t:labels.instagram"
+      },
+      {
+        "type": "url",
+        "id": "social_tiktok_link",
+        "label": "t:labels.tiktok"
+      },
+      {
+        "type": "url",
+        "id": "social_pinterest_link",
+        "label": "t:labels.pinterest"
+      }
+    ]
+  },
+  {
+    "name": "t:general.favicon",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "t:labels.favicon",
+        "info": "t:info.favicon"
+      }
+    ]
+  }
+]

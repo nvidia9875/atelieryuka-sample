@@ -1,0 +1,49 @@
+{% comment %}
+  絞り込みの選択肢1つ（色の丸 or チップ）。collection-filter から呼ぶ。
+
+  使い方:
+    {% render 'filter-value', value: value, input_id: 'xxx', swatch: '#F7F5F1', is_money: false %}
+  - swatch を渡すと色の丸、渡さないとチップ（件数つき）
+  - is_money のときは値（円）を ¥220,000 の形で出す
+  - 該当が0件の値は押せなくする（選択中のものは外せるよう残す）
+{% endcomment %}
+{%- liquid
+  assign is_disabled = false
+  if value.count == 0 and value.active == false
+    assign is_disabled = true
+  endif
+  assign label = value.label
+  if is_money
+    # money はストア通貨の最小単位を受け取る（円も 100 倍で持つ）
+    assign label = value.label | times: 100 | money
+  endif
+-%}
+{%- if swatch != blank -%}
+  <label class="swatch{% if is_disabled %} is-disabled{% endif %}" for="{{ input_id }}" style="--swatch: {{ swatch }}">
+    <input
+      type="checkbox"
+      id="{{ input_id }}"
+      name="{{ value.param_name }}"
+      value="{{ value.value }}"
+      {% if value.active %}checked{% endif %}
+      {% if is_disabled %}disabled{% endif %}
+    >
+    <span class="swatch-dot" aria-hidden="true"></span>
+    <span class="swatch-label">{{ value.label }}</span>
+  </label>
+{%- else -%}
+  <label class="chip{% if is_disabled %} is-disabled{% endif %}" for="{{ input_id }}">
+    <input
+      type="checkbox"
+      id="{{ input_id }}"
+      name="{{ value.param_name }}"
+      value="{{ value.value }}"
+      {% if value.active %}checked{% endif %}
+      {% if is_disabled %}disabled{% endif %}
+    >
+    <span class="chip-label">
+      {{- label -}}
+      <span class="chip-count">{{ value.count }}</span>
+    </span>
+  </label>
+{%- endif -%}

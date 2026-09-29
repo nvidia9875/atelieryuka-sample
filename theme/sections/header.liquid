@@ -1,0 +1,227 @@
+{%- liquid
+  assign partner_url = section.settings.partner_link | default: '/pages/withawish'
+  assign reserve_url = section.settings.reserve_link | default: '/pages/reserve'
+-%}
+
+<header class="site-header full-width">
+  {%- if localization.available_languages.size > 1 -%}
+    <div class="site-header-tools">
+      {% render 'language-selector' %}
+    </div>
+  {%- endif -%}
+
+  <a class="brand" href="{{ routes.root_url }}">
+    {%- if section.settings.logo != blank -%}
+      {{
+        section.settings.logo
+        | image_url: width: 600
+        | image_tag:
+          class: 'brand-logo',
+          alt: settings.brand_name | default: shop.name,
+          widths: '200, 300, 400, 600',
+          sizes: '(min-width: 750px) 300px, 200px',
+          style: 'max-width: calc(var(--logo-width) * 1px)'
+      }}
+    {%- else -%}
+      <span class="brand-en" translate="no">{{ settings.brand_name | default: shop.name }}</span>
+    {%- endif -%}
+    {%- if section.settings.subtitle != blank -%}
+      <span class="brand-ja">{{ section.settings.subtitle }}</span>
+    {%- endif -%}
+  </a>
+
+  <nav class="site-nav" aria-label="{{ 'general.main_navigation' | t }}">
+    <ul>
+      {%- for link in section.settings.menu.links -%}
+        <li>
+          <a href="{{ link.url }}" {% if link.current %}aria-current="page"{% endif %}>{{ link.title }}</a>
+        </li>
+      {%- endfor -%}
+      {%- if section.settings.show_partner_link -%}
+        <li><a class="nav-partner" href="{{ partner_url }}">{{ 'header.partner_link' | t }}</a></li>
+      {%- endif -%}
+      <li><a class="nav-reserve" href="{{ reserve_url }}">{{ 'header.reserve' | t }}</a></li>
+    </ul>
+  </nav>
+</header>
+
+{% style %}
+  #shopify-section-{{ section.id }} .brand-logo { --logo-width: {{ section.settings.logo_width }}; }
+{% endstyle %}
+
+{% stylesheet %}
+  .site-header {
+    position: relative;
+    text-align: center;
+    padding: clamp(1.6rem, 3vw, 2.6rem) var(--pad-x) 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .brand {
+    display: inline-block;
+    text-decoration: none;
+    color: var(--ink);
+  }
+  .brand-en {
+    display: block;
+    font: 500 clamp(1.7rem, 1.4rem + 1.2vw, 2.2rem)/1.2 var(--font-en);
+  }
+  .brand-logo { margin: 0 auto; width: 100%; height: auto; }
+  .brand-ja {
+    display: block;
+    margin-top: 0.35em;
+    font-size: 0.72rem;
+    color: var(--muted);
+  }
+
+  .site-nav { margin-top: 1.2rem; }
+  .site-nav ul {
+    display: flex; flex-wrap: wrap; justify-content: center;
+    column-gap: clamp(0.9rem, 2vw, 1.7rem); row-gap: 0.35rem;
+    padding-bottom: 1.1rem;
+  }
+  .site-nav a {
+    display: inline-block;
+    font-size: 0.83rem; font-weight: 400;
+    color: var(--ink); text-decoration: none;
+    padding: 0.35em 0.1em;
+    border-bottom: 1px solid transparent;
+    transition: color var(--duration-fast) ease-out, border-color var(--duration-fast) ease-out;
+  }
+  .site-nav a:hover,
+  .site-nav a[aria-current="page"] { color: var(--gold-ink); border-bottom-color: var(--gold-ink); }
+  .site-nav a.nav-reserve {
+    color: var(--gold-ink);
+    border: 1px solid var(--gold-ink);
+    padding: 0.35em 1.1em;
+    transition: color var(--duration-fast) ease-out, background-color var(--duration-fast) ease-out;
+  }
+  .site-nav a.nav-reserve:hover { background: var(--gold-ink); color: var(--ivory); }
+  /* 業者さま向け（with a WISH）への導線。主導線ではないので控えめに */
+  .site-nav a.nav-partner { color: var(--muted); font-size: 0.78rem; }
+  .site-nav a.nav-partner:hover { color: var(--gold-ink); }
+
+  /* ---------- 言語切り替え（右上） ---------- */
+  .site-header-tools {
+    position: absolute;
+    top: clamp(0.6rem, 1.5vw, 1.1rem);
+    right: var(--pad-x);
+    z-index: var(--z-header-pop);
+    text-align: left;
+  }
+  .lang { position: relative; }
+  .lang-toggle {
+    display: inline-flex; align-items: center; gap: 0.45em;
+    min-height: 44px;
+    padding: 0 0.2em;
+    list-style: none;
+    font: 400 0.78rem/1 var(--font-ui);
+    color: var(--muted);
+    cursor: pointer;
+    transition: color var(--duration-fast) ease-out;
+  }
+  .lang-toggle::-webkit-details-marker { display: none; }
+  .lang-toggle:hover, .lang[open] .lang-toggle { color: var(--gold-ink); }
+  .lang-caret {
+    width: 5px; height: 5px;
+    border-right: 1px solid currentColor;
+    border-bottom: 1px solid currentColor;
+    transform: translateY(-2px) rotate(45deg);
+    transition: transform var(--duration-fast) ease-out;
+  }
+  .lang[open] .lang-caret { transform: translateY(1px) rotate(-135deg); }
+  .lang-menu {
+    position: absolute;
+    top: 100%; right: 0;
+    min-width: 9.5rem;
+    padding: 0.4rem 0;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    box-shadow: 0 10px 28px -14px rgb(43 39 36 / 0.35);
+  }
+  .lang-menu button {
+    display: block;
+    width: 100%;
+    padding: 0.7em 1.2em;
+    background: none; border: 0;
+    text-align: left;
+    font: 400 0.85rem/1.4 var(--font-ui);
+    cursor: pointer;
+    transition: background-color var(--duration-fast) ease-out, color var(--duration-fast) ease-out;
+  }
+  .lang-menu button:hover { background: var(--greige); color: var(--gold-ink); }
+  .lang-menu button[aria-current="true"] {
+    color: var(--gold-ink);
+    box-shadow: inset 2px 0 0 var(--gold-ink);
+  }
+
+  /* 狭い画面ではロゴと重ならないよう、言語切り替えをロゴの上の1段に置く */
+  @media (max-width: 479px) {
+    .site-header:has(.site-header-tools) { padding-top: 0.2rem; }
+    .site-header-tools {
+      position: static;
+      display: flex; justify-content: flex-end;
+      margin-right: -0.2em;
+    }
+    .lang-menu { right: 0; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:general.header",
+  "class": "section-header",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "t:labels.logo",
+      "info": "t:info.logo"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "min": 100,
+      "max": 400,
+      "step": 10,
+      "unit": "px",
+      "label": "t:labels.logo_width",
+      "default": 220
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "t:labels.subtitle",
+      "default": "アトリエユカ — 銀座・ハワイ ウエディングドレスメゾン"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "t:labels.menu",
+      "default": "main-menu"
+    },
+    {
+      "type": "header",
+      "content": "t:labels.fixed_links"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_partner_link",
+      "label": "t:labels.show_partner_link",
+      "default": true
+    },
+    {
+      "type": "url",
+      "id": "partner_link",
+      "label": "t:labels.partner_link",
+      "info": "t:info.partner_link"
+    },
+    {
+      "type": "url",
+      "id": "reserve_link",
+      "label": "t:labels.reserve_link",
+      "info": "t:info.reserve_link"
+    }
+  ]
+}
+{% endschema %}

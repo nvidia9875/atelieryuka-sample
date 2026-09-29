@@ -1,0 +1,21 @@
+{%- comment -%}
+  ご予約フォーム ステップ V：ご入力内容の確認と規約への同意
+  規約の本文は assets/terms.js（国内／国外）から reserve.js が描画する。ご利用の目的が「海外」なら国外規約
+{%- endcomment -%}
+{%- assign terms_url = terms_url | default: '/pages/terms' -%}
+<fieldset class="form-step form-step-review" data-step="4">
+  <legend class="step-legend" tabindex="-1">{{ 'reserve.legends.review' | t }}</legend>
+  <dl class="review-summary" id="review-summary"></dl>
+
+  <p class="field-label">{{ 'reserve.review.terms_label' | t }}</p>
+  <div class="terms-box" id="terms-box" tabindex="0" role="region" aria-label="{{ 'reserve.review.terms_region' | t | escape }}"></div>
+  <p class="terms-links" id="terms-links" data-base-url="{{ terms_url }}">{{ 'reserve.review.terms_link_html' | t: url: terms_url }}</p>
+
+  <div class="consent">
+    <label class="choice">
+      <input type="checkbox" name="agree" value="agree" required data-error="{{ 'reserve.review.agree_error' | t | escape }}">
+      <span id="agree-label">{{ 'reserve.review.agree' | t }}</span>
+    </label>
+    <p class="field-error" hidden></p>
+  </div>
+</fieldset>

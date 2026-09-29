@@ -1,0 +1,179 @@
+{%- liquid
+  assign socials = 'instagram,tiktok,pinterest' | split: ','
+-%}
+
+<footer class="site-footer full-width">
+  <div class="footer-inner">
+    <p class="footer-mark" translate="no">{{ settings.brand_name | default: shop.name }}</p>
+    {%- if section.settings.tagline != blank -%}
+      <p class="footer-tagline">{{ section.settings.tagline }}</p>
+    {%- endif -%}
+
+    <ul class="footer-social">
+      {%- for key in socials -%}
+        {%- assign setting_id = 'social_' | append: key | append: '_link' -%}
+        {%- assign social_url = settings[setting_id] -%}
+        {%- if social_url != blank -%}
+          {%- assign label_key = 'footer.social.' | append: key -%}
+          <li>
+            <a href="{{ social_url }}" target="_blank" rel="noopener" translate="no">
+              {{- label_key | t -}}
+              <span class="visually-hidden">{{ 'general.opens_in_new_window' | t }}</span>
+            </a>
+          </li>
+        {%- endif -%}
+      {%- endfor -%}
+    </ul>
+
+    {%- if section.settings.company != blank -%}
+      <p class="footer-company">{{ section.settings.company }}</p>
+    {%- endif -%}
+    {%- if section.settings.address != blank -%}
+      <div class="footer-address">{{ section.settings.address }}</div>
+    {%- endif -%}
+
+    {%- if section.settings.menu.links.size > 0 -%}
+      <nav aria-label="{{ 'footer.navigation' | t }}">
+        <ul class="footer-links">
+          {%- for link in section.settings.menu.links -%}
+            <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+          {%- endfor -%}
+        </ul>
+      </nav>
+    {%- endif -%}
+
+    {%- if section.settings.partner_text != blank -%}
+      <div class="footer-partner">{{ section.settings.partner_text }}</div>
+    {%- endif -%}
+
+    <p class="footer-copy" translate="no">
+      &copy; {{ 'now' | date: '%Y' }}
+      {{ section.settings.copyright_name | default: settings.brand_name }}
+    </p>
+  </div>
+</footer>
+
+{% stylesheet %}
+  .site-footer {
+    background: var(--ink);
+    color: var(--on-ink);
+    text-align: center;
+    padding: clamp(3.5rem, 6vw, 5.5rem) var(--pad-x) clamp(4.5rem, 7vw, 6rem);
+  }
+  .site-footer :focus-visible { outline-color: var(--gold); }
+  .footer-inner { max-width: var(--w-mid); margin: 0 auto; }
+  .footer-mark { font: 500 1.9rem/1.3 var(--font-en); }
+  .footer-tagline {
+    margin-top: 0.8rem;
+    font: 400 0.85rem/2 var(--font-jp);
+  }
+
+  .footer-social {
+    display: flex; flex-wrap: wrap; justify-content: center;
+    column-gap: 2rem; row-gap: 0.4rem;
+    margin-top: 1.8rem;
+  }
+  .footer-social:empty { display: none; }
+  .footer-social a {
+    display: inline-block;
+    padding: 0.35em 0.1em;
+    color: var(--gold);
+    font: italic 400 1rem/1.4 var(--font-en);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: color var(--duration-fast) ease-out, border-color var(--duration-fast) ease-out;
+  }
+  .footer-social a:hover { color: var(--on-ink); border-bottom-color: var(--on-ink); }
+
+  .footer-company {
+    margin-top: 2.2rem;
+    font-size: 0.84rem;
+  }
+  .footer-address {
+    margin-top: 0.5rem;
+    font-size: 0.78rem;
+    color: var(--on-ink-muted);
+  }
+  .footer-address p + p { margin-top: 0.3rem; }
+
+  .footer-links {
+    display: flex; flex-wrap: wrap; justify-content: center;
+    column-gap: 1.6rem; row-gap: 0.2rem;
+    margin-top: 1.8rem;
+  }
+  .footer-links a,
+  .footer-partner a {
+    display: inline-block;
+    padding: 0.3em 0;
+    font-size: 0.8rem;
+    color: var(--on-ink);
+    text-decoration: none;
+    border-bottom: 1px solid rgb(239 233 221 / 0.35);
+    transition: color var(--duration-fast) ease-out, border-color var(--duration-fast) ease-out;
+  }
+  .footer-links a:hover,
+  .footer-partner a:hover { color: var(--gold); border-bottom-color: var(--gold); }
+
+  .footer-partner {
+    margin-top: 1.4rem;
+    font-size: 0.8rem;
+    color: var(--on-ink-muted);
+  }
+  .footer-partner a { font-size: inherit; padding: 0; }
+
+  .footer-copy {
+    margin-top: 1.8rem;
+    font-size: 0.78rem;
+    color: var(--on-ink-muted);
+    font-variant-numeric: lining-nums tabular-nums;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:general.footer",
+  "class": "section-footer",
+  "settings": [
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "t:labels.tagline",
+      "default": "人生でいちばん美しい日を、いちばん確かな一着で。"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:info.social_links"
+    },
+    {
+      "type": "text",
+      "id": "company",
+      "label": "t:labels.company",
+      "default": "松尾株式会社/MATSUO — 代表取締役 松尾 祐佳"
+    },
+    {
+      "type": "richtext",
+      "id": "address",
+      "label": "t:labels.address",
+      "default": "<p>銀座アトリエ: 東京都中央区銀座1丁目20番地11号 6階 ｜ Hawaii Salon: 2270 Kalākaua Ave Suite 1220, Honolulu, HI 96815</p><p>本社: 〒562-0035 大阪府箕面市船場東2丁目3番47号 ｜ 受付時間 10:00〜17:00（土・日曜日・年末年始を除く）</p>"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "t:labels.menu",
+      "default": "footer"
+    },
+    {
+      "type": "richtext",
+      "id": "partner_text",
+      "label": "t:labels.partner_text",
+      "default": "<p>業者さま向け 新郎タキシード取寄せレンタル <a href=\"/pages/withawish\">with a WISH</a> はこちら</p>"
+    },
+    {
+      "type": "text",
+      "id": "copyright_name",
+      "label": "t:labels.copyright_name",
+      "default": "MATSUO Co., Ltd."
+    }
+  ]
+}
+{% endschema %}

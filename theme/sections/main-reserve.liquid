@@ -1,0 +1,128 @@
+{% comment %}
+  ご予約フォーム（予約ページのテンプレート page.reserve で使う）。サンプル index.html の #reserve から移植。
+  - 送信は Shopify 標準のお問い合わせフォーム（{% form 'contact' %}）。ストアの送信元メールアドレスに届く
+  - 画面の入力欄は contact[...] ではない名前にしてあり、送信の直前に reserve.js が
+    contact[name] / contact[email] / contact[phone] / contact[body]（確認画面と同じ並びの本文）を作って送る
+  - 送信後はページが読み直されるので、完了画面の「お申し込み内容」はブラウザに一時保存したものから出す
+  - 商品ページから ?code= &who= &size= &bust= &waist= &hip= &height= を受け取って初期値に入れる
+{% endcomment %}
+{{ 'reserve.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'terms.js' | asset_url }}" defer></script>
+<script src="{{ 'reserve.js' | asset_url }}" defer></script>
+
+{%- liquid
+  assign terms_url = section.settings.terms_link | default: '/pages/terms'
+  assign heading = 'reserve.title' | t
+  if page.title != blank
+    assign heading = page.title
+  endif
+-%}
+
+<section class="chapter chapter-tinted reserve-page full-width" id="reserve" aria-labelledby="reserve-title">
+  <header class="chapter-head">
+    <p class="chapter-label" translate="no">{{ 'reserve.eyebrow' | t }}</p>
+    <h1 class="chapter-title" id="reserve-title">{{ heading }}</h1>
+    <p class="chapter-lede">{{ 'reserve.lede' | t }}</p>
+  </header>
+
+  <script type="application/json" data-reserve-strings>
+    {
+      "generic": {{ 'reserve.errors.generic' | t | json }},
+      "format": {{ 'reserve.errors.format' | t | json }},
+      "pastDate": {{ 'reserve.errors.past_date' | t | json }},
+      "sending": {{ 'reserve.nav.sending' | t | json }},
+      "submit": {{ 'reserve.nav.submit' | t | json }},
+      "stepStatus": {{ 'reserve.nav.step_status' | t | json }},
+      "agreeWithTitle": {{ 'reserve.review.agree_with_title' | t | json }},
+      "termsLine": {{ 'reserve.review.terms_line' | t | json }},
+      "sizeHintNote": {{ 'reserve.codes.size_hint_note' | t | json }},
+      "greeting": {{ 'reserve.complete.greeting' | t | json }},
+      "mailSubject": {{ 'reserve.mail.subject' | t | json }},
+      "mailHeader": {{ 'reserve.mail.header' | t | json }},
+      "locale": {{ request.locale.iso_code | json }}
+    }
+  </script>
+
+  <div class="invitation">
+    <noscript><p class="reserve-notice">{{ 'reserve.noscript' | t }}</p></noscript>
+
+    {%- form 'contact', id: 'reserve-form', class: 'reserve-form', novalidate: 'novalidate' -%}
+      {%- if form.posted_successfully? -%}
+        {%- comment -%} 送信できた: 完了画面を出す。お申し込み内容は reserve.js が一時保存から入れる {%- endcomment -%}
+        <div class="form-complete" id="form-complete" data-posted>
+          <p class="complete-en" aria-hidden="true" translate="no">{{ 'reserve.complete.en' | t }}</p>
+          <h2 class="complete-title" id="complete-title" tabindex="-1">{{ 'reserve.complete.title' | t }}</h2>
+          <p class="complete-body">
+            <span id="complete-greeting"></span>
+            {{ 'reserve.complete.body' | t }}
+          </p>
+          <dl class="complete-summary" id="complete-summary"></dl>
+          <p class="complete-terms" id="complete-terms"></p>
+          <p class="complete-body">{{ 'reserve.complete.closing' | t }}</p>
+          <p class="complete-sign" translate="no">{{ 'reserve.complete.sign' | t }}</p>
+          <a class="btn btn-ghost" href="{{ request.path }}">{{ 'reserve.complete.again' | t }}</a>
+        </div>
+      {%- else -%}
+        {%- if form.errors -%}
+          <div class="reserve-notice" role="alert" data-server-error>
+            <p>{{ 'reserve.errors.server' | t }}</p>
+            <ul>
+              {%- for field in form.errors -%}
+                <li>{{ form.errors.translated_fields[field] | capitalize }} {{ form.errors.messages[field] }}</li>
+              {%- endfor -%}
+            </ul>
+          </div>
+        {%- endif -%}
+
+        <ol class="form-progress" aria-label="{{ 'reserve.progress_label' | t | escape }}">
+          {%- assign step_keys = 'schedule,items,size,customer,review' | split: ',' -%}
+          {%- assign numerals = 'I,II,III,IV,V' | split: ',' -%}
+          {%- for key in step_keys -%}
+            {%- assign label_key = 'reserve.steps.' | append: key -%}
+            <li data-progress="{{ forloop.index0 }}" {% if forloop.first %}class="is-current" aria-current="step"{% endif %}>
+              <span class="pg-num" aria-hidden="true" translate="no">{{ numerals[forloop.index0] }}</span>
+              <span class="pg-label">{{ label_key | t }}</span>
+            </li>
+          {%- endfor -%}
+        </ol>
+
+        {% render 'reserve-step-schedule' %}
+        {% render 'reserve-step-items' %}
+        {% render 'reserve-step-size' %}
+        {% render 'reserve-step-customer' %}
+        {% render 'reserve-step-review', terms_url: terms_url %}
+
+        {%- comment -%} Shopify に送る項目。送信の直前に reserve.js が値を入れる {%- endcomment -%}
+        <input type="hidden" name="contact[name]" data-contact="name">
+        <input type="hidden" name="contact[email]" data-contact="email">
+        <input type="hidden" name="contact[phone]" data-contact="phone">
+        <input type="hidden" name="contact[件名]" data-contact="subject">
+        <input type="hidden" name="contact[規約への同意]" data-contact="terms">
+        <input type="hidden" name="contact[body]" data-contact="body">
+
+        <div class="form-nav">
+          <button type="button" class="btn btn-ghost" id="btn-prev" hidden>{{ 'reserve.nav.prev' | t }}</button>
+          <button type="button" class="btn btn-primary" id="btn-next">{{ 'reserve.nav.next' | t }}</button>
+          <button type="submit" class="btn btn-primary" id="btn-submit" hidden>{{ 'reserve.nav.submit' | t }}</button>
+        </div>
+        <p class="visually-hidden" role="status" id="form-live"></p>
+        <p class="form-foot-note">{{ 'reserve.foot_note' | t }}</p>
+      {%- endif -%}
+    {%- endform -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "t:general.reserve",
+  "class": "section-reserve",
+  "settings": [
+    {
+      "type": "url",
+      "id": "terms_link",
+      "label": "t:labels.terms_link",
+      "info": "t:info.terms_link"
+    }
+  ]
+}
+{% endschema %}
