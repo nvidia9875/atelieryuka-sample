@@ -103,6 +103,14 @@
     "price": {
       "trial": "ご自宅試着（1泊2日）",
       "rental": "本使用レンタル（{{ period }}）"
+    },
+    "lightbox": {
+      "dialog": "画像の拡大表示",
+      "prev": "前の画像",
+      "next": "次の画像",
+      "close": "閉じる",
+      "open": "{{ title }} を拡大表示",
+      "image": "画像"
     }
   },
   "size_guide": {

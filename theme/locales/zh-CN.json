@@ -103,6 +103,14 @@
     "price": {
       "trial": "在家试穿（2天1晚）",
       "rental": "正式租赁（{{ period }}）"
+    },
+    "lightbox": {
+      "dialog": "放大查看图片",
+      "prev": "上一张",
+      "next": "下一张",
+      "close": "关闭",
+      "open": "放大查看 {{ title }}",
+      "image": "图片"
     }
   },
   "size_guide": {

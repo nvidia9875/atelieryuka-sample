@@ -103,6 +103,14 @@
     "price": {
       "trial": "자택 피팅 (1박 2일)",
       "rental": "본식 대여 ({{ period }})"
+    },
+    "lightbox": {
+      "dialog": "이미지 확대 보기",
+      "prev": "이전 이미지",
+      "next": "다음 이미지",
+      "close": "닫기",
+      "open": "{{ title }} 확대 보기",
+      "image": "이미지"
     }
   },
   "size_guide": {

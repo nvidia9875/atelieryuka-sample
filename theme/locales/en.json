@@ -103,6 +103,14 @@
     "price": {
       "trial": "Try at home (2 days, 1 night)",
       "rental": "Rental ({{ period }})"
+    },
+    "lightbox": {
+      "dialog": "Enlarged image",
+      "prev": "Previous image",
+      "next": "Next image",
+      "close": "Close",
+      "open": "Enlarge {{ title }}",
+      "image": "image"
     }
   },
   "size_guide": {

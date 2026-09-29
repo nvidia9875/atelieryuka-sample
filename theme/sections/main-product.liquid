@@ -6,6 +6,8 @@
   - 「この衣裳で申し込む」は予約ページに型番（code）と誰の衣裳か（who）を付けて渡す
 {% endcomment %}
 {{ 'product.css' | asset_url | stylesheet_tag }}
+{{ 'lightbox.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'lightbox.js' | asset_url }}" defer></script>
 
 {%- capture code -%}{% render 'product-code', product: product %}{%- endcapture -%}
 {%- liquid
@@ -61,10 +63,13 @@
   </nav>
 
   <div class="pd-grid">
-    <div class="pd-gallery">
+    {%- capture lightbox_labels -%}
+      {"dialog": {{ 'products.lightbox.dialog' | t | json }}, "prev": {{ 'products.lightbox.prev' | t | json }}, "next": {{ 'products.lightbox.next' | t | json }}, "close": {{ 'products.lightbox.close' | t | json }}, "open": {{ 'products.lightbox.open' | t: title: '%title%' | json }}, "image": {{ 'products.lightbox.image' | t | json }}}
+    {%- endcapture -%}
+    <div class="pd-gallery" data-lightbox data-lightbox-labels="{{ lightbox_labels | strip | escape }}">
       {%- for media in product.media -%}
         {%- if media.media_type == 'image' -%}
-          <figure class="pd-shot">
+          <figure class="pd-shot" data-lightbox-item data-full="{{ media | image_url: width: 2000 }}">
             {%- liquid
               if forloop.first
                 assign loading = 'eager'
