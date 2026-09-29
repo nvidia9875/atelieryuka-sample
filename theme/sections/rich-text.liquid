@@ -8,7 +8,8 @@
   <div class="rich-text-body{% if section.settings.image != blank %} has-image{% endif %}{% if section.settings.image_right %} image-right{% endif %} reveal">
     {%- if section.settings.image != blank -%}
       <figure class="rich-text-media">
-        {{ section.settings.image | image_url: width: 1100 | image_tag: widths: '480, 720, 1100', sizes: '(max-width: 859px) 92vw, 460px', loading: 'lazy', alt: section.settings.image.alt | default: '' }}
+        {%- assign image_alt = section.settings.image.alt | default: section.settings.title -%}
+        {{ section.settings.image | image_url: width: 1100 | image_tag: widths: '480, 720, 1100', sizes: '(max-width: 859px) 92vw, 460px', loading: 'lazy', alt: image_alt }}
       </figure>
     {%- endif -%}
     <div class="rich-text-content">

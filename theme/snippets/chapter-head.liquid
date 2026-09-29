@@ -3,6 +3,7 @@
 
   使い方:
     {% render 'chapter-head', settings: section.settings, title_id: 'maison-title' %}
+    {% render 'chapter-head', settings: section.settings, title_id: 'x', heading_tag: 'h1' %}  ← ページの主見出しのとき
   settings から chapter_no / label / title / lede を読む（空のものは出さない）
 {% endcomment %}
 <header class="chapter-head reveal">
@@ -12,7 +13,8 @@
   {%- if settings.label != blank -%}
     <p class="chapter-label" translate="no">{{ settings.label }}</p>
   {%- endif -%}
-  <h2 class="chapter-title" id="{{ title_id }}">{{ settings.title }}</h2>
+  {%- assign tag = heading_tag | default: 'h2' -%}
+  <{{ tag }} class="chapter-title" id="{{ title_id }}">{{ settings.title }}</{{ tag }}>
   {%- if settings.lede != blank -%}
     <p class="chapter-lede">{{ settings.lede }}</p>
   {%- endif -%}

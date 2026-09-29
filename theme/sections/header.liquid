@@ -12,12 +12,13 @@
 
   <a class="brand" href="{{ routes.root_url }}">
     {%- if section.settings.logo != blank -%}
+      {%- assign logo_alt = settings.brand_name | default: shop.name -%}
       {{
         section.settings.logo
         | image_url: width: 600
         | image_tag:
           class: 'brand-logo',
-          alt: settings.brand_name | default: shop.name,
+          alt: logo_alt,
           widths: '200, 300, 400, 600',
           sizes: '(min-width: 750px) 300px, 200px',
           style: 'max-width: calc(var(--logo-width) * 1px)'

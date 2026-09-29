@@ -14,7 +14,8 @@
         <article class="line reveal" {{ block.shopify_attributes }}>
           <figure class="line-frame">
             {%- if block.settings.image != blank -%}
-              {{ block.settings.image | image_url: width: 760 | image_tag: widths: '380, 540, 760', sizes: '(max-width: 420px) 86vw, 380px', loading: 'lazy', alt: block.settings.image.alt | default: block.settings.name }}
+              {%- assign image_alt = block.settings.image.alt | default: block.settings.name -%}
+              {{ block.settings.image | image_url: width: 760 | image_tag: widths: '380, 540, 760', sizes: '(max-width: 420px) 86vw, 380px', loading: 'lazy', alt: image_alt }}
             {%- else -%}
               {{ 'image' | placeholder_svg_tag: 'line-placeholder' }}
             {%- endif -%}

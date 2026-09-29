@@ -71,7 +71,8 @@
       "previous": "前へ",
       "next": "次へ"
     },
-    "finder_link": "質問に答えてドレスを探す"
+    "finder_link": "質問に答えてドレスを探す",
+    "products_heading": "{{ title }}の一覧"
   },
   "gift_card": {
     "add_to_apple_wallet": "Apple Wallet に追加",

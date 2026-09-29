@@ -71,6 +71,7 @@
       ],
       "settings": {
         "anchor": "finder",
+        "is_page_title": true,
         "chapter_no": "",
         "label": "Dress Finder",
         "title": "質問に答えて、ドレスを探す",

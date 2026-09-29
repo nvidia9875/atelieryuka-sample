@@ -78,6 +78,7 @@
                 assign loading = 'lazy'
                 assign priority = 'auto'
               endif
+              assign image_alt = media.alt | default: product.title
             -%}
             {{
               media
@@ -87,7 +88,7 @@
                 sizes: '(max-width: 520px) 92vw, (max-width: 860px) 46vw, 600px',
                 loading: loading,
                 fetchpriority: priority,
-                alt: media.alt | default: product.title
+                alt: image_alt
             }}
           </figure>
         {%- endif -%}

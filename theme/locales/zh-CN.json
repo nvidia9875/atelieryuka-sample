@@ -71,7 +71,8 @@
       "previous": "上一页",
       "next": "下一页"
     },
-    "finder_link": "回答几个问题，寻找您的婚纱"
+    "finder_link": "回答几个问题，寻找您的婚纱",
+    "products_heading": "{{ title }}列表"
   },
   "gift_card": {
     "add_to_apple_wallet": "添加到 Apple Wallet",

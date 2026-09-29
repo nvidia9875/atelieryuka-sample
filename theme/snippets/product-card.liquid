@@ -42,6 +42,7 @@
 <li class="product">
   <figure class="product-media">
     {%- if product.featured_media -%}
+      {%- assign image_alt = product.featured_media.alt | default: product.title -%}
       {{
         product.featured_media
         | image_url: width: 700
@@ -49,7 +50,7 @@
           widths: '240, 360, 480, 700',
           sizes: sizes,
           loading: loading,
-          alt: product.featured_media.alt | default: product.title
+          alt: image_alt
       }}
     {%- else -%}
       {{ 'product-apparel-1' | placeholder_svg_tag: 'product-placeholder' }}

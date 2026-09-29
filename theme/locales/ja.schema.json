@@ -135,7 +135,8 @@
     "recommend": "おすすめのシルエット",
     "reason": "おすすめの理由",
     "finder_link": "「質問で探す」のページ",
-    "finder_collections": "「質問で探す」のリンクを出すコレクション"
+    "finder_collections": "「質問で探す」のリンクを出すコレクション",
+    "is_page_title": "このページの主見出しにする"
   },
   "info": {
     "anchor": "メニューの「/#maison」のような、ページ内のこの章へのリンクに使う名前（英小文字）。",
@@ -158,7 +159,8 @@
     "tab_collections": "衣裳の種類を切り替えるタブ。並べた順に表示します。",
     "terms_link": "空欄のときは /pages/terms に飛びます。国内・国外の見出しへは #domestic / #overseas で飛びます。",
     "recommend": "シルエットのハンドルをカンマ区切りで（例: princess,bell）",
-    "finder_collections": "ドレスのコレクションだけ選んでください（質問はドレス向け）"
+    "finder_collections": "ドレスのコレクションだけ選んでください（質問はドレス向け）",
+    "is_page_title": "このセクションだけのページで使うときにオン（見出しが h1 になる）"
   },
   "options": {
     "alignment": {

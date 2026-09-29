@@ -7,7 +7,8 @@
       <li class="journey reveal" {{ block.shopify_attributes }}>
         <figure class="journey-frame">
           {%- if block.settings.image != blank -%}
-            {{ block.settings.image | image_url: width: 640 | image_tag: widths: '320, 480, 640', sizes: '(max-width: 559px) 46vw, (max-width: 919px) 30vw, 260px', loading: 'lazy', alt: block.settings.image.alt | default: block.settings.meta }}
+            {%- assign image_alt = block.settings.image.alt | default: block.settings.meta -%}
+            {{ block.settings.image | image_url: width: 640 | image_tag: widths: '320, 480, 640', sizes: '(max-width: 559px) 46vw, (max-width: 919px) 30vw, 260px', loading: 'lazy', alt: image_alt }}
           {%- else -%}
             {{ 'image' | placeholder_svg_tag: 'journey-placeholder' }}
           {%- endif -%}

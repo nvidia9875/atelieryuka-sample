@@ -32,7 +32,11 @@
 -%}
 
 <div class="chapter finder-chapter" id="{{ section.settings.anchor | default: 'finder' }}">
-  {% render 'chapter-head', settings: section.settings, title_id: title_id %}
+  {%- if section.settings.is_page_title -%}
+    {% render 'chapter-head', settings: section.settings, title_id: title_id, heading_tag: 'h1' %}
+  {%- else -%}
+    {% render 'chapter-head', settings: section.settings, title_id: title_id %}
+  {%- endif -%}
 
   <div class="finder" data-finder role="group" aria-labelledby="{{ title_id }}">
     <script type="application/json" data-finder-strings>
@@ -198,6 +202,7 @@
     { "type": "text", "id": "label", "label": "t:labels.chapter_label", "default": "Dress Finder" },
     { "type": "text", "id": "title", "label": "t:labels.heading", "default": "質問に答えて、ドレスを探す" },
     { "type": "textarea", "id": "lede", "label": "t:labels.lede" },
+    { "type": "checkbox", "id": "is_page_title", "label": "t:labels.is_page_title", "info": "t:info.is_page_title", "default": false },
     { "type": "text", "id": "groom_label", "label": "t:labels.groom_label", "default": "新郎さまの衣裳（タキシード・モーニング）はこちら" },
     { "type": "url", "id": "groom_link", "label": "t:labels.groom_link" },
     { "type": "url", "id": "reserve_link", "label": "t:labels.reserve_link" }

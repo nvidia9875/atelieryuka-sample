@@ -71,7 +71,8 @@
       "previous": "Previous",
       "next": "Next"
     },
-    "finder_link": "Find your dress with a few questions"
+    "finder_link": "Find your dress with a few questions",
+    "products_heading": "{{ title }} list"
   },
   "gift_card": {
     "add_to_apple_wallet": "Add to Apple Wallet",

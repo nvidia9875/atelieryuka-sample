@@ -135,7 +135,8 @@
     "recommend": "Recommended silhouettes",
     "reason": "Reason",
     "finder_link": "\"Dress finder\" page",
-    "finder_collections": "Collections that show the finder link"
+    "finder_collections": "Collections that show the finder link",
+    "is_page_title": "Use as the page title"
   },
   "info": {
     "anchor": "Lower-case name used for links to this section, like /#maison in the menu.",
@@ -158,7 +159,8 @@
     "tab_collections": "Tabs for switching categories, in this order.",
     "terms_link": "Leave empty to use /pages/terms. Anchors #domestic and #overseas are added automatically.",
     "recommend": "Silhouette handles, comma separated (e.g. princess,bell)",
-    "finder_collections": "Choose dress collections only (the questions are for dresses)"
+    "finder_collections": "Choose dress collections only (the questions are for dresses)",
+    "is_page_title": "Turn on when this section is the whole page (heading becomes h1)"
   },
   "options": {
     "alignment": {
