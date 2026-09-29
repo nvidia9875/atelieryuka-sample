@@ -14,7 +14,12 @@
       "settings": {
         "eyebrow": "Collection",
         "tab_collections": ["ウエディングドレス", "colordress", "タキシード", "モーニング"],
-        "products_per_page": 15
+        "products_per_page": 15,
+        "finder_link": "shopify://pages/finder",
+        "finder_collections": [
+          "ウエディングドレス",
+          "colordress"
+        ]
       }
     }
   },

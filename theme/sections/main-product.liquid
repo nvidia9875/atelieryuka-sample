@@ -157,7 +157,8 @@
             {%- endfor -%}
           {%- endfor -%}
         </dl>
-      {%- else -%}
+      {%- elsif product.price > 0 -%}
+        {%- comment -%} ¥0 の小物は料金を出さない（プランに含まれる扱いか先方に確認中） {%- endcomment -%}
         <p class="pd-price-single">{{ product.price | money }}</p>
       {%- endif -%}
 

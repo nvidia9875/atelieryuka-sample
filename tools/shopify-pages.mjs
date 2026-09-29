@@ -22,6 +22,7 @@ const PAGES = [
   { handle: "withawish", title: "with a WISH", templateSuffix: "withawish" },
   { handle: "mini-photo", title: "ミニウエディングフォト", templateSuffix: "mini-photo" },
   { handle: "elieca", title: "Elieca セミオーダー", templateSuffix: "elieca" },
+  { handle: "finder", title: "質問に答えてドレスを探す", templateSuffix: "finder" },
   // こだわりページ。先方の文章が届くまで非公開（published: false）
   { handle: "story", title: "アトリエユカのこだわり", templateSuffix: "story", published: false },
   // レンタル規約（/pages/terms）は本文を terms.js から作るので tools/shopify-terms.mjs で作る

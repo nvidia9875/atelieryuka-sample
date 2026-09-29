@@ -40,6 +40,21 @@
     {%- if collection.description != blank -%}
       <div class="chapter-lede">{{ collection.description }}</div>
     {%- endif -%}
+    {%- liquid
+      assign show_finder = false
+      if section.settings.finder_link != blank
+        for target in section.settings.finder_collections
+          if target.handle == collection.handle
+            assign show_finder = true
+          endif
+        endfor
+      endif
+    -%}
+    {%- if show_finder -%}
+      <p class="collection-finder">
+        <a href="{{ section.settings.finder_link }}">{{ 'collections.finder_link' | t }}</a>
+      </p>
+    {%- endif -%}
   </header>
 
   {%- if section.settings.tab_collections.size > 0 -%}
@@ -199,6 +214,18 @@
       "step": 3,
       "label": "t:labels.products_per_page",
       "default": 15
+    },
+    {
+      "type": "url",
+      "id": "finder_link",
+      "label": "t:labels.finder_link"
+    },
+    {
+      "type": "collection_list",
+      "id": "finder_collections",
+      "label": "t:labels.finder_collections",
+      "info": "t:info.finder_collections",
+      "limit": 12
     }
   ]
 }

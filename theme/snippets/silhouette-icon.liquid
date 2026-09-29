@@ -1,0 +1,35 @@
+{% comment %}
+  シルエットの線画。メタオブジェクト silhouette の「イラスト」が空のときの代わり。
+  先方のイラスト（質問6）が届いたら、管理画面のメタオブジェクトに入れれば画像のほうが出る。
+
+  使い方:
+    {% render 'silhouette-icon', handle: 'a-line' %}
+  handle: a-line / princess / bell / mermaid / slender / empire（それ以外は Aライン の形）
+{% endcomment %}
+{%- liquid
+  case handle
+    when 'princess'
+      assign skirt = 'M25 36 Q4 64 6 94 Q30 99 54 94 Q56 64 35 36'
+      assign waist = 36
+    when 'bell'
+      assign skirt = 'M25 36 Q9 42 8 94 Q30 98 52 94 Q51 42 35 36'
+      assign waist = 36
+    when 'mermaid'
+      assign skirt = 'M25 36 Q23 60 27 72 Q16 86 12 94 Q30 97 48 94 Q44 86 33 72 Q37 60 35 36'
+      assign waist = 36
+    when 'slender'
+      assign skirt = 'M25 36 L22 94 Q30 96 38 94 L35 36'
+      assign waist = 36
+    when 'empire'
+      assign skirt = 'M25 26 L16 94 Q30 97 44 94 L35 26'
+      assign waist = 26
+    else
+      assign skirt = 'M25 36 L12 94 Q30 97 48 94 L35 36'
+      assign waist = 36
+  endcase
+-%}
+<svg class="silhouette-icon" viewBox="0 0 60 100" aria-hidden="true" focusable="false">
+  <path d="M24 12 Q30 17 36 12 L35 {{ waist }} L25 {{ waist }} Z" />
+  <path d="{{ skirt }}" />
+  <path d="M25 {{ waist }} L35 {{ waist }}" />
+</svg>

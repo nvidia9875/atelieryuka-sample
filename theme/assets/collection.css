@@ -8,6 +8,15 @@
 .collection[aria-busy="true"] .product-grid { opacity: 0.45; transition: opacity 0.2s ease-out; }
 
 /* ---------- カテゴリのタブ ---------- */
+.collection-finder { margin-top: 1.2rem; text-align: center; font-size: 0.88rem; }
+.collection-finder a {
+  color: var(--gold-ink);
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 0.1em;
+  transition: color var(--duration-fast) ease-out;
+}
+.collection-finder a::after { content: " →"; }
+.collection-finder a:hover { color: var(--ink); }
 .collection-tabs { max-width: var(--w-wide); margin: 0 auto; }
 .collection-tabs ul {
   display: flex; flex-wrap: wrap; justify-content: center;

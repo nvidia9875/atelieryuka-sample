@@ -128,7 +128,14 @@
     "tinted": "地の色を付ける",
     "trial_note": "試着の料金に添える補足",
     "unit": "単位",
-    "when": "時期の目安"
+    "when": "時期の目安",
+    "groom_label": "新郎さま向けリンクの文言",
+    "groom_link": "新郎さま向けリンク",
+    "collection": "コレクション",
+    "recommend": "おすすめのシルエット",
+    "reason": "おすすめの理由",
+    "finder_link": "「質問で探す」のページ",
+    "finder_collections": "「質問で探す」のリンクを出すコレクション"
   },
   "info": {
     "anchor": "メニューの「/#maison」のような、ページ内のこの章へのリンクに使う名前（英小文字）。",
@@ -149,7 +156,9 @@
     "social_links": "SNS のリンクは「テーマ設定 > SNS」で設定します。",
     "social_media": "URL を入れたものだけフッターに表示します。",
     "tab_collections": "衣裳の種類を切り替えるタブ。並べた順に表示します。",
-    "terms_link": "空欄のときは /pages/terms に飛びます。国内・国外の見出しへは #domestic / #overseas で飛びます。"
+    "terms_link": "空欄のときは /pages/terms に飛びます。国内・国外の見出しへは #domestic / #overseas で飛びます。",
+    "recommend": "シルエットのハンドルをカンマ区切りで（例: princess,bell）",
+    "finder_collections": "ドレスのコレクションだけ選んでください（質問はドレス向け）"
   },
   "options": {
     "alignment": {
@@ -184,7 +193,9 @@
     "salons": "サロンのご案内",
     "statement": "メゾン（ブランドの一文）",
     "steps": "ご利用の流れ",
-    "timeline": "日程つきの流れ"
+    "timeline": "日程つきの流れ",
+    "dress_finder": "質問で探す",
+    "finder_data": "質問で探す（件数データ）"
   },
   "blocks": {
     "care_column": "説明の欄",
@@ -197,6 +208,8 @@
     "plan": "プラン",
     "plan_item": "プランの内容",
     "salon": "サロン",
-    "step": "ステップ"
+    "step": "ステップ",
+    "finder_category": "衣裳の種類",
+    "finder_venue": "ご利用のシーン"
   }
 }

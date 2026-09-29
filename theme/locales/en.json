@@ -70,7 +70,8 @@
       "label": "Pagination",
       "previous": "Previous",
       "next": "Next"
-    }
+    },
+    "finder_link": "Find your dress with a few questions"
   },
   "gift_card": {
     "add_to_apple_wallet": "Add to Apple Wallet",
@@ -440,5 +441,35 @@
   "mini_photo": {
     "place": "Location",
     "price": "Price"
+  },
+  "finder": {
+    "step_of": "Question {{ step }} of {{ total }}",
+    "questions": {
+      "category": "What are you looking for?",
+      "venue": "Where will you wear it?",
+      "silhouette": "Which silhouette do you prefer?",
+      "color": "Which color do you prefer?"
+    },
+    "summary": {
+      "category": "Item",
+      "venue": "Scene",
+      "silhouette": "Silhouette",
+      "color": "Color"
+    },
+    "any": "No preference",
+    "recommended": "Recommended",
+    "option_count": "{{ count }} items",
+    "loading": "Searching…",
+    "error": "We couldn't load the count. Please use the button below to see the list.",
+    "back": "Previous question",
+    "restart": "Start over",
+    "noscript": "This feature requires JavaScript.",
+    "result": {
+      "title": "Your matches",
+      "count": "{{ count }} items found",
+      "show": "See these items",
+      "reserve": "Book a fitting",
+      "note": "You can narrow down further by size or rental price on the list page."
+    }
   }
 }

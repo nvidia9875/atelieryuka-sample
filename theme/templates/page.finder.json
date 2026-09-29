@@ -1,0 +1,87 @@
+{
+  "sections": {
+    "main": {
+      "type": "dress-finder",
+      "blocks": {
+        "category-wedding": {
+          "type": "category",
+          "settings": {
+            "collection": "ウエディングドレス",
+            "label": "ウエディングドレス",
+            "note": "挙式・前撮りのメインの一着"
+          }
+        },
+        "category-color": {
+          "type": "category",
+          "settings": {
+            "collection": "colordress",
+            "label": "カラードレス",
+            "note": "お色直し・パーティー・フォトに"
+          }
+        },
+        "venue-chapel": {
+          "type": "venue",
+          "settings": {
+            "label": "教会・チャペル",
+            "recommend": "princess,bell",
+            "reason": "バージンロードを歩く姿が映える、裾が大きく広がるシルエットがおすすめです。"
+          }
+        },
+        "venue-hotel": {
+          "type": "venue",
+          "settings": {
+            "label": "ホテル・ゲストハウス",
+            "recommend": "princess,a-line",
+            "reason": "華やかなプリンセスラインも、上品なAラインも映える会場です。"
+          }
+        },
+        "venue-garden": {
+          "type": "venue",
+          "settings": {
+            "label": "ガーデン・リゾート",
+            "recommend": "a-line,empire",
+            "reason": "屋外でも歩きやすく、軽やかに見えるシルエットがおすすめです。"
+          }
+        },
+        "venue-overseas": {
+          "type": "venue",
+          "settings": {
+            "label": "海外挙式（ハワイなど）",
+            "recommend": "a-line,slender",
+            "reason": "持ち運びやすく、砂浜や風のある場所でも扱いやすいシルエットがおすすめです。"
+          }
+        },
+        "venue-photo": {
+          "type": "venue",
+          "settings": {
+            "label": "フォトウエディングのみ",
+            "recommend": "",
+            "reason": "撮影だけなら、着てみたかったシルエットを自由にお選びください。"
+          }
+        }
+      },
+      "block_order": [
+        "category-wedding",
+        "category-color",
+        "venue-chapel",
+        "venue-hotel",
+        "venue-garden",
+        "venue-overseas",
+        "venue-photo"
+      ],
+      "settings": {
+        "anchor": "finder",
+        "chapter_no": "",
+        "label": "Dress Finder",
+        "title": "質問に答えて、ドレスを探す",
+        "lede": "4つの質問に答えるだけで、ご希望に合うドレスをお探しします。",
+        "groom_label": "新郎さまの衣裳（タキシード・モーニング）はこちら",
+        "groom_link": "shopify://collections/タキシード",
+        "reserve_link": "shopify://pages/reserve"
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

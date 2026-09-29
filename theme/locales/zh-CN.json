@@ -1,0 +1,475 @@
+{
+  "404": {
+    "title": "404",
+    "not_found": "抱歉，未找到您要访问的页面。",
+    "back_to_shopping": "返回首页"
+  },
+  "accessibility": {
+    "skip_to_content": "跳至正文"
+  },
+  "general": {
+    "language": "语言",
+    "main_navigation": "主导航",
+    "opens_in_new_window": "（将在新窗口中打开）"
+  },
+  "header": {
+    "partner_link": "合作商户入口",
+    "reserve": "预约"
+  },
+  "footer": {
+    "navigation": "页脚链接",
+    "social": {
+      "instagram": "Instagram",
+      "tiktok": "TikTok",
+      "pinterest": "Pinterest"
+    }
+  },
+  "blog": {
+    "article_comments": "评论",
+    "article_metadata_html": "{{ date }} · {{ author }}",
+    "comment_form_body": "评论",
+    "comment_form_email": "电子邮箱",
+    "comment_form_name": "姓名",
+    "comment_form_submit": "发表",
+    "comment_form_title": "发表评论"
+  },
+  "cart": {
+    "checkout": "前往结算",
+    "title": "购物车",
+    "update": "更新",
+    "remove": "删除"
+  },
+  "customers": {
+    "login": {
+      "email": "电子邮箱",
+      "password": "密码",
+      "submit": "登录",
+      "title": "登录"
+    }
+  },
+  "collections": {
+    "title": "系列",
+    "categories": "礼服类别",
+    "result_count": {
+      "one": "{{ count }}件",
+      "other": "{{ count }}件"
+    },
+    "no_result": "未找到符合条件的礼服。请减少筛选条件后重试。",
+    "filter": {
+      "title": "筛选",
+      "active_count": "已选{{ count }}项",
+      "apply": "按此条件筛选",
+      "clear": "清除条件",
+      "price_min": "最低价格",
+      "price_max": "最高价格"
+    },
+    "sort": {
+      "label": "排序"
+    },
+    "pagination": {
+      "label": "分页",
+      "previous": "上一页",
+      "next": "下一页"
+    },
+    "finder_link": "回答几个问题，寻找您的婚纱"
+  },
+  "gift_card": {
+    "add_to_apple_wallet": "添加到 Apple Wallet",
+    "card": "礼品卡",
+    "expired": "此礼品卡已过期",
+    "expires_on": "有效期至：{{ expires_on }}",
+    "use_at_checkout": "请在结算时使用"
+  },
+  "password": {
+    "title": "本店铺正在筹备开业",
+    "password": "密码",
+    "enter": "进入"
+  },
+  "search": {
+    "title": "搜索",
+    "placeholder": "按礼服名称或款号搜索",
+    "submit": "搜索",
+    "no_results_html": "未找到与“{{ terms }}”相符的结果",
+    "results_for_html": "“{{ terms }}”的搜索结果：{{ count }}件"
+  },
+  "products": {
+    "price_from_html": "{{ price }}起",
+    "breadcrumb": "面包屑导航",
+    "home": "首页",
+    "silhouette": "廓形",
+    "sizes": "可选尺码",
+    "size_legend": "数字＝日本尺码（号） ／ T＝以身高160cm为基准，TT＝165cm，TTT＝170cm",
+    "reserve": "申请此款礼服",
+    "price": {
+      "trial": "在家试穿（2天1晚）",
+      "rental": "正式租赁（{{ period }}）"
+    }
+  },
+  "size_guide": {
+    "title": "查询参考尺码",
+    "lede_html": "输入胸围、腰围、臀围和身高，即可当场查看此款礼服的参考尺码。<br>结果将直接带入预约表单。",
+    "fields": {
+      "bust": "胸围",
+      "waist": "腰围",
+      "hip": "臀围",
+      "height": "身高"
+    },
+    "required": "必填",
+    "hint": "请穿着内衣，将软尺保持水平测量后填写数值。",
+    "submit": "查询参考尺码",
+    "note": "计算出的尺码仅供参考，实际合身程度请在试穿时确认。",
+    "cta": "附上此结果申请试穿",
+    "errors": {
+      "need_bust_waist": "请输入胸围和腰围。",
+      "check_values": "请确认数值。"
+    },
+    "result": {
+      "caution_far": "您输入的尺寸超出尺码表范围，可能需要修改或咨询，敬请联系我们。",
+      "go_line": "相当于{go} · {height}",
+      "height_none": "未输入身高，因此未标注衣长档位",
+      "height_confirmed": "衣长以身高{height}cm为基准",
+      "height_unconfirmed": "尺码表中没有适合身高{height}cm的衣长（{suffix}），因此仅提供号数参考。衣长请在试穿时咨询",
+      "avail_head": "此款婚纱备有尺码：{sizes}",
+      "avail_diff": " — 与参考尺码不同，可能需要修改或咨询，敬请联系我们。",
+      "avail_no_height": " — 号数相同。由于未输入身高，未判断衣长。",
+      "avail_same": " — 与参考尺码相同。",
+      "avail_tier_diff": " — 号数相同，但衣长对应的基准身高不同。请在试穿时确认衣长。",
+      "spec_bust": "胸围（{column}）",
+      "column_bustier": "抹胸款",
+      "column_regular": "常规款",
+      "spec_waist": "腰围",
+      "spec_hip": "臀围",
+      "spec_hip_ref": "臀围（未输入，仅供参考）",
+      "form_size_no_height": "{size}（未输入身高，衣长未判断）",
+      "form_size_unconfirmed": "{size}（适合身高{height}cm的衣长需确认）"
+    }
+  },
+  "reserve": {
+    "eyebrow": "Reservation",
+    "title": "预约",
+    "lede": "如同回复请柬一般，只需5个步骤即可完成预约。量尺寸和收货地址等信息一次性填写，无需等待确认邮件即可继续办理。",
+    "noscript": "预约表单需要使用 JavaScript。请在浏览器设置中启用，或通过电话申请。",
+    "required": "必填",
+    "optional": "选填",
+    "progress_label": "预约步骤",
+    "steps": {
+      "schedule": "日程",
+      "items": "礼服",
+      "size": "尺码",
+      "customer": "客户信息",
+      "review": "确认"
+    },
+    "legends": {
+      "schedule": "预约内容与日程",
+      "items": "心仪的礼服",
+      "size": "尺码（量尺寸）",
+      "customer": "客户信息与收货地址",
+      "review": "确认填写内容并同意条款"
+    },
+    "purpose": {
+      "label": "预约目的",
+      "error": "请选择预约目的。",
+      "options": {
+        "home": "在家试穿（¥5,500）",
+        "rental": "正式租赁（4天3晚）",
+        "salon": "银座沙龙试穿",
+        "overseas": "海外婚礼、婚纱照咨询",
+        "order": "半定制（Elieca）咨询"
+      }
+    },
+    "occasion": {
+      "label": "使用场合",
+      "error": "请选择使用场合。",
+      "options": {
+        "wedding": "婚礼",
+        "photo": "婚纱照",
+        "both": "两者皆有",
+        "undecided": "未定"
+      }
+    },
+    "date1": {
+      "label": "试穿日期 第一志愿",
+      "error": "请选择第一志愿日期。",
+      "note": "可在使用日前4个月至10天之间预约。"
+    },
+    "date2": {
+      "label": "第二志愿"
+    },
+    "deliver_day": {
+      "label": "希望送达日",
+      "error": "请选择希望送达日。",
+      "options": {
+        "before": "试穿日前一天",
+        "same": "试穿日当天",
+        "other": "指定日期"
+      }
+    },
+    "deliver_time": {
+      "label": "送达时间段",
+      "error": "请选择送达时间段。",
+      "options": {
+        "t14": "14:00–16:00",
+        "t16": "16:00–18:00",
+        "t18": "18:00–20:00",
+        "t19": "19:00–21:00"
+      }
+    },
+    "event": {
+      "legend": "正式使用日程",
+      "note": "若婚礼或拍摄日期尚未确定，请选择大致时期的日期，并在需求栏中注明“未定”。",
+      "date": {
+        "label": "正式使用日（婚礼、拍摄日）",
+        "error": "请选择正式使用日。"
+      },
+      "venue": {
+        "label": "婚礼场地、拍摄地点",
+        "placeholder": "例：〇〇酒店／夏威夷·威基基",
+        "note": "如需租赁，请事先向婚礼场地确认是否允许带入 Atelier Yuka 的礼服。"
+      }
+    },
+    "who": {
+      "label": "申请人",
+      "error": "请选择申请人。",
+      "options": {
+        "bride": "仅新娘",
+        "groom": "仅新郎",
+        "both": "新郎新娘两位"
+      }
+    },
+    "category": {
+      "label": "礼服类别",
+      "error": "请选择礼服类别。",
+      "options": {
+        "wedding": "婚纱",
+        "color": "彩色礼服",
+        "tuxedo": "男士礼服",
+        "morning": "晨礼服／母亲礼服"
+      }
+    },
+    "codes": {
+      "label": "心仪的礼服编号",
+      "hint": "最多4件，未定亦可",
+      "note": "请填写礼服款号（商品页面上的款号）。输入时会显示候选项。",
+      "size_hint_short": "诊断尺码",
+      "size_hint_note": "将附上商品页面的尺码诊断结果“{size}”一并发送。"
+    },
+    "size": {
+      "note": "请使用软尺，穿着内衣水平测量，并以cm为单位填写数值。只要填写身高、胸围和腰围，其余项目可留空。",
+      "bride": "新娘",
+      "groom": "新郎",
+      "fields": {
+        "height": "身高",
+        "bust": "胸围",
+        "waist": "腰围",
+        "hip": "臀围",
+        "shoulder": "肩宽",
+        "sleeve": "袖长",
+        "neck": "领围",
+        "shoes": "鞋码",
+        "chest": "胸围（男士）",
+        "inseam": "内裆长"
+      },
+      "error_required": "请填写{field}。",
+      "error_range": "请填写{min}至{max}之间的数值。"
+    },
+    "customer": {
+      "name": {
+        "label": "姓名",
+        "placeholder": "例：李美华",
+        "error": "请输入姓名。"
+      },
+      "kana": {
+        "label": "姓名拼音或英文（日本客户请填写假名）",
+        "placeholder": "例：Li Meihua",
+        "error": "请输入姓名拼音或英文。"
+      },
+      "partner": {
+        "label": "伴侣姓名",
+        "placeholder": "例：张伟"
+      },
+      "email": {
+        "label": "电子邮箱",
+        "placeholder": "例：hanako@example.com",
+        "error": "请输入电子邮箱。",
+        "error_format": "请确认电子邮箱格式（例：hanako@example.com）。"
+      },
+      "tel": {
+        "label": "电话号码",
+        "placeholder": "例：09012345678",
+        "error": "请输入电话号码。",
+        "error_format": "请确认电话号码格式（例：09012345678）。"
+      },
+      "address": {
+        "label": "住址",
+        "placeholder": "例：东京都中央区银座1-20-11 〇〇公寓601室",
+        "error": "请输入住址。"
+      },
+      "tryon_place": {
+        "label": "试穿礼服收货地址",
+        "error": "请选择收货地址。",
+        "options": {
+          "home": "住址（上述地址）",
+          "other": "希望送至其他地点"
+        }
+      },
+      "tryon_address": {
+        "label": "收货地址（地点名称、地址、姓名、电话号码）",
+        "placeholder": "例：〇〇酒店 1203号房／东京都…／李美华／09012345678",
+        "error": "请填写收货地址。"
+      },
+      "main": {
+        "legend": "正式使用礼服的收货地址",
+        "label": "收货地址",
+        "error": "请选择收货地址。",
+        "options": {
+          "groom_home": "新郎住址",
+          "bride_home": "新娘住址",
+          "airport": "机场自提",
+          "other": "其他"
+        }
+      },
+      "main_address": {
+        "label": "寄送地址（地点名称、地址、姓名、电话号码）",
+        "error": "请填写寄送地址。"
+      },
+      "airport_dep": {
+        "label": "出发机场、航站楼",
+        "placeholder": "例：羽田机场 第3航站楼",
+        "error": "请填写出发机场。"
+      },
+      "airport_arr": {
+        "label": "目的地机场",
+        "placeholder": "例：檀香山",
+        "error": "请填写目的地机场。"
+      },
+      "flight": {
+        "label": "航空公司、航班号",
+        "placeholder": "例：JAL JL074",
+        "error": "请填写航空公司和航班号。"
+      },
+      "departure": {
+        "label": "出发日期、出发时间",
+        "placeholder": "例：2026年11月3日 21:55",
+        "error": "请填写出发日期和出发时间。"
+      },
+      "return_date": {
+        "label": "预计归还寄出日期"
+      },
+      "options": {
+        "legend": "所需配件",
+        "bride": "新娘用",
+        "groom": "新郎用",
+        "bride_items": {
+          "veil": "头纱",
+          "pannier": "裙撑",
+          "pumps": "高跟鞋"
+        },
+        "groom_items": {
+          "shirt": "礼服衬衫",
+          "shoes": "皮鞋",
+          "set5": "男士配饰5件套"
+        },
+        "set5_note": "配饰5件套：袖扣、袖箍、背带、白色口袋巾、白色手套"
+      },
+      "message": {
+        "label": "需求、问题",
+        "placeholder": "如有任何疑问或希望咨询的事项，请在此填写。"
+      }
+    },
+    "review": {
+      "terms_label": "租赁条款",
+      "terms_region": "租赁条款正文",
+      "terms_link_html": "您也可以在<a href=\"{{ url }}\" target=\"_blank\" rel=\"noopener\">租赁条款页面</a>（日文）查看全文。",
+      "agree": "我已阅读并同意上述条款",
+      "agree_with_title": "我已阅读并同意上述{title}",
+      "agree_error": "申请前需同意条款。",
+      "terms_line": "已同意{title} {version}（{date}）"
+    },
+    "nav": {
+      "prev": "返回",
+      "next": "下一步",
+      "submit": "按此内容提交申请",
+      "sending": "正在发送…",
+      "step_status": "步骤{current}/{total}：{legend}"
+    },
+    "foot_note": "您提交的信息仅用于确认预约及与您联系。",
+    "errors": {
+      "generic": "请填写此项。",
+      "format": "请确认输入格式。",
+      "past_date": "请选择今天或之后的日期。",
+      "server": "发送失败。请确认填写内容后重试。"
+    },
+    "complete": {
+      "en": "R.S.V.P.",
+      "title": "我们已收到您的预约",
+      "closing": "全体员工衷心期待与您相见。",
+      "sign": "Atelier Yuka — Ginza Atelier",
+      "again": "继续提交其他申请",
+      "greeting": "尊敬的{name}",
+      "body": "衷心感谢您选择 Atelier Yuka。负责您的造型师将在一两天内与您联系确认。"
+    },
+    "mail": {
+      "subject": "【预约】{name}（{purpose}）",
+      "header": "来自 Atelier Yuka 预约表单的申请"
+    },
+    "deliver_date": {
+      "label": "希望送达日（日期）",
+      "error": "请选择希望送达日。",
+      "note": "请选择试穿日之前的日期。",
+      "error_before": "请选择试穿日期（第一志愿）之前的日期。"
+    }
+  },
+  "sections_text": {
+    "open_map": "在 Google 地图中打开",
+    "catalog_open": "翻阅电子画册",
+    "catalog_flip": "在浏览器中翻阅",
+    "catalog_pdf": "打开PDF",
+    "catalog_index": "目录",
+    "catalog_close": "关闭画册",
+    "catalog_prev": "上一页",
+    "catalog_next": "下一页",
+    "catalog_track": "画册翻页（可使用左右方向键或滑动操作）",
+    "catalog_zoom": "显示比例",
+    "catalog_zoom_out": "缩小",
+    "catalog_zoom_reset": "恢复原始大小",
+    "catalog_zoom_in": "放大",
+    "catalog_drag": "拖动以移动",
+    "catalog_position": "页面位置",
+    "catalog_note": "也可通过双击、双指缩放或 Ctrl＋滚轮放大。",
+    "rich_text_empty": "请输入正文（仅在主题编辑器中编辑时显示）。"
+  },
+  "mini_photo": {
+    "place": "拍摄地点",
+    "price": "价格"
+  },
+  "finder": {
+    "step_of": "问题 {{ step }} / {{ total }}",
+    "questions": {
+      "category": "您在寻找哪类礼服？",
+      "venue": "您将在什么场合穿着？",
+      "silhouette": "您喜欢哪种廓形？",
+      "color": "您喜欢哪种颜色？"
+    },
+    "summary": {
+      "category": "礼服",
+      "venue": "场合",
+      "silhouette": "廓形",
+      "color": "颜色"
+    },
+    "any": "不限",
+    "recommended": "推荐",
+    "option_count": "{{ count }}件",
+    "loading": "正在为您查找…",
+    "error": "未能加载件数。请点击下方按钮查看列表。",
+    "back": "返回上一题",
+    "restart": "重新开始",
+    "noscript": "此功能需要 JavaScript。",
+    "result": {
+      "title": "符合您条件的礼服",
+      "count": "共找到 {{ count }} 件",
+      "show": "查看符合条件的礼服",
+      "reserve": "预约试穿",
+      "note": "在列表页面还可按尺码或租赁价格进一步筛选。"
+    }
+  }
+}

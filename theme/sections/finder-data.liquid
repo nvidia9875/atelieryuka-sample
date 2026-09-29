@@ -1,0 +1,33 @@
+{% comment %}
+  質問で探す（dress-finder）が件数を読むためだけの出力。画面には出さない。
+  /collections/{handle}?view=finder&filter.p.m.custom.silhouette=… で呼ぶと、
+  その条件での件数と、シルエット・色の選択肢ごとの件数を JSON で返す。
+{% endcomment %}
+{%- liquid
+  assign first = true
+-%}
+<script type="application/json" data-finder-data>
+  {
+    "count": {{ collection.products_count | json }},
+    "filters": {
+      {%- for filter in collection.filters -%}
+        {%- if filter.param_name == 'filter.p.m.custom.silhouette' or filter.param_name == 'filter.p.m.custom.color' -%}
+          {%- unless first %},{% endunless -%}
+          {%- assign first = false -%}
+          {{ filter.param_name | json }}: [
+            {%- for value in filter.values -%}
+              { "value": {{ value.value | json }}, "count": {{ value.count | json }} }{% unless forloop.last %},{% endunless %}
+            {%- endfor -%}
+          ]
+        {%- endif -%}
+      {%- endfor -%}
+    }
+  }
+</script>
+
+{% schema %}
+{
+  "name": "t:sections.finder_data",
+  "settings": []
+}
+{% endschema %}

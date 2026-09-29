@@ -9,7 +9,8 @@
  * - ドレス: data/dress-attributes.csv（写真から仮付け → 先方確認）。シルエットと色はここだけが正
  * - それ以外（タキシードなど）の色: 商品タグ（WHITE, BLUE, lavender …）
  * - ライン: 商品タグ（VICTRIA FRANCEZKA …）→ 販売元 の順で拾う
- * - レンタル料金: バリエーションのうち「試着」を除いた最安値（試着だけの商品には入れない）
+ * - レンタル料金: バリエーションのうち「試着」と ¥0 を除いた最安値（該当なしの商品には入れず、前に入れた値は消す）
+ *   ¥0 は小物（メンズ小物・ドレス小物）に多い。入れると絞り込みに「¥0」が出るので外す
  *
  * 既存の「Aライン」タグはウエディングドレスのほぼ全件に付いていて、シルエットの区別に使えないので読まない。
  */
@@ -62,7 +63,7 @@ function fetchAllProducts() {
       STORE,
       `query($after: String) {
         products(first: 250, after: $after) {
-          nodes { id handle title tags vendor productType variants(first: 100) { nodes { price selectedOptions { value } } } }
+          nodes { id handle title tags vendor productType rentalPrice: metafield(namespace: "custom", key: "rental_price") { id } variants(first: 100) { nodes { price selectedOptions { value } } } }
           pageInfo { hasNextPage endCursor }
         }
       }`,
@@ -83,11 +84,12 @@ function metaobjectIds(type) {
   return new Map(data.metaobjects.nodes.map((m) => [m.handle, m.id]));
 }
 
-// 試着（¥5,500）のバリエーションを除いた最安値。どれも試着なら null
+// 試着（¥5,500）と ¥0 のバリエーションを除いた最安値。残らなければ null
 function rentalPrice(product) {
   const prices = product.variants.nodes
     .filter((v) => !v.selectedOptions.some((o) => o.value.includes("試着")))
-    .map((v) => Math.round(Number(v.price)));
+    .map((v) => Math.round(Number(v.price)))
+    .filter((price) => price > 0);
   return prices.length ? Math.min(...prices) : null;
 }
 
@@ -151,6 +153,24 @@ function writeMetafields(metafields) {
   process.stdout.write("\n");
 }
 
+function deleteRentalPrices(products) {
+  const identifiers = products.map((p) => ({ ownerId: p.id, namespace: "custom", key: "rental_price" }));
+  for (let i = 0; i < identifiers.length; i += BATCH) {
+    const data = gql(
+      STORE,
+      `mutation($metafields: [MetafieldIdentifierInput!]!) {
+        metafieldsDelete(metafields: $metafields) {
+          deletedMetafields { key }
+          userErrors { field message }
+        }
+      }`,
+      { metafields: identifiers.slice(i, i + BATCH) },
+      { mutation: true },
+    );
+    assertNoUserErrors("metafieldsDelete", data.metafieldsDelete);
+  }
+}
+
 function tally(plans, key) {
   const counts = {};
   for (const { values } of plans) {
@@ -186,12 +206,15 @@ function main() {
   console.log(`値が1つも入らない商品: ${plans.filter((p) => !Object.keys(p.values).length).length} 件`);
 
   const metafields = plans.flatMap(({ product, values }) => toMetafields(product.id, values, ids));
+  const staleRental = plans.filter(({ product, values }) => values.rental_price == null && product.rentalPrice).map((p) => p.product);
   console.log(`書き込むメタフィールド: ${metafields.length} 件`);
+  console.log(`レンタル料金を消す商品: ${staleRental.length} 件${staleRental.length ? `（${staleRental.map((p) => p.handle).join(", ")}）` : ""}`);
   if (!WRITE) {
     console.log("ドライランなので書き込んでいません。--write を付けると書き込みます");
     return;
   }
   writeMetafields(metafields);
+  if (staleRental.length) deleteRentalPrices(staleRental);
   console.log("完了");
 }
 

@@ -19,11 +19,11 @@
   endif
   assign sizes = '(max-width: 559px) 46vw, (max-width: 919px) 45vw, 350px'
 
-  # 試着のバリエーションはどの商品にもあるので、価格の表示から外す
+  # 試着のバリエーションはどの商品にもあるので、価格の表示から外す。¥0（小物に多い）も出さない
   assign rental_min = 0
   assign rental_max = 0
   for variant in product.variants
-    if variant.title contains '試着'
+    if variant.title contains '試着' or variant.price == 0
       continue
     endif
     if rental_min == 0 or variant.price < rental_min
@@ -76,11 +76,13 @@
       <span class="product-line" translate="no"> — {{ line }}</span>
     {%- endif -%}
   </p>
-  <p class="product-price">
-    {%- if rental_max > rental_min -%}
-      {{ 'products.price_from_html' | t: price: rental_min_money }}
-    {%- else -%}
-      {{ rental_min_money }}
-    {%- endif -%}
-  </p>
+  {%- if rental_min > 0 -%}
+    <p class="product-price">
+      {%- if rental_max > rental_min -%}
+        {{ 'products.price_from_html' | t: price: rental_min_money }}
+      {%- else -%}
+        {{ rental_min_money }}
+      {%- endif -%}
+    </p>
+  {%- endif -%}
 </li>

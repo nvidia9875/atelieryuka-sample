@@ -128,7 +128,14 @@
     "tinted": "Tinted background",
     "trial_note": "Note next to the try-on price",
     "unit": "Unit",
-    "when": "When"
+    "when": "When",
+    "groom_label": "Groom link text",
+    "groom_link": "Groom link",
+    "collection": "Collection",
+    "recommend": "Recommended silhouettes",
+    "reason": "Reason",
+    "finder_link": "\"Dress finder\" page",
+    "finder_collections": "Collections that show the finder link"
   },
   "info": {
     "anchor": "Lower-case name used for links to this section, like /#maison in the menu.",
@@ -149,7 +156,9 @@
     "social_links": "Social links are set in Theme settings > Social media.",
     "social_media": "Only links with a URL are shown in the footer.",
     "tab_collections": "Tabs for switching categories, in this order.",
-    "terms_link": "Leave empty to use /pages/terms. Anchors #domestic and #overseas are added automatically."
+    "terms_link": "Leave empty to use /pages/terms. Anchors #domestic and #overseas are added automatically.",
+    "recommend": "Silhouette handles, comma separated (e.g. princess,bell)",
+    "finder_collections": "Choose dress collections only (the questions are for dresses)"
   },
   "options": {
     "alignment": {
@@ -184,7 +193,9 @@
     "salons": "Salons",
     "statement": "Maison statement",
     "steps": "How it works",
-    "timeline": "Timeline"
+    "timeline": "Timeline",
+    "dress_finder": "Dress finder",
+    "finder_data": "Finder data"
   },
   "blocks": {
     "care_column": "Column",
@@ -197,6 +208,8 @@
     "plan": "Plan",
     "plan_item": "Plan item",
     "salon": "Salon",
-    "step": "Step"
+    "step": "Step",
+    "finder_category": "Category",
+    "finder_venue": "Scene"
   }
 }

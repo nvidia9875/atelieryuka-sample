@@ -70,7 +70,8 @@
       "label": "ページ送り",
       "previous": "前へ",
       "next": "次へ"
-    }
+    },
+    "finder_link": "質問に答えてドレスを探す"
   },
   "gift_card": {
     "add_to_apple_wallet": "Apple Wallet に追加",
@@ -440,5 +441,35 @@
   "mini_photo": {
     "place": "撮影場所",
     "price": "価格"
+  },
+  "finder": {
+    "step_of": "質問 {{ step }} / {{ total }}",
+    "questions": {
+      "category": "どんな衣裳をお探しですか？",
+      "venue": "ご利用のシーンは？",
+      "silhouette": "お好みのシルエットは？",
+      "color": "お好みの色は？"
+    },
+    "summary": {
+      "category": "衣裳",
+      "venue": "シーン",
+      "silhouette": "シルエット",
+      "color": "色"
+    },
+    "any": "こだわらない",
+    "recommended": "おすすめ",
+    "option_count": "{{ count }}着",
+    "loading": "お探ししています…",
+    "error": "件数を読み込めませんでした。下のボタンから一覧をご覧ください。",
+    "back": "ひとつ前の質問へ",
+    "restart": "最初からやり直す",
+    "noscript": "この機能には JavaScript が必要です。",
+    "result": {
+      "title": "ご希望に合う衣裳",
+      "count": "{{ count }} 着見つかりました",
+      "show": "この条件で衣裳を見る",
+      "reserve": "試着を予約する",
+      "note": "一覧の画面で、サイズやレンタル料金でもさらに絞り込めます。"
+    }
   }
 }

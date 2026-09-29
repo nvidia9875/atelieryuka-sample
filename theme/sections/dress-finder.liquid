@@ -1,0 +1,235 @@
+{% comment %}
+  質問に答えて探す：衣裳の種類 → ご利用のシーン → シルエット → 色 → 絞り込んだ一覧へ。
+  動きは assets/finder.js。件数は templates/collection.finder.json（finder-data）から読み、
+  0着になる選択肢は出さない。
+
+  - 衣裳の種類・シーンはブロックで足し引きできる（シーンの「おすすめのシルエット」は
+    メタオブジェクト silhouette のハンドルをカンマ区切りで書く。例: princess,bell）
+  - シルエット・色はメタオブジェクト（silhouette / dress_color）の並び順で出す
+{% endcomment %}
+{{ 'finder.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'finder.js' | asset_url }}" defer></script>
+
+{%- liquid
+  assign title_id = 'finder-title-' | append: section.id
+  assign gid_prefix = 'gid://shopify/Metaobject/'
+  assign silhouettes = shop.metaobjects.silhouette.values
+  assign colors = shop.metaobjects.dress_color.values
+
+  # 並び順（5桁にそろえた数字）でソートするための一覧
+  assign silhouette_order = ''
+  for entry in silhouettes
+    assign position = entry.position.value | default: 9999 | plus: 10000
+    assign silhouette_order = silhouette_order | append: position | append: ','
+  endfor
+  assign silhouette_order = silhouette_order | split: ',' | sort | uniq
+  assign color_order = ''
+  for entry in colors
+    assign position = entry.position.value | default: 9999 | plus: 10000
+    assign color_order = color_order | append: position | append: ','
+  endfor
+  assign color_order = color_order | split: ',' | sort | uniq
+-%}
+
+<div class="chapter finder-chapter" id="{{ section.settings.anchor | default: 'finder' }}">
+  {% render 'chapter-head', settings: section.settings, title_id: title_id %}
+
+  <div class="finder" data-finder role="group" aria-labelledby="{{ title_id }}">
+    <script type="application/json" data-finder-strings>
+      {
+        "count": {{ 'finder.result.count' | t: count: '%count%' | json }},
+        "option_count": {{ 'finder.option_count' | t: count: '%count%' | json }},
+        "loading": {{ 'finder.loading' | t | json }},
+        "error": {{ 'finder.error' | t | json }},
+        "step_of": {{ 'finder.step_of' | t: step: '%step%', total: '%total%' | json }},
+        "summary": {
+          "category": {{ 'finder.summary.category' | t | json }},
+          "venue": {{ 'finder.summary.venue' | t | json }},
+          "silhouette": {{ 'finder.summary.silhouette' | t | json }},
+          "color": {{ 'finder.summary.color' | t | json }}
+        }
+      }
+    </script>
+
+    <p class="finder-progress" data-finder-progress></p>
+
+    {%- comment -%} Q1 衣裳の種類 {%- endcomment -%}
+    <section class="finder-step" data-finder-step="category" aria-labelledby="finder-q1-{{ section.id }}">
+      <h3 class="finder-q" id="finder-q1-{{ section.id }}" tabindex="-1">{{ 'finder.questions.category' | t }}</h3>
+      <div class="finder-options is-wide">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'category' and block.settings.collection != blank -%}
+            <button
+              type="button"
+              class="finder-option"
+              data-value="{{ block.settings.collection.url }}"
+              data-label="{{ block.settings.label | default: block.settings.collection.title | escape }}"
+              {{ block.shopify_attributes }}
+            >
+              <span class="finder-option-name">{{ block.settings.label | default: block.settings.collection.title }}</span>
+              {%- if block.settings.note != blank -%}<span class="finder-option-note">{{ block.settings.note }}</span>{%- endif -%}
+            </button>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+      {%- if section.settings.groom_label != blank -%}
+        <p class="finder-aside"><a href="{{ section.settings.groom_link | default: routes.all_products_collection_url }}">{{ section.settings.groom_label }}</a></p>
+      {%- endif -%}
+    </section>
+
+    {%- comment -%} Q2 ご利用のシーン {%- endcomment -%}
+    <section class="finder-step" data-finder-step="venue" aria-labelledby="finder-q2-{{ section.id }}">
+      <h3 class="finder-q" id="finder-q2-{{ section.id }}" tabindex="-1">{{ 'finder.questions.venue' | t }}</h3>
+      <div class="finder-options is-wide">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'venue' -%}
+            <button
+              type="button"
+              class="finder-option"
+              data-value="{{ block.id }}"
+              data-label="{{ block.settings.label | escape }}"
+              data-recommend="{{ block.settings.recommend | remove: ' ' | escape }}"
+              data-reason="{{ block.settings.reason | escape }}"
+              {{ block.shopify_attributes }}
+            >
+              <span class="finder-option-name">{{ block.settings.label }}</span>
+            </button>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </section>
+
+    {%- comment -%} Q3 シルエット {%- endcomment -%}
+    <section class="finder-step" data-finder-step="silhouette" aria-labelledby="finder-q3-{{ section.id }}">
+      <h3 class="finder-q" id="finder-q3-{{ section.id }}" tabindex="-1">{{ 'finder.questions.silhouette' | t }}</h3>
+      <p class="finder-reason" data-finder-reason hidden></p>
+      <div class="finder-options is-figures">
+        {%- for position in silhouette_order -%}
+          {%- for entry in silhouettes -%}
+            {%- assign entry_position = entry.position.value | default: 9999 | plus: 10000 | append: '' -%}
+            {%- if entry_position == position -%}
+              <button
+                type="button"
+                class="finder-option"
+                data-value="{{ gid_prefix | append: entry.system.id }}"
+                data-handle="{{ entry.system.handle }}"
+                data-label="{{ entry.name.value | escape }}"
+              >
+                <span class="finder-figure">
+                  {%- if entry.illustration.value != blank -%}
+                    {{ entry.illustration.value | image_url: width: 240 | image_tag: loading: 'lazy', alt: '' }}
+                  {%- else -%}
+                    {% render 'silhouette-icon', handle: entry.system.handle %}
+                  {%- endif -%}
+                </span>
+                <span class="finder-option-name">{{ entry.name.value }}</span>
+                <span class="finder-badge" data-finder-badge hidden>{{ 'finder.recommended' | t }}</span>
+                <span class="finder-count" data-finder-count></span>
+              </button>
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endfor -%}
+        <button type="button" class="finder-option is-any" data-value="" data-label="{{ 'finder.any' | t | escape }}">
+          <span class="finder-option-name">{{ 'finder.any' | t }}</span>
+          <span class="finder-count" data-finder-count></span>
+        </button>
+      </div>
+    </section>
+
+    {%- comment -%} Q4 色 {%- endcomment -%}
+    <section class="finder-step" data-finder-step="color" aria-labelledby="finder-q4-{{ section.id }}">
+      <h3 class="finder-q" id="finder-q4-{{ section.id }}" tabindex="-1">{{ 'finder.questions.color' | t }}</h3>
+      <div class="finder-options is-swatches">
+        {%- for position in color_order -%}
+          {%- for entry in colors -%}
+            {%- assign entry_position = entry.position.value | default: 9999 | plus: 10000 | append: '' -%}
+            {%- if entry_position == position -%}
+              <button
+                type="button"
+                class="finder-option"
+                data-value="{{ gid_prefix | append: entry.system.id }}"
+                data-label="{{ entry.name.value | escape }}"
+                style="--swatch: {{ entry.swatch.value | default: '#E4DCCB' | escape }}"
+              >
+                <span class="finder-swatch" aria-hidden="true"></span>
+                <span class="finder-option-name">{{ entry.name.value }}</span>
+                <span class="finder-count" data-finder-count></span>
+              </button>
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endfor -%}
+        <button type="button" class="finder-option is-any" data-value="" data-label="{{ 'finder.any' | t | escape }}">
+          <span class="finder-option-name">{{ 'finder.any' | t }}</span>
+          <span class="finder-count" data-finder-count></span>
+        </button>
+      </div>
+    </section>
+
+    {%- comment -%} 結果 {%- endcomment -%}
+    <section class="finder-step finder-result" data-finder-step="result" aria-labelledby="finder-r-{{ section.id }}">
+      <h3 class="finder-q" id="finder-r-{{ section.id }}" tabindex="-1">{{ 'finder.result.title' | t }}</h3>
+      <p class="finder-total" data-finder-total role="status"></p>
+      <dl class="finder-summary" data-finder-summary></dl>
+      <p class="finder-actions">
+        <a class="btn btn-primary" href="{{ routes.all_products_collection_url }}" data-finder-link>{{ 'finder.result.show' | t }}</a>
+        <a class="btn btn-ghost" href="{{ section.settings.reserve_link | default: '/pages/reserve' }}">{{ 'finder.result.reserve' | t }}</a>
+      </p>
+      <p class="finder-note">{{ 'finder.result.note' | t }}</p>
+    </section>
+
+    <p class="finder-nav">
+      <button type="button" class="finder-back" data-finder-back>{{ 'finder.back' | t }}</button>
+      <button type="button" class="finder-restart" data-finder-restart>{{ 'finder.restart' | t }}</button>
+    </p>
+
+    <noscript>
+      <p class="finder-note">{{ 'finder.noscript' | t }} <a href="{{ routes.all_products_collection_url }}">{{ 'finder.result.show' | t }}</a></p>
+    </noscript>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.dress_finder",
+  "class": "section-dress-finder",
+  "settings": [
+    { "type": "text", "id": "anchor", "label": "t:labels.anchor", "info": "t:info.anchor", "default": "finder" },
+    { "type": "text", "id": "chapter_no", "label": "t:labels.chapter_no" },
+    { "type": "text", "id": "label", "label": "t:labels.chapter_label", "default": "Dress Finder" },
+    { "type": "text", "id": "title", "label": "t:labels.heading", "default": "質問に答えて、ドレスを探す" },
+    { "type": "textarea", "id": "lede", "label": "t:labels.lede" },
+    { "type": "text", "id": "groom_label", "label": "t:labels.groom_label", "default": "新郎さまの衣裳（タキシード・モーニング）はこちら" },
+    { "type": "url", "id": "groom_link", "label": "t:labels.groom_link" },
+    { "type": "url", "id": "reserve_link", "label": "t:labels.reserve_link" }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "t:blocks.finder_category",
+      "settings": [
+        { "type": "collection", "id": "collection", "label": "t:labels.collection" },
+        { "type": "text", "id": "label", "label": "t:labels.name" },
+        { "type": "text", "id": "note", "label": "t:labels.note" }
+      ]
+    },
+    {
+      "type": "venue",
+      "name": "t:blocks.finder_venue",
+      "settings": [
+        { "type": "text", "id": "label", "label": "t:labels.name", "default": "教会・チャペル" },
+        { "type": "text", "id": "recommend", "label": "t:labels.recommend", "info": "t:info.recommend" },
+        { "type": "textarea", "id": "reason", "label": "t:labels.reason" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.dress_finder",
+      "blocks": [
+        { "type": "venue", "settings": { "label": "教会・チャペル", "recommend": "princess,bell" } },
+        { "type": "venue", "settings": { "label": "ガーデン・リゾート", "recommend": "a-line,empire" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
