@@ -18,6 +18,8 @@ if (!STORE || !STORE.endsWith(".myshopify.com")) {
 // handle は先方に共有する URL（/pages/…）になるので変えない
 const PAGES = [
   { handle: "reserve", title: "ご予約", templateSuffix: "reserve" },
+  // with a WISH（業者さま向け）。/withawish と withawish.jp からここへ転送する（フェーズ8）
+  { handle: "withawish", title: "with a WISH", templateSuffix: "withawish" },
 ];
 
 function findPage(handle) {

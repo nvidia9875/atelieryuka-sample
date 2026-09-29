@@ -1,0 +1,44 @@
+{%- comment -%}
+  with a WISH（/pages/withawish）専用のレイアウト。
+  黒のデザイン・日本語のみ。アトリエユカのヘッダー／フッター・言語切り替え・書体は使わない。
+  ヘッダーとフッターはページ本体（sections/main-withawish.liquid）が持つ（サンプルと同じ構成）。
+{%- endcomment -%}
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>with a WISH | 新郎タキシードの専門メゾン</title>
+    <meta name="description" content="新郎タキシード専門ブランド with a WISH（松尾株式会社）。創業1962年、100型を超えるタキシードと63サイズを全国約3,000店へ。コレクション検索、デジタルカタログ、業者さま向けのご案内。">
+    <link rel="canonical" href="{{ canonical_url }}">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="ja_JP">
+    <meta property="og:site_name" content="with a WISH">
+    <meta property="og:url" content="{{ canonical_url }}">
+    <meta property="og:title" content="with a WISH | 新郎タキシードの専門メゾン">
+    <meta property="og:description" content="新郎タキシード専門ブランド with a WISH（松尾株式会社）。創業1962年、100型を超えるタキシードと63サイズを全国約3,000店へ。">
+    <meta property="og:image" content="https:{{ 'ww-og-cover.jpg' | file_url }}">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="theme-color" content="#14120F">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%2314120F'/%3E%3Crect x='3.5' y='3.5' width='9' height='9' fill='none' stroke='%23B49B57'/%3E%3C/svg%3E">
+
+    {% # theme-check-disable RemoteAsset %}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Noto+Sans+JP:wght@300;400;500&family=Shippori+Mincho:wght@400;500;600&display=swap">
+    {% # theme-check-enable RemoteAsset %}
+    {{ 'ww.css' | asset_url | stylesheet_tag }}
+
+    <script src="{{ 'ww-data.js' | asset_url }}" defer></script>
+    <script src="{{ 'catalog-viewer.js' | asset_url }}" defer></script>
+    <script src="{{ 'ww-script.js' | asset_url }}" defer></script>
+
+    {{ content_for_header }}
+  </head>
+
+  <body>
+    {{ content_for_layout }}
+  </body>
+</html>
