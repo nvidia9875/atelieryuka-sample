@@ -48,6 +48,12 @@
   transition: border-color 0.18s ease-out, color 0.18s ease-out, background-color 0.18s ease-out;
 }
 .pg-label { font-size: 0.72rem; color: var(--muted); }
+/* 320px 前後では丸5つ＋間隔が入りきらないので、丸と間隔を詰める */
+@media (max-width: 359px) {
+  .form-progress { gap: 0.55rem; }
+  .pg-num { width: 38px; height: 38px; font-size: 1rem; }
+  .pg-label { font-size: 0.66rem; }
+}
 .form-progress li.is-current .pg-num {
   border-color: var(--gold-ink);
   color: var(--gold-ink);
