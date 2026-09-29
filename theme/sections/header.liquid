@@ -33,8 +33,17 @@
   <nav class="site-nav" aria-label="{{ 'general.main_navigation' | t }}">
     <ul>
       {%- for link in section.settings.menu.links -%}
+        {%- liquid
+          # 「コレクション」はウエディングドレスへのリンクだが、ほかの種類の一覧や商品ページでも選択中にする
+          assign is_current = link.current
+          if link.type == 'collection_link' or link.type == 'catalog_link'
+            if request.page_type == 'collection' or request.page_type == 'product'
+              assign is_current = true
+            endif
+          endif
+        -%}
         <li>
-          <a href="{{ link.url }}" {% if link.current %}aria-current="page"{% endif %}>{{ link.title }}</a>
+          <a href="{{ link.url }}" {% if is_current %}aria-current="page"{% endif %}>{{ link.title }}</a>
         </li>
       {%- endfor -%}
       {%- if section.settings.show_partner_link -%}
