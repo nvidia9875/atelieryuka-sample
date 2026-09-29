@@ -1,0 +1,19 @@
+{% comment %}
+  章の見出し（ローマ数字・英字ラベル・見出し・リード文）。サンプルの .chapter-head と同じ組み。
+
+  使い方:
+    {% render 'chapter-head', settings: section.settings, title_id: 'maison-title' %}
+  settings から chapter_no / label / title / lede を読む（空のものは出さない）
+{% endcomment %}
+<header class="chapter-head reveal">
+  {%- if settings.chapter_no != blank -%}
+    <p class="chapter-no" aria-hidden="true" translate="no">{{ settings.chapter_no }}</p>
+  {%- endif -%}
+  {%- if settings.label != blank -%}
+    <p class="chapter-label" translate="no">{{ settings.label }}</p>
+  {%- endif -%}
+  <h2 class="chapter-title" id="{{ title_id }}">{{ settings.title }}</h2>
+  {%- if settings.lede != blank -%}
+    <p class="chapter-lede">{{ settings.lede }}</p>
+  {%- endif -%}
+</header>

@@ -1,0 +1,34 @@
+{% comment %}
+  読みもののページ（ページの本文をそのまま出す）。レンタル規約（/pages/terms）で使う。
+  規約の本文は tools/shopify-terms.mjs が theme/assets/terms.js から作ってページに入れる。
+{% endcomment %}
+{{ 'pages.css' | asset_url | stylesheet_tag }}
+<div class="terms-page full-width">
+  <header class="chapter-head">
+    {%- if section.settings.label != blank -%}<p class="chapter-label" translate="no">{{ section.settings.label }}</p>{%- endif -%}
+    <h1 class="chapter-title">{{ page.title }}</h1>
+  </header>
+  <div class="document-body">{{ page.content }}</div>
+  {%- if section.settings.cta_label != blank -%}
+    <p class="terms-back"><a class="btn btn-ghost" href="{{ section.settings.cta_link | default: '/pages/reserve' }}">{{ section.settings.cta_label }}</a></p>
+  {%- endif -%}
+</div>
+
+{% stylesheet %}
+  .terms-intro { text-align: center; font-size: 0.92rem; color: var(--muted); }
+  .terms-toc { display: flex; justify-content: center; flex-wrap: wrap; gap: 0.6rem 1.6rem; margin-top: 1.4rem; font-size: 0.88rem; }
+  .terms-toc a { color: var(--gold-ink); text-decoration: none; border-bottom: 1px solid var(--line); padding-bottom: 0.1em; }
+  .terms-toc a:hover { border-bottom-color: var(--gold-ink); }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:sections.document",
+  "class": "section-document",
+  "settings": [
+    { "type": "text", "id": "label", "label": "t:labels.chapter_label", "default": "Terms" },
+    { "type": "text", "id": "cta_label", "label": "t:labels.button_label", "default": "ご予約フォームへ" },
+    { "type": "url", "id": "cta_link", "label": "t:labels.button_link" }
+  ]
+}
+{% endschema %}

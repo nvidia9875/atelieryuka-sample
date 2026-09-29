@@ -1,0 +1,116 @@
+{% comment %}
+  デジタルカタログ（冊子ビューア）への導線。サンプルのコレクション章末尾「2026 カタログを見る」と同じ組み。
+  ページ画像・サムネイル・PDF は Shopify の「ファイル」（tools/shopify-ay-files.mjs が ay-catalog-… で上げたもの）。
+  ビューアは assets/catalog-viewer.js（with a WISH と共通）。
+  カタログを差し替えるときは、同じ名前で上げ直すか、テーマ設定の「ファイル名の頭」「ページ数」を変える。
+{% endcomment %}
+{{ 'catalog.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'catalog-viewer.js' | asset_url }}" defer></script>
+{%- liquid
+  assign prefix = section.settings.file_prefix | default: 'ay-catalog'
+  assign pages = section.settings.pages
+  assign catalog_pages = ''
+  assign catalog_thumbs = ''
+  for n in (1..pages)
+    assign num = n | prepend: '0' | slice: -2, 2
+    assign page_file = prefix | append: '-page-' | append: num | append: '.webp'
+    assign thumb_file = prefix | append: '-thumb-' | append: num | append: '.webp'
+    assign page_url = page_file | file_url
+    assign thumb_url = thumb_file | file_url
+    assign catalog_pages = catalog_pages | append: '"' | append: page_url | append: '"'
+    assign catalog_thumbs = catalog_thumbs | append: '"' | append: thumb_url | append: '"'
+    unless forloop.last
+      assign catalog_pages = catalog_pages | append: ','
+      assign catalog_thumbs = catalog_thumbs | append: ','
+    endunless
+  endfor
+  assign catalog_pages = '[' | append: catalog_pages | append: ']'
+  assign catalog_thumbs = '[' | append: catalog_thumbs | append: ']'
+  assign cover_file = prefix | append: '-page-01.webp'
+  assign pdf_file = section.settings.pdf_file | default: 'ay-catalog-2026.pdf'
+  assign spec_items = section.settings.specs | newline_to_br | split: '<br />'
+-%}
+
+<section class="chapter full-width catalog-chapter" aria-labelledby="catalog-title-{{ section.id }}">
+  <div class="cat-lead reveal" id="{{ section.settings.anchor | default: 'catalogue' }}">
+    <button type="button" class="cat-lead-cover" data-catalog aria-label="{{ 'sections_text.catalog_open' | t | escape }}">
+      <img src="{{ cover_file | file_url }}" alt="{{ section.settings.title | escape }}" width="{{ section.settings.page_width }}" height="{{ section.settings.page_height }}" loading="lazy" decoding="async">
+    </button>
+    <div class="cat-lead-body">
+      <p class="cat-lead-label" translate="no">Digital Catalogue</p>
+      <h2 class="cat-lead-title" id="catalog-title-{{ section.id }}">{{ section.settings.title }}</h2>
+      {%- if section.settings.desc != blank -%}<p class="cat-lead-desc">{{ section.settings.desc }}</p>{%- endif -%}
+      <ul class="cat-lead-spec">
+        {%- for item in spec_items -%}{%- assign item = item | strip -%}{%- if item != blank -%}<li>{{ item }}</li>{%- endif -%}{%- endfor -%}
+      </ul>
+      <div class="cat-lead-acts">
+        <button type="button" class="btn btn-primary" data-catalog>{{ 'sections_text.catalog_flip' | t }}</button>
+        <a class="btn btn-ghost" href="{{ pdf_file | file_url }}" target="_blank" rel="noopener">{{ 'sections_text.catalog_pdf' | t }}<span class="cat-lead-ext" aria-hidden="true">↗</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<dialog
+  id="catalog-dialog"
+  aria-labelledby="cat-title"
+  data-pages="{{ catalog_pages | escape }}"
+  data-thumbs="{{ catalog_thumbs | escape }}"
+  data-width="{{ section.settings.page_width }}"
+  data-height="{{ section.settings.page_height }}"
+>
+  <div class="cat-shell">
+    <div class="cat-bar">
+      <p class="cat-title" id="cat-title">{{ section.settings.title }}</p>
+      <div class="cat-acts">
+        <button type="button" class="cat-btn" id="cat-index" aria-expanded="false" aria-controls="cat-thumbs">{{ 'sections_text.catalog_index' | t }}</button>
+        <a class="cat-btn" href="{{ pdf_file | file_url }}" target="_blank" rel="noopener">{{ 'sections_text.catalog_pdf' | t }}</a>
+        <button type="button" class="cat-x" data-close aria-label="{{ 'sections_text.catalog_close' | t | escape }}">&times;</button>
+      </div>
+    </div>
+    <div class="cat-stage">
+      <button type="button" class="cat-nav cat-prev" id="cat-prev" aria-label="{{ 'sections_text.catalog_prev' | t | escape }}"><span aria-hidden="true">&lsaquo;</span></button>
+      <div class="cat-track" id="cat-track" tabindex="0" role="group" aria-label="{{ 'sections_text.catalog_track' | t | escape }}"></div>
+      <button type="button" class="cat-nav cat-next" id="cat-next" aria-label="{{ 'sections_text.catalog_next' | t | escape }}"><span aria-hidden="true">&rsaquo;</span></button>
+    </div>
+    <div class="cat-thumbs" id="cat-thumbs" hidden></div>
+    <div class="cat-foot">
+      <p class="cat-count" id="cat-count" role="status" aria-live="polite"></p>
+      <div class="cat-zoom" role="group" aria-label="{{ 'sections_text.catalog_zoom' | t | escape }}">
+        <button type="button" class="cat-zbtn" id="cat-zoom-out" aria-label="{{ 'sections_text.catalog_zoom_out' | t | escape }}">&minus;</button>
+        <button type="button" class="cat-zbtn cat-zval" id="cat-zoom-reset" aria-label="{{ 'sections_text.catalog_zoom_reset' | t | escape }}"><span id="cat-zoom-val">100%</span></button>
+        <button type="button" class="cat-zbtn" id="cat-zoom-in" aria-label="{{ 'sections_text.catalog_zoom_in' | t | escape }}">&plus;</button>
+        <span class="cat-hint" id="cat-hint" hidden>{{ 'sections_text.catalog_drag' | t }}</span>
+      </div>
+      <label class="cat-slider">
+        <span class="visually-hidden">{{ 'sections_text.catalog_position' | t }}</span>
+        <input class="cat-range" type="range" id="cat-range" min="1" max="{{ pages }}" step="1" value="1">
+      </label>
+      <p class="cat-note">{{ 'sections_text.catalog_note' | t }}</p>
+    </div>
+  </div>
+</dialog>
+
+{% stylesheet %}
+  /* 料金などの章と同じ余白で、見出し無しでコレクション章の続きとして置く */
+  .catalog-chapter { padding-top: 0; }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:sections.catalog_lead",
+  "class": "section-catalog",
+  "settings": [
+    { "type": "text", "id": "title", "label": "t:labels.heading", "default": "2026 カタログを見る" },
+    { "type": "textarea", "id": "desc", "label": "t:labels.description" },
+    { "type": "textarea", "id": "specs", "label": "t:labels.list_items", "info": "t:info.one_per_line" },
+    { "type": "text", "id": "file_prefix", "label": "t:labels.file_prefix", "info": "t:info.file_prefix", "default": "ay-catalog" },
+    { "type": "range", "id": "pages", "min": 2, "max": 100, "step": 1, "label": "t:labels.pages", "default": 58 },
+    { "type": "number", "id": "page_width", "label": "t:labels.page_width_px", "default": 1200 },
+    { "type": "number", "id": "page_height", "label": "t:labels.page_height_px", "default": 1683 },
+    { "type": "text", "id": "pdf_file", "label": "t:labels.pdf_file", "default": "ay-catalog-2026.pdf" },
+    { "type": "text", "id": "anchor", "label": "t:labels.anchor", "info": "t:info.anchor", "default": "catalogue" }
+  ],
+  "presets": [{ "name": "t:sections.catalog_lead" }]
+}
+{% endschema %}

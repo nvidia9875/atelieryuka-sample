@@ -1,0 +1,40 @@
+{% comment %} ご利用の流れ（サンプルの「III. ご利用の流れ」）。ステップはブロックで、番号は自動 {% endcomment %}
+{%- assign title_id = 'steps-title-' | append: section.id -%}
+<section class="chapter full-width {% if section.settings.tinted %}chapter-tinted{% endif %}" id="{{ section.settings.anchor | default: 'flow' }}" aria-labelledby="{{ title_id }}">
+  {% render 'chapter-head', settings: section.settings, title_id: title_id %}
+  <ol class="flow-list">
+    {%- for block in section.blocks -%}
+      <li class="flow-step reveal" {{ block.shopify_attributes }}>
+        <p class="flow-no" aria-hidden="true">{% if forloop.index < 10 %}0{% endif %}{{ forloop.index }}</p>
+        <h3 class="flow-title">{{ block.settings.title }}</h3>
+        {%- if block.settings.desc != blank -%}<p class="flow-desc">{{ block.settings.desc }}</p>{%- endif -%}
+      </li>
+    {%- endfor -%}
+  </ol>
+</section>
+
+{% schema %}
+{
+  "name": "t:sections.steps",
+  "class": "section-steps",
+  "settings": [
+    { "type": "text", "id": "chapter_no", "label": "t:labels.chapter_no", "default": "III" },
+    { "type": "text", "id": "label", "label": "t:labels.chapter_label", "default": "How to Rent" },
+    { "type": "text", "id": "title", "label": "t:labels.heading", "default": "ご利用の流れ" },
+    { "type": "textarea", "id": "lede", "label": "t:labels.lede" },
+    { "type": "checkbox", "id": "tinted", "label": "t:labels.tinted", "default": true },
+    { "type": "text", "id": "anchor", "label": "t:labels.anchor", "info": "t:info.anchor", "default": "flow" }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "t:blocks.step",
+      "settings": [
+        { "type": "text", "id": "title", "label": "t:labels.heading", "default": "商品を選ぶ" },
+        { "type": "textarea", "id": "desc", "label": "t:labels.description" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "t:sections.steps" }]
+}
+{% endschema %}

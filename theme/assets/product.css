@@ -149,7 +149,7 @@
 .pd-hint { font-size: 0.75rem; color: var(--muted); margin: 0.5em 0 0; }
 .pd-size-act { text-align: center; margin: 1.8rem 0 0; }
 .pd-submit {
-  font: inherit;
+  font: inherit; font-variant-numeric: lining-nums;
   letter-spacing: 0.1em;
   background: var(--ink);
   color: var(--ivory);
@@ -170,7 +170,7 @@
   background: var(--greige);
 }
 .pd-size-en { font-family: var(--font-en); font-style: italic; letter-spacing: 0.2em; color: var(--gold-ink); margin: 0; }
-.pd-size-value { font: 500 clamp(2.4rem, 2rem + 2vw, 3.2rem)/1.2 var(--font-en); margin: 0.2em 0 0; letter-spacing: 0.06em; }
+.pd-size-value { font: 500 clamp(2.4rem, 2rem + 2vw, 3.2rem)/1.2 var(--font-en); font-variant-numeric: lining-nums; margin: 0.2em 0 0; letter-spacing: 0.06em; }
 .pd-size-go { font-size: 0.9rem; color: var(--muted); margin: 0.4em 0 0; }
 .pd-size-spec {
   display: flex; justify-content: center; flex-wrap: wrap; gap: 0.6em 2.2em;

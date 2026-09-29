@@ -1,0 +1,54 @@
+{% comment %}
+  メゾン（ブランドの一文と、ラインの紹介）。サンプルの「I. メゾン」。
+  ラインはブロック（写真・名前・説明）で足し引きできる。
+{% endcomment %}
+{%- assign title_id = 'statement-title-' | append: section.id -%}
+<section class="chapter full-width" id="{{ section.settings.anchor | default: 'maison' }}" aria-labelledby="{{ title_id }}">
+  {% render 'chapter-head', settings: section.settings, title_id: title_id %}
+  {%- if section.settings.text != blank -%}
+    <p class="statement reveal">{{ section.settings.text }}</p>
+  {%- endif -%}
+  {%- if section.blocks.size > 0 -%}
+    <div class="lines">
+      {%- for block in section.blocks -%}
+        <article class="line reveal" {{ block.shopify_attributes }}>
+          <figure class="line-frame">
+            {%- if block.settings.image != blank -%}
+              {{ block.settings.image | image_url: width: 760 | image_tag: widths: '380, 540, 760', sizes: '(max-width: 420px) 86vw, 380px', loading: 'lazy', alt: block.settings.image.alt | default: block.settings.name }}
+            {%- else -%}
+              {{ 'image' | placeholder_svg_tag: 'line-placeholder' }}
+            {%- endif -%}
+          </figure>
+          <h3 class="line-name" translate="no">{{ block.settings.name }}</h3>
+          {%- if block.settings.desc != blank -%}<p class="line-desc">{{ block.settings.desc }}</p>{%- endif -%}
+        </article>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "t:sections.statement",
+  "class": "section-statement",
+  "settings": [
+    { "type": "text", "id": "chapter_no", "label": "t:labels.chapter_no", "default": "I" },
+    { "type": "text", "id": "label", "label": "t:labels.chapter_label", "default": "Maison" },
+    { "type": "text", "id": "title", "label": "t:labels.heading", "default": "洗練されたクラシックを、普遍美へ" },
+    { "type": "textarea", "id": "text", "label": "t:labels.text" },
+    { "type": "text", "id": "anchor", "label": "t:labels.anchor", "info": "t:info.anchor", "default": "maison" }
+  ],
+  "blocks": [
+    {
+      "type": "line",
+      "name": "t:blocks.line",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "t:labels.image" },
+        { "type": "text", "id": "name", "label": "t:labels.name", "default": "Atelier Yuka" },
+        { "type": "textarea", "id": "desc", "label": "t:labels.description" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "t:sections.statement" }]
+}
+{% endschema %}

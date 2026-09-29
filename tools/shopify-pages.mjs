@@ -20,6 +20,11 @@ const PAGES = [
   { handle: "reserve", title: "ご予約", templateSuffix: "reserve" },
   // with a WISH（業者さま向け）。/withawish と withawish.jp からここへ転送する（フェーズ8）
   { handle: "withawish", title: "with a WISH", templateSuffix: "withawish" },
+  { handle: "mini-photo", title: "ミニウエディングフォト", templateSuffix: "mini-photo" },
+  { handle: "elieca", title: "Elieca セミオーダー", templateSuffix: "elieca" },
+  // こだわりページ。先方の文章が届くまで非公開（published: false）
+  { handle: "story", title: "アトリエユカのこだわり", templateSuffix: "story", published: false },
+  // レンタル規約（/pages/terms）は本文を terms.js から作るので tools/shopify-terms.mjs で作る
 ];
 
 function findPage(handle) {
@@ -39,24 +44,25 @@ for (const page of PAGES) {
       `mutation($page: PageCreateInput!) {
         pageCreate(page: $page) { page { id handle } userErrors { field message code } }
       }`,
-      { page: { ...page, body: "", isPublished: true } },
+      { page: { handle: page.handle, title: page.title, templateSuffix: page.templateSuffix, body: "", isPublished: page.published !== false } },
       { mutation: true },
     );
     assertNoUserErrors(`pageCreate(${page.handle})`, data.pageCreate);
-    console.log(`＋/pages/${page.handle}（${page.title}）を作成`);
+    console.log(`＋/pages/${page.handle}（${page.title}）を作成${page.published === false ? "（非公開）" : ""}`);
     continue;
   }
-  if (existing.templateSuffix !== page.templateSuffix || !existing.isPublished) {
+  const wantPublished = page.published !== false;
+  if (existing.templateSuffix !== page.templateSuffix || existing.isPublished !== wantPublished) {
     const data = gql(
       STORE,
       `mutation($id: ID!, $page: PageUpdateInput!) {
         pageUpdate(id: $id, page: $page) { page { id } userErrors { field message code } }
       }`,
-      { id: existing.id, page: { templateSuffix: page.templateSuffix, isPublished: true } },
+      { id: existing.id, page: { templateSuffix: page.templateSuffix, isPublished: wantPublished } },
       { mutation: true },
     );
     assertNoUserErrors(`pageUpdate(${page.handle})`, data.pageUpdate);
-    console.log(`・/pages/${page.handle} のテンプレートを ${page.templateSuffix} にし、公開`);
+    console.log(`・/pages/${page.handle} のテンプレートを ${page.templateSuffix}、${wantPublished ? "公開" : "非公開"}にした`);
   } else {
     console.log(`・/pages/${page.handle} は作成済み`);
   }

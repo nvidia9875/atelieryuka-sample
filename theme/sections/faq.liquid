@@ -1,0 +1,55 @@
+{% comment %} よくあるご質問（サンプルの「IX. FAQ」）。質問と回答はブロック {% endcomment %}
+{%- assign title_id = 'faq-title-' | append: section.id -%}
+<section class="chapter full-width chapter-last {% if section.settings.tinted %}chapter-tinted{% endif %}" id="{{ section.settings.anchor | default: 'faq' }}" aria-labelledby="{{ title_id }}">
+  {% render 'chapter-head', settings: section.settings, title_id: title_id %}
+  <div class="faq-list reveal">
+    {%- for block in section.blocks -%}
+      <details class="faq" {{ block.shopify_attributes }}>
+        <summary>{{ block.settings.question }}</summary>
+        <div class="faq-answer">{{ block.settings.answer }}</div>
+      </details>
+    {%- endfor -%}
+  </div>
+  {%- if section.settings.cta_label != blank -%}
+    <p class="faq-cta reveal">
+      <a class="btn btn-primary" href="{{ section.settings.cta_link | default: '/pages/reserve' }}">
+        {{- section.settings.cta_label -}}
+        {%- if section.settings.cta_price != blank %} <span class="price">{{ section.settings.cta_price }}</span>{% endif -%}
+      </a>
+    </p>
+  {%- endif -%}
+</section>
+
+{% stylesheet %}
+  /* 回答は管理画面のリッチテキスト（段落が <p> で入る） */
+  .faq-answer p + p { margin-top: 0.6em; }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:sections.faq",
+  "class": "section-faq",
+  "settings": [
+    { "type": "text", "id": "chapter_no", "label": "t:labels.chapter_no", "default": "IX" },
+    { "type": "text", "id": "label", "label": "t:labels.chapter_label", "default": "FAQ" },
+    { "type": "text", "id": "title", "label": "t:labels.heading", "default": "よくあるご質問" },
+    { "type": "textarea", "id": "lede", "label": "t:labels.lede" },
+    { "type": "text", "id": "cta_label", "label": "t:labels.button_label", "default": "ご自宅試着を予約する" },
+    { "type": "text", "id": "cta_price", "label": "t:labels.primary_price", "default": "¥5,500" },
+    { "type": "url", "id": "cta_link", "label": "t:labels.button_link" },
+    { "type": "checkbox", "id": "tinted", "label": "t:labels.tinted", "default": true },
+    { "type": "text", "id": "anchor", "label": "t:labels.anchor", "info": "t:info.anchor", "default": "faq" }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "t:blocks.faq_item",
+      "settings": [
+        { "type": "text", "id": "question", "label": "t:labels.question", "default": "試着だけでも利用できますか?" },
+        { "type": "richtext", "id": "answer", "label": "t:labels.answer" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "t:sections.faq" }]
+}
+{% endschema %}

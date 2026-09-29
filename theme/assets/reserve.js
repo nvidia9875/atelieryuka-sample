@@ -460,6 +460,10 @@
     var who = params.get("who");
     var radio = who && $('input[name="who"][value="' + who + '"]');
     if (radio) radio.checked = true;
+    /* ?purpose=order など（Elieca のページの「ご相談を予約する」から） */
+    var purpose = params.get("purpose");
+    var purposeRadio = purpose && $('input[name="purpose"][value="' + purpose + '"]');
+    if (purposeRadio) purposeRadio.checked = true;
   };
 
   /* 送信に失敗して戻ってきたときは、下書きを戻す。そうでなければ商品ページからの引き継ぎ */

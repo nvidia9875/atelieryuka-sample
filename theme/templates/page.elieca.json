@@ -1,0 +1,258 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "eyebrow": "Semi-Order Dress & Tuxedo",
+        "title": "elieca",
+        "tagline": "着たいデザインを、あなたにぴったりのサイズで。",
+        "image": "shopify://shop_images/ay-brand-02.webp",
+        "primary_label": "オーダーのご相談を予約する",
+        "primary_price": "",
+        "primary_link": "/pages/reserve?purpose=order",
+        "secondary_label": "採寸から挙式までの流れ",
+        "secondary_link": "#process-dress",
+        "note": "ドレス・タキシードとも、ご注文からお渡しまで約6か月（お急ぎの場合はご相談ください）。"
+      }
+    },
+    "dress": {
+      "type": "rich-text",
+      "settings": {
+        "chapter_no": "I",
+        "label": "Semi-Order Dress",
+        "title": "セミオーダードレス",
+        "body": "<p>お好みのデザインを選び、花嫁様お一人おひとりの体型に合わせた、ぴったりのサイズで仕立てるオーダードレスです。</p>\n<p>一般的なレンタルドレスショップでは、多くのデザインが標準的なサイズを中心に展開されています。そのため、少し大きめ・小さめのサイズをご希望の場合や、バストが大きい、ウエストが細いなど体型に特徴がある場合には、気に入ったデザインがあっても、ジャストフィットで美しく着こなすことが難しい場合があります。また、大きいサイズや小さいサイズは取り扱っているデザインが限られるため、体型に合うサイズを優先すると、デザインの選択肢が少なくなってしまうこともあります。</p>\n<p>セミオーダーなら、サイズからドレスを選ぶのではなく、着たいデザインからドレスを選ぶことができます。例えば、既製サイズよりもウエストが細い場合には、ウエストをシェイプした、その方の体型に合わせたサイズで仕立てることや、トレーンの長さ変更やネックラインの高さや形の一部変更など、可能な限り、お好みのデザインに近づけることも可能です。</p>\n<p>さらに挙式当日だけでなく、海外へのハネムーンに持ち出しての撮影や、国内で結婚式とは別日に行うパーティーなど、さまざまなシーンで繰り返し着用していただけます。</p>\n<p>「着たいデザイン」と「自分にぴったりのサイズ」を両方叶え、結婚式の一日だけでなく、その先の思い出にも寄り添える。それが、Eliecaの魅力です。</p>",
+        "image": "shopify://shop_images/ay-wd-01.webp",
+        "anchor": "dress"
+      }
+    },
+    "price": {
+      "type": "pricing",
+      "settings": {
+        "chapter_no": "II",
+        "label": "Price & Period",
+        "title": "価格の目安と期間",
+        "lede": "価格はデザイン・生地により異なります。ご相談の際にお見積りいたします。",
+        "cta_label": "",
+        "tinted": true,
+        "anchor": "price"
+      },
+      "blocks": {
+        "plan_1": {
+          "type": "plan",
+          "settings": {
+            "name": "セミオーダードレス",
+            "en": "Dress",
+            "price": "¥220,000〜¥400,000",
+            "note": "ご注文からお渡しまで 約6か月\nドレス製作日数 60〜90日（チャージアップで45日対応可能なデザインあり）"
+          }
+        },
+        "plan_2": {
+          "type": "plan",
+          "settings": {
+            "name": "セミオーダータキシード",
+            "en": "Tuxedo",
+            "price": "¥180,000〜",
+            "note": "ご注文からお渡しまで 約6か月\nタキシード製作日数 60〜75日"
+          }
+        }
+      },
+      "block_order": [
+        "plan_1",
+        "plan_2"
+      ]
+    },
+    "dress_process": {
+      "type": "timeline",
+      "settings": {
+        "chapter_no": "III",
+        "label": "Process — Dress",
+        "title": "ドレス　採寸から出来上がるまで",
+        "lede": "7月に挙式の場合の日程イメージです。",
+        "anchor": "process-dress"
+      },
+      "blocks": {
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "when": "1月",
+            "title": "ヒアリング",
+            "details": "デザインセレクト\n採寸"
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "when": "2月",
+            "title": "オーダー",
+            "details": "クーリングオフ1週間"
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "when": "2月中",
+            "title": "製作開始",
+            "details": "60〜90日"
+          }
+        },
+        "step_4": {
+          "type": "step",
+          "settings": {
+            "when": "4月か5月",
+            "title": "フィッティングチェック",
+            "details": "小物合わせ"
+          }
+        },
+        "step_5": {
+          "type": "step",
+          "settings": {
+            "when": "5月か6月",
+            "title": "サイズ修正（必要な場合）",
+            "details": "内容により別途お見積り\n〜30日"
+          }
+        },
+        "step_6": {
+          "type": "step",
+          "settings": {
+            "when": "7月",
+            "title": "挙式",
+            "details": ""
+          }
+        }
+      },
+      "block_order": [
+        "step_1",
+        "step_2",
+        "step_3",
+        "step_4",
+        "step_5",
+        "step_6"
+      ]
+    },
+    "tuxedo": {
+      "type": "rich-text",
+      "settings": {
+        "chapter_no": "IV",
+        "label": "Semi-Order Tuxedo",
+        "title": "セミオーダータキシード",
+        "body": "<p>基準となる4型のデザインと豊富な生地のラインナップから、お好みのスタイルをお選びいただき、お客様お一人おひとりの体型に合わせて仕立てます。</p>\n<p>サイズに合わせてタキシードを選ぶのではなく、着たいデザインを、自分の体型に合わせてお仕立ていたします。既製サイズでは合わせにくい肩幅や胸まわり、ウエスト、袖丈・パンツ丈なども、細かく調整できます。</p>\n<p>さらに、より自分らしい一着に仕上げたい方には、ジャケットの着丈や襟の形、ポケットなど、細部までこだわった調整にも対応しています。</p>\n<p>※デザインの変更・追加には、別途デザイン費を頂戴いたします。</p>\n<p>体型に合ったタキシードは、全体のシルエットを美しく見せるだけでなく、動きやすく、長時間でも快適に着用できます。結婚式当日はもちろん、前撮りやフォトウェディング、二次会など、さまざまなシーンで自分らしいスタイルをお楽しみいただけます。</p>",
+        "image": "shopify://shop_images/ay-tx-01.webp",
+        "image_right": true,
+        "tinted": true,
+        "anchor": "tuxedo"
+      }
+    },
+    "tuxedo_process": {
+      "type": "timeline",
+      "settings": {
+        "chapter_no": "V",
+        "label": "Process — Tuxedo",
+        "title": "タキシード　採寸から出来上がるまで",
+        "lede": "7月に挙式の場合の日程イメージです。",
+        "anchor": "process-tuxedo"
+      },
+      "blocks": {
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "when": "1月",
+            "title": "ヒアリング",
+            "details": "デザインセレクト\n生地のヒアリング"
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "when": "2月",
+            "title": "オーダー",
+            "details": "表生地・裏生地・ボタン等決定\n採寸\nクーリングオフ1週間"
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "when": "2月中",
+            "title": "製作開始",
+            "details": "60日（デザイン変更の場合75日）"
+          }
+        },
+        "step_4": {
+          "type": "step",
+          "settings": {
+            "when": "4月か5月",
+            "title": "フィッティングチェック",
+            "details": ""
+          }
+        },
+        "step_5": {
+          "type": "step",
+          "settings": {
+            "when": "5月か6月",
+            "title": "サイズ修正（必要な場合）",
+            "details": "内容により別途お見積り\n15日〜30日"
+          }
+        },
+        "step_6": {
+          "type": "step",
+          "settings": {
+            "when": "7月",
+            "title": "挙式",
+            "details": ""
+          }
+        }
+      },
+      "block_order": [
+        "step_1",
+        "step_2",
+        "step_3",
+        "step_4",
+        "step_5",
+        "step_6"
+      ]
+    },
+    "venue": {
+      "type": "rich-text",
+      "settings": {
+        "chapter_no": "VI",
+        "label": "For Your Venue",
+        "title": "式場・ホテルへのお持ち込み",
+        "body": "<p>お仕立てしたドレス・タキシードは、お客さまご自身の衣裳です。レンタル衣裳ではお持ち込みに条件がある式場・ホテルでも、ご自身の一着としてお持ち込みいただけます（お持ち込みの条件は、ご利用の式場にご確認ください）。</p>\n<p>式場・衣裳店の方へ　サンプルを店頭に置いていただくことで、Elieca のオーダーを承っていただくこともできます。お取引のご相談は、業者さま向けのページからお寄せください。</p>",
+        "cta_label": "業者さま向けのページへ",
+        "cta_link": "shopify://pages/withawish",
+        "tinted": true,
+        "anchor": "venue"
+      }
+    },
+    "consult": {
+      "type": "rich-text",
+      "settings": {
+        "label": "Consultation",
+        "title": "まずはご相談ください",
+        "body": "<p>デザインのご希望や挙式の日程をお伺いし、採寸のご予約をご案内します。ご予約フォームの「ご利用の目的」で「セミオーダー（Elieca）のご相談」をお選びください。</p>",
+        "cta_label": "オーダーのご相談を予約する",
+        "cta_link": "/pages/reserve?purpose=order",
+        "anchor": "consult"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "dress",
+    "price",
+    "dress_process",
+    "tuxedo",
+    "tuxedo_process",
+    "venue",
+    "consult"
+  ]
+}

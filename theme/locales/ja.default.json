@@ -172,7 +172,8 @@
         "home": "ご自宅試着(¥5,500)",
         "rental": "本使用レンタル(3泊4日)",
         "salon": "銀座サロン試着",
-        "overseas": "海外挙式・フォト相談"
+        "overseas": "海外挙式・フォト相談",
+        "order": "セミオーダー（Elieca）のご相談"
       }
     },
     "occasion": {
@@ -416,5 +417,28 @@
       "note": "ご試着日より前の日付をお選びください。",
       "error_before": "ご試着希望日（第一希望）より前の日付をお選びください。"
     }
+  },
+  "sections_text": {
+    "open_map": "Google マップで開く",
+    "catalog_open": "デジタルカタログをめくって見る",
+    "catalog_flip": "ブラウザでめくる",
+    "catalog_pdf": "PDFを開く",
+    "catalog_index": "目次",
+    "catalog_close": "カタログを閉じる",
+    "catalog_prev": "前のページ",
+    "catalog_next": "次のページ",
+    "catalog_track": "カタログのページ送り（左右キー・スワイプで操作）",
+    "catalog_zoom": "表示倍率",
+    "catalog_zoom_out": "縮小",
+    "catalog_zoom_reset": "等倍に戻す",
+    "catalog_zoom_in": "拡大",
+    "catalog_drag": "ドラッグで移動",
+    "catalog_position": "ページ位置",
+    "catalog_note": "ダブルタップ・ピンチ・Ctrl＋ホイールでも拡大できます。",
+    "rich_text_empty": "本文を入力してください（テーマエディタで編集中のときだけ表示されます）。"
+  },
+  "mini_photo": {
+    "place": "撮影場所",
+    "price": "価格"
   }
 }

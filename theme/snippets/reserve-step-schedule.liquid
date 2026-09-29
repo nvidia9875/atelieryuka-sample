@@ -2,7 +2,7 @@
 <fieldset class="form-step" data-step="0">
   <legend class="step-legend" tabindex="-1">{{ 'reserve.legends.schedule' | t }}</legend>
 
-  {% render 'reserve-choices', name: 'purpose', key: 'reserve.purpose', ids: 'home,rental,salon,overseas', required: true %}
+  {% render 'reserve-choices', name: 'purpose', key: 'reserve.purpose', ids: 'home,rental,salon,overseas,order', required: true %}
   {% render 'reserve-choices', name: 'occasion', key: 'reserve.occasion', ids: 'wedding,photo,both,undecided', required: true, compact: true %}
 
   <div class="field-row">

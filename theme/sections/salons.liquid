@@ -1,0 +1,52 @@
+{% comment %} サロンのご案内（サンプルの「VII. サロン」）。サロンはブロック、地図は住所から Google マップを埋め込む {% endcomment %}
+{%- assign title_id = 'salons-title-' | append: section.id -%}
+<section class="chapter full-width {% if section.settings.tinted %}chapter-tinted{% endif %}" id="{{ section.settings.anchor | default: 'salon' }}" aria-labelledby="{{ title_id }}">
+  {% render 'chapter-head', settings: section.settings, title_id: title_id %}
+  <div class="salon-grid">
+    {%- for block in section.blocks -%}
+      {%- assign map_query = block.settings.map_query | default: block.settings.address | url_encode -%}
+      <article class="salon reveal" {{ block.shopify_attributes }}>
+        {%- if block.settings.en != blank -%}<p class="salon-en" aria-hidden="true" translate="no">{{ block.settings.en }}</p>{%- endif -%}
+        <h3 class="salon-name">{{ block.settings.name }}</h3>
+        <address class="salon-address">{{ block.settings.address }}</address>
+        {%- if block.settings.note != blank -%}<p class="salon-note">{{ block.settings.note }}</p>{%- endif -%}
+        {%- if block.settings.show_map -%}
+          <div class="salon-map">
+            <iframe src="https://www.google.com/maps?q={{ map_query }}&amp;z=16&amp;hl=ja&amp;output=embed" title="{{ block.settings.name | escape }}周辺の地図" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+          <a class="salon-map-link" href="https://www.google.com/maps/search/?api=1&amp;query={{ map_query }}" target="_blank" rel="noopener">{{ 'sections_text.open_map' | t }}</a>
+        {%- endif -%}
+      </article>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "t:sections.salons",
+  "class": "section-salons",
+  "settings": [
+    { "type": "text", "id": "chapter_no", "label": "t:labels.chapter_no", "default": "VII" },
+    { "type": "text", "id": "label", "label": "t:labels.chapter_label", "default": "Salons" },
+    { "type": "text", "id": "title", "label": "t:labels.heading", "default": "サロンのご案内" },
+    { "type": "textarea", "id": "lede", "label": "t:labels.lede" },
+    { "type": "checkbox", "id": "tinted", "label": "t:labels.tinted", "default": true },
+    { "type": "text", "id": "anchor", "label": "t:labels.anchor", "info": "t:info.anchor", "default": "salon" }
+  ],
+  "blocks": [
+    {
+      "type": "salon",
+      "name": "t:blocks.salon",
+      "settings": [
+        { "type": "text", "id": "en", "label": "t:labels.eyebrow", "default": "Ginza Atelier" },
+        { "type": "text", "id": "name", "label": "t:labels.name", "default": "銀座アトリエ" },
+        { "type": "text", "id": "address", "label": "t:labels.address" },
+        { "type": "text", "id": "note", "label": "t:labels.note" },
+        { "type": "checkbox", "id": "show_map", "label": "t:labels.show_map", "default": true },
+        { "type": "text", "id": "map_query", "label": "t:labels.map_query", "info": "t:info.map_query" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "t:sections.salons" }]
+}
+{% endschema %}

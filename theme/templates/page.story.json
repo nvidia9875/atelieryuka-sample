@@ -1,0 +1,58 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "intro": {
+      "type": "rich-text",
+      "settings": {
+        "label": "Our Story",
+        "title": "アトリエユカのこだわり",
+        "lede": "歴史・国内生産・素材について（先方の文章が届いたら差し込む）",
+        "anchor": "story"
+      }
+    },
+    "history": {
+      "type": "rich-text",
+      "settings": {
+        "chapter_no": "I",
+        "label": "History",
+        "title": "歴史",
+        "tinted": true,
+        "anchor": "history"
+      }
+    },
+    "atelier": {
+      "type": "rich-text",
+      "settings": {
+        "chapter_no": "II",
+        "label": "Made in Japan",
+        "title": "国内のアトリエで仕立てる",
+        "anchor": "atelier",
+        "image_right": true
+      }
+    },
+    "material": {
+      "type": "rich-text",
+      "settings": {
+        "chapter_no": "III",
+        "label": "Material",
+        "title": "素材",
+        "tinted": true,
+        "anchor": "material"
+      }
+    }
+  },
+  "order": [
+    "intro",
+    "history",
+    "atelier",
+    "material"
+  ]
+}

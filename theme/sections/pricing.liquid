@@ -1,0 +1,51 @@
+{% comment %} 料金（サンプルの「IV. 料金」）。プランはブロック。「主なプラン」を付けると金の枠とバッジになる {% endcomment %}
+{%- assign title_id = 'pricing-title-' | append: section.id -%}
+<section class="chapter full-width {% if section.settings.tinted %}chapter-tinted{% endif %}" id="{{ section.settings.anchor | default: 'pricing' }}" aria-labelledby="{{ title_id }}">
+  {% render 'chapter-head', settings: section.settings, title_id: title_id %}
+  <div class="pricing-grid">
+    {%- for block in section.blocks -%}
+      <article class="plan reveal{% if block.settings.main %} plan-main{% endif %}" {{ block.shopify_attributes }}>
+        {%- if block.settings.main and block.settings.badge != blank -%}<p class="plan-badge" translate="no">{{ block.settings.badge }}</p>{%- endif -%}
+        <h3 class="plan-name">{{ block.settings.name }}</h3>
+        {%- if block.settings.en != blank -%}<p class="plan-en" aria-hidden="true" translate="no">{{ block.settings.en }}</p>{%- endif -%}
+        <p class="plan-price{% if block.settings.price contains '〜' %} plan-price-range{% endif %}">{{ block.settings.price }}</p>
+        {%- if block.settings.note != blank -%}<p class="plan-note">{{ block.settings.note | newline_to_br }}</p>{%- endif -%}
+      </article>
+    {%- endfor -%}
+  </div>
+  {%- if section.settings.cta_label != blank -%}
+    <p class="pricing-cta reveal"><a class="btn btn-primary" href="{{ section.settings.cta_link | default: '/pages/reserve' }}">{{ section.settings.cta_label }}</a></p>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "t:sections.pricing",
+  "class": "section-pricing",
+  "settings": [
+    { "type": "text", "id": "chapter_no", "label": "t:labels.chapter_no", "default": "IV" },
+    { "type": "text", "id": "label", "label": "t:labels.chapter_label", "default": "Pricing" },
+    { "type": "text", "id": "title", "label": "t:labels.heading", "default": "料金のご案内" },
+    { "type": "textarea", "id": "lede", "label": "t:labels.lede" },
+    { "type": "text", "id": "cta_label", "label": "t:labels.button_label", "default": "ご予約フォームへ進む" },
+    { "type": "url", "id": "cta_link", "label": "t:labels.button_link" },
+    { "type": "checkbox", "id": "tinted", "label": "t:labels.tinted", "default": false },
+    { "type": "text", "id": "anchor", "label": "t:labels.anchor", "info": "t:info.anchor", "default": "pricing" }
+  ],
+  "blocks": [
+    {
+      "type": "plan",
+      "name": "t:blocks.plan",
+      "settings": [
+        { "type": "text", "id": "name", "label": "t:labels.name", "default": "ご自宅試着" },
+        { "type": "text", "id": "en", "label": "t:labels.eyebrow" },
+        { "type": "text", "id": "price", "label": "t:labels.price", "default": "¥5,500" },
+        { "type": "textarea", "id": "note", "label": "t:labels.note" },
+        { "type": "checkbox", "id": "main", "label": "t:labels.main_plan", "default": false },
+        { "type": "text", "id": "badge", "label": "t:labels.badge", "default": "Main Plan" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "t:sections.pricing" }]
+}
+{% endschema %}

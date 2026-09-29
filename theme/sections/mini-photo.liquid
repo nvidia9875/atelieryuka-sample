@@ -1,0 +1,107 @@
+{% comment %}
+  ミニウエディングフォト（サンプル mini-photo.html）。プラン内容・オプションはブロックで足し引きできる。
+{% endcomment %}
+{{ 'pages.css' | asset_url | stylesheet_tag }}
+<div class="mini-page full-width">
+  <header class="chapter-head">
+    {%- if section.settings.label != blank -%}<p class="chapter-label" translate="no">{{ section.settings.label }}</p>{%- endif -%}
+    <h1 class="chapter-title">{{ section.settings.title | default: page.title }}</h1>
+    {%- if section.settings.tagline != blank -%}<p class="mini-tagline">{{ section.settings.tagline }}</p>{%- endif -%}
+  </header>
+
+  {%- if section.settings.statement != blank -%}<p class="statement">{{ section.settings.statement }}</p>{%- endif -%}
+
+  <dl class="mini-facts">
+    {%- if section.settings.place != blank -%}<div><dt>{{ 'mini_photo.place' | t }}</dt><dd>{{ section.settings.place }}</dd></div>{%- endif -%}
+    {%- if section.settings.price != blank -%}<div><dt>{{ 'mini_photo.price' | t }}</dt><dd><span class="mini-price" translate="no">{{ section.settings.price }}</span><span class="mini-tax">{{ section.settings.tax_note }}</span></dd></div>{%- endif -%}
+  </dl>
+
+  {%- assign groups = 'plan,option' | split: ',' -%}
+  {%- for group in groups -%}
+    {%- liquid
+      assign has_items = false
+      for block in section.blocks
+        if block.type == group
+          assign has_items = true
+        endif
+      endfor
+      if group == 'plan'
+        assign group_title = section.settings.plan_title
+        assign group_price = section.settings.price
+      else
+        assign group_title = section.settings.option_title
+        assign group_price = blank
+      endif
+    -%}
+    {%- if has_items -%}
+      <section class="mini-sec" aria-labelledby="mini-{{ group }}-{{ section.id }}">
+        <h2 class="mini-sec-title" id="mini-{{ group }}-{{ section.id }}">
+          {{- group_title -}}
+          {%- if group_price != blank -%}<span class="mini-sec-price" translate="no">{{ group_price }}</span>{%- endif -%}
+        </h2>
+        <dl class="mini-list">
+          {%- for block in section.blocks -%}
+            {%- if block.type == group -%}
+              <div {{ block.shopify_attributes }}>
+                <dt>{{ block.settings.label }}</dt>
+                <dd>
+                  {{- block.settings.value -}}
+                  {%- if block.settings.note != blank -%}<span class="mini-list-note">{{ block.settings.note }}</span>{%- endif -%}
+                </dd>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </dl>
+      </section>
+    {%- endif -%}
+  {%- endfor -%}
+
+  <p class="mini-cta">
+    {%- if section.settings.cta_label != blank -%}<a class="btn btn-primary" href="{{ section.settings.cta_link | default: '/pages/reserve' }}">{{ section.settings.cta_label }}</a>{%- endif -%}
+    {%- if section.settings.cta2_label != blank -%}<a class="btn btn-ghost" href="{{ section.settings.cta2_link | default: '/' }}">{{ section.settings.cta2_label }}</a>{%- endif -%}
+  </p>
+  {%- if section.settings.note != blank -%}<p class="mini-note">{{ section.settings.note }}</p>{%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.mini_photo",
+  "class": "section-mini-photo",
+  "settings": [
+    { "type": "text", "id": "label", "label": "t:labels.chapter_label", "default": "Mini Wedding Photo" },
+    { "type": "text", "id": "title", "label": "t:labels.heading" },
+    { "type": "text", "id": "tagline", "label": "t:labels.tagline" },
+    { "type": "textarea", "id": "statement", "label": "t:labels.text" },
+    { "type": "text", "id": "place", "label": "t:labels.place" },
+    { "type": "text", "id": "price", "label": "t:labels.price" },
+    { "type": "text", "id": "tax_note", "label": "t:labels.tax_note", "default": "（税込）" },
+    { "type": "text", "id": "plan_title", "label": "t:labels.plan_title", "default": "基本プラン内容" },
+    { "type": "text", "id": "option_title", "label": "t:labels.option_title", "default": "オプション" },
+    { "type": "text", "id": "cta_label", "label": "t:labels.button_label", "default": "ご予約・お問い合わせ" },
+    { "type": "url", "id": "cta_link", "label": "t:labels.button_link" },
+    { "type": "text", "id": "cta2_label", "label": "t:labels.secondary_label", "default": "衣裳を見る" },
+    { "type": "url", "id": "cta2_link", "label": "t:labels.secondary_link" },
+    { "type": "textarea", "id": "note", "label": "t:labels.note" }
+  ],
+  "blocks": [
+    {
+      "type": "plan",
+      "name": "t:blocks.plan_item",
+      "settings": [
+        { "type": "text", "id": "label", "label": "t:labels.name", "default": "衣装" },
+        { "type": "text", "id": "value", "label": "t:labels.description" },
+        { "type": "text", "id": "note", "label": "t:labels.note" }
+      ]
+    },
+    {
+      "type": "option",
+      "name": "t:blocks.option_item",
+      "settings": [
+        { "type": "text", "id": "label", "label": "t:labels.name" },
+        { "type": "text", "id": "value", "label": "t:labels.price" },
+        { "type": "text", "id": "note", "label": "t:labels.note" }
+      ]
+    }
+  ]
+}
+{% endschema %}

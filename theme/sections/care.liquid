@@ -1,0 +1,76 @@
+{% comment %}
+  クリーニング費・メンテナンス費（2026-08-20 に任意加入→必須費用へ変更した内容）。
+  必須で頂戴する費用なので、料金の章のすぐ下に置く。リンク先は #care
+{% endcomment %}
+<section class="chapter full-width care-chapter" aria-labelledby="care-title-{{ section.id }}">
+  <div class="care reveal" id="{{ section.settings.anchor | default: 'care' }}">
+    <h3 class="care-title" id="care-title-{{ section.id }}">{{ section.settings.title }}</h3>
+    {%- if section.settings.lede != blank -%}<p class="care-lede">{{ section.settings.lede }}</p>{%- endif -%}
+    <dl class="care-fee">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'fee' -%}
+          <div {{ block.shopify_attributes }}><dt>{{ block.settings.label }}</dt><dd>{{ block.settings.amount }}<span class="care-yen">{{ block.settings.unit }}</span></dd></div>
+        {%- endif -%}
+      {%- endfor -%}
+    </dl>
+    {%- if section.settings.note != blank -%}<p class="care-note">{{ section.settings.note }}</p>{%- endif -%}
+    <div class="care-cols">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'column' -%}
+          <section class="care-col" {{ block.shopify_attributes }}>
+            <h4>{{ block.settings.title }}</h4>
+            {%- if block.settings.lede != blank -%}<p class="care-col-lede">{{ block.settings.lede }}</p>{%- endif -%}
+            {%- assign items = block.settings.items | newline_to_br | split: '<br />' -%}
+            <ul>
+              {%- for item in items -%}{%- assign item = item | strip -%}{%- if item != blank -%}<li>{{ item }}</li>{%- endif -%}{%- endfor -%}
+            </ul>
+            {%- if block.settings.note != blank -%}<p class="care-col-note">{{ block.settings.note }}</p>{%- endif -%}
+          </section>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+    {%- if section.settings.caution != blank -%}<p class="care-caution">{{ section.settings.caution }}</p>{%- endif -%}
+  </div>
+</section>
+
+{% stylesheet %}
+  /* 料金の章と一続きに見せるため、料金の章の下とこの章の上の余白を詰める（サンプルでは料金の章の中にあった） */
+  .care-chapter { padding-top: 0; }
+  .shopify-section:has(+ .section-care) .chapter { padding-bottom: 0; }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:sections.care",
+  "class": "section-care",
+  "settings": [
+    { "type": "text", "id": "title", "label": "t:labels.heading", "default": "クリーニング費・メンテナンス費について" },
+    { "type": "textarea", "id": "lede", "label": "t:labels.lede" },
+    { "type": "textarea", "id": "note", "label": "t:labels.note" },
+    { "type": "textarea", "id": "caution", "label": "t:labels.caution" },
+    { "type": "text", "id": "anchor", "label": "t:labels.anchor", "info": "t:info.anchor", "default": "care" }
+  ],
+  "blocks": [
+    {
+      "type": "fee",
+      "name": "t:blocks.fee",
+      "settings": [
+        { "type": "text", "id": "label", "label": "t:labels.name", "default": "屋内利用" },
+        { "type": "text", "id": "amount", "label": "t:labels.price", "default": "15,000" },
+        { "type": "text", "id": "unit", "label": "t:labels.unit", "default": "円" }
+      ]
+    },
+    {
+      "type": "column",
+      "name": "t:blocks.care_column",
+      "settings": [
+        { "type": "text", "id": "title", "label": "t:labels.heading" },
+        { "type": "textarea", "id": "lede", "label": "t:labels.lede" },
+        { "type": "textarea", "id": "items", "label": "t:labels.list_items", "info": "t:info.one_per_line" },
+        { "type": "textarea", "id": "note", "label": "t:labels.note" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "t:sections.care" }]
+}
+{% endschema %}

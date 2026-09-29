@@ -10,6 +10,8 @@
     {% render 'css-variables' %}
     {% render 'fonts' %}
     {{ 'critical.css' | asset_url | stylesheet_tag: preload: true }}
+    {%- comment -%} トップの章（メゾン・料金・FAQ など）のセクションは、どのページに置いても同じ見た目にする {%- endcomment -%}
+    {{ 'home.css' | asset_url | stylesheet_tag }}
 
     {%- comment -%} テーマエディタではセクションが差し替わるので、フェードインを使わず最初から見せる {%- endcomment -%}
     {%- unless request.design_mode -%}

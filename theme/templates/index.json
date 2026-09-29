@@ -11,10 +11,510 @@
   "sections": {
     "hero": {
       "type": "hero",
-      "settings": {}
+      "settings": {
+        "image": "shopify://shop_images/ay-hero-05.webp",
+        "secondary_link": "shopify://collections/ウエディングドレス"
+      }
+    },
+    "maison": {
+      "type": "statement",
+      "settings": {
+        "chapter_no": "I",
+        "label": "Maison",
+        "title": "洗練されたクラシックを、普遍美へ",
+        "text": "アトリエユカは「洗練されたクラシック」をウェディングドレスの普遍美に進化させるドレスメゾン。インポートの素材を惜しみなく使い、国内最高峰のアトリエで一着ずつ仕立てるコレクションを、銀座とハワイのサロン、そしてオンラインからお届けします。",
+        "anchor": "maison"
+      },
+      "blocks": {
+        "line_1": {
+          "type": "line",
+          "settings": {
+            "image": "shopify://shop_images/ay-brand-01.webp",
+            "name": "Atelier Yuka",
+            "desc": "「洗練されたクラシック」を普遍美に進化させたメゾンライン。インポート素材×国内最高峰アトリエの仕立て。"
+          }
+        }
+      },
+      "block_order": [
+        "line_1"
+      ]
+    },
+    "entrances": {
+      "type": "entrances",
+      "settings": {
+        "chapter_no": "II",
+        "label": "Collection",
+        "title": "お探しの一着へ",
+        "lede": "レンタルのドレス・タキシードから、お仕立てのセミオーダーまで。すべてご自宅試着（1着 ¥5,500）からお選びいただけます。",
+        "note": "<p>セミオーダー（Elieca）でお仕立てした一着は、お客さまご自身の衣裳として式場・ホテルにお持ち込みいただけます（持ち込みの条件は式場にご確認ください）。式場・衣裳店の方は <a href=\"/pages/withawish\">業者さま向けのページ</a> からお取引のご相談を承ります。</p>",
+        "anchor": "collection"
+      },
+      "blocks": {
+        "entry_1": {
+          "type": "entry",
+          "settings": {
+            "image": "shopify://shop_images/ay-wd-01.webp",
+            "en": "Wedding Dress",
+            "title": "ウエディングドレス",
+            "text": "メゾンの純白のドレス。インポート素材を国内のアトリエで仕立てた一着。",
+            "link": "shopify://collections/ウエディングドレス"
+          }
+        },
+        "entry_2": {
+          "type": "entry",
+          "settings": {
+            "image": "shopify://shop_images/ay-cd-01.webp",
+            "en": "Color Dress",
+            "title": "カラードレス",
+            "text": "お色直しやフォトに。サテンからチュールまで、色と素材で選べます。",
+            "link": "shopify://collections/colordress"
+          }
+        },
+        "entry_3": {
+          "type": "entry",
+          "settings": {
+            "image": "shopify://shop_images/ay-brand-02.webp",
+            "en": "Semi-Order",
+            "title": "セミオーダー（Elieca）",
+            "text": "着たいデザインを、ご自身の体型に合わせて。ドレスとタキシードのお仕立て。",
+            "link": "shopify://pages/elieca"
+          }
+        },
+        "entry_4": {
+          "type": "entry",
+          "settings": {
+            "image": "shopify://shop_images/ay-tx-01.webp",
+            "en": "For Men",
+            "title": "メンズ（タキシード）",
+            "text": "新郎さまのタキシード。ドレスと合わせてお選びいただけます。",
+            "link": "shopify://collections/タキシード"
+          }
+        },
+        "entry_5": {
+          "type": "entry",
+          "settings": {
+            "image": "shopify://shop_images/ay-mo-02.webp",
+            "en": "Morning & Mother",
+            "title": "モーニング・マザードレス",
+            "text": "ご両家のご両親さまの礼装を、新郎新婦さまとご一緒に。",
+            "link": "shopify://collections/モーニング"
+          }
+        },
+        "entry_6": {
+          "type": "entry",
+          "settings": {
+            "image": "shopify://shop_images/ww-20432.jpg",
+            "en": "For Partners",
+            "title": "業者さまはこちら",
+            "text": "式場・衣裳店さま向け。新郎タキシードの取寄せレンタル with a WISH。",
+            "link": "shopify://pages/withawish",
+            "partner": true
+          }
+        }
+      },
+      "block_order": [
+        "entry_1",
+        "entry_2",
+        "entry_3",
+        "entry_4",
+        "entry_5",
+        "entry_6"
+      ]
+    },
+    "catalog": {
+      "type": "catalog-lead",
+      "settings": {
+        "title": "2026 カタログを見る",
+        "desc": "冊子のカタログを、そのままブラウザでご覧いただけます。スマートフォンはスワイプ、PCは見開き。拡大すればレースやビーズのディテールまでご確認いただけます。",
+        "specs": "全58ページ\nダウンロード不要\nPDF 13MB",
+        "anchor": "catalogue"
+      }
+    },
+    "flow": {
+      "type": "steps",
+      "settings": {
+        "chapter_no": "III",
+        "label": "How to Rent",
+        "title": "ご利用の流れ",
+        "lede": "借りて、着て、返すだけ。店舗に足を運ばなくても、ご自宅で一着と出会えます。",
+        "tinted": true,
+        "anchor": "flow"
+      },
+      "blocks": {
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "title": "商品を選ぶ",
+            "desc": "ご利用日の4ヶ月前〜10日前までにオンラインでご予約。おすすめは2〜3ヶ月前です。"
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "title": "注文する",
+            "desc": "発送時にご登録のクレジットカードで決済。店舗に行かずに準備が完了します。"
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "title": "受け取る",
+            "desc": "指定日・指定時間帯に、ご自宅など指定の場所へヤマト運輸でお届けします。"
+          }
+        },
+        "step_4": {
+          "type": "step",
+          "settings": {
+            "title": "試着/本使用",
+            "desc": "試着は1泊2日、本使用は3泊4日。サイズとイメージをご自宅でゆっくり確認できます。"
+          }
+        },
+        "step_5": {
+          "type": "step",
+          "settings": {
+            "title": "返送する",
+            "desc": "翌日正午までに同梱の着払い伝票で返送。お手入れは当店で行いますので、そのままお戻しください。"
+          }
+        }
+      },
+      "block_order": [
+        "step_1",
+        "step_2",
+        "step_3",
+        "step_4",
+        "step_5"
+      ]
+    },
+    "pricing": {
+      "type": "pricing",
+      "settings": {
+        "chapter_no": "IV",
+        "label": "Pricing",
+        "title": "料金のご案内",
+        "lede": "価格はすべて明示しています。まずは¥5,500のご自宅試着からどうぞ。",
+        "cta_label": "ご予約フォームへ進む",
+        "cta_link": "shopify://pages/reserve",
+        "anchor": "pricing"
+      },
+      "blocks": {
+        "plan_1": {
+          "type": "plan",
+          "settings": {
+            "name": "ご自宅試着",
+            "en": "Home Fitting",
+            "price": "¥5,500",
+            "note": "1泊2日/1着あたり。シューズオプション +¥1,500"
+          }
+        },
+        "plan_2": {
+          "type": "plan",
+          "settings": {
+            "name": "本使用レンタル(3泊4日)",
+            "en": "Rental",
+            "price": "¥110,000〜¥394,500",
+            "note": "ウエディングドレス ¥220,000〜/カラードレス ¥198,800〜/タキシード ¥110,000〜\n別途クリーニング・メンテナンス費",
+            "main": true,
+            "badge": "Main Plan"
+          }
+        },
+        "plan_3": {
+          "type": "plan",
+          "settings": {
+            "name": "銀座サロンご試着予約",
+            "en": "Ginza Salon",
+            "price": "¥5,500",
+            "note": "銀座アトリエでスタイリストと一緒に試着"
+          }
+        }
+      },
+      "block_order": [
+        "plan_1",
+        "plan_2",
+        "plan_3"
+      ]
+    },
+    "care": {
+      "type": "care",
+      "settings": {
+        "title": "クリーニング費・メンテナンス費について",
+        "lede": "ご着用後のドレスを適切な状態に戻すため、クリーニング・メンテナンス費として下記の料金（1着あたり・税込）を頂戴しております。",
+        "note": "通常のご着用に伴う汚れや軽微な損傷については、上記のクリーニング・メンテナンス費に含まれております。",
+        "caution": "※クリーニング・メンテナンス費は、衣裳の破損・汚損に対する保証・保険ではございません。ドレスはデリケートな衣裳のため、ご着用・お取り扱いの際は十分にご注意ください。",
+        "anchor": "care"
+      },
+      "blocks": {
+        "care_1": {
+          "type": "fee",
+          "settings": {
+            "label": "屋内利用",
+            "amount": "15,000",
+            "unit": "円"
+          }
+        },
+        "care_2": {
+          "type": "fee",
+          "settings": {
+            "label": "屋外利用",
+            "amount": "20,000",
+            "unit": "円"
+          }
+        },
+        "care_3": {
+          "type": "column",
+          "settings": {
+            "title": "クリーニング・メンテナンス費に含まれる例",
+            "items": "化粧品による軽微な汚れ\n食品・飲料等による1cm未満の小さなシミ\n裾が床に擦れることによる軽微な汚れ\n1cm未満の小さな穴\n裾の2cm程度までの軽微な裂け\nその他、通常のご着用に伴う軽微な汚れ・損傷"
+          }
+        },
+        "care_4": {
+          "type": "column",
+          "settings": {
+            "title": "別途修理・補修費用が発生する場合",
+            "lede": "通常のクリーニングやメンテナンスでは対応が困難な重大な破損・汚損が生じた場合は、別途修理・補修費用をご負担いただく場合がございます。",
+            "items": "ヒール等で裾を踏み、2cmを超える裂けが生じた場合\n通常のクリーニングでは除去できない大きなシミが付着した場合\n開封や収納作業中にドレスカバー等へ生地が挟まり、生地が裂けた場合\nその他、通常のクリーニングや軽微な補修では原状回復が困難な破損・汚損が生じた場合",
+            "note": "修理・補修費用は、損傷の状態・箇所・素材・修理内容等を確認したうえでご案内いたします。"
+          }
+        }
+      },
+      "block_order": [
+        "care_1",
+        "care_2",
+        "care_3",
+        "care_4"
+      ]
+    },
+    "journey": {
+      "type": "journey",
+      "settings": {
+        "chapter_no": "V",
+        "label": "Photo Journey",
+        "title": "世界8都市のフォトジャーニー",
+        "lede": "ドレスとともに、世界のどこへでも。海外フォトウエディングのプロデュース実績です。",
+        "anchor": "journey"
+      },
+      "blocks": {
+        "city_1": {
+          "type": "city",
+          "settings": {
+            "image": "shopify://shop_images/ay-journey-paris.webp",
+            "city": "Paris",
+            "meta": "パリ — エッフェル塔・凱旋門",
+            "plan": "パリ・ゴールドプラン ¥598,000〜"
+          }
+        },
+        "city_2": {
+          "type": "city",
+          "settings": {
+            "image": "shopify://shop_images/ay-journey-hawaii.webp",
+            "city": "Hawaii",
+            "meta": "ハワイ — ロイヤルハワイアン・ワイキキ",
+            "plan": "ハワイサロンで現地サポート"
+          }
+        },
+        "city_3": {
+          "type": "city",
+          "settings": {
+            "image": "shopify://shop_images/ay-journey-newyork.webp",
+            "city": "New York",
+            "meta": "ニューヨーク — セントラルパーク・ブルックリン"
+          }
+        },
+        "city_4": {
+          "type": "city",
+          "settings": {
+            "image": "shopify://shop_images/ay-journey-london.webp",
+            "city": "London",
+            "meta": "ロンドン — ビッグ・ベン・タワーブリッジ"
+          }
+        },
+        "city_5": {
+          "type": "city",
+          "settings": {
+            "image": "shopify://shop_images/ay-journey-sydney.webp",
+            "city": "Sydney",
+            "meta": "シドニー — オペラハウス"
+          }
+        },
+        "city_6": {
+          "type": "city",
+          "settings": {
+            "image": "shopify://shop_images/ay-journey-melbourne.webp",
+            "city": "Melbourne",
+            "meta": "メルボルン — オーストラリア"
+          }
+        },
+        "city_7": {
+          "type": "city",
+          "settings": {
+            "image": "shopify://shop_images/ay-journey-perth.webp",
+            "city": "Perth",
+            "meta": "パース — オーストラリア"
+          }
+        },
+        "city_8": {
+          "type": "city",
+          "settings": {
+            "image": "shopify://shop_images/ay-journey-lasvegas.webp",
+            "city": "Las Vegas",
+            "meta": "ラスベガス — ネバダ"
+          }
+        }
+      },
+      "block_order": [
+        "city_1",
+        "city_2",
+        "city_3",
+        "city_4",
+        "city_5",
+        "city_6",
+        "city_7",
+        "city_8"
+      ]
+    },
+    "salon": {
+      "type": "salons",
+      "settings": {
+        "chapter_no": "VI",
+        "label": "Salons",
+        "title": "サロンのご案内",
+        "tinted": true,
+        "anchor": "salon"
+      },
+      "blocks": {
+        "salon_1": {
+          "type": "salon",
+          "settings": {
+            "en": "Ginza Atelier",
+            "name": "銀座アトリエ",
+            "address": "〒104-0061 東京都中央区銀座1丁目20番地11号 6階",
+            "note": "ご試着予約 ¥5,500(スタイリスト同伴)",
+            "map_query": "東京都中央区銀座1丁目20-11"
+          }
+        },
+        "salon_2": {
+          "type": "salon",
+          "settings": {
+            "en": "Hawaii Salon",
+            "name": "ハワイサロン",
+            "address": "2270 Kalākaua Ave Suite 1220, Honolulu, HI 96815",
+            "note": "ハワイ挙式・フォトウエディングを現地サポート",
+            "map_query": "2270 Kalakaua Ave, Honolulu, HI 96815"
+          }
+        }
+      },
+      "block_order": [
+        "salon_1",
+        "salon_2"
+      ]
+    },
+    "faq": {
+      "type": "faq",
+      "settings": {
+        "chapter_no": "VII",
+        "label": "FAQ",
+        "title": "よくあるご質問",
+        "cta_label": "ご自宅試着を予約する",
+        "cta_price": "¥5,500",
+        "cta_link": "shopify://pages/reserve",
+        "tinted": true,
+        "anchor": "faq"
+      },
+      "blocks": {
+        "faq_1": {
+          "type": "item",
+          "settings": {
+            "question": "試着だけでも利用できますか?",
+            "answer": "<p>はい。ご自宅試着は1泊2日・1着¥5,500でご利用いただけます。使用日が決まっていなくてもお申し込みいただけます。</p>"
+          }
+        },
+        "faq_2": {
+          "type": "item",
+          "settings": {
+            "question": "サイズが合わなかった場合は?",
+            "answer": "<p>試着でサイズやイメージをご確認いただいてから本使用をご予約いただけるので安心です。気になる点はチャット・お問合せでスタイリストにご相談ください。</p>"
+          }
+        },
+        "faq_3": {
+          "type": "item",
+          "settings": {
+            "question": "返却前にクリーニングは必要ですか?",
+            "answer": "<p>お客様でのクリーニングは不要です。ご利用後はそのまま同梱の着払い伝票でご返送ください。お手入れはアトリエユカで行い、<a href=\"#care\">クリーニング・メンテナンス費</a>として屋内利用¥15,000/屋外利用¥20,000を頂戴しております。</p>"
+          }
+        },
+        "faq_4": {
+          "type": "item",
+          "settings": {
+            "question": "いつまでに予約すればいいですか?",
+            "answer": "<p>ご利用日の4ヶ月前〜10日前までご予約可能です。人気のドレスは埋まりやすいため、2〜3ヶ月前のご予約がおすすめです。</p>"
+          }
+        },
+        "faq_5": {
+          "type": "item",
+          "settings": {
+            "question": "店舗での試着はできますか?",
+            "answer": "<p>銀座アトリエにてスタイリスト同伴のご試着(¥5,500)を承っています。ハワイサロンでは現地挙式のサポートも行っています。</p>"
+          }
+        },
+        "faq_6": {
+          "type": "item",
+          "settings": {
+            "question": "試着料はレンタル料金に含まれますか?",
+            "answer": "<p>ご自宅試着の料金（1着 ¥5,500・税込）は、レンタルまたはフォトプランをご決定いただいた場合、ご請求額から差し引きます。実質無料でご試着いただけます。</p>"
+          }
+        },
+        "faq_7": {
+          "type": "item",
+          "settings": {
+            "question": "インナーは用意する必要がありますか?",
+            "answer": "<p>ご希望の場合はインナー上下セットをご用意しています（¥9,800・税込）。お申し込み時にお選びください。</p>"
+          }
+        },
+        "faq_8": {
+          "type": "item",
+          "settings": {
+            "question": "レンタル期間を延ばすことはできますか?",
+            "answer": "<p>本使用レンタルは3泊4日です。延泊は1日あたりレンタル価格の10%で承ります。日程はお申し込み後にご相談ください。</p>"
+          }
+        },
+        "faq_9": {
+          "type": "item",
+          "settings": {
+            "question": "海外へ持ち出せますか?",
+            "answer": "<p>海外でのご使用も承ります。海外レンタルのラインナップ以外の衣裳を持ち出す場合は、ドレス ¥60,000・タキシード ¥20,000を海外持ち出しオプションとして別途頂戴し、レンタル期間は最長10泊までとなります。詳しくは<a href=\"/pages/terms#overseas\">国外レンタル規約</a>をご覧ください。</p>"
+          }
+        },
+        "faq_10": {
+          "type": "item",
+          "settings": {
+            "question": "海外挙式にも対応していますか?",
+            "answer": "<p>パリ・ハワイをはじめ海外レンタルプランをご用意しています。フォトウエディングのプロデュース実績も多数ございます。</p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4",
+        "faq_5",
+        "faq_6",
+        "faq_7",
+        "faq_8",
+        "faq_9",
+        "faq_10"
+      ]
     }
   },
   "order": [
-    "hero"
+    "hero",
+    "maison",
+    "entrances",
+    "catalog",
+    "flow",
+    "pricing",
+    "care",
+    "journey",
+    "salon",
+    "faq"
   ]
 }

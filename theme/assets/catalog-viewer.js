@@ -350,8 +350,9 @@
   /* 次に開いたとき前回の倍率が残っていると、いきなり誌面の一部が出る */
   dialog.addEventListener("close", resetZoom);
 
-  window.WWCatalog = {
+  var viewer = {
     open: function (page) {
+      if (dialog.open) return; // with a WISH は本体の JS でもボタンをつないでいるので、二重に開かない
       build();
       dialog.showModal();
       /* showModal 直後は レイアウト未確定でページ幅が取れない */
@@ -362,4 +363,11 @@
       });
     }
   };
+  window.CatalogViewer = viewer;
+  window.WWCatalog = viewer; // with a WISH の本体（ww-script.js）が呼ぶ名前
+
+  /* data-catalog の付いたボタンはどれもビューアを開く（サンプルのアトリエユカ版と同じ） */
+  Array.prototype.forEach.call(document.querySelectorAll("[data-catalog]"), function (btn) {
+    btn.addEventListener("click", function () { viewer.open(); });
+  });
 })();

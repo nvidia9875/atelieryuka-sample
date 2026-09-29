@@ -1,0 +1,49 @@
+{% comment %} フォトジャーニー（サンプルの「VI. フォトジャーニー」）。都市はブロック {% endcomment %}
+{%- assign title_id = 'journey-title-' | append: section.id -%}
+<section class="chapter full-width {% if section.settings.tinted %}chapter-tinted{% endif %}" id="{{ section.settings.anchor | default: 'journey' }}" aria-labelledby="{{ title_id }}">
+  {% render 'chapter-head', settings: section.settings, title_id: title_id %}
+  <ul class="journey-grid">
+    {%- for block in section.blocks -%}
+      <li class="journey reveal" {{ block.shopify_attributes }}>
+        <figure class="journey-frame">
+          {%- if block.settings.image != blank -%}
+            {{ block.settings.image | image_url: width: 640 | image_tag: widths: '320, 480, 640', sizes: '(max-width: 559px) 46vw, (max-width: 919px) 30vw, 260px', loading: 'lazy', alt: block.settings.image.alt | default: block.settings.meta }}
+          {%- else -%}
+            {{ 'image' | placeholder_svg_tag: 'journey-placeholder' }}
+          {%- endif -%}
+        </figure>
+        <h3 class="journey-city" translate="no">{{ block.settings.city }}</h3>
+        {%- if block.settings.meta != blank -%}<p class="journey-meta">{{ block.settings.meta }}</p>{%- endif -%}
+        {%- if block.settings.plan != blank -%}<p class="journey-plan">{{ block.settings.plan }}</p>{%- endif -%}
+      </li>
+    {%- endfor -%}
+  </ul>
+</section>
+
+{% schema %}
+{
+  "name": "t:sections.journey",
+  "class": "section-journey",
+  "settings": [
+    { "type": "text", "id": "chapter_no", "label": "t:labels.chapter_no", "default": "VI" },
+    { "type": "text", "id": "label", "label": "t:labels.chapter_label", "default": "Photo Journey" },
+    { "type": "text", "id": "title", "label": "t:labels.heading", "default": "世界8都市のフォトジャーニー" },
+    { "type": "textarea", "id": "lede", "label": "t:labels.lede" },
+    { "type": "checkbox", "id": "tinted", "label": "t:labels.tinted", "default": false },
+    { "type": "text", "id": "anchor", "label": "t:labels.anchor", "info": "t:info.anchor", "default": "journey" }
+  ],
+  "blocks": [
+    {
+      "type": "city",
+      "name": "t:blocks.city",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "t:labels.image" },
+        { "type": "text", "id": "city", "label": "t:labels.name", "default": "Paris" },
+        { "type": "text", "id": "meta", "label": "t:labels.description" },
+        { "type": "text", "id": "plan", "label": "t:labels.plan" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "t:sections.journey" }]
+}
+{% endschema %}

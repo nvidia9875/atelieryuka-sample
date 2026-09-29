@@ -43,7 +43,7 @@
   display: grid; place-items: center;
   border: 1px solid var(--line);
   border-radius: 50%;
-  font: italic 500 1.1rem/1 var(--font-en);
+  font: italic 500 1.1rem/1 var(--font-en); font-variant-numeric: lining-nums;
   color: var(--muted);
   transition: border-color 0.18s ease-out, color 0.18s ease-out, background-color 0.18s ease-out;
 }
@@ -64,7 +64,7 @@
   display: block;
   width: 100%;
   text-align: center;
-  font: 500 1.15rem/1.7 var(--font-jp);
+  font: 500 1.15rem/1.7 var(--font-jp); font-variant-numeric: lining-nums;
   margin-bottom: 1.6rem;
 }
 .step-legend:focus { outline: none; }
@@ -118,7 +118,7 @@
   background-color: #FFFFFF;
   color: var(--ink);
   /* 入力値はメールアドレスや電話番号など小さな英数字が中心なのでゴシックで組む */
-  font: 400 1rem/1.5 var(--font-ui);
+  font: 400 1rem/1.5 var(--font-ui); font-variant-numeric: lining-nums;
   border-radius: 0;
   color-scheme: light;
   transition: border-color 0.15s ease-out;
@@ -160,13 +160,13 @@ input[aria-invalid="true"], .choice-group.has-error .choice { border-color: var(
 /* 完了画面(招待状の返信) */
 .form-complete { text-align: center; }
 .complete-en {
-  font: italic 400 1.3rem/1.4 var(--font-en);
+  font: italic 400 1.3rem/1.4 var(--font-en); font-variant-numeric: lining-nums;
   letter-spacing: 0.18em;
   color: var(--gold-ink);
 }
 .complete-title {
   margin-top: 0.8rem;
-  font: 400 1.5rem/1.7 var(--font-jp);
+  font: 400 1.5rem/1.7 var(--font-jp); font-variant-numeric: lining-nums;
 }
 .complete-title:focus { outline: none; }
 .complete-title::after {
@@ -199,7 +199,7 @@ input[aria-invalid="true"], .choice-group.has-error .choice { border-color: var(
 .complete-summary dd { font-variant-numeric: lining-nums tabular-nums; text-align: right; }
 .complete-sign {
   margin: 1.6rem 0 1.8rem;
-  font: italic 500 1.15rem/1.4 var(--font-en);
+  font: italic 500 1.15rem/1.4 var(--font-en); font-variant-numeric: lining-nums;
   color: var(--gold-ink);
 }
 
@@ -213,7 +213,7 @@ input[aria-invalid="true"], .choice-group.has-error .choice { border-color: var(
 }
 .field-group > legend {
   padding: 0 0.5em;
-  font: 400 0.9rem/1.6 var(--font-jp);
+  font: 400 0.9rem/1.6 var(--font-jp); font-variant-numeric: lining-nums;
   letter-spacing: 0.08em;
 }
 .field-group-note { margin: -0.3rem 0 1.1rem; font-size: 0.78rem; color: var(--muted); }
@@ -267,7 +267,7 @@ input[aria-invalid="true"], .choice-group.has-error .choice { border-color: var(
   border: 1px solid var(--line);
   background-color: #FFFFFF;
   color: var(--ink);
-  font: 400 1rem/1.6 var(--font-ui);
+  font: 400 1rem/1.6 var(--font-ui); font-variant-numeric: lining-nums;
   border-radius: 0;
   resize: vertical;
 }
@@ -278,7 +278,7 @@ input[aria-invalid="true"], .choice-group.has-error .choice { border-color: var(
 .review-group {
   margin-top: 1.4rem;
   padding-bottom: 0.4rem;
-  font: 400 0.78rem/1.6 var(--font-en);
+  font: 400 0.78rem/1.6 var(--font-en); font-variant-numeric: lining-nums;
   letter-spacing: 0.16em;
   color: var(--gold-ink);
 }
@@ -306,7 +306,7 @@ input[aria-invalid="true"], .choice-group.has-error .choice { border-color: var(
   scrollbar-width: thin;
 }
 .terms-box:focus-visible { outline: 2px solid var(--gold-ink); outline-offset: 2px; }
-.terms-box-title { font: 400 1rem/1.6 var(--font-jp); letter-spacing: 0.1em; margin-bottom: 0.6em; }
+.terms-box-title { font: 400 1rem/1.6 var(--font-jp); font-variant-numeric: lining-nums; letter-spacing: 0.1em; margin-bottom: 0.6em; }
 .terms-box-sec { margin-top: 1em; font-weight: 400; color: var(--gold-ink); }
 .terms-box-sec::before { content: "＜"; } .terms-box-sec::after { content: "＞"; }
 .terms-box-lead { margin-top: 0.3em; }
@@ -328,7 +328,7 @@ input[aria-invalid="true"], .choice-group.has-error .choice { border-color: var(
   border: 1px solid var(--line);
   background: #FFFFFF;
   color: var(--ink);
-  font: 400 1rem/1.5 var(--font-ui);
+  font: 400 1rem/1.5 var(--font-ui); font-variant-numeric: lining-nums;
   border-radius: 0;
 }
 .measure > input:hover { border-color: var(--gold); }

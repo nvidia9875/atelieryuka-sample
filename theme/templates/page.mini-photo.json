@@ -1,0 +1,72 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "mini-photo",
+      "settings": {
+        "label": "Mini Wedding Photo",
+        "title": "ATELIER YUKA の「ミニ」ウエディングフォト",
+        "tagline": "― 100枚のデータより、ずっと飾れる最高の2〜3枚を。 ―",
+        "statement": "「予算内で、本当に上質なドレス＆タキシードを着て写真を残したい」というご要望から生まれた特別プラン。最高級の衣装に身を包み、ずっと誇らしく飾れる“至高の数枚”を残す、贅沢なプチ撮影パッケージです。",
+        "place": "銀座アトリエ内",
+        "price": "¥100,000",
+        "tax_note": "（税込）",
+        "plan_title": "基本プラン内容",
+        "option_title": "オプション",
+        "cta_label": "ご予約・お問い合わせ",
+        "cta_link": "shopify://pages/reserve",
+        "cta2_label": "衣裳を見る",
+        "cta2_link": "shopify://collections/ウエディングドレス",
+        "note": "※ 撮影日・衣裳のご相談は、ご予約フォームの「ご要望・ご質問」に「ミニウエディングフォト希望」とご記入ください。"
+      },
+      "blocks": {
+        "plan_1": {
+          "type": "plan",
+          "settings": {
+            "label": "衣装",
+            "value": "最高級ウエディングドレス 1着 ＋ タキシード 1着"
+          }
+        },
+        "plan_2": {
+          "type": "plan",
+          "settings": {
+            "label": "ヘアメイク",
+            "value": "新婦ヘアメイク・着付け ＋ 新郎着付け込"
+          }
+        },
+        "plan_3": {
+          "type": "plan",
+          "settings": {
+            "label": "納品",
+            "value": "厳選ハイエンドレタッチデータ 2〜3カット"
+          }
+        },
+        "option_1": {
+          "type": "option",
+          "settings": {
+            "label": "ドレス2着目追加（カラードレス等）",
+            "value": "＋¥50,000",
+            "note": "追加衣装1着 ＋ レタッチデータ1〜2カット追加納品"
+          }
+        }
+      },
+      "block_order": [
+        "plan_1",
+        "plan_2",
+        "plan_3",
+        "option_1"
+      ]
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

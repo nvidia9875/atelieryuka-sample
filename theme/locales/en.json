@@ -172,7 +172,8 @@
         "home": "Try on at home (¥5,500)",
         "rental": "Rental for the day (4 days, 3 nights)",
         "salon": "Fitting at the Ginza salon",
-        "overseas": "Overseas wedding or photo shoot"
+        "overseas": "Overseas wedding or photo shoot",
+        "order": "Semi-order (Elieca) consultation"
       }
     },
     "occasion": {
@@ -416,5 +417,28 @@
       "note": "Please choose a date before your fitting.",
       "error_before": "Please choose a date before your first-choice fitting date."
     }
+  },
+  "sections_text": {
+    "open_map": "Open in Google Maps",
+    "catalog_open": "Open the digital catalogue",
+    "catalog_flip": "Browse in the browser",
+    "catalog_pdf": "Open PDF",
+    "catalog_index": "Contents",
+    "catalog_close": "Close the catalogue",
+    "catalog_prev": "Previous page",
+    "catalog_next": "Next page",
+    "catalog_track": "Catalogue pages (use arrow keys or swipe)",
+    "catalog_zoom": "Zoom",
+    "catalog_zoom_out": "Zoom out",
+    "catalog_zoom_reset": "Reset zoom",
+    "catalog_zoom_in": "Zoom in",
+    "catalog_drag": "Drag to move",
+    "catalog_position": "Page position",
+    "catalog_note": "You can also zoom with double-tap, pinch or Ctrl + wheel.",
+    "rich_text_empty": "Add text (shown only in the theme editor)."
+  },
+  "mini_photo": {
+    "place": "Location",
+    "price": "Price"
   }
 }

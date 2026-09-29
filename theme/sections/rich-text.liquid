@@ -1,0 +1,70 @@
+{% comment %}
+  説明文＋写真（任意）。Elieca の「セミオーダーとは」や、こだわりページのように、文章が主役の章に使う。
+  写真を選ぶと左右に並べ、選ばないと文章だけを中央に置く。
+{% endcomment %}
+{%- assign title_id = 'rich-text-title-' | append: section.id -%}
+<section class="chapter full-width {% if section.settings.tinted %}chapter-tinted{% endif %}" {% if section.settings.anchor != blank %}id="{{ section.settings.anchor }}"{% endif %} aria-labelledby="{{ title_id }}">
+  {% render 'chapter-head', settings: section.settings, title_id: title_id %}
+  <div class="rich-text-body{% if section.settings.image != blank %} has-image{% endif %}{% if section.settings.image_right %} image-right{% endif %} reveal">
+    {%- if section.settings.image != blank -%}
+      <figure class="rich-text-media">
+        {{ section.settings.image | image_url: width: 1100 | image_tag: widths: '480, 720, 1100', sizes: '(max-width: 859px) 92vw, 460px', loading: 'lazy', alt: section.settings.image.alt | default: '' }}
+      </figure>
+    {%- endif -%}
+    <div class="rich-text-content">
+      {%- if section.settings.body != blank -%}
+        {{ section.settings.body }}
+      {%- elsif request.design_mode -%}
+        <p class="rich-text-empty">{{ 'sections_text.rich_text_empty' | t }}</p>
+      {%- endif -%}
+      {%- if section.settings.cta_label != blank -%}
+        <p class="rich-text-cta"><a class="btn btn-ghost" href="{{ section.settings.cta_link | default: '/pages/reserve' }}">{{ section.settings.cta_label }}</a></p>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .rich-text-body { max-width: var(--w-narrow); margin: 0 auto; }
+  .rich-text-body.has-image {
+    max-width: var(--w-wide);
+    display: grid;
+    gap: clamp(1.6rem, 4vw, 3.6rem);
+    align-items: center;
+  }
+  @media (min-width: 860px) {
+    .rich-text-body.has-image { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); }
+    .rich-text-body.image-right .rich-text-media { order: 2; }
+  }
+  .rich-text-media { padding: 10px; border: 1px solid var(--gold); background: var(--paper); }
+  .rich-text-media img { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; }
+  .rich-text-content { font: 400 0.98rem/2.2 var(--font-jp); font-variant-numeric: lining-nums; }
+  .rich-text-content p + p, .rich-text-content ul + p, .rich-text-content p + ul { margin-top: 1.1em; }
+  .rich-text-content ul { padding-left: 1.2em; list-style: disc; }
+  .rich-text-content li + li { margin-top: 0.3em; }
+  .rich-text-content h3 { margin-top: 1.6em; font: 500 1.05rem/1.7 var(--font-jp); font-variant-numeric: lining-nums; color: var(--gold-ink); }
+  .rich-text-content a { color: var(--gold-ink); }
+  .rich-text-cta { margin-top: 1.8rem; }
+  .rich-text-empty { color: var(--muted); font-size: 0.88rem; }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:sections.rich_text",
+  "class": "section-rich-text",
+  "settings": [
+    { "type": "text", "id": "chapter_no", "label": "t:labels.chapter_no" },
+    { "type": "text", "id": "label", "label": "t:labels.chapter_label" },
+    { "type": "text", "id": "title", "label": "t:labels.heading", "default": "見出し" },
+    { "type": "textarea", "id": "lede", "label": "t:labels.lede" },
+    { "type": "richtext", "id": "body", "label": "t:labels.text" },
+    { "type": "image_picker", "id": "image", "label": "t:labels.image" },
+    { "type": "checkbox", "id": "image_right", "label": "t:labels.image_right", "default": false },
+    { "type": "text", "id": "cta_label", "label": "t:labels.button_label" },
+    { "type": "url", "id": "cta_link", "label": "t:labels.button_link" },
+    { "type": "checkbox", "id": "tinted", "label": "t:labels.tinted", "default": false },
+    { "type": "text", "id": "anchor", "label": "t:labels.anchor", "info": "t:info.anchor" }
+  ],
+  "presets": [{ "name": "t:sections.rich_text" }]
+}
+{% endschema %}
