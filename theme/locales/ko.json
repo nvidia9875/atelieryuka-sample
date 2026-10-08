@@ -416,7 +416,7 @@
       "sign": "Atelier Yuka — Ginza Atelier",
       "again": "이어서 다른 신청하기",
       "greeting": "{name} 님",
-      "body": "이번에 Atelier Yuka에 신청해 주셔서 진심으로 감사드립니다. 1~2일 이내에 담당 스타일리스트가 확인 연락을 드리겠습니다."
+      "body": "이번에 Atelier Yuka에 신청해 주셔서 진심으로 감사드립니다. 영업일 기준 3일 이내에 담당자가 이메일로 연락드리겠습니다. 잠시만 기다려 주십시오."
     },
     "mail": {
       "subject": "[예약] {name} 님 ({purpose})",

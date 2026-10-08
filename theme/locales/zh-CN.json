@@ -416,7 +416,7 @@
       "sign": "Atelier Yuka — Ginza Atelier",
       "again": "继续提交其他申请",
       "greeting": "尊敬的{name}",
-      "body": "衷心感谢您选择 Atelier Yuka。负责您的造型师将在一两天内与您联系确认。"
+      "body": "衷心感谢您选择 Atelier Yuka。我们的工作人员将在3个工作日内通过电子邮件与您联系，敬请稍候。"
     },
     "mail": {
       "subject": "【预约】{name}（{purpose}）",
