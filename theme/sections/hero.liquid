@@ -7,8 +7,24 @@
   {%- if section.settings.eyebrow != blank -%}
     <p class="hero-eyebrow reveal" translate="no">{{ section.settings.eyebrow }}</p>
   {%- endif -%}
-  <h1 class="hero-title reveal" id="hero-title-{{ section.id }}" translate="no">
-    {{ section.settings.title | default: settings.brand_name }}
+  {%- assign hero_title = section.settings.title | default: settings.brand_name -%}
+  <h1 class="hero-title reveal{% if section.settings.logo != blank %} has-logo{% endif %}" id="hero-title-{{ section.id }}" translate="no">
+    {%- if section.settings.logo != blank -%}
+      {%- comment -%} ロゴ画像があれば文字の代わりに出す（見出しの文字は画像の代替テキストにする） {%- endcomment -%}
+      {%- assign logo_sizes = '(max-width: 620px) 70vw, ' | append: section.settings.logo_width | append: 'px' -%}
+      {{
+        section.settings.logo
+        | image_url: width: 960
+        | image_tag:
+          widths: '320, 480, 640, 960',
+          sizes: logo_sizes,
+          loading: 'eager',
+          alt: hero_title,
+          style: 'width: min(100%, var(--hero-logo-width))'
+      }}
+    {%- else -%}
+      {{ hero_title }}
+    {%- endif -%}
   </h1>
   {%- if section.settings.tagline != blank -%}
     <p class="hero-tagline reveal">{{ section.settings.tagline }}</p>
@@ -52,6 +68,7 @@
 </section>
 
 {% style %}
+  #shopify-section-{{ section.id }} .hero-title { --hero-logo-width: {{ section.settings.logo_width }}px; }
   #shopify-section-{{ section.id }} .hero-frame {
     --hero-focal: {{ section.settings.image.presentation.focal_point | default: '50% 100%' }};
   }
@@ -72,6 +89,8 @@
     margin-top: 0.5em;
     font: 400 clamp(2.9rem, 1.6rem + 6.5vw, 6.2rem)/1.08 var(--font-en); font-variant-numeric: lining-nums;
   }
+  .hero-title.has-logo { display: flex; justify-content: center; line-height: 0; }
+  .hero-title.has-logo img { height: auto; }
   .hero-tagline {
     margin-top: 1.1em;
     font: 400 clamp(1rem, 0.9rem + 0.7vw, 1.3rem)/2 var(--font-jp); font-variant-numeric: lining-nums;
@@ -126,6 +145,22 @@
       "id": "title",
       "label": "t:labels.heading",
       "default": "Atelier Yuka"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "t:labels.logo",
+      "info": "t:info.hero_logo"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "min": 120,
+      "max": 480,
+      "step": 10,
+      "unit": "px",
+      "label": "t:labels.logo_width",
+      "default": 260
     },
     {
       "type": "text",

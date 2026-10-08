@@ -160,7 +160,9 @@
     "terms_link": "空欄のときは /pages/terms に飛びます。国内・国外の見出しへは #domestic / #overseas で飛びます。",
     "recommend": "シルエットのハンドルをカンマ区切りで（例: princess,bell）",
     "finder_collections": "ドレスのコレクションだけ選んでください（質問はドレス向け）",
-    "is_page_title": "このセクションだけのページで使うときにオン（見出しが h1 になる）"
+    "is_page_title": "このセクションだけのページで使うときにオン（見出しが h1 になる）",
+    "one_paragraph_per_line": "1行が1段落になります",
+    "hero_logo": "入れると見出しの文字の代わりにロゴを出します（見出しの文字は読み上げ用に使います）"
   },
   "options": {
     "alignment": {
@@ -212,6 +214,7 @@
     "salon": "サロン",
     "step": "ステップ",
     "finder_category": "衣裳の種類",
-    "finder_venue": "ご利用のシーン"
+    "finder_venue": "ご利用のシーン",
+    "care_notice": "お知らせ（幅いっぱい）"
   }
 }

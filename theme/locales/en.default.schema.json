@@ -160,7 +160,9 @@
     "terms_link": "Leave empty to use /pages/terms. Anchors #domestic and #overseas are added automatically.",
     "recommend": "Silhouette handles, comma separated (e.g. princess,bell)",
     "finder_collections": "Choose dress collections only (the questions are for dresses)",
-    "is_page_title": "Turn on when this section is the whole page (heading becomes h1)"
+    "is_page_title": "Turn on when this section is the whole page (heading becomes h1)",
+    "one_paragraph_per_line": "Each line becomes a paragraph",
+    "hero_logo": "Shown instead of the heading text (the heading text becomes the alt text)"
   },
   "options": {
     "alignment": {
@@ -212,6 +214,7 @@
     "salon": "Salon",
     "step": "Step",
     "finder_category": "Category",
-    "finder_venue": "Scene"
+    "finder_venue": "Scene",
+    "care_notice": "Notice (full width)"
   }
 }

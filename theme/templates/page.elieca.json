@@ -14,6 +14,8 @@
       "settings": {
         "eyebrow": "Semi-Order Dress & Tuxedo",
         "title": "elieca",
+        "logo": "shopify://shop_images/ay-elieca-logo.png",
+        "logo_width": 280,
         "tagline": "着たいデザインを、あなたにぴったりのサイズで。",
         "image": "shopify://shop_images/ay-brand-02.webp",
         "primary_label": "オーダーのご相談を予約する",

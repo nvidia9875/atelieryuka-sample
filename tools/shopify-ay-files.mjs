@@ -4,7 +4,7 @@
  *
  *   使い方: node tools/shopify-ay-files.mjs <store>.myshopify.com [--dry-run]
  *
- * 元はサンプルの assets/img（公開用 WebP）と assets/catalog（2026 カタログ 58面・PDF）。
+ * 元はサンプルの assets/img（公開用 WebP）と assets/catalog（2026 カタログ 58面・PDF）、先方からいただいたロゴ（data/brand）。
  * 前提: shopify store auth の scopes に read_files,write_files
  */
 import { existsSync, readdirSync, statSync } from "node:fs";
@@ -51,6 +51,8 @@ function items() {
   const webPdf = new URL("../docs/catalog-web/atelieryuka-catalog-2026-web.pdf", import.meta.url).pathname;
   const pdfPath = existsSync(webPdf) ? webPdf : join(ROOT, "catalog/atelieryuka-catalog-2026.pdf");
   list.push({ path: pdfPath, filename: `${PREFIX}catalog-2026.pdf`, mimeType: "application/pdf", contentType: "FILE" });
+  // 先方からいただいたロゴ（2026-10-09。元は A4 の PNG なので、ロゴの部分だけ切り出したもの）
+  list.push({ path: new URL("../data/brand/elieca-logo.png", import.meta.url).pathname, filename: `${PREFIX}elieca-logo.png`, mimeType: "image/png", contentType: "IMAGE" });
   return list.map((it) => ({ ...it, alt: "" }));
 }
 

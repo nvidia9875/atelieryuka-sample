@@ -1,6 +1,7 @@
 {% comment %}
   クリーニング費・メンテナンス費（2026-08-20 に任意加入→必須費用へ変更した内容）。
   必須で頂戴する費用なので、料金の章のすぐ下に置く。リンク先は #care
+  ブロック「お知らせ」は2列の下に幅いっぱいで出す（全損＝修理できない破損の扱い。2026-10-09 先方の文章）
 {% endcomment %}
 <section class="chapter full-width care-chapter" aria-labelledby="care-title-{{ section.id }}">
   <div class="care reveal" id="{{ section.settings.anchor | default: 'care' }}">
@@ -29,6 +30,18 @@
         {%- endif -%}
       {%- endfor -%}
     </div>
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'notice' -%}
+        <section class="care-notice" {{ block.shopify_attributes }}>
+          {%- if block.settings.title != blank -%}<h4>{{ block.settings.title }}</h4>{%- endif -%}
+          {%- assign paragraphs = block.settings.text | newline_to_br | split: '<br />' -%}
+          {%- for paragraph in paragraphs -%}
+            {%- assign paragraph = paragraph | strip -%}
+            {%- if paragraph != blank -%}<p>{{ paragraph }}</p>{%- endif -%}
+          {%- endfor -%}
+        </section>
+      {%- endif -%}
+    {%- endfor -%}
     {%- if section.settings.caution != blank -%}<p class="care-caution">{{ section.settings.caution }}</p>{%- endif -%}
   </div>
 </section>
@@ -68,6 +81,14 @@
         { "type": "textarea", "id": "lede", "label": "t:labels.lede" },
         { "type": "textarea", "id": "items", "label": "t:labels.list_items", "info": "t:info.one_per_line" },
         { "type": "textarea", "id": "note", "label": "t:labels.note" }
+      ]
+    },
+    {
+      "type": "notice",
+      "name": "t:blocks.care_notice",
+      "settings": [
+        { "type": "text", "id": "title", "label": "t:labels.heading" },
+        { "type": "textarea", "id": "text", "label": "t:labels.text", "info": "t:info.one_paragraph_per_line" }
       ]
     }
   ],
