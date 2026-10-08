@@ -2,7 +2,7 @@
 {%- assign title_id = 'steps-title-' | append: section.id -%}
 <section class="chapter full-width {% if section.settings.tinted %}chapter-tinted{% endif %}" id="{{ section.settings.anchor | default: 'flow' }}" aria-labelledby="{{ title_id }}">
   {% render 'chapter-head', settings: section.settings, title_id: title_id %}
-  <ol class="flow-list">
+  <ol class="flow-list" style="--steps: {{ section.blocks.size | at_least: 1 }}">
     {%- for block in section.blocks -%}
       <li class="flow-step reveal" {{ block.shopify_attributes }}>
         <p class="flow-no" aria-hidden="true">{% if forloop.index < 10 %}0{% endif %}{{ forloop.index }}</p>

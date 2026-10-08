@@ -12,47 +12,200 @@
     "intro": {
       "type": "rich-text",
       "settings": {
-        "label": "Our Story",
-        "title": "アトリエユカのこだわり",
-        "lede": "歴史・国内生産・素材について（先方の文章が届いたら差し込む）",
-        "anchor": "story"
+        "label": "Brand Story & Philosophy",
+        "title": "大切な一日に、ふさわしい一着を。",
+        "body": "<p>私たちがつくりたいのは、ただ美しいだけの衣裳ではありません。</p><p>大切な一日を迎えるおふたりが、自分らしく、心からその瞬間を楽しめる一着。そして、何年経っても写真を見返したときに、その日の記憶とともに思い出していただける一着。</p><p>アトリエユカは創業以来、そんな衣裳を追求してきました。</p>",
+        "image": "shopify://shop_images/ay-brand-01.webp",
+        "anchor": "story",
+        "is_page_title": true
       }
     },
     "history": {
-      "type": "rich-text",
+      "type": "timeline",
+      "blocks": {
+        "h1962": {
+          "type": "step",
+          "settings": {
+            "when": "1962年",
+            "title": "創業",
+            "details": ""
+          }
+        },
+        "h1968": {
+          "type": "step",
+          "settings": {
+            "when": "1968年",
+            "title": "「新郎にもお色直し」を考案",
+            "details": "その日の主役として美しくお色直しできる、モーニングやカラータキシードをデザインし、提案"
+          }
+        },
+        "h1975": {
+          "type": "step",
+          "settings": {
+            "when": "1975年",
+            "title": "ウエディングドレスの企画・販売を始める",
+            "details": "ブライダル洋装のトップメーカーとして歩む\nパリの「ジャン＝ルイ・シェレル」のオートクチュールを継承し、さまざまなドレスを手がける"
+          }
+        },
+        "h1992": {
+          "type": "step",
+          "settings": {
+            "when": "1992年",
+            "title": "日本でいちばん大きなタキシードを製作",
+            "details": "スポーツ選手や芸能人の華やかな結婚式に衣裳を提供"
+          }
+        },
+        "hnow": {
+          "type": "step",
+          "settings": {
+            "when": "現在",
+            "title": "アトリエで、衣裳をつくり続けています",
+            "details": "ウエディングだけでなく、ドラマ・映画・テレビ番組・音楽番組・表彰式などにも衣裳を提供\n多様化するウエディングの衣裳を、今もアトリエでつくり続けています"
+          }
+        }
+      },
+      "block_order": [
+        "h1962",
+        "h1968",
+        "h1975",
+        "h1992",
+        "hnow"
+      ],
       "settings": {
         "chapter_no": "I",
         "label": "History",
-        "title": "歴史",
-        "tinted": true,
-        "anchor": "history"
+        "title": "1962年から、衣裳をつくり続けて",
+        "lede": "アトリエユカ／松尾株式会社は、日本のブライダル業界に数々の新しい提案をしてきた、ドレス・タキシード・スーツのメーカーです。パリの「ジャン＝ルイ・シェレル」のオートクチュールを継承し、GIVENCHY・ハナエモリ・桂由美・鳥居ユキなどを手がける国内の縫製工場を傘下に入れ、現在に至ります。",
+        "anchor": "history",
+        "tinted": true
       }
     },
-    "atelier": {
+    "fit": {
       "type": "rich-text",
       "settings": {
         "chapter_no": "II",
-        "label": "Made in Japan",
-        "title": "国内のアトリエで仕立てる",
-        "anchor": "atelier",
-        "image_right": true
+        "label": "For Everyone",
+        "title": "すべての人のために、たった一人の一着を。",
+        "body": "<p>どのような体型の方にもお気に入りの一着を見つけていただけるよう、豊富なデザインとサイズで、ぴったりの衣裳をお届けしてきました。</p><p>一人ひとり、体型も好みも、理想のウエディングも違います。だからこそ、「着られる衣裳」ではなく、「自分がいちばん美しく感じられる衣裳」を。</p>",
+        "image": "shopify://shop_images/ay-hero-02.webp",
+        "image_right": true,
+        "tinted": false,
+        "anchor": "fit"
+      }
+    },
+    "commitment": {
+      "type": "steps",
+      "blocks": {
+        "c1": {
+          "type": "step",
+          "settings": {
+            "title": "DESIGN",
+            "desc": "美しさを、細部まで。"
+          }
+        },
+        "c2": {
+          "type": "step",
+          "settings": {
+            "title": "MATERIAL",
+            "desc": "こだわり抜かれた素材から生まれる衣裳。"
+          }
+        },
+        "c3": {
+          "type": "step",
+          "settings": {
+            "title": "MADE IN-HOUSE",
+            "desc": "一着を、すべて自分たちの手で。"
+          }
+        },
+        "c4": {
+          "type": "step",
+          "settings": {
+            "title": "FIT",
+            "desc": "誰もが、自分にぴったりの一着を。"
+          }
+        }
+      },
+      "block_order": [
+        "c1",
+        "c2",
+        "c3",
+        "c4"
+      ],
+      "settings": {
+        "chapter_no": "III",
+        "label": "Our Commitment",
+        "title": "衣裳づくりで大切にしている4つのこと",
+        "anchor": "commitment",
+        "tinted": true
       }
     },
     "material": {
       "type": "rich-text",
       "settings": {
-        "chapter_no": "III",
+        "chapter_no": "IV",
         "label": "Material",
         "title": "素材",
-        "tinted": true,
+        "lede": "生地選びから縫製まで、すべて自分たちの手で。",
+        "body": "<p>こだわり抜かれた高品質の生地を選び、衣裳に仕立てています。</p>",
+        "cta_label": "衣裳を見る",
+        "cta_link": "shopify://collections/ウエディングドレス",
+        "tinted": false,
         "anchor": "material"
+      }
+    },
+    "offer": {
+      "type": "steps",
+      "blocks": {
+        "o1": {
+          "type": "step",
+          "settings": {
+            "title": "信頼",
+            "desc": "創業から積み重ねてきた経験"
+          }
+        },
+        "o2": {
+          "type": "step",
+          "settings": {
+            "title": "品質",
+            "desc": "自分たちの手でつくる一着"
+          }
+        },
+        "o3": {
+          "type": "step",
+          "settings": {
+            "title": "自分らしさ",
+            "desc": "一人ひとりに合う一着"
+          }
+        },
+        "o4": {
+          "type": "step",
+          "settings": {
+            "title": "記憶",
+            "desc": "人生の大切な日に残る一着"
+          }
+        }
+      },
+      "block_order": [
+        "o1",
+        "o2",
+        "o3",
+        "o4"
+      ],
+      "settings": {
+        "chapter_no": "V",
+        "label": "What We Can Offer",
+        "title": "アトリエユカがお届けするもの",
+        "anchor": "offer",
+        "tinted": true
       }
     }
   },
   "order": [
     "intro",
     "history",
-    "atelier",
-    "material"
+    "fit",
+    "commitment",
+    "material",
+    "offer"
   ]
 }

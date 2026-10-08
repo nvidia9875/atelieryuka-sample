@@ -23,8 +23,8 @@ const PAGES = [
   { handle: "mini-photo", title: "ミニウエディングフォト", templateSuffix: "mini-photo" },
   { handle: "elieca", title: "Elieca セミオーダー", templateSuffix: "elieca" },
   { handle: "finder", title: "質問に答えてドレスを探す", templateSuffix: "finder" },
-  // こだわりページ。先方の文章が届くまで非公開（published: false）
-  { handle: "story", title: "アトリエユカのこだわり", templateSuffix: "story", published: false },
+  // こだわりページ。2026-10-09 に先方の資料（プレゼン資料.pptx）から下書きを作った。本番では先方の確認後に公開する
+  { handle: "story", title: "アトリエユカのこだわり", templateSuffix: "story" },
   // レンタル規約（/pages/terms）は本文を terms.js から作るので tools/shopify-terms.mjs で作る
 ];
 
